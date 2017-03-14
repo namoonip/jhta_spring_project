@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.example.org/food" 
+elementFormDefault="qualified">
+
+	<!--<food>
+			<name>된장찌게</name>
+			<type>한식</type>
+			<price>5000</price>
+		</food>-->
+	 
+	 <xsd:element name="food">
+	 <!-- 복잡한 형식의 data를 선언할 때 complexType을 사용한다. -->
+	 	<xsd:complexType>
+	 	<!-- 순서를 나타내기위해 sequence를 사용한다. -->
+	 		<xsd:sequence>
+	 			<xsd:element name="name" type="xsd:string"/>
+	 			<xsd:element name="type" type="xsd:string"/>
+	 			<xsd:element name="price">
+	 				<!-- 원하는 타입을 만들기 -->
+		 			<xsd:simpleType>
+					 	<xsd:restriction base="xsd:integer">	
+					 		<xsd:minInclusive value="0"/>
+					 		<xsd:maxInclusive value="99999"/>
+				 		</xsd:restriction>
+					 </xsd:simpleType>	
+	 			</xsd:element>
+	 		</xsd:sequence>
+	 	</xsd:complexType>
+	 </xsd:element>
+</xsd:schema>

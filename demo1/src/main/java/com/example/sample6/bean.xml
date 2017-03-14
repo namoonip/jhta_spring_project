@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- new EmailService(host, port, username, password);와 같다 -->
+	<bean id="emailService" class="com.example.sample6.EmailService">
+		<constructor-arg name="host" value="smtp.gemail.com"/>
+		<constructor-arg name="port" value="10000"/>
+		<constructor-arg name="username" value="hong"/>
+		<constructor-arg name="password" value="zxcv1234"/>
+	</bean>
+	
+	<!-- 위와 같다(단, Namespaces의 C를 체크해야된다.) -->
+	<bean id="emailService2" class="com.example.sample6.EmailService"
+		c:host="stmp.gamil.com"
+		c:port="500"
+		c:username="hong"
+		c:password="zxcv1234"/>		
+		
+</beans>

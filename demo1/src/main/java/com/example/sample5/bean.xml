@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		1. Reporting 클래스로 객체 만들어서 "reporter"라는 이름으로 가지고 있어라.
+		2. LineChart 클래스로 객체 만들어서 "lineChart"라는 이름으로 가지고 있어라.
+		3. 1번에서 생성한 객체의 Chart라는 멤버변수에 "lineChart"라는 이름으로 참조할 수 있는
+			(찾아지는) 객체를 Setter를 이용해 주입까지 해라.
+			<property name="chart" ref="lineChart"/>은
+			setChart(lineChart)라는 뜻이다.
+			구체적으로 "chart 변수에 lineChart 객체를 주입해라"는 뜻이다.
+			스프링은 lineChart를 주입하기 위해 setChart()를 실행하고,
+			setChart()의 매개변수에 lineChart를 전달한다.
+	 -->
+
+	<!-- @Autowired를 활성화하는 context 태그 없이 활성화 시키기가 가능해짐 -->
+	<!-- @Autowired 대신 사용이 가능하다. -->
+	<!-- 1 -->
+	<!-- <bean id="reporter" class="com.example.sample5.Reporting">
+		3
+		LineChart의 chart객체를 주입하라고 알려줌 Setter 메소드가 없으면 안됨.
+		ref는 bean의 id에 등록되 있는 것만 가능하다.
+		value는 단순한 값만 넣는다.
+		<property name="chart" ref="barChart"/>
+		<property name="width" value="200"/>
+		<property name="height" value="150"/>
+	</bean> -->
+	
+	<!-- 위와 같다.(단, Namespaces에 p를 체크해야한다.) -->
+	<bean id="reporter" class="com.example.sample5.Reporting"
+		p:chart-ref="lineChart"
+		p:width="200"
+		p:height="150"/>
+	
+	<!-- 2 -->
+	<bean id="lineChart" class="com.example.sample5.LineChart"></bean>
+	<bean id="barChart" class="com.example.sample5.BarChart">
+		<!-- setter로 등록되어 있지 않으면 name에 등록 자체가 불가능하다. -->
+		<property name="color" value="red"/>
+		<property name="gap" value="5"/>
+	</bean>
+</beans>
