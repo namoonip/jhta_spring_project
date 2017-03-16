@@ -7,10 +7,23 @@
 
 	<bean id="connectionPool" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:my://192.168.10.106:3306/my_db"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/my_db"/>
 		<property name="username" value="myuser"/>
 		<property name="password" value="zxcv1234"/>
 	</bean>
 	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="connectionPool" />
+		<property name="configLocation" value="classpath:/META-INF/ibatis/SqlMapConfig.xml"/>
+	</bean>
+	
+	<bean id="sqlMapClientTemplate"
+		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	
+	<bean id="boardDao" class="kr.co.jhta.dao.BoardDaoImpl">
+		<property name="template" ref="sqlMapClientTemplate"/>
+	</bean>
 	
 </beans>

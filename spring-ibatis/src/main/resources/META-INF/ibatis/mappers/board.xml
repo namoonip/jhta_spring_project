@@ -5,5 +5,20 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="board">
+
+	<typeAlias alias="Board" type="kr.co.jhta.vo.Board"/>
+
+	<insert id="addBoard" parameterClass="Board">
+		insert into tb_board(title, writer, contents, regdate)
+		values(#title#, #writer#, #contents#, #regdate#)
+	</insert>
 	
+	<select id="getAllBoards" resultClass="Board">
+		select
+			id, title, writer, contents, regdate
+		from
+			tb_board
+		order by
+			id desc
+	</select>
 </sqlMap>

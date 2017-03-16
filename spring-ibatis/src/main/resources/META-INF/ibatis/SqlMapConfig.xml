@@ -8,7 +8,7 @@
 
   <!-- DB 연결은 spring app-context.xml에 이미 설정함 -->
   <!-- 맵퍼 파일 등록 -->
-  <sqlMap resource="META-INF/ibatis/mapper/board.xml"/>
+  <sqlMap resource="META-INF/ibatis/mappers/board.xml"/>
       
 </sqlMapConfig>
 
