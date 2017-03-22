@@ -1,5 +1,6 @@
 package kr.co.jhta.todo.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -30,10 +31,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public String login(String id, String pwd) {
+	public String login(String id, String pwd, HttpSession session) {
 		if(StringUtils.isEmpty(id) || StringUtils.isEmpty(pwd)) {
 			return "redirect:/login.do?error=invalid";
 		}
+		
+		User user = userService.getLoginUserInfo(id, pwd);
+		
+		session.setAttribute("LOGIN_USER", user);
+		
+		return "redirect:/home.do";
+	}
+	
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
 		return "redirect:/home.do";
 	}
 	

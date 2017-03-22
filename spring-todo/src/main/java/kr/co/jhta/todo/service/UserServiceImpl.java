@@ -20,5 +20,18 @@ public class UserServiceImpl implements UserService{
 		} else {
 			throw new RuntimeException("동일한 아이디로 가입한 사용자가 있습니다.");
 		}
+	}
+
+	@Override
+	public User getLoginUserInfo(String id, String pwd) {
+		User savedUser = userDao.getUserById(id); 
+		if(savedUser == null) {
+			throw new RuntimeException("아이디 혹은 비밀번호가 일치하지 않습니다.");
+		}
+		if(!savedUser.getPwd().equals(pwd)) {
+			throw new RuntimeException("아이디 혹은 비밀번호가 일치하지 않습니다.");
+		}
+		
+		return savedUser;
 	}	
 }
