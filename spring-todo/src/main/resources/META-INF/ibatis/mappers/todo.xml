@@ -5,5 +5,27 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="todo">
-
+	<typeAlias alias="Todo" type="kr.co.jhta.todo.vo.Todo"/>
+	
+	<insert id="addTodo" parameterClass="Todo">
+		insert tb_todo
+			(title, event_date, description, completed, regdate, user_no)
+		values
+			(#title#, #eventDate#, #description#, 'N', now(), #user.no#)
+	</insert>
+	
+	<select id="getTodoListByUserNo" parameterClass="int" resultClass="Todo">
+		select 
+			A.no, A.title, 
+			A.event_date as eventDate, A.description, 
+			A.completed, A.regdate,	A.user_no as "user.no",
+			B.name as "user.name"
+		from
+			tb_todo A, tb_user B
+		where
+			A.user_no = #value#
+		and A.user_no = B.no
+		order by no desc
+	</select>
+	
 </sqlMap>

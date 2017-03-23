@@ -17,7 +17,7 @@
 		
 		<div class="alert alert-danger">
 			<strong>에러메세지</strong> <%=exception.getMessage() %>
-		</div>		
+		</div>
 				
 		<p class="text-right">
 			<a href="home.do" class="btn btn-default btn-lg">홈</a>

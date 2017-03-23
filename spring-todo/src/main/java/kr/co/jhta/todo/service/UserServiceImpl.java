@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getLoginUserInfo(String id, String pwd) {
-		User savedUser = userDao.getUserById(id); 
+		User savedUser = userDao.getUserById(id);
 		if(savedUser == null) {
 			throw new RuntimeException("아이디 혹은 비밀번호가 일치하지 않습니다.");
 		}
@@ -33,5 +33,5 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return savedUser;
-	}	
+	}
 }

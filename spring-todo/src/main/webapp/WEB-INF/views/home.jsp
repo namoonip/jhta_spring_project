@@ -25,9 +25,14 @@
 				</p>			
 			</c:when>
 			<c:otherwise>
+				<div class="panel">
+					<div class="panel-body">
+						
+					</div>					
+				</div>			
 				<p class="text-right">
-					<a href="" class="btn btn-default">일정 보기</a>
-					<a href="" class="btn btn-primary">일정 등록</a>
+					<a href="todo.do" class="btn btn-default">일정 보기</a>
+					<a href="addtodo.do" class="btn btn-primary">일정 등록</a>
 					<a href="logout.do" class="btn btn-primary">로그아웃</a>
 				</p>			
 			</c:otherwise>
