@@ -24,8 +24,28 @@
 			tb_todo A, tb_user B
 		where
 			A.user_no = #value#
-		and A.user_no = B.no
-		order by no desc
+			and A.user_no = B.no
+			and A.completed = 'N'
+		order by
+			A.event_date asc
 	</select>
+	
+	<select id="getTodoByNo" parameterClass="int" resultClass="Todo">
+		select 
+			A.no, A.title, 
+			A.event_date as eventDate, A.description, 
+			A.completed, A.regdate,	A.user_no as "user.no"
+		from
+			tb_todo A, tb_user B
+		where
+			A.user_no = B.no
+			and A.no = #value#
+	</select>
+	
+	<update id="completeTodoByNo" parameterClass="int">
+		update tb_todo
+		set completed = 'Y'
+		where no = #value#
+	</update>
 	
 </sqlMap>

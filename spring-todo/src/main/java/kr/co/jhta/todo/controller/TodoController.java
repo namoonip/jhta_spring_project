@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.todo.service.TodoService;
 import kr.co.jhta.todo.vo.Todo;
@@ -26,11 +27,15 @@ public class TodoController {
 	@Autowired
 	public TodoService todoService;
 	
+	
+	
 	@RequestMapping(value="/addtodo.do", method=RequestMethod.GET)
 	public String form(Model model) {
 		model.addAttribute("todoform", new TodoForm());
 		return "registertodo";
 	}
+	
+	
 	
 	@RequestMapping(value="/addtodo.do", method=RequestMethod.POST)
 	public String register(@Valid @ModelAttribute("todoform")TodoForm todoform, 
@@ -44,25 +49,28 @@ public class TodoController {
 		BeanUtils.copyProperties(todoform, todo);
 		
 		User user = (User) session.getAttribute("LOGIN_USER");
-		if(user == null) {
-			throw new RuntimeException("새 일정 등록은 로그인이 필요한 서비스입니다.");
-		} 
 		todo.setUser(user);
 		todoService.registerTodo(todo);
 		return "redirect:/todo.do";
 	}
 	
+	
+	
 	@RequestMapping("/todo.do")
 	public String todos(Model model, HttpSession session) {
-		
 		User user = (User) session.getAttribute("LOGIN_USER");
-		if(user == null) {
-			throw new RuntimeException("일정 조회는 로그인이 필요한 서비스입니다.");
-		} 
-		
 		List<Todo> todoList = todoService.getTodoList(user.getNo());
 		model.addAttribute("todoList", todoList);
-		
 		return "todo";
 	}
+	
+	
+	
+	@RequestMapping("/complete.do")
+	public String complete(@RequestParam("no") int no, User user) {
+		todoService.completeTodo(no, user.getNo());
+		
+		return "redirect:/todo.do";
+	}
+	
 }

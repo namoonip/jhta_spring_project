@@ -11,38 +11,56 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>일정 관리 - 일정 목록</title>
+<style type="text/css">
+	.hidden {display: none;}
+</style>
+<script type="text/javascript">
+$(function() {
+	$("td > strong").click(function() {
+		$(this).parents("tr").next().toggleClass("hidden");
+	});
+})
+</script>
 </head>
 <body>
 <div class="container">
 	<h1>일정 리스트</h1>
-	
 	<div class="row">
-	<table class="table">
-		<colgroup>
-			<col width="20%" />
-			<col width="60%" />
-			<col width="20%" />
-		</colgroup>
-		<thead>
-			<tr>
-				<th>날짜</th>
-				<th>제목</th>
-				<th>처리여부</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="todo" items="${todoList }">
+		<table class="table table-condensed">
+			<colgroup>
+				<col width="20%" />
+				<col width="60%" />
+				<col width="20%" />
+			</colgroup>
+			<thead>
 				<tr>
-					<td><fmt:formatDate value="${todo.eventDate}"/></td>
-					<td><c:out value="${todo.title}"/></td>
-					<td>${todo.completed}</td>
-				</tr>			
-			</c:forEach>
-		</tbody>
-	</table>
-	<div class="text-right">
-		<a href="home.do" class="btn btn-default">홈</a>
+					<th>날짜</th>
+					<th>제목</th>
+					<th>처리여부</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="todo" items="${todoList }">
+					<tr>
+						<td><fmt:formatDate value="${todo.eventDate}"/></td>
+						<td><strong><c:out value="${todo.title}"/></strong></td>
+						<td>${todo.completed}</td>
+					</tr>
+					<tr class="hidden">
+						<td></td>
+						<td><c:out value="${todo.description }"/></td>
+						<td>
+							<a href="complete.do?no=${todo.no }" class="btn btn-primary btn-xs">처리완료</a>
+							<a href="delete.do?no=${todo.no }" class="btn btn-danger btn-xs">삭제</a>
+						</td>
+					</tr>	
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
+	<div class="row text-right">
+		<a href="home.do" class="btn btn-default">홈</a>
+		<a href="addtodo.do" class="btn btn-primary">새 일정</a>
 	</div>
 </div>
 </body>

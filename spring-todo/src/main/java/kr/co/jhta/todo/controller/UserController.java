@@ -23,7 +23,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginform() {
 		return "loginform";

@@ -23,5 +23,15 @@ public class TodoDaoImpl implements TodoDao{
 	@Override
 	public List<Todo> getTodoListByUserNo(int no) {
 		return template.queryForList("getTodoListByUserNo", no);
+	}
+
+	@Override
+	public Todo getTodoByNo(int no) {
+		return (Todo) template.queryForObject("getTodoByNo", no);
+	}
+
+	@Override
+	public void completeTodoByNo(int no) {
+		template.update("completeTodoByNo", no);
 	}	
 }
