@@ -8,7 +8,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<!-- 어노테이션 스켄을 위해 필요함 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="kr.co.jhta.todo.controller.argumentResolver.LoginUserArgumentResolver"></bean>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<mvc:interceptors>
 		<bean class="kr.co.jhta.todo.controller.interceptor.LoginCheckInterceptor">

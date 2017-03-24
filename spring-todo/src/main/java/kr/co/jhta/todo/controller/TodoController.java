@@ -25,9 +25,7 @@ import kr.co.jhta.todo.vo.User;
 public class TodoController {
 	
 	@Autowired
-	public TodoService todoService;
-	
-	
+	public TodoService todoService;	
 	
 	@RequestMapping(value="/addtodo.do", method=RequestMethod.GET)
 	public String form(Model model) {
@@ -35,42 +33,31 @@ public class TodoController {
 		return "registertodo";
 	}
 	
-	
-	
 	@RequestMapping(value="/addtodo.do", method=RequestMethod.POST)
 	public String register(@Valid @ModelAttribute("todoform")TodoForm todoform, 
-				Errors errors, HttpSession session) {
-		
+											Errors errors, User user) {
 		if(errors.hasErrors()) {
 			return "registertodo";
 		}
 		
 		Todo todo = new Todo();
-		BeanUtils.copyProperties(todoform, todo);
-		
-		User user = (User) session.getAttribute("LOGIN_USER");
+		BeanUtils.copyProperties(todoform, todo);		
 		todo.setUser(user);
+		
 		todoService.registerTodo(todo);
 		return "redirect:/todo.do";
 	}
 	
-	
-	
 	@RequestMapping("/todo.do")
-	public String todos(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("LOGIN_USER");
+	public String todos(Model model, User user) {
 		List<Todo> todoList = todoService.getTodoList(user.getNo());
 		model.addAttribute("todoList", todoList);
 		return "todo";
 	}
 	
-	
-	
 	@RequestMapping("/complete.do")
 	public String complete(@RequestParam("no") int no, User user) {
 		todoService.completeTodo(no, user.getNo());
-		
 		return "redirect:/todo.do";
 	}
-	
 }

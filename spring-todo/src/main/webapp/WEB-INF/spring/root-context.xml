@@ -8,14 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	
 	<!-- dao를 등록 -->
-	<context:component-scan base-package="kr.co.jhta.todo" >
-			<!-- 어노테이션으로 context를 할 패키지를 구분 -->
-			<!-- 해당 어노테이션이 붙은 클래스는 include한다.(Service, Repository) -->
-			<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-			<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-			<!-- 해당 어노테이션이 붙은 클래스는 exclude한다.(Controller) -->
-			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
-	
+	<context:component-scan base-package="kr.co.jhta.todo.service"  />
+		
 </beans>
 

@@ -34,4 +34,5 @@ public class TodoDaoImpl implements TodoDao{
 	public void completeTodoByNo(int no) {
 		template.update("completeTodoByNo", no);
 	}	
+	
 }

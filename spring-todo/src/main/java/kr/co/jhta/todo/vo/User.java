@@ -2,6 +2,10 @@ package kr.co.jhta.todo.vo;
 
 import java.util.Date;
 
+/**
+ * @author JHTA
+ *
+ */
 public class User {
 	
 	private int no;
@@ -86,5 +90,12 @@ public class User {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	@Override
+	public String toString() {
+		return "User [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", phone=" + phone + ", email="
+				+ email + ", completedTodo=" + completedTodo + ", uncompletedTodo=" + uncompletedTodo + ", regDate="
+				+ regDate + "]";
 	}
 }
