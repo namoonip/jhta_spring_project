@@ -2,8 +2,11 @@ package kr.co.jhta.todo.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.co.jhta.todo.vo.Todo;
 
+@Transactional
 public interface TodoService {
 
 	void registerTodo(Todo todo);

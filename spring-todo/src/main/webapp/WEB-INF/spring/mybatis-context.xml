@@ -27,7 +27,7 @@
 		}
 	 -->
 	
-	<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<!-- <bean class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="kr.co.jhta.todo.dao.UserDao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
@@ -35,6 +35,12 @@
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="kr.co.jhta.todo.dao.TodoDao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean> -->
+	
+	<!-- MapperFactoryBean을  사용해 하나하나 등록하는 것 없이 자동으로 인터페이스와 Mapping을 지원한다.-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="kr.co.jhta.todo.dao" />
 	</bean>
 
 </beans>

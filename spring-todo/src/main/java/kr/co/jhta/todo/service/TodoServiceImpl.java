@@ -33,7 +33,7 @@ public class TodoServiceImpl implements TodoService{
 		Todo todo = todoDao.getTodoByNo(userNo);
 		if(todo != null) {
 			if(todo.getUser().getNo() != userNo) {
-				throw new RuntimeException("본인이 등록한 일정만 완료저리할 수 있습니다.");
+				throw new RuntimeException("본인이 등록한 일정만 완료 처리할 수 있습니다.");
 			}
 		}
 		todoDao.completeTodoByNo(no);
