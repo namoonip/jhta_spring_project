@@ -10,7 +10,7 @@ import kr.co.jhta.todo.vo.Todo;
 
 @SuppressWarnings("deprecation")
 @Repository
-public class TodoDaoImpl implements TodoDao{
+public class TodoDaoIbatisImpl implements TodoDao{
 	
 	@Autowired
 	private SqlMapClientTemplate template;
