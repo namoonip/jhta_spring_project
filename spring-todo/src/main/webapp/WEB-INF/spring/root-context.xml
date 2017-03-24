@@ -9,6 +9,5 @@
 	
 	<!-- dao를 등록 -->
 	<context:component-scan base-package="kr.co.jhta.todo.service"  />
-		
+	
 </beans>
-
