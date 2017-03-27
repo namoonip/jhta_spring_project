@@ -2,6 +2,9 @@ package kr.co.jhta.rest.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author JHTA
  *
@@ -10,14 +13,39 @@ public class User {
 	
 	private int no;
 	private String id;
+	@JsonIgnore
 	private String pwd;
 	private String name;
 	private String phone;
 	private String email;
 	private int completedTodo;
 	private int uncompletedTodo;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date regDate;
 	
+	
+	
+	public User(int no, String id, String pwd, String name, String phone, String email) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.regDate = new Date();
+	}
+
+	public User(String id, String pwd, String name, String phone, String email) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.regDate = new Date();
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
