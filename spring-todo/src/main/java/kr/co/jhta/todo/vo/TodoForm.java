@@ -6,6 +6,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 public class TodoForm {
 	
@@ -20,6 +21,22 @@ public class TodoForm {
 	@NotBlank
 	private String description;
 	
+	private MultipartFile uploadFile;
+	private MultipartFile attachFile;
+
+	public MultipartFile getAttachFile() {
+		return attachFile;
+	}
+	
+	public void setAttachFile(MultipartFile attachFile) {
+		this.attachFile = attachFile;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	public String getTitle() {
 		return title;
 	}

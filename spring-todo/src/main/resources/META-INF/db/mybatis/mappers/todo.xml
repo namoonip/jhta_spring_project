@@ -6,17 +6,17 @@
 
 	<insert id="addTodo" parameterType="Todo">
 		insert tb_todo
-			(title, event_date, description, completed, regdate, user_no)
+			(title, event_date, description, completed, regdate, user_no, map_filename, attach_filename)
 		values
-			(#{title}, #{eventDate}, #{description}, 'N', now(), #{user.no})
+			(#{title}, #{eventDate}, #{description}, 'N', now(), #{user.no}, #{mapFilename}, #{attachFilename})
 	</insert>
 	
 	<select id="getTodoListByUserNo" parameterType="int" resultType="Todo">
 		select 
-			A.no, A.title, 
-			A.event_date as eventDate, A.description, 
+			A.no, A.title, A.event_date as eventDate, A.description, 
 			A.completed, A.regdate,	A.user_no as "user.no",
-			B.name as "user.name"
+			B.name as "user.name", A.map_filename as mapFilename,
+			A.attach_filename as attachFilename
 		from
 			tb_todo A, tb_user B
 		where
@@ -31,7 +31,9 @@
 		select 
 			A.no, A.title, 
 			A.event_date as eventDate, A.description, 
-			A.completed, A.regdate,	A.user_no as "user.no"
+			A.completed, A.regdate,	A.user_no as "user.no",
+			A.map_filename as mapFilename,
+			A.attach_filename as attachFilename
 		from
 			tb_todo A, tb_user B
 		where

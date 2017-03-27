@@ -12,4 +12,5 @@ public interface TodoService {
 	void registerTodo(Todo todo);
 	List<Todo> getTodoList(int userNo);
 	void completeTodo(int no, int userNo);
+	String getAttachFileName(int no, int userNo);
 }

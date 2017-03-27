@@ -16,8 +16,12 @@
 </style>
 <script type="text/javascript">
 $(function() {
+	$("tbody tr:not(:has(strong))").addClass('hidden');
 	$("td > strong").click(function() {
-		$(this).parents("tr").next().toggleClass("hidden");
+		var $next = $(this).parents("tr").next().toggleClass("hidden");
+		if($next.next().is(":has(img)")) {
+			$next.next().toggleClass("hidden");
+		};
 	});
 })
 </script>
@@ -43,7 +47,11 @@ $(function() {
 				<c:forEach var="todo" items="${todoList }">
 					<tr>
 						<td><fmt:formatDate value="${todo.eventDate}"/></td>
-						<td><strong><c:out value="${todo.title}"/></strong></td>
+						<td><strong><c:out value="${todo.title}"/></strong>
+							<c:if test="${not empty todo.attachFilename }">
+								<a href="download.do?no=${todo.no}" class="pull-right btn btn-xs btn-link">${todo.attachFilename }</a>						
+							</c:if>
+						</td>
 						<td>${todo.completed}</td>
 					</tr>
 					<tr class="hidden">
@@ -53,7 +61,14 @@ $(function() {
 							<a href="complete.do?no=${todo.no }" class="btn btn-primary btn-xs">처리완료</a>
 							<a href="delete.do?no=${todo.no }" class="btn btn-danger btn-xs">삭제</a>
 						</td>
-					</tr>	
+					</tr>
+					<c:if test="${not empty todo.mapFilename}">
+						<tr class="hidden">
+							<td></td>
+							<td><img src="resources/images/map/${todo.mapFilename }" width="200px;" height="200px;"></td>
+							<td></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

@@ -21,10 +21,17 @@
 					<value>/addtodo.do</value>
 					<value>/todo.do</value>
 					<value>/complete.do</value>
+					<value>/download.do</value>
 				</list>
 			</property>		
 		</bean>
 	</mvc:interceptors>
+	
+	<!-- id는 multipartResolver로 정해져 있다!. 바꾸면 안된다. -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"></property>
+	</bean>
+	
 	
 	<context:component-scan base-package="kr.co.jhta.todo.controller" />
 
