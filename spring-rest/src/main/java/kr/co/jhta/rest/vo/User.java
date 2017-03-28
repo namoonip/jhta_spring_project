@@ -23,7 +23,11 @@ public class User {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date regDate;
 	
-	
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	public User(int no, String id, String pwd, String name, String phone, String email) {
 		super();
@@ -44,11 +48,6 @@ public class User {
 		this.phone = phone;
 		this.email = email;
 		this.regDate = new Date();
-	}
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public User(int no, String id, String pwd, String name, String phone, String email, int completedTodo,

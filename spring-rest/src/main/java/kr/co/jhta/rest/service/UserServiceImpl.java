@@ -1,6 +1,7 @@
 package kr.co.jhta.rest.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,8 +41,41 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User saveUser(User user) {
 		user.setNo(counter.getAndIncrement());
+		user.setRegDate(new Date());
 		db.add(user);
 		return user;
+	}
+
+	@Override
+	public User deleteUser(int no) {
+		int userIndex = -1;
+		for(int index=0; index<db.size(); index++ ) {
+			User user = db.get(index);
+			if(user.getNo() == no) {
+				userIndex = index;
+				break;
+			}
+		}
+		if(userIndex != -1) {
+			return db.remove(userIndex);
+		}
+		return null;
+	}
+
+	@Override
+	public void updateUser(User user) {
+		int userIndex = -1; // List가 0부터 양의 정수까지이므로 나올 수 없는 음수를 디폴트로 지정
+		for (int index=0; index<db.size(); index++) {
+			User item = db.get(index);
+			if(item.getNo() == user.getNo()) {
+				userIndex = index;
+				break;
+			}
+		}
+		
+		if(userIndex != -1) {
+			db.set(userIndex, user);	// 지정된 위치의 객체를 새로운 객체로 교체
+		}
 	}
 }
 
