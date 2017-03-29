@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.jhta.ex.dao.BookMapper">
+	<insert id="addBook">
+		insert into ex_book 
+		(book_no,		 book_title,		 book_author,
+		 book_description,		book_publisher 	,book_price,		 
+		 book_regDate,		 book_quantity,		 book_img,		 
+		 book_category,		 book_sellCount)
+		values
+		(#{no},		 #{title},		 #{author},
+		 #{description},		#{publisher}, 	#{price},
+		 now(),		 #{quantity},		 #{img},		 
+		 #{category},		 0)
+	</insert>
+	
+	<select id="getAllBooks" resultType="Book">
+		select book_no as no,		 book_title as title,		 book_author as author,
+		 book_description as description,		 book_publisher as publisher, book_price as price,		 
+		 book_regDate as regDate,		 book_quantity as quantity,		 book_img as img,		 
+		 book_category as category,		 book_sellCount as sellCount
+		from ex_book
+		 order by book_no desc
+	</select>
+	
+
+</mapper>

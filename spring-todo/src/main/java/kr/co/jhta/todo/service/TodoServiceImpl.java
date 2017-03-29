@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.jhta.todo.dao.TodoDao;
 import kr.co.jhta.todo.dao.UserDao;
 import kr.co.jhta.todo.vo.Todo;
 
+@Transactional
 @Service
 public class TodoServiceImpl implements TodoService{
 	@Autowired
