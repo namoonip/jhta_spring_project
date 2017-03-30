@@ -67,7 +67,7 @@
 								</colgroup>
 								<tbody id="detailTbody1">
 									<tr>
-										<th colspan="2" style="color: blue;">${bookDetail.category}</th>
+										<th colspan="2" style="color: blue;">[${bookDetail.category}]</th>
 									</tr>
 									<tr>
 										<th>제목</th>
@@ -117,7 +117,7 @@
 			<h5>책 소개</h5>
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-						${bookDetail.description }
+				${bookDetail.description }
 			</div>
 			<div class="col-md-2"></div>
 		</div>

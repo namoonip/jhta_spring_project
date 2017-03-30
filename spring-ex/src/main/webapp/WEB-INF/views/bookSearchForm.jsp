@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
     /* Add a gray background color and some padding to the footer */
     footer {
@@ -24,16 +25,9 @@
       }
     }
   </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	$(':input[name="keyword"]');
-})
-</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/nav/navigator.jsp" />
-
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
@@ -51,7 +45,7 @@ $(function() {
     </div>
 
     <div class="col-sm-9">
-      <h4><small>검색 결과</small><span class="badge">2</span></h4>
+      <h4><small>검색 결과</small><span class="badge"></span></h4>
       <hr>
       <c:choose>
 	      <c:when test="${not empty bookList}">
@@ -59,19 +53,26 @@ $(function() {
 			      <div class="row">
 			        <div class="col-sm-2 text-center">
 	  	      		  <a href="bookDetail.do?no=${book.no}">
-			          	<img src="resources/images/map/${book.img}" height="80" width="80" alt="${book.img }">
+			          	<img src="resources/images/map/${book.img}" height="100" width="100" alt="${book.img }">
 			          </a>
 			        </div>
-			        <div class="col-sm-10">
-			          <h4><a href="bookDetail.do?no=${book.no}">${book.title } </a><small>[${book.category }]</small></h4>
+			        <div class="col-sm-1"></div>
+			        <div class="col-sm-6">
+			          <h4><a id="titleA" href="bookDetail.do?no=${book.no}">${book.title } </a><small>[${book.category }]</small></h4>
+			          <c:set var="beforeKeyword" value="${beforeKeyword}" scope="request"/>
 			          <p>
 			          	<fmt:formatNumber value="${book.price }" type="number" />원 → 
 			          	<fmt:formatNumber value="${book.price - book.price/3 }" pattern="#,###"/>원
 			          </p>
+			          <p>
+			          	저자 : ${book.author}
+			          </p>
 			          <br>
 			        </div>
+			        <div class="col-sm-2">
+			        </div>
+			        <div class="col-sm-1"></div>
 			      </div>
-
 		      </c:forEach>
 	      </c:when>
 	      <c:otherwise>
@@ -84,4 +85,9 @@ $(function() {
 <footer class="container-fluid text-center">
 </footer>
 </body>
+<script type="text/javascript">
+$(function() {
+ 	$(':input[name="keyword"]').val('${beforeKeyword}');
+})
+</script>
 </html>

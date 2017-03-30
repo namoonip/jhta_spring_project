@@ -43,7 +43,7 @@
 		<div class="col-xs-2">
 			<select name="opt" class="form-control" style="width:150px;">		
 				<option value="title">제목</option>
-				<option value="authoer">저자</option>
+				<option value="author">저자</option>
 				<option value="publisher">출판사</option>
 			</select>
 		</div>

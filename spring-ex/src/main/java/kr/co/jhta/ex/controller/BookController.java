@@ -38,9 +38,10 @@ public class BookController {
 	BookService bookService;
 	
 	@RequestMapping(value="bookSearch.do")
-	public String searchBookList(Model model, SearchForm searchForm) {
+	public String searchBookList(Model model, SearchForm searchForm,@RequestParam("keyword") String keyword) {
 		List<Book> bookList = bookService.searchBook(searchForm);
 		model.addAttribute("bookList", bookList);
+		model.addAttribute("beforeKeyword",keyword);
 		return "bookSearchForm";
 	}	
 	
