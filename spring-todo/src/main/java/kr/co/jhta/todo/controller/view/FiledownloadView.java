@@ -17,7 +17,8 @@ import org.springframework.web.servlet.view.AbstractView;
 public class FiledownloadView extends AbstractView{
 
 	@Override // IRVR이 아니라 다른 파일 다운로드 뷰로 데이터를 보낸다.
-	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
+	protected void renderMergedOutputModel(Map<String, Object> model, 
+						HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// Map객체 형태의 Model객체에서 파일 이름과 경로를 가져오기.
 		String filename = (String) model.get("filename");

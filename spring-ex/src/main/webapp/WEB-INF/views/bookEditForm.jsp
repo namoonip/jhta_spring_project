@@ -11,10 +11,11 @@
 <div class="container">
 <div class="row">
 	<h1>Add Book</h1>
-	<form:form action="addBook.do" method="POST" enctype="multipart/form-data" modelAttribute="bookForm">
+	<form:form action="bookEditForm.do" method="POST" enctype="multipart/form-data" modelAttribute="bookForm">
+		<form:input type="hidden" path="no"/>
 		<div class="form-group">
 			<label for="">Title</label>
-			<form:input path="title" cssClass="form-control"/>
+			<form:input path="title" cssClass="form-control" />
 			<form:errors path="title" cssClass="text-danger" />
 		</div>	
 		<div class="form-group">
@@ -29,7 +30,7 @@
 		</div>	
 		<div class="form-group">
 			<label for="">publisher</label>
-			<form:input path="publisher" cssClass="form-control"/>
+			<form:input path="publisher" cssClass="form-control" />
 			<form:errors path="publisher" cssClass="text-danger" /> 
 		</div>	
 		<div class="form-group">
@@ -38,13 +39,8 @@
 			<form:errors path="price" cssClass="text-danger" />
 		</div>	
 		<div class="form-group">
-			<label for="">Img</label>
-			<form:input path="uploadFile" type="file" cssClass="form-control"/>
-			<form:errors path="uploadFile" cssClass="text-danger" />
-		</div>
-		<div class="form-group">
 			<label for="">RegDate</label>
-			<form:input path="regDate" type="date" cssClass="form-control" />
+			<form:input id="datePicker" path="regDate" type="date" cssClass="form-control" />
 			<form:errors path="regDate" cssClass="text-danger" />
 		</div>
 		<label for="">Category</label>

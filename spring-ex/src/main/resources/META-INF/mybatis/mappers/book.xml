@@ -3,16 +3,69 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.ex.dao.BookMapper">
-	<insert id="addBook">
+
+	<select id="searchBook" parameterType="kr.co.jhta.ex.vo.SearchForm" resultType="Book">
+		select book_no as no,		 book_title as title,		 book_author as author,
+		 book_description as description,		 book_publisher as publisher, book_price as price,		 
+		 book_regDate as regDate,		 book_quantity as quantity,		 book_img as img,		 
+		 book_category as category,		 book_sellCount as sellCount
+		from ex_book
+		<!-- where조건 안에 아무것도 맞는 것이 없으면 where절이 사라진 쿼리가 실행된다. -->
+		<where>
+			<if test="opt == 'title'">
+				book_title like concat('%', #{keyword} ,'%')
+			</if>
+			<if test="opt == 'author'">
+				book_author like concat('%', #{keyword} ,'%')
+			</if>
+			<if test="opt == 'publisher'">
+				book_publisher like concat('%', #{keyword} ,'%')
+			</if>
+		</where>		 	
+	</select>
+
+	<update id="editBook" parameterType="Book">
+		update ex_book
+		set book_title = #{title},		 book_author = #{author},
+			book_description = #{description},		 book_publisher = #{publisher}, book_price = #{price},		 
+			book_regDate = #{regDate},		 book_quantity  = #{quantity}, 	book_category = #{category}
+		where book_no = #{no}
+	</update>
+
+	<select id="getBookByNo" parameterType="int" resultType="Book">
+		select book_no as no,		 book_title as title,		 book_author as author,
+		 book_description as description,		 book_publisher as publisher, book_price as price,		 
+		 book_regDate as regDate,		 book_quantity as quantity,		 book_img as img,		 
+		 book_category as category,		 book_sellCount as sellCount
+		from ex_book
+		where book_no = #{no}	
+	</select>
+
+	<select id="getBestBookBySellCount" resultType="Book">
+		select book_no as no,		 book_title as title,		 book_author as author,
+		 book_description as description,		 book_publisher as publisher, book_price as price,		 
+		 book_regDate as regDate,		 book_quantity as quantity,		 book_img as img,		 
+		 book_category as category,		 book_sellCount as sellCount
+		from ex_book
+		 where row_count() &lt;= 4
+		 order by book_sellCount asc			
+	</select>
+
+	<delete id="deleteBook" parameterType="int">
+		delete from ex_book
+		where book_no = #{no}
+	</delete>
+
+	<insert id="addBook" parameterType="Book">
 		insert into ex_book 
-		(book_no,		 book_title,		 book_author,
+		(book_no, book_title,		 book_author,
 		 book_description,		book_publisher 	,book_price,		 
 		 book_regDate,		 book_quantity,		 book_img,		 
 		 book_category,		 book_sellCount)
 		values
-		(#{no},		 #{title},		 #{author},
+		(#{no}, #{title},		 #{author},
 		 #{description},		#{publisher}, 	#{price},
-		 now(),		 #{quantity},		 #{img},		 
+		 #{regDate},		 #{quantity},		 #{img},		 
 		 #{category},		 0)
 	</insert>
 	

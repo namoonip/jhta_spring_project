@@ -2,22 +2,40 @@ package kr.co.jhta.ex.vo;
 
 import java.util.Date;
 
-public class Book {
-	
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+public class BookForm {
 	private int no;
+	@NotBlank
+	@NotNull(message="제목은 필수 입력 값입니다.")
 	private String title;
+	@NotBlank
+	@NotNull(message="저자는 필수 입력 값입니다.")
 	private String author;
+	@NotBlank
+	@NotNull(message="설명은 필수 입력 값입니다.")
 	private String description;
+	@NotBlank
+	@NotNull(message="출판사는 필수 입력 값입니다.")
 	private String publisher;
+	@NotNull(message="가격은 필수 입력 값입니다.")
+	@Min(value=0, message="0원 이상입니다.")
+	@Max(value=1000000 , message="1,000,000원 이하만 입력 가능합니다.")
 	private int price;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message="날짜는 필수 입력 값입니다.")
 	private Date regDate;
 	private int quantity;
-	private String img;
+	private MultipartFile uploadFile;
+	@NotNull
 	private String category;
 	private int sellCount;
-	public Book() {
-		super();
-	}
 	public int getNo() {
 		return no;
 	}
@@ -66,11 +84,11 @@ public class Book {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public String getImg() {
-		return img;
+	public MultipartFile getUploadFile() {
+		return uploadFile;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	public String getCategory() {
 		return category;
