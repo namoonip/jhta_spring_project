@@ -76,6 +76,7 @@ public class Pagination {
 		return getCurrentBlock() * pagesPerBlock + 1;
 	}
 	
+	
 	/*public void setRowsPerPage(int rowsPerPage) {
 	this.rowsPerPage = rowsPerPage;
 	}

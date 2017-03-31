@@ -33,7 +33,7 @@
 		select	id, name, dept, job, phone, salary, comm, hiredate
 		from
 		(select
-			row_number() over(order by employee_id asc) rn,
+			row_number() over(order by ${sort} ${orderby}) rn,
 			employee_id 	as id,
 			first_name 		as name,
 			department_id 	as dept,

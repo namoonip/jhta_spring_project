@@ -23,7 +23,13 @@ $(function () {
 	      
 	    var keyword = $("#origin-search-form :input[name='keyword']").val();
 	    $("#search-form :input[name='keyword']").val(keyword);
-	   }
+	    
+	    var arr = 
+	    	$("button:has(.glyphicon)").filter(".btn-success").attr("id").split("-");
+	    
+	    $("#search-form :input[name='sort']").val(arr[0]);
+	    $("#search-form :input[name='orderby']").val(arr[1]);
+	}
 	   
 	$("select[name='rows']").change(function(){
 		// 지금 선택된 보기 갯수를 hidden 필드에 설정
@@ -50,6 +56,16 @@ $(function () {
 	    setSearchFormField(pageNo);
 	    $("#search-form").submit();
 	});
+	
+	$("button:has('.glyphicon')").click(function() {
+		$("button:has('.glyphicon')").removeClass('btn-success').addClass('btn-default');
+		$(this).addClass("btn-success").removeClass("btn-default");
+		
+		setSearchFormField(1);
+		
+		$("#search-form").submit();
+	});
+
 });   
 </script>
 </head>
@@ -70,12 +86,33 @@ $(function () {
 		<table class="table">
 			<thead>
 				<tr>
-					<th>사원 번호</th>
-					<th>이름</th>
+					<th>사원 번호
+						<button type="button" class="btn btn-success btn-xs" id="employee_id-asc">
+							<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-xs" id="employee_id-desc">
+							<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+						</button>
+					</th>
+					<th>이름
+						<button type="button" class="btn btn-default btn-xs" id="first_name-asc">
+							<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-xs" id="first_name-desc">
+							<span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+						</button>
+					</th>
 					<th>부서 번호</th>
 					<th>직종</th>
 					<th>전화번호</th>
-					<th>급여</th>
+					<th>급여
+						<button type="button" class="btn btn-default btn-xs" id="salary-asc">
+							<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-xs" id="salary-desc">
+							<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+						</button>
+					</th>
 					<th>커미션</th>
 					<th>입사일</th>
 				</tr>
@@ -98,36 +135,9 @@ $(function () {
 	</div>
 	
 	<div class="row text-center">
-		<ul class="pagination">
-		<c:if test="${pagination.currentBlock gt 1}">
-			<li>
-				<a href="search.fo?pageNo=${pagination.prevBlock }" id="navi-${pagination.prevBlock }" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>		
-		</c:if>
-		<c:forEach var="pno" begin="${pagination.beginPage }" end="${pagination.endPage }">
-			<c:choose>
-				<c:when test="${pno eq pagination.currentPage }">
-					<li class="active">
-						<a id="navi-${pno }" href="search.do?pageNo=${pno }">${pno }</a>
-					</li>
-				</c:when>
-				<c:otherwise>
-					<li>
-						<a id="navi-${pno }" href="search.do?pageNo=${pno }">${pno }</a>
-					</li>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${pagination.currentBlock lt pagination.totalBlocks}">
-			<li>
-				<a href="search.fo?pageNo=${pagination.nextBlock }" id="navi-${pagination.nextBlock }" aria-label="Previous">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>		
-		</c:if>
-		</ul>
+		<!-- 다른 url일 경우 value만 수정하면 된다. -->
+		<c:set var="link" value="search.do"/>
+		<%@ include file="common/navi.jsp" %>
 	</div>
 	
 	<div class="row">
@@ -155,6 +165,8 @@ $(function () {
 		<input type="hidden" name="opt" value=""/>
 		<input type="hidden" name="keyword" value=""/>
 		<input type="hidden" name="display" value="5"/>
+		<input type="hidden" name="sort" value="employee_id"/>
+		<input type="hidden" name="orderby" value="asc"/>
 	</form>
 </div>
 </body>

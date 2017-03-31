@@ -8,7 +8,21 @@ public class SearchForm {
 	private int beginIndex;	// 조회 시작번호
 	private int endIndex;	// 조회 끝 번호
 	private int display;	// 표시할 개수
-	
+	private String sort = "employee_id";
+	private String orderby = "asc";
+		
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	public String getOrderby() {
+		return orderby;
+	}
+	public void setOrderby(String orderby) {
+		this.orderby = orderby;
+	}
 	public int getDisplay() {
 		return display;
 	}
@@ -45,6 +59,5 @@ public class SearchForm {
 	public void setEndIndex(int endIndex) {
 		this.endIndex = endIndex;
 	}
-	
 	
 }
