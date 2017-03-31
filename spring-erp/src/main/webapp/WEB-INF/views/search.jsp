@@ -59,6 +59,7 @@ $(function () {
 	
 	<div class="row pull-right">
 		<select name="rows" class="form-control" style="width: 130px;">
+			<option value="5" ${search.display eq 5 ? 'selected=selected' : ''}>5개씩 보기</option>
 			<option value="10" ${search.display eq 10 ? 'selected=selected' : ''}>10개씩 보기</option>
 			<option value="20" ${search.display eq 20 ? 'selected=selected' : ''}>20개씩 보기</option>
 			<option value="50" ${search.display eq 50 ? 'selected=selected' : ''}>50개씩 보기</option>
@@ -98,7 +99,14 @@ $(function () {
 	
 	<div class="row text-center">
 		<ul class="pagination">
-		<c:forEach var="pno" begin="1" end="${pagination.totalPages }">
+		<c:if test="${pagination.currentBlock gt 1}">
+			<li>
+				<a href="search.fo?pageNo=${pagination.prevBlock }" id="navi-${pagination.prevBlock }" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>		
+		</c:if>
+		<c:forEach var="pno" begin="${pagination.beginPage }" end="${pagination.endPage }">
 			<c:choose>
 				<c:when test="${pno eq pagination.currentPage }">
 					<li class="active">
@@ -112,6 +120,13 @@ $(function () {
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		<c:if test="${pagination.currentBlock lt pagination.totalBlocks}">
+			<li>
+				<a href="search.fo?pageNo=${pagination.nextBlock }" id="navi-${pagination.nextBlock }" aria-label="Previous">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>		
+		</c:if>
 		</ul>
 	</div>
 	
@@ -139,7 +154,7 @@ $(function () {
 		<input type="hidden" name="pageNo" value="1"/>
 		<input type="hidden" name="opt" value=""/>
 		<input type="hidden" name="keyword" value=""/>
-		<input type="hidden" name="display" value="10"/>
+		<input type="hidden" name="display" value="5"/>
 	</form>
 </div>
 </body>
