@@ -11,6 +11,13 @@
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(function () {   
+	
+	$("button:has('.glyphicon')").removeClass('btn-success').addClass("btn-default");
+    var sort = $("#search-form :input[name='sort']").val();
+    var orderby = $("#search-form :input[name='orderby']").val();
+    var $orderedButton = $("#" + sort + "-" + orderby);
+    $orderedButton.removeClass('btn-default').addClass('btn-success');    
+	
 	function setSearchFormField(pageNo) {
 		pageNo = pageNo || 1;
 	    $("#search-form :input[name='pageNo']").val(pageNo);
@@ -58,13 +65,17 @@ $(function () {
 	});
 	
 	$("button:has('.glyphicon')").click(function() {
+		// 기존에 선택되어 있던 버튼을 해제
 		$("button:has('.glyphicon')").removeClass('btn-success').addClass('btn-default');
+		// 지금 클릭한 버튼을 하이라이트 처리
 		$(this).addClass("btn-success").removeClass("btn-default");
 		
 		setSearchFormField(1);
 		
 		$("#search-form").submit();
 	});
+	
+	
 
 });   
 </script>
@@ -105,7 +116,7 @@ $(function () {
 					<th>부서 번호</th>
 					<th>직종</th>
 					<th>전화번호</th>
-					<th>급여
+					<th>연봉
 						<button type="button" class="btn btn-default btn-xs" id="salary-asc">
 							<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
 						</button>
@@ -125,7 +136,7 @@ $(function () {
 						<td>${emp.dept }</td>
 						<td>${emp.job }</td>
 						<td>${emp.phone }</td>
-						<td><fmt:formatNumber value="${emp.salary }" pattern="#,###"/></td>
+						<td><fmt:formatNumber value="${emp.salary }" pattern="#,###$"/></td>
 						<td><fmt:formatNumber value="${emp.comm }" pattern="#,##%"/></td>
 						<td><fmt:formatDate value="${emp.hiredate }" /></td>
 					</tr>
@@ -165,8 +176,8 @@ $(function () {
 		<input type="hidden" name="opt" value=""/>
 		<input type="hidden" name="keyword" value=""/>
 		<input type="hidden" name="display" value="5"/>
-		<input type="hidden" name="sort" value="employee_id"/>
-		<input type="hidden" name="orderby" value="asc"/>
+		<input type="hidden" name="sort" value="${search.sort }"/>
+		<input type="hidden" name="orderby" value="${search.orderby }"/>
 	</form>
 </div>
 </body>
