@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller // Controller 어노테이션 추가(scan)
-public class HomeConroller {
+public class HomeController {
 	
 	@Autowired
 	private ExcelView excelView;
@@ -20,7 +20,6 @@ public class HomeConroller {
 		
 		return mav;
 	}
-	
 	
 	
 	@Autowired
