@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.jhta.dao.SemesterDao">
+
+	<select id="addSemester" parameterType="semester"> 
+		insert into s_semester 
+		(S_NO, S_SELECT, S_TERM_ST, S_TEM_END, S_ENROLLTERM_ST, S_ENROLLTERM_END, 
+		S_ENROLLEDITTERM_ST, S_ENROLLEDITTERM_END, S_APPLYTERM_ST, S_APPLYTERM_END, 
+		S_EVALTERM_ST, S_EVALTERM_END, S_GRADETERM_ST, S_GRADETERM_END, 
+		S_GRADEEDITTERM_ST, S_GRADEEDITTERM_END, S_APPEALTERM_ST, S_APPEALTERM_END,
+		S_COURSETERM_ST, S_COURSETERM_END)
+		values
+		(s_semester_seq.nextval, #{select}, #{termStart}, #{termEnd}, #{enrollTermStart}, #{enrollTermEnd}, 
+		#{enrollEditTermStart}, #{enrollEditTermEnd}, #{applyTermStart}, #{applyTermEnd},
+		#{evalTermStart}, #{evalTermEnd}, #{gradeTermStart}, #{gradeTermEnd}, 
+		#{gradeEditTermStart}, #{gradeEditTermEnd}, #{appealTermStart}, #{appealTermEnd},
+		#{courseTermStart}, #{courseTermEnd})
+	</select>
+</mapper>

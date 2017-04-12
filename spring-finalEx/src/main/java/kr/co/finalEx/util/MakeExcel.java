@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class MakeExcel {
+public class MakeExcel{
 
     public MakeExcel() {}
 

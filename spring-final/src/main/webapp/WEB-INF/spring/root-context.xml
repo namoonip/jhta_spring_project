@@ -15,7 +15,7 @@
 	<context:component-scan base-package="kr.co.jhta.service" />
 
 	<!-- jee를 사용한 DB 커넥션 풀 설정 -->
-	<jee:jndi-lookup jndi-name="jdbc/myDB" id="dataSource" />
+	<jee:jndi-lookup jndi-name="jdbc/myoracle" id="dataSource" />
 
 	<!-- 커넥션 풀 설정 jee를 사용하지 않는 경우 -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -23,7 +23,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/my_db"/>
 		<property name="username" value="myuser" />
 		<property name="password" value="zxcv1234" />
-	</bean> -->
+		</bean> -->
 	
 	<!-- 트랜잭션 매니저 설정 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -42,7 +42,7 @@
 	<!-- MapperFactoryBean을 사용해 자동으로 인터페이스 Mapping을  지원 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-		<property name="basePackage" value="kr.co.jhta.dao" />
+		<property name="basePackage" value="kr.co.jhta.dao.*" />
 	</bean>
 	
 </beans>

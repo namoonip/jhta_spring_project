@@ -9,7 +9,9 @@
 
 	<mvc:annotation-driven/>
 	
-	<context:component-scan base-package="kr.co.jhta" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<context:component-scan base-package="kr.co.jhta.controller"/>
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

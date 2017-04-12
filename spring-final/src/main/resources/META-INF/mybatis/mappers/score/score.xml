@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.jhta.dao.score.ScoreDao">
+	<select id="getAllScoreList" resultType="kr.co.jhta.vo.Score">
+		select
+			r_regi_no as regiNo,
+			s_score_no as scoreNo,
+			s_credit as scoreCredit,
+			s_grade as scoreGrade,
+			s_endterm_score as endtermScore,
+			s_midterm_score as midtermScore,
+			s_attendance_score as attScore,
+			s_report_score as reportScore
+		from
+			s_score
+		order by
+			s_score_no
+	</select>
+	
+	<select id="getRegiInfo" parameterType="int" resultType="kr.co.jhta.vo.SubjectRegister">
+		select
+			r_regi_no as regiNo,
+			r_maxgrade as maxgrade,
+			r_grade as grade,
+			j_no as jNo,
+			u_stu_no as stuNo
+		from
+			r_regisubject
+		where
+			r_regi_no = #{r_regi_no}
+	</select>
+	
+	<select id="getAllSubjectList" resultType="kr.co.jhta.vo.SubjectRegister">
+		select
+			r_regi_no as regiNo,
+			r_maxgrade as maxgrade,
+			r_grade as grade,
+			u_stu_no as stuNo,
+			j_no as jNo
+		from
+			r_regisubject
+	</select>
+	
+	<select id="getStudentInfo" parameterType="int" resultType="student">
+		select 
+				U_STU_NO as no, U_STU_ADDR1 as addr1, U_STU_ADDR2 as addr2,
+				U_STU_DIVISION as division, U_STU_EMAIL as email, 
+				U_STU_ENTERDATE as enterDate, U_STU_GENDER as gender, 
+				U_STU_GRADE as grade,U_STU_ID as id, 
+				U_STU_LEAVEDATE as leaveDate, U_STU_NAME as name, 
+				U_STU_NO as no, U_STU_PARENTNAME as parentName, 
+				U_STU_PARENTPHON as parentPhone, U_STU_PHONE as phone, 
+				U_STU_PROFESSOR as professor, U_STU_PWD as pwd, 
+				U_STU_REGISTER as register, U_STU_SCORE as score, 
+				U_STU_SSN as ssn
+		from 
+				U_STUDENT
+		where
+				U_STU_NO = #{u_no}
+	</select>
+	
+	<select id="getSubjectinfo" parameterType="int" resultType="subject">
+		select
+			j_no as no,
+			j_grade as grade,
+			j_is_passed as isPassed,
+			j_subject_name as subjectName
+		from
+			j_subject
+		where
+			j_no = #{j_no}
+	</select>
+	
+	<select id="getScoreListByRegiNo" parameterType="int" resultType='kr.co.jhta.vo.Score'>
+		select
+			r_regi_no as regiNo,
+			s_score_no as scoreNo,
+			s_credit as scoreCredit,
+			s_grade as scoreGrade,
+			s_endterm_score as endtermScore,
+			s_midterm_score as midtermScore,
+			s_attendance_score as attScore,
+			s_report_score as reportScore
+		from
+			s_score
+		where
+			r_regi_no = #{regino}
+	</select>
+	
+	<select id="getSubjectListByRegiNo"  parameterType="int" resultType="kr.co.jhta.vo.SubjectRegister">
+		select
+			r_regi_no as regiNo,
+			r_maxgrade as maxgrade,
+			r_grade as grade,
+			u_stu_no as stuNo,
+			j_no as jNo
+		from
+			r_regisubject
+		where
+			r_regi_no = #{regino}
+	</select>
+</mapper>

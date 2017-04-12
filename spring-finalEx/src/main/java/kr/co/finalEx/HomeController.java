@@ -70,11 +70,11 @@ public class HomeController {
 		return "home";
 	}
 	
-	/*@RequestMapping(value="/studentExcel.do")
+	@RequestMapping(value="/studentExcel.do")
 	public void studentListExcel(HttpServletRequest req, HttpServletResponse res, 
 								Student student) {
-		String templateFile = "C:\\spring_project\\workspace\\spring-finalEx\\src\\main\\webapp\\WEB-INF\\practice.xlsx";
-		String destFile = "C:\\spring_project\\workspace\\spring-finalEx\\src\\main\\webapp\\WEB-INF\\practice-demo.xlsx";
+		String templateFile = "C:\\spring_project\\workspace\\spring-finalEx\\src\\main\\resources\\practice.xlsx";
+		String destFile = "C:\\spring_project\\workspace\\spring-finalEx\\src\\main\\resources\\practice-demo.xlsx";
 		
 		studentList.add(student1);
 		studentList.add(student2);
@@ -89,8 +89,8 @@ public class HomeController {
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
-	}*/
-	
+	}
+	/*
 	@RequestMapping(value="/studentExcel.do")
 	public void studentListExcel(HttpServletRequest req, HttpServletResponse res, 
 			Student student) {
@@ -106,5 +106,5 @@ public class HomeController {
 		makeExcel.download(req, res, beans, 
 								makeExcel.get_Filename("excelProject"), "practice.xlsx");
 	}
-	
+*/	
 }

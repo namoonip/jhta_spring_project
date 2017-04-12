@@ -1,0 +1,33 @@
+package kr.co.jhta.service.user;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.jhta.dao.user.StudentDao;
+import kr.co.jhta.vo.stu.Student;
+
+@Service
+public class StudentServiceImpl implements StudentService{
+	
+	@Autowired
+	StudentDao studao;
+	
+	@Override
+	public void addNewStudentService() {
+		
+	}
+
+	@Override
+	public List<Student> getAllStudentService() {
+		List<Student> stuList = studao.getAllStudent();
+		return stuList;
+	}
+
+	@Override
+	public Student getStudentByIdService() {
+		return null;
+	}
+	
+}
