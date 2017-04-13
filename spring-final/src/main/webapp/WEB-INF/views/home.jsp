@@ -31,8 +31,8 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/stunavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
+<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/adminSidebar.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px; ">
     <div class="row text-right">
          홈

@@ -11,6 +11,9 @@ public class SubjectRegister {
 	public int getRegiNo() {
 		return regiNo;
 	}
+	public void setRegiNo(int regiNo) {
+		this.regiNo = regiNo;
+	}
 	public int getStuNo() {
 		return stuNo;
 	}
@@ -23,9 +26,7 @@ public class SubjectRegister {
 	public int getMaxgrade() {
 		return maxgrade;
 	}
-	public void setRegiNo(int regiNo) {
-		this.regiNo = regiNo;
-	}
+	
 	public void setStuNo(int stuNo) {
 		this.stuNo = stuNo;
 	}
@@ -38,11 +39,11 @@ public class SubjectRegister {
 	public void setMaxgrade(int maxgrade) {
 		this.maxgrade = maxgrade;
 	}
-	
 	@Override
 	public String toString() {
-		return "SubjectRegister [regiNo=" + regiNo + ", stuNo=" + stuNo + ", jNo=" + jNo + ", grade=" + grade
+		return "SubjectRegister [register=" + regiNo + ", stuNo=" + stuNo + ", jNo=" + jNo + ", grade=" + grade
 				+ ", maxgrade=" + maxgrade + "]";
 	}
+	
 	
 }

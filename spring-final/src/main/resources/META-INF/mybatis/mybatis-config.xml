@@ -4,13 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="student" type="kr.co.jhta.vo.stu.Student"/>
+		<typeAlias alias="Student" type="kr.co.jhta.vo.stu.Student"/>
 		<typeAlias alias="subject" type="kr.co.jhta.vo.Subject"/>
 		<typeAlias alias="semester" type="kr.co.jhta.vo.Semester"/>
 		<typeAlias alias="division" type="kr.co.jhta.vo.SubjectDivision"/>
 		<typeAlias alias="attendance" type="kr.co.jhta.vo.Attendance"/>
 		<typeAlias alias="report" type="kr.co.jhta.vo.Report"/>
 		<typeAlias alias="sitemap" type="kr.co.jhta.vo.SiteMap"/>
+		<typeAlias alias="Enroll" type="kr.co.jhta.vo.stu.Enroll"/>
+		<typeAlias alias="Regisuject" type="kr.co.jhta.vo.stu.Regisubject"/>
+		<typeAlias alias="Syllabus" type="kr.co.jhta.vo.Syllabus"/>
 	</typeAliases>
 	
 	<mappers>
@@ -24,7 +27,8 @@
 		<!-- <mapper resource="META-INF/mybatis/mappers/score/attendance.xml"/> -->
 		<mapper resource="META-INF/mybatis/mappers/score/score.xml"/>
 		<!-- <mapper resource="META-INF/mybatis/mappers/score/report.xml"/> -->
-		<mapper resource="META-INF/mybatis/mappers/user/enroll.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/enroll/enroll.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/enroll/regisuject.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/user/student.xml"/>			<!-- student -->
 		<mapper resource="META-INF/mybatis/mappers/user/professor.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/user/syllabus.xml"/>

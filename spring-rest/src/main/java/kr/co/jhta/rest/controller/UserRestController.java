@@ -55,5 +55,4 @@ public class UserRestController {
 			userService.updateUser(user);
 			return null;
 		}
-		
 }

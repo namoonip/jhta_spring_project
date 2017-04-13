@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Review {
 	private int no;
-	private int groupNo;
+	private int groupNo;	
 	private String contents;
 	private String writer;
 	private Date regdate;

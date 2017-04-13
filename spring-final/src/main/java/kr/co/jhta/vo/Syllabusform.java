@@ -2,13 +2,22 @@ package kr.co.jhta.vo;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class Syllabusform {
 	
+	private String sub_no;
+	
 	private String sub_name;
+	@NotNull
 	private int midtrum;
+	@NotNull
 	private int final1;
+	@NotNull
 	private int atlen;
+	@NotNull
 	private int project;
+	
 	private String distri;
 	private String outline;
 	private String goals;

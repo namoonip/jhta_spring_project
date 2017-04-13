@@ -9,72 +9,74 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class SemesterForm {
 	
-	@NotNull
-	@NotBlank
-	private String select;
+	private int no;
+	
+	//@NotNull
+	//@NotBlank
+	private String semeSelect;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date termStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date termEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date enrollTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date enrollTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date enrollEditTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date enrollEditTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date applyTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date applyTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date evalTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date evalTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date gradeTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date gradeTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date appealTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date appealTermEnd;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date gradeEditTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date gradeEditTermEnd;
 	
 	//@Future
@@ -82,15 +84,26 @@ public class SemesterForm {
 	private Date courseTermStart;
 	
 	//@Future
-	@NotNull
+	//@NotNull
 	private Date courseTermEnd;
 
-	public String getSelect() {
-		return select;
+	
+	
+	
+	public int getNo() {
+		return no;
 	}
 
-	public void setSelect(String select) {
-		this.select = select;
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getSemeSelect() {
+		return semeSelect;
+	}
+
+	public void setSemeSelect(String semeSelect) {
+		this.semeSelect = semeSelect;
 	}
 
 	public Date getTermStart() {

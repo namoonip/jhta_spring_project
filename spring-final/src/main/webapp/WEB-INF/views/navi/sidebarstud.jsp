@@ -54,7 +54,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="enroll"><i class="fa fa-caret-right"></i>수강 신청</a></li>
+                            <li><a href="enrollMain"><i class="fa fa-caret-right"></i>수강 신청</a></li>
                             <li><a href="#"><i class="fa fa-caret-right"></i>신청 목록</a></li>
                         </ul>
                     </li>

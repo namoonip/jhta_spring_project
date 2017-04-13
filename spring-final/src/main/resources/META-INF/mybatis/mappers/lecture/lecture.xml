@@ -3,5 +3,49 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.lecture.LectureDao">
+
+	<select id="getMajorList" parameterType="string" resultType="subject">
+		select
+			j_no as no,
+			j_reference as reference,
+			j_progress as progress,
+			j_subject_name as subjectName,
+			j_semester as semester,
+			j_grade as grade,
+			j_is_passed as isPassed,
+			j_score as score,
+			j_outline as outline,
+			J_t_code as "siteCode.code",
+			j_sub_prof as professor
+		from
+			j_subject
+		where
+			J_t_code = #{majorCode}
+	</select>
+	
+	<select id="getDetpList" parameterType="string" resultType="sitemap">
+		select
+			t_no as no,
+			t_code as code,
+			t_name as name,
+			t_precode as preCode
+		from
+			t_sitemap
+		where
+			t_code = #{majorCode}
+	</select>
+	
+	<select id="getDivisionList" parameterType="int" resultType="division">
+		select
+			J_div_no as no,
+			j_subject_no as "subjectNo.no",
+			j_div_num as divisionNo,
+			J_limit_num as limitNumber,
+			j_div_prof as divisionProfessor
+		from
+			j_division
+		where
+			j_subject_no = #{subNo}
+	</select>
 	
 </mapper>

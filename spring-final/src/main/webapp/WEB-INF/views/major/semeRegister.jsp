@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebar-major.jsp" %>
+<%@ include file="/WEB-INF/views/navi/sidebarmajor.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
     <div class="row text-right">
          홈
@@ -25,24 +25,24 @@
 	<div class="row well">
 		<div class="col-md-6">
 			
-			<table class="table table-condensed">
-			   	<colgroup>
-			   		<col width="20%">
-			   		<col width="32%">
-			   		<col width="8%">
-			   		<col width="32%">
-			   		<col width="8%">
-			   	</colgroup>
-			   	<form action="addSemester" method="post" >
+			<form action="addSemester" method="post" name="semeform">
+				<table class="table table-condensed">
+			   		<colgroup>
+			   			<col width="20%">
+			   			<col width="32%">
+			   			<col width="8%">
+			   			<col width="32%">
+			   			<col width="8%">
+			   		</colgroup>
 	      		
 	      			
 	      			<tr>
 	      				<td>학기명</td>
 	      				<td>
-	      					<input name="select" class="form-control"  style="text-align: right";/>
+	      					<input name="selectyear" class="form-control"  style="text-align: right";/>
 	      				</td>
 	      				<td>년도</td>
-	      				<td><input name="select" class="form-control" /></td>
+	      				<td><input name="selectseme" class="form-control" /></td>
 	      				<td>학기</td>
 	      			</tr>
 	      			<tr>
@@ -144,8 +144,14 @@
 	      				</td>
 	      				<td></td>
 	      			</tr>
-		      	</form>
-	    	</table>
+	      			<tr>
+	      				<td colspan="5">
+	      					<a href="semester" class="btn btn-default btn-sm pull-left">목록</a>
+	      					<button type="submit" class="btn btn-primary btn-sm pull-right">등록</button>
+	      				</td>
+	      			</tr>
+	    		</table>
+			</form>
     	</div>
     </div>
       

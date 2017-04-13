@@ -50,7 +50,7 @@
 		where 
 			T_PRECODE is not null
 		and
-			T_PRECODE = #{sitemap.preCode}
+			T_PRECODE = #{preCode}
 	</select>
 	
 	

@@ -18,6 +18,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(function(){
+		$(".second").hide();
+		$(".third").hide();
+		$("#second").click(function(){
+			$(this).next().slideToggle();
+		})
+		$("#third").click(function(){
+			$(this).next().slideToggle();
+		})
+		$("[name='sub_name']").change(function (event) {
+			$("[name='sub_no']").val($(this).text());
+		})
+	})
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
@@ -26,14 +41,15 @@
 		<h1>새 강의계획서 등록하기</h1>
 		<hr class="one">
 		<div class="row well">
-			<form:form method="post" action="addsyll.do" modelAttribute="syllabusform" enctype="multipart/form-data">
+			<form:form method="post" action="/jhta/syllform" modelAttribute="syllabusform" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>과목명</label>
-					<form:select path="sub_name" cssClass="form-control">
+					<form:select path="sub_no" cssClass="form-control">
 						<c:forEach var="subject" items="${subList }">
-							<form:option value="${subject.no }">${subject.subjectName }</form:option>
+							<form:option value="${subject.no }">${subject.subjectName }</form:option>							
 						</c:forEach>
 					</form:select>
+					<input type="hidden" name="sub_name" value="">
 				</div>
 				<div class="form-group">
 					<label>중간점수퍼센트</label>
@@ -65,8 +81,10 @@
 				</div>
 				<div class="form-group">
 					<label>강의방법</label>
-					<form:input path="method" cssClass="form-control"/>
+					<form:textarea path="method" cssClass="form-control"/>
 				</div>
+				<h1 id="second">교수</h1>
+				<div class="second">
 				<div class="form-group">
 					<label>담당 교수</label>
 					<form:select path="prof_name" cssClass="form-control">
@@ -115,6 +133,9 @@
 					<label>과제물</label>
 					<form:textarea path="project_content" cssClass="form-control"/>
 				</div>
+				</div>
+				<h1 id="third">강의계획</h1>
+				<div class="third">
 				<div class="form-group">
 					<label>1주차강의계획</label>
 					<form:textarea path="week1" cssClass="form-control"/>
@@ -174,6 +195,7 @@
 				<div class="form-group">
 					<label>15주차강의계획</label>
 					<form:textarea path="week15" cssClass="form-control"/>
+				</div>
 				</div>
 				
 				<div class="form-group text-right">

@@ -8,18 +8,46 @@ public class Enroll {
 	private int no;
 	private Subject subject;
 	private SubjectDivision division;
-	private String EnrollDay;
+	private String enrollDay;
+	private int enrollTime;
+	private int enrollNum;
+	private int stuNo;
+	
 	public Enroll() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Enroll(int no, Subject subject, SubjectDivision division, String enrollDay) {
+	
+	public Enroll(int no, Subject subject, SubjectDivision division, String enrollDay, int enrollTime, int enrollNum,
+			int stuNo) {
 		super();
 		this.no = no;
 		this.subject = subject;
 		this.division = division;
-		EnrollDay = enrollDay;
+		this.enrollDay = enrollDay;
+		this.enrollTime = enrollTime;
+		this.enrollNum = enrollNum;
+		this.stuNo = stuNo;
 	}
+
+
+
+	public int getStuNo() {
+		return stuNo;
+	}
+
+	public void setStuNo(int stuNo) {
+		this.stuNo = stuNo;
+	}
+
+	public int getEnrollNum() {
+		return enrollNum;
+	}
+
+	public void setEnrollNum(int enrollNum) {
+		this.enrollNum = enrollNum;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -39,10 +67,17 @@ public class Enroll {
 		this.division = division;
 	}
 	public String getEnrollDay() {
-		return EnrollDay;
+		return enrollDay;
 	}
 	public void setEnrollDay(String enrollDay) {
-		EnrollDay = enrollDay;
+		this.enrollDay = enrollDay;
 	}
-
+	public int getEnrollTime() {
+		return enrollTime;
+	}
+	public void setEnrollTime(int enrollTime) {
+		this.enrollTime = enrollTime;
+	}
+	
+	
 }

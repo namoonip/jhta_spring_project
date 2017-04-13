@@ -5,7 +5,7 @@ import java.util.Date;
 public class Semester {
 
 	private int no;
-	private String select;
+	private String semeSelect;
 	private Date termStart;
 	private Date termEnd;
 	private Date enrollTermStart;
@@ -37,12 +37,13 @@ public class Semester {
 		this.no = no;
 	}
 
-	public String getSelect() {
-		return select;
+
+	public String getSemeSelect() {
+		return semeSelect;
 	}
 
-	public void setSelect(String select) {
-		this.select = select;
+	public void setSemeSelect(String semeSelect) {
+		this.semeSelect = semeSelect;
 	}
 
 	public Date getTermStart() {

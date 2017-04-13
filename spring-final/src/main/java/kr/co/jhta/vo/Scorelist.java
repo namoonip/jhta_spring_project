@@ -8,7 +8,14 @@ public class Scorelist {
 	private Student student;
 	private Subject subject;
 	private Score score;
+	private Attendance att;
 	
+	public void setAtt(Attendance att) {
+		this.att = att;
+	}
+	public Attendance getAtt() {
+		return att;
+	}
 	public void setScore(Score score) {
 		this.score = score;
 	}

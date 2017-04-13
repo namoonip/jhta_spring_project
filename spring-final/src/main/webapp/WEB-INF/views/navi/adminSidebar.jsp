@@ -65,7 +65,7 @@
                         </a>
                         <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="boardmanagement"><i class="fa fa-caret-right"></i>강의 게시판 관리</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>홈페이지 게시판 관리</a></li>
+                            <li><a href="homeboard"><i class="fa fa-caret-right"></i>홈페이지 게시판 관리</a></li>
                             <li><a href="board"><i class="fa fa-caret-right"></i>전체 공지관리</a></li>
                         </ul>
                     </li>

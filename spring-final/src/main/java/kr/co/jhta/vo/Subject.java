@@ -5,7 +5,7 @@ public class Subject {
 	private int no;
 	private String subjectName;
 	private String professor;
-	private Semester select;
+	private Semester selectNo;
 	private int grade;
 	private String isPassed;
 	private SiteMap siteCode;
@@ -42,12 +42,14 @@ public class Subject {
 		this.professor = professor;
 	}
 
-	public Semester getSelect() {
-		return select;
+	
+
+	public Semester getSelectNo() {
+		return selectNo;
 	}
 
-	public void setSelect(Semester select) {
-		this.select = select;
+	public void setSelectNo(Semester selectNo) {
+		this.selectNo = selectNo;
 	}
 
 	public int getGrade() {
@@ -105,7 +107,12 @@ public class Subject {
 	public void setProgress(String progress) {
 		this.progress = progress;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Subject [no=" + no + ", subjectName=" + subjectName + ", professor=" + professor + ", selectNo="
+				+ selectNo + ", grade=" + grade + ", isPassed=" + isPassed + ", siteCode=" + siteCode + ", score="
+				+ score + ", outline=" + outline + ", reference=" + reference + ", progress=" + progress + "]";
+	}
 	
 }

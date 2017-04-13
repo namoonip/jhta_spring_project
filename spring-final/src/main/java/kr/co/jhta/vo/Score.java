@@ -1,26 +1,37 @@
 package kr.co.jhta.vo;
 
+import javax.validation.constraints.NotNull;
+
 public class Score {
-	private int regiNo;
-	private int scoreNo;
-	private int scoreCredit;
-	private String scoreGrade;
+	private SubjectRegister registerinfo;
+	private int no;
+	private int credit;
+	
+	private String grade;
+	
 	private int reportScore;
+	
 	private int attScore;
+	
 	private int midtermScore;
+	
 	private int endtermScore;
 	
-	public int getRegiNo() {
-		return regiNo;
+	public Score() {
+		// TODO Auto-generated constructor stub
 	}
-	public int getScoreNo() {
-		return scoreNo;
+	
+	public SubjectRegister getRegister() {
+		return registerinfo;
 	}
-	public int getScoreCredit() {
-		return scoreCredit;
+	public int getNo() {
+		return no;
 	}
-	public String getScoreGrade() {
-		return scoreGrade;
+	public int getCredit() {
+		return credit;
+	}
+	public String getGrade() {
+		return grade;
 	}
 	public int getReportScore() {
 		return reportScore;
@@ -34,17 +45,17 @@ public class Score {
 	public int getEndtermScore() {
 		return endtermScore;
 	}
-	public void setRegiNo(int regiNo) {
-		this.regiNo = regiNo;
+	public void setRegister(SubjectRegister registerinfo) {
+		this.registerinfo = registerinfo;
 	}
-	public void setScoreNo(int scoreNo) {
-		this.scoreNo = scoreNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public void setScoreCredit(int scoreCredit) {
-		this.scoreCredit = scoreCredit;
+	public void setCredit(int credit) {
+		this.credit = credit;
 	}
-	public void setScoreGrade(String scoreGrade) {
-		this.scoreGrade = scoreGrade;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	public void setReportScore(int reportScore) {
 		this.reportScore = reportScore;
@@ -58,11 +69,12 @@ public class Score {
 	public void setEndtermScore(int endtermScore) {
 		this.endtermScore = endtermScore;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Score [regiNo=" + regiNo + ", scoreNo=" + scoreNo + ", scoreCredit=" + scoreCredit + ", scoreGrade="
-				+ scoreGrade + ", reportScore=" + reportScore + ", attScore=" + attScore + ", midtermScore="
-				+ midtermScore + ", endtermScore=" + endtermScore + "]";
+		return "Score [registerinfo=" + registerinfo + ", no=" + no + ", credit=" + credit + ", grade=" + grade
+				+ ", reportScore=" + reportScore + ", attScore=" + attScore + ", midtermScore=" + midtermScore
+				+ ", endtermScore=" + endtermScore + "]";
 	}
+	
 }

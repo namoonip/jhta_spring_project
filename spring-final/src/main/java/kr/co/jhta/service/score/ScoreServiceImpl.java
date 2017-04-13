@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.jhta.dao.score.ScoreDao;
 import kr.co.jhta.vo.Score;
+import kr.co.jhta.vo.Semester;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
 import kr.co.jhta.vo.stu.Student;
@@ -16,34 +17,44 @@ public class ScoreServiceImpl implements ScoreService{
 	private ScoreDao scoreDao;
 
 	@Override
+	public List<SubjectRegister> getAllRegiList() {
+		return scoreDao.getAllRegiList();
+	}
+
+	@Override
 	public List<Score> getAllScoreList() {
 		return scoreDao.getAllScoreList();
 	}
-	
+
 	@Override
-	public SubjectRegister getRegiInfo(int regino) {
-		return scoreDao.getRegiInfo(regino);
-	}
-	
-	//수강등록관리 리스트
-	@Override
-	public List<SubjectRegister> getAllSubjectList() {
-		return scoreDao.getAllSubjectList();
-	}
-	
-	@Override
-	public Student getStudentInfo(int uno) {
-		return scoreDao.getStudentInfo(uno);
+	public SubjectRegister getRegiListByNo(int regiNo) {
+		return scoreDao.getRegiListByNo(regiNo);
 	}
 
 	@Override
-	public Subject getSubjectInfo(int jno) {
-		return scoreDao.getSubjectinfo(jno);
+	public Student getStudentInfoByNo(int stuNo) {
+		return scoreDao.getStudentInfoByNo(stuNo);
 	}
 
 	@Override
-	public Score getScoreListByRegiNo(int regino) {
-		return scoreDao.getScoreListByRegiNo(regino);
+	public Subject getSubjectInfoByNo(int jNo) {
+		return scoreDao.getSubjectInfoByNo(jNo);
 	}
-		
+
+	@Override
+	public Semester getSemesterByNo(int no) {
+		return scoreDao.getSemesterByNo(no);
+	}
+
+	@Override
+	public Score getScoreByNo(int no) {
+		return scoreDao.getScoreByNo(no);
+	}
+
+	@Override
+	public void updateScoreByNo(Score score) {
+		scoreDao.updateScoreByNo(score);
+	}
+
+	
 }

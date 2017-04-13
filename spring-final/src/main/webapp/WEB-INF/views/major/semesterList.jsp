@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebar-major.jsp" %>
+<%@ include file="/WEB-INF/views/navi/sidebarmajor.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
     <div class="row text-right">
          홈
@@ -23,7 +23,7 @@
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
       <div class="row" style="margin-bottom: 20px">
-      	<a href="addSemester" class="btn btn-primary btn-sm pull-right">등록</a>
+      	<a href="addSemester" class="btn btn-primary btn-sm pull-right">학기등록</a>
       </div>
       <div class="row">
          <div class="panel panel-default panel-body">
@@ -39,8 +39,46 @@
 						<th>성적정정기간</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="font-size: 9pt">
+				<c:forEach var="semester" items="${semesterList }">
+					<tr>
+						<td>
+							<c:forTokens items="${semester.semeSelect }" delims="-" begin="0" end="0" var="year" >
+								<c:set value="${year }" var="selectyear"></c:set>
+							</c:forTokens>
+							<c:forTokens items="${semester.semeSelect }" delims="-" begin="1" end="1" var="seme" >
+								<c:set value="${seme }" var="selectseme"></c:set>
+							</c:forTokens>
+							
+							<a href="detailSeme?no=${semester.no }">${selectyear }년도${selectseme }학기</a>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.termStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.termEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.enrollTermStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.enrollTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.enrollEditTermStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.enrollEditTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.gradeTermStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.gradeTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.appealTermStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.appealTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<fmt:formatDate value="${semester.gradeEditTermStart }" pattern="yyyy-MM-dd"/> ~
+							<fmt:formatDate value="${semester.gradeEditTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+					</tr>
 					
+				</c:forEach>	
 				</tbody>
 			</table>
          </div>

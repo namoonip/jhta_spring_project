@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.jhta.vo.Score;
+import kr.co.jhta.vo.Semester;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
 import kr.co.jhta.vo.stu.Student;
@@ -13,12 +14,12 @@ import kr.co.jhta.vo.stu.Student;
 @Transactional
 @Service
 public interface ScoreService {
+	List<SubjectRegister> getAllRegiList();
 	List<Score> getAllScoreList();
-	
-	Score getScoreListByRegiNo(int regino);
-	SubjectRegister getRegiInfo(int regino);
-	
-	List<SubjectRegister> getAllSubjectList();
-	Student getStudentInfo(int uno);
-	Subject getSubjectInfo(int jno);
+	SubjectRegister getRegiListByNo(int regiNo);
+	Student getStudentInfoByNo(int stuNo);
+	Subject getSubjectInfoByNo(int jNo);
+	Semester getSemesterByNo(int no);
+	Score getScoreByNo(int no);
+	void updateScoreByNo(Score score);
 }

@@ -1,12 +1,10 @@
 package kr.co.jhta.vo;
 
-import java.util.Date;
-
 public class Attendance {
 	private int attNo;
 	private int scoreNo;
 	private int count;
-	private Date attScore;
+	private int attScore;
 	
 	public int getAttNo() {
 		return attNo;
@@ -17,7 +15,7 @@ public class Attendance {
 	public int getCount() {
 		return count;
 	}
-	public Date getAttScore() {
+	public int getAttScore() {
 		return attScore;
 	}
 	public void setAttNo(int attNo) {
@@ -29,7 +27,7 @@ public class Attendance {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public void setAttScore(Date attScore) {
+	public void setAttScore(int attScore) {
 		this.attScore = attScore;
 	}	
 }

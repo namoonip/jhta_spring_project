@@ -195,6 +195,15 @@ public class Student {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [no=" + no + ", addr1=" + addr1 + ", addr2=" + addr2 + ", email=" + email + ", grade=" + grade
+				+ ", ssn=" + ssn + ", enterDate=" + enterDate + ", leaveDate=" + leaveDate + ", parentName="
+				+ parentName + ", parentPhone=" + parentPhone + ", id=" + id + ", pwd=" + pwd + ", name=" + name
+				+ ", gender=" + gender + ", division=" + division + ", register=" + register + ", score=" + score
+				+ ", phone=" + phone + "]";
+	}
 	
 	
 	

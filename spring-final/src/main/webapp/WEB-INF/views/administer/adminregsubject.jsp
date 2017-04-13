@@ -16,11 +16,15 @@ $(function() {
 		var dept = $(this).val();
 		
 		$.ajax({
-			url: "adminregsubject?dept=" + dept,
+			url: "adminregsubjectmenu?dept=" + dept,
 			dataType: "json",
 			type: "POST",
 			success: function(data) {
+				$("#select-major").empty();
 				
+				for (var i=0; i<data.length; i++) {
+					$("#select-major").append("<option value="+data[i].code+">"+data[i].name+"</option>");	
+				}
 			}
 		});
 	});
@@ -31,7 +35,7 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarsubject.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
-	<form method="post" action="" class="form-inline">
+	<form method="post" action="adminregsubject" class="form-inline">
 		<div class="row">
 			<div class="col-sm-12">
 				<h4>수강신청관리</h4><hr>
@@ -46,7 +50,8 @@ $(function() {
 							<th>
 								<div class="form-group">
 									<label>대학선택:</label>
-									<select class="form-control" name="" id="select-dept">
+									<select class="form-control" name="dept" id="select-dept">
+										<option>학과선택</option>
 									<c:forEach items="${deptList }" var="dept">
 										<option value="${dept.code }">${dept.name }</option>
 									</c:forEach>
@@ -54,9 +59,7 @@ $(function() {
 								</div>
 								<div class="form-group">
 									<label>학과선택:</label>
-									<select class="form-control" name="major">
-										<option value="">일어일문학과</option>
-									</select>
+									<select class="form-control" name="major" id="select-major"></select>
 								</div>
 								<div class="form-group">
 									<label>학기선택:</label>
@@ -114,17 +117,19 @@ $(function() {
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${subList }" var="sub">
 						<tr>
-							<td>전공필수</td>
-							<td>일어일문</td>
-							<td>일본어한자</td>
-							<td>2</td>
-							<td>2016~3016</td>
-							<td>3</td>
-							<td>20</td>
-							<td>10</td>
-							<td>개설</td>
+							<td>${sub.isPassed }</td>
+							<td>${sub.siteCode.name }</td>
+							<td>${sub.subjectName }</td>
+							<td>${sub.grade }</td>
+							<td></td>
+							<td>${sub.score }</td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

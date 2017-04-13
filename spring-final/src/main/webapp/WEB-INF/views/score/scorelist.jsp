@@ -53,12 +53,9 @@
 								<td bgcolor="#f0fcff">
 									학기:
 									<select>
-										<option value="">2015년 1학기</option>
-										<option value="">2015년 2학기</option>
-										<option value="">2016년 1학기</option>
-										<option value="">2016년 2학기</option>
-										<option value="">2017년 1학기</option>
-										<option value="">2017년 2학기</option>
+										<c:forEach var="semesterlist" items="${semesterlist }">
+											<option value="${semesterlist.no }">${semesterlist.semeSelect }</option>
+										</c:forEach>
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">
@@ -72,38 +69,36 @@
 							<thead>
 								<tr bgcolor="#f0fcff">
 									<th>수강번호</th>
-									<th>학번</th>
-									<th>학년</th>
 									<th>이름</th>
-									<th>교과목명</th>
-									<th>이수구분</th>
-									<th>출결점수</th>
-									<th>과제점수</th>
-									<th>중간점수</th>
-									<th>기말점수</th>
-									<th>등급</th>
+									<th>학번</th>
+									<th>학기</th>
+									<th>과목명</th>
 									<th>학점</th>
+									<th>등급</th>
+									<th>과제</th>
+									<th>출석</th>
+									<th>중간</th>
+									<th>기말</th>
 									<th>수정</th>
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="scoreinfolist" items="${scoreinfolist }">
-								<tr>
-									<td>${scoreinfolist.no }</td>
-									<td>${scoreinfolist.student.id }</td>
-									<td>${scoreinfolist.student.grade }</td>
-									<td>${scoreinfolist.student.name }</td>
-									<td>${scoreinfolist.subject.subjectName }</td>
-									<td>${scoreinfolist.subject.isPassed }</td>
-									<td>${scoreinfolist.score.attScore }</td>
-									<td>${scoreinfolist.score.reportScore }</td>
-									<td>${scoreinfolist.score.midtermScore }</td>
-									<td>${scoreinfolist.score.endtermScore }</td>
-									<td>${scoreinfolist.score.scoreGrade }</td>
-									<td>${scoreinfolist.score.scoreCredit }</td>
-									<td><a href="" class="btn btn-default btn-xs">수정</a></td>
+								<tr style="text-align: left;">
+								<c:forEach var="scorelist2" items="${scorelist2 }">
+									<td>${scorelist2.no}</td>
+									<td>${scorelist2.student.name}</td>
+									<td>${scorelist2.student.id}</td>
+									<td>${scorelist2.subject.selectNo.semeSelect}</td>
+									<td>${scorelist2.subject.subjectName}</td>
+									<td>${scorelist2.score.credit}</td>
+									<td>${scorelist2.score.grade}</td>
+									<td>${scorelist2.score.reportScore}</td>
+									<td>${scorelist2.score.attScore}</td>
+									<td>${scorelist2.score.midtermScore}</td>
+									<td>${scorelist2.score.endtermScore}</td>
+									<td><a href="scoreform.do?sno=${scorelist2.score.no }" class="btn btn-default btn-xs">수정</a></td>
+								</c:forEach>
 								</tr>
-							</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -117,12 +112,9 @@
 								<td bgcolor="#f0fcff">
 									학기선택:
 									<select>
-										<option value="">2015년 1학기</option>
-										<option value="">2015년 2학기</option>
-										<option value="">2016년 1학기</option>
-										<option value="">2016년 2학기</option>
-										<option value="">2017년 1학기</option>
-										<option value="">2017년 2학기</option>
+										<c:forEach var="semesterlist" items="${semesterlist }">
+											<option value="${semesterlist.no }">${semesterlist.semeSelect }</option>
+										</c:forEach>
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">
@@ -145,22 +137,23 @@
 						<table class="table table-condensed">
 							<thead>
 								<tr bgcolor="#f0fcff">
+									<th>성적번호</th>
 									<th>학번</th>
 									<th>이름</th>
-									<th>학기</th>
+									<th>학년</th>
 									<th>교과목명</th>
 									<th>출석일수</th>
 									<th>선택</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>testid</td>
-									<td>홍길동</td>
-									<td>2015년 1학년 1학기</td>
-									<td>디지털회로</td>
-									<td>13</td>
-									<td><button class="btn btn-primary btn-xs" id="att_Btn" type="button">출석현황</button></td>
+								<tr style="text-align: left;">
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
 							</tbody>
 						</table>
@@ -183,12 +176,9 @@
 								<td bgcolor="#f0fcff">
 									학기선택:
 									<select>
-										<option value="">2015년 1학기</option>
-										<option value="">2015년 2학기</option>
-										<option value="">2016년 1학기</option>
-										<option value="">2016년 2학기</option>
-										<option value="">2017년 1학기</option>
-										<option value="">2017년 2학기</option>
+										<c:forEach var="semesterlist" items="${semesterlist }">
+											<option value="${semesterlist.no }">${semesterlist.semeSelect }</option>
+										</c:forEach>
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">

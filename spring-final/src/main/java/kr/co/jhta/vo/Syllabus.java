@@ -5,7 +5,7 @@ import java.util.Date;
 public class Syllabus {
 	private int no;
 	private Subject subject;
-	private String sub_name;
+	private String subname;
 	private int midtrum;
 	private int final1;
 	private int atlen;
@@ -53,11 +53,11 @@ public class Syllabus {
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
-	public String getSub_name() {
-		return sub_name;
+	public String getSubname() {
+		return subname;
 	}
-	public void setSub_name(String sub_name) {
-		this.sub_name = sub_name;
+	public void setSubname(String subname) {
+		this.subname = subname;
 	}
 	public int getMidtrum() {
 		return midtrum;

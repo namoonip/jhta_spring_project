@@ -12,6 +12,34 @@
 <script type="text/javascript">
 $(function() {
 	
+	$("button").click(function() {
+		var enrollNo = $(this).attr('id').replace("enroll_", "");
+		console.log($(this).parents());
+		/* $.ajax({
+			type:"GET",
+			url:"enrollMain/" + enrollNo,
+			dataType:"json",
+			success:function(data) {
+				var $tablebody = $("#enrolled");
+				var $tr1 = $("<tr></tr>");
+				$tr1.append("<th>"+data.subject.siteCode.no+"</th>");
+				$tr1.append("<th>"+data.subject.isPassed+"</th>");
+				$tr1.append("<th>"+data.subject.grade+"</th>");
+				$tr1.append("<th>"+data.subject.subjectName+"</th>");
+				$tr1.append("<th>"+data.division.divisionProfessor+"</th>");
+				$tr1.append("<th>"+data.enrollTime+"</th>");
+				$tr1.append("<th>"+data.enrollDay+"</th>");
+				$tr1.append("<th>"+data.subject.score+"</th>");
+				$tr1.append("<th>"+data.division.divisionNo+"</th>");
+				$tr1.append("<th>"+data.enrollNum+" / " +data.division.limitNumber+"</th>");
+				$tr1.append("<th><a href='' class='btn btn-danger'>취소<a/></th>");
+				
+				$tablebody.append($tr1);
+			}
+			
+		}) */
+		
+	});
 })
 </script>
 </head>
@@ -23,7 +51,7 @@ $(function() {
          	홈
       </div>
       <div class="row">
-         <h4><span class="glyphicon glyphicon-th-list"></span> 정보 수정</h4>
+         <h4><span class="glyphicon glyphicon-th-list"></span> 수강신청</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
       <div class="row">
@@ -61,15 +89,16 @@ $(function() {
       	<table class="table table-bordered">
       		<colgroup>
       			<col width="10%" />
+      			<col width="8%" />
+      			<col width="8%" />
+      			<col width="*" />
+      			<col width="8%" />
       			<col width="10%" />
       			<col width="10%" />
+      			<col width="5%" />
+      			<col width="6%" />
       			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
+      			<col width="8%" />
       		</colgroup>
       		<thead>
       			<tr>
@@ -79,13 +108,32 @@ $(function() {
       				<th>과목명</th>
       				<th>담당교수</th>
       				<th>강의시간</th>
+      				<th>강의요일</th>
       				<th>학점</th>
       				<th>분반</th>
       				<th>신청인원</th>
       				<th>신청</th>
       			</tr>
       		</thead>
-      		<tbody id="searchBody"></tbody>
+      		<tbody>
+      			<c:forEach var="enroll" items="${enrollList}">
+      				<tr>
+      					<th>${enroll.subject.siteCode.code}</th>
+      					<th>${enroll.subject.isPassed }</th>
+      					<th>${enroll.subject.grade }</th>	<!-- 학년 -->
+      					<th>${enroll.subject.subjectName }</th>	<!-- 과목명 -->
+      					<th>${enroll.division.divisionProfessor }</th>	<!-- 담당교수 -->
+      					<%-- ${enroll.subject.professor } --%>
+      					<th>${enroll.enrollTime }</th>	<!-- 강의 시간 -->
+      					<th>${enroll.enrollDay }</th>	<!-- 강의 요일-->
+      					<th>${enroll.subject.score }</th>	<!-- 학점 -->
+      					<th>${enroll.division.divisionNo }</th>	<!-- 분반 -->
+      					<th> <span id="now_${enroll.no}">${enroll.enrollNum }</span> / ${enroll.division.limitNumber}</th>	<!-- 신청 인원 -->
+      					<th><button class="btn btn-default" id="enroll_${enroll.no}">신청</button>
+      					</th>
+      				</tr>
+      			</c:forEach>
+      		</tbody>
       	</table>
       </div>
       <div>
@@ -95,15 +143,16 @@ $(function() {
       	<table class="table table-bordered">
       		<colgroup>
       			<col width="10%" />
+      			<col width="8%" />
+      			<col width="8%" />
+      			<col width="*" />
+      			<col width="8%" />
       			<col width="10%" />
       			<col width="10%" />
+      			<col width="5%" />
+      			<col width="6%" />
       			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
-      			<col width="10%" />
+      			<col width="8%" />
       		</colgroup>
       		<thead>
       			<tr>
@@ -113,16 +162,20 @@ $(function() {
       				<th>과목명</th>
       				<th>담당교수</th>
       				<th>강의시간</th>
+      				<th>강의요일</th>
       				<th>학점</th>
       				<th>분반</th>
       				<th>신청인원</th>
-      				<th>신청</th>
+      				<th>취소</th>
       			</tr>
       		</thead>
-      		<tbody id="searchBody"></tbody>
+      		<tbody id="enrolled"></tbody>
       	</table>
+      	<div class="row text-center">
+      		신청 학점 / 최대 신청학점
+      	</div>
       </div>
-      </div>
+    </div>
    </div>
 </body>
 </html>
