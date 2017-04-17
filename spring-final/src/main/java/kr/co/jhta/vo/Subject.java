@@ -7,7 +7,7 @@ public class Subject {
 	private Professor professor;
 	private Semester selectNo;
 	private int grade;
-	private String isPassed;
+	private SubjectIsPassed isPassed;
 	private SiteMap siteCode;
 	private int score;
 	private String outline;
@@ -37,6 +37,8 @@ public class Subject {
 	
 	
 
+	
+
 	public Professor getProfessor() {
 		return professor;
 	}
@@ -61,11 +63,14 @@ public class Subject {
 		this.grade = grade;
 	}
 
-	public String getIsPassed() {
+
+	
+	
+	public SubjectIsPassed getIsPassed() {
 		return isPassed;
 	}
 
-	public void setIsPassed(String isPassed) {
+	public void setIsPassed(SubjectIsPassed isPassed) {
 		this.isPassed = isPassed;
 	}
 

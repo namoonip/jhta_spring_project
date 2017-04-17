@@ -20,6 +20,7 @@ import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.stu.Enroll;
 import kr.co.jhta.vo.stu.Regisubject;
+import kr.co.jhta.vo.stu.Student;
 
 @Controller
 @RequestMapping("/stud")
@@ -43,7 +44,9 @@ public class StuEnrollController {
 	private static final Logger logger = LoggerFactory.getLogger(StuEnrollController.class);
 	
 	@RequestMapping(value="/enrollMain", method=RequestMethod.GET)
-	public String stuEnroll(Model model) {
+	public String stuEnroll(Model model, Student student) {
+		
+		
 		
 		List<SiteMap> deptList = sitemapService.getAllSitemapPreService();
 		if(deptList == null) {
@@ -53,13 +56,14 @@ public class StuEnrollController {
 		model.addAttribute("deptList", deptList);
 				
 		// 수강신청 목록 뿌려주기
-		List<Enroll> enrollList = enrollService.getAllEnrollService();
+		
+		List<Enroll> enrollList = enrollService.getAllEnrollByTnameService(student.getDivision());
 		if(!enrollList.isEmpty()) {			
 			model.addAttribute("enrollList", enrollList);
 		}
 		
 		// 수강신청한 목록 아이디를 가져와 뿌려주기로 바꾸기 
-		List<Regisubject> regisubList = regisubjectService.getAllRegisInfoService();
+		List<Regisubject> regisubList = regisubjectService.getRegisByUserNoService(student.getNo());
 		if(!regisubList.isEmpty()) {			
 			model.addAttribute("regisubList" , regisubList);
 		}
@@ -67,13 +71,13 @@ public class StuEnrollController {
 		return "/student/enroll/enrollMain";
 	}
 	
-	@RequestMapping(value="/enrollSend", method=RequestMethod.POST)
-	public String stuEnrollSending(@RequestParam int enrollNo) {
-		
+	@RequestMapping(value="/enrollSend", method=RequestMethod.GET)
+	public String stuEnrollSending(@RequestParam(value="enrollNo") int enrollNo, Student student) {
 		// 사용자가 같은지 비교조건 추가
-		Enroll enroll = enrollService.getEnrollByENoService(enrollNo);		
+		Enroll enroll = enrollService.getEnrollByENoService(enrollNo);
 		boolean check = checkEnrollMax(enroll.getEnrollNum(), enroll.getDivision().getLimitNumber());
 		if(check) {
+			enroll.setStuNo(student.getNo());
 			enrollService.updatePlusNowNumService(enrollNo);
 			enrollService.addRegisubService(enroll);
 		} else {			
@@ -82,7 +86,21 @@ public class StuEnrollController {
 		return "redirect:/stud/enrollMain";
 	}	
 	
-	@RequestMapping(value="/enrollCancle", method=RequestMethod.POST)
+	// 신청인원과 최대인원 비교
+	private boolean checkEnrollMax(int nowNum, int maxNum) {
+		if(nowNum >= maxNum) {
+			return false;
+		}
+		return true;
+	}
+	
+	// 이전에 신청한 과목인지 비교하기
+	private boolean checkBeforeEnroll() {
+		
+		return true;
+	}
+	
+	@RequestMapping(value="/enrollCancle", method=RequestMethod.GET)
 	public String stuEnrollCancel(@RequestParam int cancleNo) {
 		regisubjectService.deleteRegisubByENoService(cancleNo);
 		enrollService.updateMinusNowNumService(cancleNo);
@@ -93,17 +111,11 @@ public class StuEnrollController {
 	@RequestMapping(value="/enrollSubjectSearch", method=RequestMethod.POST)
 	public @ResponseBody List<SiteMap> adminRegSubjectGetDept(String dept) {
 		SiteMap siteMap = new SiteMap();
-		siteMap.setPreCode(dept);;
+		siteMap.setPreCode(dept);
 		
 		return sitemapService.getAllSitemapSecService(siteMap);
 	}
 		
-	// 신청인원과 최대인원 비교
-	private boolean checkEnrollMax(int nowNum, int maxNum) {
-		if(nowNum >= maxNum) {
-			return false;
-		}
-		return true;
-	}
+
 		
 }

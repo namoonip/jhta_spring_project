@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.jhta.dao.major.SubjectDao;
 import kr.co.jhta.vo.Subject;
+import kr.co.jhta.vo.SubjectIsPassed;
 
 @Service
 public class SubjectServiceImpl implements SubjectService{
@@ -22,5 +23,13 @@ public class SubjectServiceImpl implements SubjectService{
 	@Override
 	public List<Subject> getAllList() {
 		return subjectDao.getAllList();
+	}
+	@Override
+	public List<Subject> getByProIdList(String id) {
+		return subjectDao.getByProIdList(id);
+	}
+	@Override
+	public List<SubjectIsPassed> getPassAllList() {
+		return subjectDao.getPassAllList();
 	}
 }

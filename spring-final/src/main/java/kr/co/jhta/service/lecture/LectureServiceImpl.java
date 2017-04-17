@@ -41,4 +41,14 @@ public class LectureServiceImpl implements LectureService {
 	public Semester getSemesterList(int semesterNo) {
 		return lectureDao.getSemesterList(semesterNo);
 	}
+	
+	@Override
+	public List<Map<String, Object>> getAllSubjectList() {
+		return lectureDao.getAllSubjectList();
+	}
+	
+	@Override
+	public int getSubjectRowCount(String majorCode) {
+		return lectureDao.getSubjectRowCount(majorCode);
+	}
 }

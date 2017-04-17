@@ -8,5 +8,5 @@ public interface OpenLectureDao {
 
 	List<Professor> getInformationOfProfessorList();
 	
-	
+	Professor getInformationProfessor(String id);
 }

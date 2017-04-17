@@ -28,11 +28,7 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		return regisubList;
 	}
 
-	@Override
-	public Regisubject getRegisByIdService(String id) {
-		Regisubject regisub = regiDao.getRegisById(id);
-		return regisub;
-	}
+
 
 	@Override
 	public void deleteRegisubByENoService(int enrollNo) {
@@ -40,6 +36,12 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		System.out.println(rno);
 		scoreDao.delScore(rno);
 		regiDao.deleteRegisubByENo(enrollNo);
+	}
+
+	@Override
+	public List<Regisubject> getRegisByUserNoService(int userNo) {
+		List<Regisubject> regisubList = regiDao.getRegisByUserNo(userNo);
+		return regisubList;
 	}
 	
 }

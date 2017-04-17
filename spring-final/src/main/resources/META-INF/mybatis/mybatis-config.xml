@@ -27,7 +27,7 @@
 		<!-- <mapper resource="META-INF/mybatis/mappers/board/review.xml"/> -->
 		<mapper resource="META-INF/mybatis/mappers/score/attendance.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/score/score.xml"/>
-		<!-- <mapper resource="META-INF/mybatis/mappers/score/report.xml"/> -->
+		<mapper resource="META-INF/mybatis/mappers/score/report.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/enroll/enroll.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/enroll/regisubject.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/user/student.xml"/>			<!-- student -->

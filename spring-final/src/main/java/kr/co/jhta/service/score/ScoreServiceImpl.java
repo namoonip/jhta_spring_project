@@ -21,10 +21,10 @@ public class ScoreServiceImpl implements ScoreService{
 	private ScoreDao scoreDao;
 	
 	@Autowired
-	private AttendanceDao attDao;
+	private AttendanceService attService;
 	
 	@Autowired
-	private ReportDao reportDao;
+	private ReportService repService;
 
 	@Override
 	public List<SubjectRegister> getAllRegiList() {
@@ -69,8 +69,8 @@ public class ScoreServiceImpl implements ScoreService{
 	@Override
 	public void addScore() {
 		scoreDao.addScore();
-		attDao.addAttendance();
-		reportDao.addReport();
+		attService.addAttendance();
+		repService.addReport();
 		
 	}
 	
@@ -82,8 +82,8 @@ public class ScoreServiceImpl implements ScoreService{
 	@Override
 	public void delScore(int rno) {
 		int sno = scoreDao.getScoreNoByRno(rno);
-		attDao.delAttendance(sno);
-		reportDao.delReport(sno);
+		attService.delAttendance(sno);
+		repService.delReport(sno);
 		scoreDao.delScore(rno);
 	}
 

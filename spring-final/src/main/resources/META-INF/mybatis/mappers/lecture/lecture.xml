@@ -51,13 +51,30 @@
 			d.j_div_no as divNo,
 			d.j_div_num as divisionNo,
 			d.j_limit_num as limitNumber,
-			d.j_div_prof as divisionProfessor
+			d.j_div_prof as divisionProfessor,
+			e.e_no as no,
+			e.e_enrollday	as enrollDay,
+			e.e_j_div_no as "division.no",
+			e.e_j_subject_no as "subject.no",
+			e.e_enrolltime as enrollTime,
+			e.e_enrollnum as	enrollNum
 		from
 			j_subject s,
-			j_division d
+			j_division d,
+			e_enrollment e
 		where
 			s.J_t_code = #{majorCode}
 			and s.j_no = d.j_subject_no
+			and s.j_no = e.e_j_subject_no
+	</select>
+	
+	<select id="getSubjectRowCount" parameterType="string" resultType="int">
+		select 
+			count(*)
+		from
+			j_subject s, j_division d, e_enrollment e
+		where
+			s.j_t_code = #{majorCode} and s.j_no = d.j_subject_no and s.j_no = e.e_j_subject_no 
 	</select>
 	
 	<select id="getAllSemesterList" resultType="semester">
@@ -111,6 +128,38 @@
 			s_semester
 		where
 			s_no = #{semesterNo}
+	</select>
+	
+	<select id="getAllSubjectList" resultType="hashmap">
+		select
+			s.j_no as no,
+			s.j_reference as reference,
+			s.j_progress as progress,
+			s.j_subject_name as subjectName,
+			s.j_semester as semester,
+			s.j_grade as grade,
+			s.j_is_passed as isPassed,
+			s.j_score as score,
+			s.j_outline as outline,
+			s.J_t_code as "siteCode.code",
+			s.j_sub_prof as professor,
+			d.j_div_no as divNo,
+			d.j_div_num as divisionNo,
+			d.j_limit_num as limitNumber,
+			d.j_div_prof as divisionProfessor,
+			e.e_no as no,
+			e.e_enrollday	as enrollDay,
+			e.e_j_div_no as "division.no",
+			e.e_j_subject_no as "subject.no",
+			e.e_enrolltime as enrollTime,
+			e.e_enrollnum as	enrollNum
+		from
+			j_subject s,
+			j_division d,
+			e_enrollment e
+		where
+			s.j_no = d.j_subject_no
+			and s.j_no = e.e_j_subject_no
 	</select>
 	
 </mapper>

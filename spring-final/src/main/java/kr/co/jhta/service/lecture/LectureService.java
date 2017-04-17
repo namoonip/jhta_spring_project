@@ -14,4 +14,6 @@ public interface LectureService {
 	List<Map<String, Object>> getSubjectList(String majorCode);
 	List<Semester> getAllSemesterList();
 	Semester getSemesterList(int semesterNo);
+	List<Map<String, Object>> getAllSubjectList();
+	int getSubjectRowCount(String majorCode);
 }

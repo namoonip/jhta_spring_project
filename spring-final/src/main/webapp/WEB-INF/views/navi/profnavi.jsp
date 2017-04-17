@@ -151,7 +151,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index" style="color: white;"><span class="glyphicon glyphicon-education"></span> JHTA 학사 관리 시스템</a>
+                        <a class="navbar-brand" href="home" style="color: white;"><span class="glyphicon glyphicon-education"></span> JHTA 학사 관리 시스템</a>
                             <ul class="nav navbar-nav">
 						      <li><a href="#" style="color: white;">학적 관리</a></li>
 						      <li><a href="#" style="color: white;">교과 관리</a></li>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.jhta.service.major.SemesterService;
@@ -18,6 +19,7 @@ import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.Semester;
 import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
+import kr.co.jhta.vo.SubjectSearchForm;
 
 @Controller
 @RequestMapping("/admin")
@@ -36,10 +38,29 @@ public class SubjectController {
 	private SubjectService subjectService;
 	
 	
-	@RequestMapping("/subjectmain")
+	@RequestMapping(value="/subjectmain", method=RequestMethod.GET)
 	public String subjectMain(Model model) {
+		
+		List<Semester> semeList = semesterService.getAllSemester();
+		List<Subject> subjectList = subjectService.getAllList();
+		
+		model.addAttribute("semeList", semeList);
+		model.addAttribute("subjectlist", subjectList);
+		
+			
 		return "major/subjectmain";
 	}
+	
+	@RequestMapping(value="searchsubject", method=RequestMethod.POST)
+	public String searchSubject(SubjectSearchForm searchForm, Model model) {
+		
+		
+		model.addAttribute("searchsubject", searchForm);
+		
+		
+		return "major/subjectmain";
+	}
+	
 	
 	@RequestMapping(value="/addsubject", method=RequestMethod.GET)
 	public String subjectform(Model model) {
@@ -78,18 +99,7 @@ public class SubjectController {
 	
 	
 	@RequestMapping(value="/addsubject", method=RequestMethod.POST)
-	public String registersubject(Subject subjectaddform, String major, String semeSelect, String professorId) throws Exception {
-		
-		Semester semester = new Semester();
-		SiteMap sitemap = new SiteMap();
-		Professor professor = new Professor();
-		semester.setSemeSelect(semeSelect);
-		sitemap.setCode(major);
-		professor.setId(professorId);
-		
-		subjectaddform.setSelectNo(semester);
-		subjectaddform.setSiteCode(sitemap);
-		subjectaddform.setProfessor(professor);
+	public String registersubject(Subject subjectaddform) throws Exception {
 		
 		subjectService.addSubject(subjectaddform);
 		return "redirect:/admin/subjectmain";

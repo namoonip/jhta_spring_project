@@ -3,17 +3,46 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.major.SubjectDao">
-	<insert id="addSubject" parameterType="Subject">
+	
+	
+	<insert id="addSubject" parameterType="subject">
 		insert into j_subject
 		(j_no, j_subject_name, j_sub_prof, j_semester, j_grade,
 		j_is_passed, j_t_code, j_score, j_outline, j_reference, j_progress)
 		values
-		(j_subject_seq.nextval, #{subjectName}, "professor.id", "selectNo.semeSelect", 
-		#{grade}, #{inPassed}, "siteCode.code", #{score}, #{outline}, 
+		(j_subject_seq.nextval, #{subjectName}, #{professor.id}, #{selectNo.semeSelect}, 
+		#{grade}, #{isPassed.code}, #{siteCode.code}, #{score}, #{outline}, 
 		#{reference}, #{progress})
 	</insert>
 	
-	<select id="getAllList" resultType="Subject">
+	
+	<select id="getAllList" resultType="subject">
+		select
+			A.j_no as no,
+			A.j_subject_name as subjectName,
+			C.u_prof_name as "professor.name",
+			D.s_seme_select as "selectNo.semeSelect",
+			A.j_grade as grade,
+			B.is_passed as isPassed,
+			E.t_name as "siteCode.name",
+			A.j_score as score,
+			A.j_outline as outline,
+			A.j_reference as "reference",
+			A.j_progress as progress
+		from 
+			j_subject A, j_is_passed B, u_professor C, s_semester D, t_sitemap E
+		where 
+			A.j_sub_prof = C.u_prof_id
+		and
+			A.j_semester = D.s_no
+		and
+			A.j_is_passed = B.pass_code
+		and
+			A.j_t_code = E.t_code
+	</select>
+	
+	<!--
+	<select id="getSubjects" parameterType="" resultType="">
 		select
 			j_no as no,
 			j_subject_name as subjectName,
@@ -28,5 +57,28 @@
 			j_progress as progress
 		from
 			j_subject
+		
 	</select>
+	 -->
+	<select id="getByProIdList" parameterType="string" resultType="subject">
+		select
+			j_no as no,
+			j_subject_name as subjectName,
+			j_sub_prof as "professor.id",
+			j_semester as "selectNo.no",
+			j_grade as grade,
+			j_is_passed as "isPassed.code",
+			j_t_code as "siteCode.code",
+			j_score as score,
+			j_outline as outline,
+			j_reference as "reference",
+			j_progress as progress
+		from
+			j_subject
+		where
+			j_sub_prof = #{value}
+	</select>
+	
+	
+	
 </mapper>

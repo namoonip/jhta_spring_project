@@ -10,6 +10,7 @@
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean class="kr.co.jhta.controller.argumentResolver.LoginStudArgumentResolver"></bean>
+			<bean class="kr.co.jhta.controller.argumentResolver.LoginProfArgumentResolver"></bean>
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	<mvc:interceptors>
@@ -30,6 +31,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<context:component-scan base-package="kr.co.jhta.controller"/>
+
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

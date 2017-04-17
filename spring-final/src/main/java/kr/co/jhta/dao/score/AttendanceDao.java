@@ -9,4 +9,5 @@ public interface AttendanceDao {
 	Attendance getAttendanceListByScoreNo(int sno);
 	void addAttendance();
 	void delAttendance(int sno);
+	
 }

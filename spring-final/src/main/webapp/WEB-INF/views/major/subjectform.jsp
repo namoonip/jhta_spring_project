@@ -89,7 +89,7 @@ $(function() {
 	         						</c:forEach>
 	         					</select>
 	         					<label>전공</label>
-	         					<select name="major" id="select-major"></select>
+	         					<select name="siteCode.code" id="select-major"></select>
 	         					
          					</td>
          				</tr>
@@ -98,7 +98,7 @@ $(function() {
          					<td><input type="text" name="subjectName"></td>
          					<td><label>학기선택</label></td>
          					<td>
-         						<select name="selectNo">
+         						<select name="selectNo.semeSelect">
          							<option>학기</option>
          							<c:forEach var="seme" items="${semeList}">
          							<option value="${seme.no }">${seme.semeSelect }</option>
@@ -111,13 +111,13 @@ $(function() {
          					<td>
          						<select name="isPassed">
          							<option>이수구분</option>
-         							<option value="">구분없음</option>
-         							<option value="">전공필수</option>
-         							<option value="">전공선택</option>
-         							<option value="">교양필수</option>
-         							<option value="">교양선택</option>
-         							<option value="">일반선택</option>
-         							<option value="">학부기초</option>
+         							<option value="ns">구분없음</option>
+         							<option value="me">전공필수</option>
+         							<option value="ms">전공선택</option>
+         							<option value="ce">교양필수</option>
+         							<option value="cs">교양선택</option>
+         							<option value="gs">일반선택</option>
+         							<option value="db">학부기초</option>
          						</select>
          					</td>
          					<td><label>대상학년</label></td>
@@ -135,7 +135,7 @@ $(function() {
          				<tr>
          					<td><label>교수명</label></td>
          					<td>
-         						<select name="professorId" id="select-prof">
+         						<select name="professor.id" id="select-prof">
          							<option>교수선택</option>
          							
          						</select>

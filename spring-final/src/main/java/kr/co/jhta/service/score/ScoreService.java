@@ -26,6 +26,7 @@ public interface ScoreService {
 	Score getScoreByNo(int no);
 	Regisubject getRegisInfoByEno(int enrollNo);
 	void updateScoreByNo(Score score);
+	
 	void addScore();
 	void delScore(int rno);
 	int getScoreNoByRno(int rno);
