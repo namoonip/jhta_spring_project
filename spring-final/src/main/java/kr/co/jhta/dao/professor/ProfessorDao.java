@@ -10,4 +10,5 @@ import kr.co.jhta.vo.Professor;
 public interface ProfessorDao {
 	List<Professor> proAllList();
 	Professor getProfessorById(String id);
+	List<Professor> getProListByTCode(String code);
 }

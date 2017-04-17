@@ -42,6 +42,5 @@ public class SiteMap {
 	public void setPreCode(String preCode) {
 		this.preCode = preCode;
 	}
-	
-	
+
 }

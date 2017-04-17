@@ -13,7 +13,6 @@ public class StringToDateConvertAdvice {
 
 	@InitBinder
 	   public void stringtoDateBinding(WebDataBinder binder){
-			System.out.println("string 여기실행");
 	      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	      binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	   }

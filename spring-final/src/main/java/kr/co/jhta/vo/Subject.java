@@ -4,7 +4,7 @@ public class Subject {
 
 	private int no;
 	private String subjectName;
-	private String professor;
+	private Professor professor;
 	private Semester selectNo;
 	private int grade;
 	private String isPassed;
@@ -34,15 +34,16 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public String getProfessor() {
+	
+	
+
+	public Professor getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(String professor) {
+	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-
-	
 
 	public Semester getSelectNo() {
 		return selectNo;

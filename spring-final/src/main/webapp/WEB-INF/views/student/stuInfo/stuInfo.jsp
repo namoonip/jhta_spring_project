@@ -23,10 +23,10 @@
       </div>
       <div class="row">
       	<div class="col-xs-2">
-      		<img src="resources/images/student/PeoPleDefault.png" alt="person" style="width: 100px; height: 100px;"/>
+      		<img src="../resources/images/student/PeoPleDefault.png" alt="person" style="width: 100px; height: 100px;"/>
       	</div>
       	<div class="col-xs-10">
-      		<p>기본 정보</p>
+      		<p>나의 정보</p>
         	<table class="table table-bordered">
 	        	<colgroup>
 	        		<col width="20%" />
@@ -115,7 +115,7 @@
       				</tr>
       				<tr>
       					<th>보호자 성함</th>
-      					<td>홍길동</td>
+      					<td> </td>
       				</tr>
       				<tr>
       					<th>보호자 연락처</th>

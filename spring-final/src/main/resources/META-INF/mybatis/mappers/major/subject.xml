@@ -8,20 +8,20 @@
 		(j_no, j_subject_name, j_sub_prof, j_semester, j_grade,
 		j_is_passed, j_t_code, j_score, j_outline, j_reference, j_progress)
 		values
-		(j_subject_seq.nextval, #{subjectName}, #{professor}, #{Semester.semeSelect}, 
-		#{grade}, #{inPassed}, #{SiteMap.code}, #{score}, #{outline}, 
-		#{reference},#{progress})
+		(j_subject_seq.nextval, #{subjectName}, "professor.id", "selectNo.semeSelect", 
+		#{grade}, #{inPassed}, "siteCode.code", #{score}, #{outline}, 
+		#{reference}, #{progress})
 	</insert>
 	
 	<select id="getAllList" resultType="Subject">
 		select
 			j_no as no,
 			j_subject_name as subjectName,
-			j_sub_prof as professor,
-			j_semester as selectNo,
+			j_sub_prof as "professor.id",
+			j_semester as "selectNo.semeSelect",
 			j_grade as grade,
 			j_is_passed as isPassed,
-			j_t_code as siteCode,
+			j_t_code as "siteCode.code",
 			j_score as score,
 			j_outline as outline,
 			j_reference as "reference",

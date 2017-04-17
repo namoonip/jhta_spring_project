@@ -12,8 +12,10 @@
 <script type="text/javascript">
 	$(function() {
 		$("#att_Btn").click(function() {
+			var attper = $("#att_Btn").val();
+			alert(attper);
 			$('#attDataBox').empty();
-			$('#attDataBox').append('<label>홍길동 디지털코드 출석정보</label><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" id="attDataBar">60%</div></div>');			
+			$('#attDataBox').append('<label>홍길동 디지털코드 출석정보</label><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="'+attper+'" aria-valuemin="0" aria-valuemax="15" style="width: 60%;" id="attDataBar">'+attper+'</div></div>');			
 		});
 	});
 </script>
@@ -83,8 +85,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr style="text-align: left;">
 								<c:forEach var="scorelist2" items="${scorelist2 }">
+								<tr style="text-align: left;">
 									<td>${scorelist2.no}</td>
 									<td>${scorelist2.student.name}</td>
 									<td>${scorelist2.student.id}</td>
@@ -97,8 +99,8 @@
 									<td>${scorelist2.score.midtermScore}</td>
 									<td>${scorelist2.score.endtermScore}</td>
 									<td><a href="scoreform.do?sno=${scorelist2.score.no }" class="btn btn-default btn-xs">수정</a></td>
-								</c:forEach>
 								</tr>
+								</c:forEach>	
 							</tbody>
 						</table>
 					</div>
@@ -147,14 +149,17 @@
 								</tr>
 							</thead>
 							<tbody>
+							<%-- <c:forEach var="scorelist2" items="${scorelist2 }">
 								<tr style="text-align: left;">
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>${scorelist2.score.no }</td>
+									<td>${scorelist2.student.id}</td>
+									<td>${scorelist2.student.name}</td>
+									<td>${scorelist2.subject.grade}</td>
+									<td>${scorelist2.subject.subjectName}</td>
+									<td>${scorelist2.att.count}</td>
+									<td><button type="button" class="btn btn-primary btn-xs" id="att_Btn" value="${scorelist2.att.count}">상세정보</button></td>
 								</tr>
+							</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>

@@ -1,11 +1,10 @@
 package kr.co.jhta.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.major.SubjectService;
 import kr.co.jhta.service.professor.ProfessorService;
@@ -34,17 +34,18 @@ public class ProfController {
 	@Autowired
 	private SyllabusService syllabusService;
 	
-	@RequestMapping("/profMain")
+	@RequestMapping("/prof/home")
 	public String testMain() {
 		return "/prof/profMain";
 	}
 	
-	@RequestMapping("/syllabus")
-	public String syllAbus(Model model){
-		
+	@RequestMapping("/prof/syllabus")
+	public String syllAbus(@RequestParam("no") int no,Model model, Syllabus syll){
+		Syllabus syno = syllabusService.getByNoList(syll.getNo());
+		model.addAttribute("syno",syno);
 		return "/prof/syllabus";
 	}
-	@RequestMapping(value="/syllform", method=RequestMethod.GET)
+	@RequestMapping(value="/prof/syllform", method=RequestMethod.GET)
 	public String syllForm(Model model){
 		List<Professor> proList = professorService.proAllList();
 		model.addAttribute("proList", proList);
@@ -54,16 +55,40 @@ public class ProfController {
 		
 		return "/prof/syllabusform";
 	}
-	@RequestMapping(value="/syllform", method=RequestMethod.POST)
-	public String addNewSyll(@Valid @ModelAttribute("syllform")Syllabusform syllform, Errors errors, Syllabus syllabus) throws Exception{
+	@RequestMapping(value="/prof/syllupdate", method=RequestMethod.GET)
+	public String syllUpForm(@RequestParam("no") int no,Model model, Syllabus syll){
+		Syllabus syno = syllabusService.getByNoList(syll.getNo());
+		model.addAttribute("syno", syno);
+		List<Professor> proList = professorService.proAllList();
+		model.addAttribute("proList", proList);
+		List<Subject> subList = subjectService.getAllList();
+		model.addAttribute("subList", subList);
+		model.addAttribute("syllabusform", new Syllabusform());
+		
+		
+		return "/prof/syllupdate";
+	}
+	
+	@RequestMapping(value="/prof/syllform", method=RequestMethod.POST)
+	public String addNewSyll(@Valid @ModelAttribute("syllabusform")Syllabusform syllform, Errors errors) throws Exception{
+		
+		System.out.println(syllform);
 		if(errors.hasErrors()){
-			return "/prof/syllabusInfo";
+			System.out.println(errors.getAllErrors());
+			return "/prof/syllabusform";
 		}
+		Syllabus syllabus = new Syllabus();
+		Subject subject = new Subject();
+		subject.setNo(syllform.getSubno());
+		syllabus.setSubject(subject);
+		Professor prof = new Professor();
+		prof.setId(syllform.getId());
+		syllabus.setProfessor(prof);
 		BeanUtils.copyProperties(syllform, syllabus);
 		syllabusService.addNewSyll(syllabus);
-		return "redirect:/jhta/syllinfo";
+		return "redirect:/syllinfo";
 	}
-	@RequestMapping("/syllinfo")
+	@RequestMapping("/prof/syllinfo")
 	public String syllInfo(Model model){
 		List<Syllabus> syllList = syllabusService.getAllList();
 		model.addAttribute("syllList", syllList);

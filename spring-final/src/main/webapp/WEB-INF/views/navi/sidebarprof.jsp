@@ -23,8 +23,8 @@
                         <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="#"><i class="fa fa-caret-right"></i>강의 조회</a></li>
                             <li><a href="#"><i class="fa fa-caret-right"></i>강의 등록</a></li>
-                            <li><a href="/jhta/syllinfo"><i class="fa fa-caret-right"></i>강의계획서 조회</a></li>
-                            <li><a href="/jhta/syllform"><i class="fa fa-caret-right"></i>강의계획서 등록</a></li>
+                            <li><a href="/jhta/prof/syllinfo"><i class="fa fa-caret-right"></i>강의계획서 조회</a></li>
+                            <li><a href="/jhta/prof/syllform"><i class="fa fa-caret-right"></i>강의계획서 등록</a></li>
                         </ul>
                     </li>
                     <li>

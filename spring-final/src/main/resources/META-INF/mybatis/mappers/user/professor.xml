@@ -47,6 +47,16 @@
 		where u_prof_id = #{id}
 	</select>
 	
+	<select id="getProListByTCode" parameterType="string" resultType="kr.co.jhta.vo.Professor">
+		select
+			u_prof_no as no,
+			u_prof_id as id,
+			u_prof_name as name
+		from
+			u_professor
+		where u_prof_code = #{code}
+	</select>
+	
 	
 
 </mapper>

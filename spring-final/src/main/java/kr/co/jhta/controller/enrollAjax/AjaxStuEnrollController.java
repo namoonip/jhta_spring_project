@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import kr.co.jhta.service.sitemap.EnrollService;
+import kr.co.jhta.service.user.EnrollService;
 import kr.co.jhta.vo.stu.Enroll;
 
 @RestController
@@ -19,10 +19,11 @@ public class AjaxStuEnrollController {
 	@Autowired
 	EnrollService enrollService;
 	
+	// 현재 사용안함
 	@RequestMapping("/enrollMain/{no}")
 	public @ResponseBody Enroll enrollSubject(@PathVariable("no") int no) {
 		Enroll enroll = enrollService.getEnrollByENoService(no);
-		enrollService.addRegisubService(enroll);
+//		enrollService.addRegisubService(enroll);
 		System.out.println(enroll.getNo());
 		return enroll;
 	}

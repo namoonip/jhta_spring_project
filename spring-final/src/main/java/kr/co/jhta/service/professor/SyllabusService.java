@@ -10,4 +10,5 @@ import kr.co.jhta.vo.Syllabus;
 public interface SyllabusService {
 	void addNewSyll(Syllabus syllabus);
 	List<Syllabus> getAllList();
+	Syllabus getByNoList(int no);
 }

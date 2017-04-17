@@ -11,5 +11,5 @@ import kr.co.jhta.vo.Professor;
 public interface ProfessorService {
 	List<Professor> proAllList();
 	Professor loginByProfessor(LoginForm loginForm);
-	
+	List<Professor> getProListByTCode(String code);
 }

@@ -32,4 +32,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		}		
 		return prof;
 	}	
+	
+	@Override
+	public List<Professor> getProListByTCode(String code) {
+		
+		return professordao.getProListByTCode(code);
+	}
 }

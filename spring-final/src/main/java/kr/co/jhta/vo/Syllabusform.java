@@ -2,37 +2,31 @@ package kr.co.jhta.vo;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 
 public class Syllabusform {
 	
-	private String sub_no;
-	
-	private String sub_name;
-	@NotNull
+	private int subno;
+	private String subname;
 	private int midtrum;
-	@NotNull
 	private int final1;
-	@NotNull
 	private int atlen;
-	@NotNull
 	private int project;
-	
 	private String distri;
 	private String outline;
 	private String goals;
 	private String method;
-	private String prof_name;
-	private String prof_email;
-	private String prof_phone;
+	private String id;
+	private String name;
+	private String email;
+	private String phone;
 	private String book;
-	private Date midturm_st;
-	private Date midturm_end;
-	private Date final_st;
-	private Date final_end;
-	private Date project_st;
-	private Date project_end;
-	private String project_content;
+	private Date midst;
+	private Date midend;
+	private Date finalst;
+	private Date finalend;
+	private Date prost;
+	private Date proend;
+	private String procontent;
 	private String week1;
 	private String week2;
 	private String week3;
@@ -48,19 +42,17 @@ public class Syllabusform {
 	private String week13;
 	private String week14;
 	private String week15;
-	
-	
-	public String getProf_name() {
-		return prof_name;
+	public int getSubno() {
+		return subno;
 	}
-	public void setProf_name(String prof_name) {
-		this.prof_name = prof_name;
+	public void setSubno(int subno) {
+		this.subno = subno;
 	}
-	public String getSub_name() {
-		return sub_name;
+	public String getSubname() {
+		return subname;
 	}
-	public void setSub_name(String sub_name) {
-		this.sub_name = sub_name;
+	public void setSubname(String subname) {
+		this.subname = subname;
 	}
 	public int getMidtrum() {
 		return midtrum;
@@ -110,17 +102,29 @@ public class Syllabusform {
 	public void setMethod(String method) {
 		this.method = method;
 	}
-	public String getProf_email() {
-		return prof_email;
+	public String getId() {
+		return id;
 	}
-	public void setProf_email(String prof_email) {
-		this.prof_email = prof_email;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getProf_phone() {
-		return prof_phone;
+	public String getName() {
+		return name;
 	}
-	public void setProf_phone(String prof_phone) {
-		this.prof_phone = prof_phone;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getBook() {
 		return book;
@@ -128,47 +132,47 @@ public class Syllabusform {
 	public void setBook(String book) {
 		this.book = book;
 	}
-	public Date getMidturm_st() {
-		return midturm_st;
+	public Date getMidst() {
+		return midst;
 	}
-	public void setMidturm_st(Date midturm_st) {
-		this.midturm_st = midturm_st;
+	public void setMidst(Date midst) {
+		this.midst = midst;
 	}
-	public Date getMidturm_end() {
-		return midturm_end;
+	public Date getMidend() {
+		return midend;
 	}
-	public void setMidturm_end(Date midturm_end) {
-		this.midturm_end = midturm_end;
+	public void setMidend(Date midend) {
+		this.midend = midend;
 	}
-	public Date getFinal_st() {
-		return final_st;
+	public Date getFinalst() {
+		return finalst;
 	}
-	public void setFinal_st(Date final_st) {
-		this.final_st = final_st;
+	public void setFinalst(Date finalst) {
+		this.finalst = finalst;
 	}
-	public Date getFinal_end() {
-		return final_end;
+	public Date getFinalend() {
+		return finalend;
 	}
-	public void setFinal_end(Date final_end) {
-		this.final_end = final_end;
+	public void setFinalend(Date finalend) {
+		this.finalend = finalend;
 	}
-	public Date getProject_st() {
-		return project_st;
+	public Date getProst() {
+		return prost;
 	}
-	public void setProject_st(Date project_st) {
-		this.project_st = project_st;
+	public void setProst(Date prost) {
+		this.prost = prost;
 	}
-	public Date getProject_end() {
-		return project_end;
+	public Date getProend() {
+		return proend;
 	}
-	public void setProject_end(Date project_end) {
-		this.project_end = project_end;
+	public void setProend(Date proend) {
+		this.proend = proend;
 	}
-	public String getProject_content() {
-		return project_content;
+	public String getProcontent() {
+		return procontent;
 	}
-	public void setProject_content(String project_content) {
-		this.project_content = project_content;
+	public void setProcontent(String procontent) {
+		this.procontent = procontent;
 	}
 	public String getWeek1() {
 		return week1;
@@ -260,6 +264,10 @@ public class Syllabusform {
 	public void setWeek15(String week15) {
 		this.week15 = week15;
 	}
+	
+	
+	
+
 	
 	
 }

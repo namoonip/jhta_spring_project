@@ -4,11 +4,11 @@
 <html lang="ko">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <link href="resources/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
-  <link href="resources/fullcalendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
-  <script src="resources/fullcalendar/lib/moment.min.js"></script>
-  <script src="resources/fullcalendar/lib/jquery.min.js"></script>
-  <script src="resources/fullcalendar/fullcalendar.min.js"></script>
+  <link href="../resources/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+  <link href="../resources/fullcalendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
+  <script src="../resources/fullcalendar/lib/moment.min.js"></script>
+  <script src="../resources/fullcalendar/lib/jquery.min.js"></script>
+  <script src="../resources/fullcalendar/fullcalendar.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	

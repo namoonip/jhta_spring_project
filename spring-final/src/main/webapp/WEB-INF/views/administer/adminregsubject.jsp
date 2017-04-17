@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,13 +21,30 @@ $(function() {
 			dataType: "json",
 			type: "POST",
 			success: function(data) {
-				$("#select-major").empty();
+				$("#select-major").empty();					
 				
+				// data 가 없을 경우 data.length 가 0 이라서 실행되지 않는다.
 				for (var i=0; i<data.length; i++) {
 					$("#select-major").append("<option value="+data[i].code+">"+data[i].name+"</option>");	
 				}
+				
+				// data 가 없을 경우 학과선택을 표시하게 하는 코드
+				if (data.length == 0) {
+					$("#select-major").append("<option value='0'>학과선택</option>");	
+				}
 			}
 		});
+	});
+	
+	$("#search-button").click(function() {
+		var dept = $("#select-dept :selected").val();
+		var major = $("#select-major :selected").val();
+		var semester = $("#select-semester :selected").val();
+		
+		if (dept == 0 || major == 0 || semester == 0) {
+			alert("검색 값을 입력해주세요.");
+			return false;
+		}
 	});
 })
 </script>
@@ -51,7 +69,7 @@ $(function() {
 								<div class="form-group">
 									<label>대학선택:</label>
 									<select class="form-control" name="dept" id="select-dept">
-										<option>학과선택</option>
+										<option value="0">대학선택</option>
 									<c:forEach items="${deptList }" var="dept">
 										<option value="${dept.code }">${dept.name }</option>
 									</c:forEach>
@@ -59,20 +77,22 @@ $(function() {
 								</div>
 								<div class="form-group">
 									<label>학과선택:</label>
-									<select class="form-control" name="major" id="select-major"></select>
+									<select class="form-control" name="major" id="select-major">
+										<option value="0">학과선택</option>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>학기선택:</label>
-									<select class="form-control" name="">
-										<option value="">2016-1</option>
-										<option value="">2016-2</option>
-										<option value="">2017-1</option>
-										<option value="">2017-2</option>
+									<select class="form-control" name="semesterNo" id="select-semester">
+										<option value="0">학기선택</option>
+									<c:forEach items="${semesterList }" var="semester">
+										<option value="${semester.no }">${semester.semeSelect }</option>
+									</c:forEach>	
 									</select>	
 								</div>
 								<div class="pull-right">
 									<a href="adminregsubject" class="btn btn-default">전체조회</a>
-									<button type="submit" class="btn btn-info">조회</button>
+									<button type="submit" class="btn btn-info" id="search-button">조회</button>
 								</div>
 							</th>
 						</tr>
@@ -83,9 +103,9 @@ $(function() {
 		<div class="row">
 			<div class="col-sm-2">
 				<select class="form-control" name="">
-					<option value="">10개씩 조회</option>
-					<option value="">20개씩 조회</option>
-					<option value="">50개씩 조회</option>
+					<option value="10">10개씩 조회</option>
+					<option value="20">20개씩 조회</option>
+					<option value="50">50개씩 조회</option>
 				</select>
 			</div>
 		</div><br>
@@ -119,13 +139,16 @@ $(function() {
 					<tbody>
 					<c:forEach items="${subList }" var="sub">
 						<tr>
-							<td>${sub.isPassed }</td>
-							<td>${sub.siteCode.name }</td>
-							<td>${sub.subjectName }</td>
-							<td>${sub.grade }</td>
-							<td></td>
-							<td>${sub.score }</td>
-							<td></td>
+							<td>${sub.ISPASSED }</td>
+							<td>${sub.DEPTNAME }</td>
+							<td>${sub.SUBJECTNAME }</td>
+							<td>${sub.GRADE }</td>
+							<td>
+								<fmt:formatDate value="${sub.SEMSTART }" pattern="yyyy/MM/dd"/> ~
+							 	<fmt:formatDate value="${sub.SEMEND }" pattern="yyyy/MM/dd"/>
+							</td>
+							<td>${sub.SCORE }</td>
+							<td>${sub.LIMITNUMBER }</td>
 							<td></td>
 							<td></td>
 						</tr>

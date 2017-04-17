@@ -9,6 +9,7 @@ import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Semester;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
+import kr.co.jhta.vo.stu.Regisubject;
 import kr.co.jhta.vo.stu.Student;
 
 @Transactional
@@ -16,10 +17,16 @@ import kr.co.jhta.vo.stu.Student;
 public interface ScoreService {
 	List<SubjectRegister> getAllRegiList();
 	List<Score> getAllScoreList();
+	
 	SubjectRegister getRegiListByNo(int regiNo);
 	Student getStudentInfoByNo(int stuNo);
 	Subject getSubjectInfoByNo(int jNo);
+	
 	Semester getSemesterByNo(int no);
 	Score getScoreByNo(int no);
+	Regisubject getRegisInfoByEno(int enrollNo);
 	void updateScoreByNo(Score score);
+	void addScore();
+	void delScore(int rno);
+	int getScoreNoByRno(int rno);
 }

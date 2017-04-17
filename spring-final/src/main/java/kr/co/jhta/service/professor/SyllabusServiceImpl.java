@@ -22,4 +22,9 @@ public class SyllabusServiceImpl implements SyllabusService {
 	public List<Syllabus> getAllList() {
 		return syllabusDao.getAllList();
 	}
+	
+	@Override
+	public Syllabus getByNoList(int no) {
+		return syllabusDao.getByNoList(no);
+	}
 }

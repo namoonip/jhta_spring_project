@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.user.RegisubjectDao">
 
-	<select id="getAllRegisInfo" parameterType="Regisubject">
+	<select id="getAllRegisInfo" resultType="Regisubject">
 		select r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
 	   r.R_GRADE as "grade",
@@ -29,29 +29,20 @@
 		  j.J_DIV_NO as "division.no",
 		   t.T_NO as "subject.siteCode.no",
 		   t.T_CODE as "subject.siteCode.code",
-		   t.T_NAME as "subject.siteCode.name",
-		  	c.S_SCORE_NO as "score.no",
-			c.S_CREDIT as "score.credit",
-			c.S_GRADE as "score.grade",
-			c.S_MIDTERM_SCORE as "score.mintermScore",
-			c.S_ENDTERM_SCORE as "score.endtermScore",
-			c.S_REPORT_SCORE as "score.reportScore",
-			c.S_ATTENDANCE_SCORE as "score.att"
+		   t.T_NAME as "subject.siteCode.name"
 		from E_ENROLLMENT e, 
 			 J_DIVISION j,
 			 J_SUBJECT s,
 			 T_SITEMAP t,
-			 R_REGISUBJECT r,
-			 S_SCORE c
-		where e.E_J_DIV_NO = j.J_DIV_NO
+			 R_REGISUBJECT r
+		where j.J_DIV_NO = e.E_J_DIV_NO
 		and e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
 		and	r.E_NO = e.E_NO
-		and r.S_SCORE_NO = c.S_SCORE_NO
 	</select>
 	
-	<select id="getRegisById" parameterType="String" resultType="Regisuject">
-	select r.R_REGI_NO as "no",
+	<select id="getRegisById" parameterType="String" resultType="Regisubject">
+select r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
 	   r.R_GRADE as "grade",
 	   r.R_MAXGRADE as "maxGrade",
@@ -75,26 +66,21 @@
 		  j.J_DIV_NO as "division.no",
 		   t.T_NO as "subject.siteCode.no",
 		   t.T_CODE as "subject.siteCode.code",
-		   t.T_NAME as "subject.siteCode.name",
-		  	c.S_SCORE_NO as "score.no",
-			c.S_CREDIT as "score.credit",
-			c.S_GRADE as "score.grade",
-			c.S_MIDTERM_SCORE as "score.mintermScore",
-			c.S_ENDTERM_SCORE as "score.endtermScore",
-			c.S_REPORT_SCORE as "score.reportScore",
-			c.S_ATTENDANCE_SCORE as "score.att"
+		   t.T_NAME as "subject.siteCode.name"
 		from E_ENROLLMENT e, 
 			 J_DIVISION j,
 			 J_SUBJECT s,
 			 T_SITEMAP t,
-			 R_REGISUBJECT r,
-			 S_SCORE c
-		where e.E_J_DIV_NO = j.J_DIV_NO
+			 R_REGISUBJECT r
+		where j.J_DIV_NO = e.E_J_DIV_NO
 		and e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
 		and	r.E_NO = e.E_NO
-		and r.S_SCORE_NO = c.S_SCORE_NO
 		and r.U_STU_NO = #{id}
 	</select>
+	
+	<delete id="deleteRegisubByENo" parameterType="int">
+		delete from R_REGISUBJECT WHERE E_NO = #{enrollNo}
+	</delete>
 	
 </mapper>

@@ -26,6 +26,7 @@ public class OpenLecture {
 	@RequestMapping("/openregister.do")
 	public String openLectureRegister(Model model){
 		
+		
 		List<Professor> openlecturelist = lectureservice.getInformationOfProfessorList();
 		model.addAttribute("openlecturelist",openlecturelist);
 		

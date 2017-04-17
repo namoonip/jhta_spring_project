@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.major.SemesterService;
+import kr.co.jhta.service.score.AttendanceService;
 import kr.co.jhta.service.score.ScoreService;
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Scorelist;
@@ -30,26 +31,36 @@ public class ScoreListController {
 	
 	@Autowired
 	private SemesterService semesterSevice;
+	
+	@Autowired
+	private AttendanceService attendanceService;
 			
 	@RequestMapping("/scorelist.do")
 	public String scorelist(Model model){
 		
 		List<Score> scorelist = scoreService.getAllScoreList();
 		List<Scorelist> scorelist2 = new ArrayList<Scorelist>();
-		
 		List<Semester> semesterlist = semesterSevice.getAllSemester();
 		
 		for(Score score : scorelist){
+			
 			Scorelist list = new Scorelist();
-			Subject sub = scoreService.getSubjectInfoByNo(score.getRegister().getRegiNo());
-			Student stu = scoreService.getStudentInfoByNo(score.getRegister().getStuNo());
+			System.out.println(score.getRegister().getRegiNo());
 			score.setRegister(scoreService.getRegiListByNo(score.getRegister().getRegiNo()));
+		
+			Subject sub = scoreService.getSubjectInfoByNo(score.getRegister().getjNo());
+			System.out.println(sub);
+			Student stu = scoreService.getStudentInfoByNo(score.getRegister().getStuNo());
+			System.out.println(stu);
+			
 			sub.setSelectNo(scoreService.getSemesterByNo(sub.getSelectNo().getNo()));
+			System.out.println(score.getRegister());
 			
 			list.setStudent(stu);
 			list.setSubject(sub);
 			list.setScore(score);
 			list.setNo(score.getRegister().getRegiNo());
+			
 			
 			scorelist2.add(list);
 		}
