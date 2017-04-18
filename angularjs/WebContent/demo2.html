@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/bootstarp/bootstrap.min.css" >
+<script type="text/javascript" src="resources/angular/angular.min.js"></script>
+<script type="text/javascript">
+	// 모듈 생성하기	 = angular.module("모듈 이름", ["주입받을 모듈들을 입력(AutoWired와 비슷한 개념)"])
+	// var yourModule = angular.module("yourApp", ['myApp']); myApp를 주입 받는다.
+	var myModule = angular.module("myApp", []);
+	
+	// 모듈에 컨트롤러 추가하기
+	// 모듈.controller('컨트롤러 이름', 컨트롤러 함수($scope) { } );
+	// $scope는 컨트롤러가 사용하는 저장 공간이다.
+	// $scope에 데이터를 담거나 핸들러 함수를 등록할 수 있다.
+	// 이 컨트롤러와 연관된 뷰에서 접근할 수 있다.
+	// publis String sample(Model model) { }
+	myModule.controller("sampleCtrl", function($scope) {
+		$scope.message = "이것은 데이터다.";
+		$scope.save = function() {
+			alert("저장하기 완료");
+		}
+	});
+	
+</script>
+</head>
+<body ng-app="myApp">
+<div class="container">
+	<div class="container">
+		<div ng-controller="sampleCtrl">
+			{{message}}
+			<button ng-click="save()">등록</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

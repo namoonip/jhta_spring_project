@@ -85,9 +85,38 @@
 		
 		$("#scoreprint").click(function (e) {
 			var scoreno = $(this).val();
-			alert(scoreno);
-		    window.open('data:application/vnd.ms-excel,' + $('#score_table').html());
-		    e.preventDefault();
+			window.open('data:application/vnd.ms-excel,filename="test.xls",' + encodeURIComponent($('#score_table').html()), '_blank');
+			e.preventDefault(); 
+		});
+		
+		$("#score_search_btn").click(function() {
+			var code1 = $("#score_box1").val();
+			var code2 = $("#score_box2").val();
+			var stucode = $("#score_box3").val();
+	
+			$.ajax({
+				url: "scoreSearchInfo?code="+code1+"&codes="+code2+"&stucode="+stucode,
+				dataType: "json",
+				type: "POST",
+				success: function(data) {
+					$("#score_td_box").empty();
+					
+					for (var i=0; i<data.length; i++) {
+						$("#score_td_box").append('<tr style="text-align: left;" id=tr_'+data[i].no+'></tr>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].no+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].student.name+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].student.id+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.semeSelect+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.subjectName+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.credit+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.grade+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.reportScore+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.attScore+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.midtermScore+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.endtermScore+'</td>');				
+					}
+				}
+			});
 		});
 	});
 </script>
@@ -100,8 +129,6 @@
 		<div class="panel panel-heading">
 		<h3>성적관리</h3>
 		<hr style="border:solid 0.5px #2C7BB5;">		                            	   
-
-		<form class="form-group" method="post" action="">
 			<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#score" aria-controls="score" role="tab" data-toggle="tab" aria-expanded="true">성적</a></li>
 					<li role="presentation"><a href="#attendance" aria-controls="attendance" role="tab" data-toggle="tab" aria-expanded="false">출결</a></li>
@@ -116,7 +143,7 @@
 								<td bgcolor="#dceef3" style="color: #333; width: 10%; vertical-align: middle; height: 30px;"><strong>조회</strong></td>
 								<td bgcolor="#f0fcff">
 									<select class="form-control" id="score_box1">
-											<option value="">전체</option>
+											<option value="all">전체</option>
 										<c:forEach var="sitemaplist" items="${sitemaplist }">
 											<option value="${sitemaplist.code }">${sitemaplist.name }</option>
 										</c:forEach>
@@ -128,10 +155,10 @@
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">
-									<input class="form-control" type="text" placeholder="이름 또는 학번"/>
+									<input class="form-control" type="text" placeholder="이름 또는 학번" id="score_box3"/>
 								</td>
 								<td bgcolor="#f0fcff">
-									<button class="btn btn-primary" type="submit">조회하기</button>
+									<button class="btn btn-primary" type="button" id="score_search_btn">조회하기</button>
 								</td>
 							</tr>
 						</tbody>
@@ -156,7 +183,7 @@
 									<th>출력</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="score_td_box">
 								<c:forEach var="scorelist2" items="${scorelist2 }">
 								<tr style="text-align: left;">
 									<td>${scorelist2.no}</td>
@@ -302,7 +329,6 @@
 					</div>
 				</div>
 			</div>
-		</form>
 		</div>
 	</div>
 </body>

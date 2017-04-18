@@ -10,9 +10,11 @@ public class Subject {
 	private SubjectIsPassed isPassed;
 	private SiteMap siteCode;
 	private int score;
+	private int division;
 	private String outline;
 	private String reference;
 	private String progress;
+	
 	
 	public Subject() {
 		// TODO Auto-generated constructor stub
@@ -34,10 +36,13 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	
-	
+	public int getDivision() {
+		return division;
+	}
 
-	
+	public void setDivision(int division) {
+		this.division = division;
+	}
 
 	public Professor getProfessor() {
 		return professor;
@@ -63,9 +68,6 @@ public class Subject {
 		this.grade = grade;
 	}
 
-
-	
-	
 	public SubjectIsPassed getIsPassed() {
 		return isPassed;
 	}
@@ -118,7 +120,10 @@ public class Subject {
 	public String toString() {
 		return "Subject [no=" + no + ", subjectName=" + subjectName + ", professor=" + professor + ", selectNo="
 				+ selectNo + ", grade=" + grade + ", isPassed=" + isPassed + ", siteCode=" + siteCode + ", score="
-				+ score + ", outline=" + outline + ", reference=" + reference + ", progress=" + progress + "]";
+				+ score + ", division=" + division + ", outline=" + outline + ", reference=" + reference + ", progress="
+				+ progress + "]";
 	}
+
+	
 	
 }

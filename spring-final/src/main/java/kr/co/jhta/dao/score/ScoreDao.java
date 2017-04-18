@@ -1,9 +1,11 @@
 package kr.co.jhta.dao.score;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Semester;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
 import kr.co.jhta.vo.stu.Regisubject;
@@ -23,4 +25,8 @@ public interface ScoreDao {
 	void delScore(int rno);
 	Regisubject getRegisInfoByEno(int enrollNo);
 	int getScoreNoByRno(int rno);
+	SiteMap getSitemapByCode(String code);
+	List<Regisubject> getRegisInfoByhash(HashMap<String, Object> list);
+	Score getScoreinfoByRno(int rno);
+	SubjectRegister getRegiListByStuNo(int stuno);
 }

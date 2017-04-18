@@ -61,8 +61,7 @@ public class StuController {
 	@RequestMapping(value="/stuPwdCheck", method=RequestMethod.POST) 
 	public String stuPwdCheck(Student student, Model model, 
 						@RequestParam(value="stuPwd", required=true) String stuPwd,
-						@RequestParam(value="Repwd", required=true) String Repwd,
-						@RequestParam(value="RepwdCheck", required=true) String RepwdCheck) {
+						@RequestParam(value="Repwd", required=true) String Repwd) {
 		boolean isPassed = false;
 		if(student.getPwd().equals(stuPwd)) {
 			isPassed = true;

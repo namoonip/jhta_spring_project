@@ -86,7 +86,7 @@
 		<h1>강의계획서 수정</h1>
 		<hr class="one">
 		<div class="row well">
-			<form:form method="post" action="/jhta/prof/syllupdate" modelAttribute="syllabusform">
+			<form:form method="post" action="/jhta/prof/syllupdate?no=${syno.no }" modelAttribute="syllabusform">
 				<div class="form-group" id="subclass">
 					<label>과목명</label>
 					<form:select path="subno" cssClass="form-control" selected="${syno.subject.subjackName }">

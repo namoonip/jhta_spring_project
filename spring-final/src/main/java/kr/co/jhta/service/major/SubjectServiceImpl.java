@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.jhta.dao.major.SubjectDao;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectIsPassed;
+import kr.co.jhta.vo.SubjectSearchForm;
 
 @Service
 public class SubjectServiceImpl implements SubjectService{
@@ -31,5 +32,31 @@ public class SubjectServiceImpl implements SubjectService{
 	@Override
 	public List<SubjectIsPassed> getPassAllList() {
 		return subjectDao.getPassAllList();
+	}
+	
+	@Override
+	public List<Subject> getSubjectByOpt(SubjectSearchForm searchform) {
+		return subjectDao.getSubjectByOpt(searchform);
+	}
+	
+	@Override
+	public void addSubject2(Subject subject) {
+		subjectDao.addSubject2(subject);
+		
+	}
+	
+	@Override
+	public void deleteSub(int no) {
+		subjectDao.deleteSub(no);
+		
+	}
+	@Override
+	public Subject getByNoList(int no) {
+		return subjectDao.getByNoList(no);
+	}
+	@Override
+	public void subupdate(Subject subject) {
+		subjectDao.subupdate(subject);
+		
 	}
 }

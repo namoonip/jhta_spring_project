@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$("#sele").selected("#pass-0").val();
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
@@ -21,11 +24,11 @@
 			<form:form method="post" action="/jhta/prof/addsubform" modelAttribute="subjackform">
 				<div class="form-group">
 					<label>과목명</label>
-					<form:input cssClass="form-control" path="subjeckName" />
+					<form:input cssClass="form-control" path="subjectName" />
 				</div>
 				<div class="form-group">
 					<label>담당 교수</label>
-					<form:input path="profname" cssClass="form-control" value="${prof.name }"/>
+					<form:input path="professor" cssClass="form-control" value="${prof.id }"/>
 				</div>
 				<div class="form-group">
 					<label>학과코드</label>
@@ -34,7 +37,7 @@
 				</div>
 				<div class="form-group">
 					<label>학기 선택</label>
-					<form:select path="selectNo" cssClass="form-control" selected="${syno.subject.subjackName }">
+					<form:select path="selectNo" cssClass="form-control" selected="">
 						<c:forEach var="semester" items="${semeList }" varStatus="status">
 							<form:option id="semester-${status.count }" value="${semester.no }">${semester.semeSelect }</form:option>							
 						</c:forEach>
@@ -47,9 +50,9 @@
 				</div>
 				<div class="form-group">
 					<label>이수구분</label>
-					<form:select path="isPassed" cssClass="form-control" selected="${syno.subject.subjackName }">
+					<form:select path="isPassed" id="sele" cssClass="form-control" selected="">
 						<c:forEach var="pass" items="${passList }" varStatus="status">
-							<form:option id="pass-${status.count }" value="${pass.code }">${pass.isPassed }</form:option>							
+							<form:option id="pass-${status.count }" value="${pass.code }">${pass.isPassedName }</form:option>							
 						</c:forEach>
 					</form:select>
 				</div>

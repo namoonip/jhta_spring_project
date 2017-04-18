@@ -21,7 +21,9 @@ import kr.co.jhta.service.professor.ProfessorService;
 import kr.co.jhta.service.professor.SyllabusService;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.Semester;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
+import kr.co.jhta.vo.SubjectAddForm;
 import kr.co.jhta.vo.SubjectIsPassed;
 import kr.co.jhta.vo.Syllabus;
 import kr.co.jhta.vo.Syllabusform;
@@ -78,7 +80,7 @@ public class ProfController {
 	}
 	
 	@RequestMapping(value="/syllupdate", method=RequestMethod.POST)
-	public String syllUpdate(@Valid @ModelAttribute("syllabusform")Syllabusform syllform, Errors errors) throws Exception{
+	public String syllUpdate(@RequestParam("no") int no,@Valid @ModelAttribute("syllabusform")Syllabusform syllform, Errors errors) throws Exception{
 		if(errors.hasErrors()){
 			System.out.println(errors.getAllErrors());
 			return "/prof/syllabusform";
@@ -89,6 +91,7 @@ public class ProfController {
 		syllabus.setSubject(subject);
 		Professor prof = new Professor();
 		prof.setId(syllform.getId());
+		syllabus.setNo(no);
 		syllabus.setProfessor(prof);
 		BeanUtils.copyProperties(syllform, syllabus);
 		syllabusService.updateSyll(syllabus);
@@ -115,6 +118,31 @@ public class ProfController {
 		syllabusService.addNewSyll(syllabus);
 		return "redirect:/prof/syllinfo";
 	}
+	@RequestMapping(value="/addsubform", method=RequestMethod.POST)
+	public String addsub(@Valid @ModelAttribute("subjackform")SubjectAddForm subjackform, Errors errors) throws Exception{
+		System.out.println(subjackform);
+		if(errors.hasErrors()){
+			System.out.println(errors.getAllErrors());
+			return "/prof/addsubjectform";
+		}
+		Subject subject = new Subject();
+		SiteMap sitemap = new SiteMap();
+		sitemap.setCode(subjackform.getCode());
+		subject.setSiteCode(sitemap);
+		Professor prof = new Professor();
+		prof.setId(subjackform.getProfessor());
+		subject.setProfessor(prof);
+		Semester seme = new Semester();
+		seme.setNo(subjackform.getSelectNo());
+		subject.setSelectNo(seme);
+		SubjectIsPassed pass = new SubjectIsPassed();
+		pass.setCode(subjackform.getIsPassed());
+		subject.setIsPassed(pass);
+		
+		BeanUtils.copyProperties(subjackform, subject);
+		subjectService.addSubject2(subject);
+		return "redirect:/prof/subinfo";
+	}
 	@RequestMapping("/syllinfo")
 	public String syllInfo(Model model, HttpSession session){
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
@@ -132,7 +160,7 @@ public class ProfController {
 	}
 	
 	@RequestMapping(value="/addsubform", method=RequestMethod.GET)
-	public String addsubform(Model model, HttpSession session){
+	public String addsubform(@Valid @ModelAttribute("subjackform")SubjectAddForm subjackform,Model model, HttpSession session){
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
 		model.addAttribute("prof", prof);
 		List<SubjectIsPassed> passList = subjectService.getPassAllList();
@@ -142,5 +170,64 @@ public class ProfController {
 		return "/prof/addsubjectform";
 	}
 	
+	
+	@RequestMapping("/subinfo")
+	public String subinfo(Model model, HttpSession session){
+		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
+		List<Subject> subList = subjectService.getByProIdList(prof.getId());
+		model.addAttribute("subList", subList);
+		
+		return "/prof/subinfo";
+	}
+	@RequestMapping("/subdel")
+	public String deleteSub(@RequestParam("no") int no, Subject subject){
+		subjectService.deleteSub(subject.getNo());
+		
+		
+		return "redirect:/prof/subinfo";
+	}
+	@RequestMapping("/subdetail")
+	public String subdetail(@RequestParam("no")int no, Model model, Subject sub){
+		
+		Subject subno = subjectService.getByNoList(sub.getNo());
+		model.addAttribute("subno", subno);
+		return "/prof/subdetail";
+	}
+	@RequestMapping(value="/subupdate", method=RequestMethod.GET)
+	public String subupdateform(@RequestParam("no")int no, Model model, @Valid @ModelAttribute("subjackform")SubjectAddForm subjackform, Subject sub){
+		Subject subno = subjectService.getByNoList(sub.getNo());
+		model.addAttribute("subno", subno);
+		List<SubjectIsPassed> passList = subjectService.getPassAllList();
+		model.addAttribute("passList", passList);
+		List<Semester> semeList = semesterService.getAllSemester();
+		model.addAttribute("semeList", semeList);
+		
+		return "/prof/subupdate";
+	}
+	@RequestMapping(value="/subupdate", method=RequestMethod.POST)
+	public String subupdate(@RequestParam("no") int no,@Valid @ModelAttribute("subjackform")SubjectAddForm subjackform, Errors errors) throws Exception{
+		System.out.println(subjackform);
+		if(errors.hasErrors()){
+			System.out.println(errors.getAllErrors());
+			return "/prof/addsubjectform";
+		}
+		Subject subject = new Subject();
+		subject.setNo(no);
+		Professor prof = new Professor();
+		prof.setId(subjackform.getProfessor());
+		subject.setProfessor(prof);
+		Semester seme = new Semester();
+		seme.setNo(subjackform.getSelectNo());
+		subject.setSelectNo(seme);
+		SubjectIsPassed pass = new SubjectIsPassed();
+		pass.setCode(subjackform.getIsPassed());
+		subject.setIsPassed(pass);
+		SiteMap site = new SiteMap();
+		site.setCode(subjackform.getCode());
+		subject.setSiteCode(site);
+		BeanUtils.copyProperties(subjackform, subject);
+		subjectService.subupdate(subject);
+		return "redirect:/prof/subinfo";
+	}
 	
 }

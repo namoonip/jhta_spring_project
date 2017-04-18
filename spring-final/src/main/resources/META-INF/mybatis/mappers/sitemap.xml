@@ -52,6 +52,4 @@
 		and
 			T_PRECODE = #{preCode}
 	</select>
-	
-	
 </mapper>

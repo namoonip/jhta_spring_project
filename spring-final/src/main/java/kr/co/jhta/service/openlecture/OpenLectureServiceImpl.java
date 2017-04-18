@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import kr.co.jhta.dao.openlecture.OpenLectureDao;
+import kr.co.jhta.vo.InvestGationAttribute;
+import kr.co.jhta.vo.InvestgationItems;
 import kr.co.jhta.vo.Professor;
 
 @Service
@@ -26,5 +28,11 @@ public class OpenLectureServiceImpl implements OpenLectureService {
 	public Professor getInformationProfessor(String id) {
 		
 		return openLecturedao.getInformationProfessor(id);
+	}
+	
+	@Override
+	public void addInvestgation(InvestGationAttribute item) {
+		
+		openLecturedao.addInvestgation(item);
 	}
 }

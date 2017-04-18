@@ -1,24 +1,24 @@
 package kr.co.jhta.vo;
 
 public class SubjectAddForm {
-	private String subjeckName;
-	private String profname;
+	private String subjectName;
+	private String professor;
 	private String code;
 	private int selectNo;
 	private int grade;
 	private String isPassed;
 	private int score;
-	public String getSubjeckName() {
-		return subjeckName;
+	public String getSubjectName() {
+		return subjectName;
 	}
-	public void setSubjeckName(String subjeckName) {
-		this.subjeckName = subjeckName;
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
-	public String getProfname() {
-		return profname;
+	public String getProfessor() {
+		return professor;
 	}
-	public void setProfname(String profname) {
-		this.profname = profname;
+	public void setProfessor(String professor) {
+		this.professor = professor;
 	}
 	public String getCode() {
 		return code;
@@ -50,6 +50,10 @@ public class SubjectAddForm {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+	@Override
+	public String toString() {
+		return "SubjectAddForm [subjectName=" + subjectName + ", professor=" + professor + ", code=" + code
+				+ ", selectNo=" + selectNo + ", grade=" + grade + ", isPassed=" + isPassed + ", score=" + score + "]";
+	}
 	
 }

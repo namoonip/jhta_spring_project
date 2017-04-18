@@ -16,4 +16,6 @@ public interface LectureDao {
 	Semester getSemesterList(int no);
 	List<Map<String, Object>> getAllSubjectList();
 	int getSubjectRowCount(String code);
+	List<SiteMap> getAllMajorList();
+	List<Map<String, Object>> getStudentList(Map<?, ?> searchForm);
 }

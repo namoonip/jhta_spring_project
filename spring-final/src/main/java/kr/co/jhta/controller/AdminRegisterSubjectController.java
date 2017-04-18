@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.jhta.dao.user.EnrollDao;
+import kr.co.jhta.dao.user.RegisubjectDao;
 import kr.co.jhta.service.lecture.LectureService;
 import kr.co.jhta.service.sitemap.SitemapService;
 import kr.co.jhta.vo.Semester;
@@ -25,6 +27,12 @@ public class AdminRegisterSubjectController {
 	
 	@Autowired
 	private LectureService lectureService;
+	
+	@Autowired
+	private RegisubjectDao regiSubjectDao;
+	
+	@Autowired
+	private EnrollDao enrollDao;
 	
 	@RequestMapping(value="/adminregsubject", method=RequestMethod.GET)
 	public String adminRegSubject(Model model) {
@@ -43,7 +51,7 @@ public class AdminRegisterSubjectController {
 	
 	// 대학을 선택하면 학과들이 검색되도록 하는 ajax 검색 기능
 	@RequestMapping(value="/adminregsubjectmenu", method=RequestMethod.POST)
-	public @ResponseBody List<SiteMap> adminRegSubjectGetDept(String dept) {
+	public @ResponseBody List<SiteMap> adminRegSubjectGetMajor(String dept) {
 		SiteMap siteMap = new SiteMap();
 		siteMap.setPreCode(dept);;
 		
@@ -67,8 +75,8 @@ public class AdminRegisterSubjectController {
 		Semester semester = lectureService.getSemesterList(semesterNo);
 		
 		// 페이지네이션
-		int totalRows = lectureService.getSubjectRowCount(major);	// ex> 40
-		int totalPageNo = (int) Math.ceil((double) totalRows/pagination);	// ex> 20
+		int totalRows = lectureService.getSubjectRowCount(major);
+		int totalPageNo = (int) Math.ceil((double) totalRows/pagination);
 		int beginPage = (currentPageNo - 1) * pagination + 1;
 		int endPage = currentPageNo * pagination;
 		int blockCurrentNo = (int) Math.ceil((double) currentPageNo/5);
@@ -93,7 +101,7 @@ public class AdminRegisterSubjectController {
 		
 		List<Map<String, Object>> subList = new ArrayList<Map<String, Object>>();
 		
-		// form 대신에 검색된 페이지네이션 갯수만큼 전체 결과에서 페이지 갯수만큼 다시 복사하는 코드
+		// form 대신에 검색된 페이지네이션 갯수만큼 전체 결과에서 현재 페이지 표현수만큼 다시 복사하는 코드
 		if (subTempList.size() != 0) {
 			for (int i=beginPage-1; i<endPage; i++) {
 				subList.add(subTempList.get(i));
@@ -110,29 +118,54 @@ public class AdminRegisterSubjectController {
 		model.addAttribute("subList", subList);
 		model.addAttribute("paginationList", paginationList);
 		
-		// 페이지네이션 정보를 다시 보내기 위한 코드
-		model.addAttribute("major", major);
+		// 매개변수로 받았던 페이지네이션 정보를 다시 포워드 하기 위한 코드
+ 		model.addAttribute("major", major);
 		model.addAttribute("semesterNo", semesterNo);
 		model.addAttribute("pagination", pagination);
 		
 		return "administer/adminregsubject";
 	}
 	
-	@RequestMapping("/adminallsubject")
-	public String adminRegAllSubject(Model model) {
-		model.addAttribute("deptList", sitemapService.getAllSitemapPreService());
+	@RequestMapping("/adminregstudent")
+	public String adminRegStudent(Model model) {
 		model.addAttribute("semesterList", lectureService.getAllSemesterList());
+		model.addAttribute("majorList", lectureService.getAllMajorList());
 		
-		List<Map<String, Object>> subList = lectureService.getAllSubjectList();
-		model.addAttribute("subList", subList);
-		
-		return "administer/adminregsubject";
+		return "administer/adminregstudent";
 	}
 	
-	
-	@RequestMapping("/adminregstudent")
-	public String adminRegStudent() {
+	@RequestMapping(value="/adminregstudent", method=RequestMethod.POST)
+	public String adminStuSearch(Model model, String major, int semester, String student, String word) {
+		model.addAttribute("semesterList", lectureService.getAllSemesterList());
+		model.addAttribute("majorList", lectureService.getAllMajorList());
+		
+		Map<String, Object> searchForm = new HashMap<String, Object>();
+		searchForm.put("major", major);
+		searchForm.put("semester", semester);
+		searchForm.put("student", student);
+		searchForm.put("word", word);
+		
+		List<Map<String, Object>> stuList = lectureService.getStudentList(searchForm);
+		
+		// 학기의 "2017-1" 의 표현을 "2017/1" 로 바꿔주는 코드
+		for (int i=0; i<stuList.size(); i++) {
+			String semeSelect = (String) stuList.get(i).get("SEMESELECT");
+			stuList.get(i).replace("SEMESELECT", semeSelect.replace("-", "/"));
+		}
+		
+		model.addAttribute("stuList", stuList);
+		model.addAttribute("stuListCount", stuList.size());
+ 		System.out.println(stuList);
+ 		
 		return "administer/adminregstudent";
+	}
+	
+	@RequestMapping("/adminstudelete")
+	public String adminStuDelete(int dno) {
+		regiSubjectDao.deleteRegisubByENo(dno);
+		enrollDao.updateMinusNowNum(dno);
+		
+		return "redirect:adminregstudent";
 	}
 	
 	@RequestMapping("/adminsendemail")

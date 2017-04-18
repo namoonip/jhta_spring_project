@@ -35,7 +35,7 @@
 		and t.T_CODE = s.J_T_CODE
 	</select>
 	
-	<select id="getAllEnrollByTname" parameterType="String" resultType="Enroll">
+	<select id="getAllEnrollByTcode" parameterType="String" resultType="Enroll">
 		select e.E_NO as no, 
 			   e.E_ENROLLTIME as enrollTime, 
 			   e.E_ENROLLDAY as enrollDay,
@@ -64,7 +64,7 @@
 		where e.E_J_DIV_NO = j.J_DIV_NO
 		and e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
-		and s.J_SUBJECT_NAME = #{value}
+		and s.J_T_CODE = #{value}
 	</select>
 	
 	<select id="getEnrollByENo" parameterType="int" resultType="Enroll">

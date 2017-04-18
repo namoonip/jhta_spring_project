@@ -120,7 +120,6 @@ $(function() {
 									</select>	
 								</div>
 								<div class="pull-right">
-									<a href="adminallsubject" class="btn btn-default" id="all-subject">전체조회</a>
 									<button type="submit" class="btn btn-info" id="search-button">조회</button>
 								</div>
 							</th>
@@ -198,7 +197,9 @@ $(function() {
 					<li><a href="adminregsubject?pageNo=${paginationList.blockBeginNo-1 }" id="pageNo-${paginationList.blockBeginNo-1 }"><span aria-hidden="true">&laquo;</span></a></li>
 				</c:if>
 				<c:forEach var="pno" begin="${paginationList.blockBeginNo }" end="${paginationList.blockEndNo }">
-					<li><a href="adminregsubject?pageNo=${pno }" id="pageNo-${pno }">${pno }</a></li>
+					<c:if test="${!empty subList }">
+						<li><a href="adminregsubject?pageNo=${pno }" id="pageNo-${pno }">${pno }</a></li>
+					</c:if>
 				</c:forEach>
 				<c:if test="${paginationList.totalPageNo ne paginationList.blockEndNo }">
 					<li><a href="adminregsubject?pageNo=${paginationList.blockEndNo+1 }" id="pageNo-${paginationList.blockEndNo+1 }"><span aria-hidden="true">&raquo;</span></a></li>

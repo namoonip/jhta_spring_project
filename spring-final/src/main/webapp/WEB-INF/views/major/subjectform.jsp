@@ -98,7 +98,7 @@ $(function() {
          					<td><input type="text" name="subjectName"></td>
          					<td><label>학기선택</label></td>
          					<td>
-         						<select name="selectNo.semeSelect">
+         						<select name="selectNo.no">
          							<option>학기</option>
          							<c:forEach var="seme" items="${semeList}">
          							<option value="${seme.no }">${seme.semeSelect }</option>
@@ -109,7 +109,7 @@ $(function() {
          				<tr>
          					<td><label>이수구분</label></td>
          					<td>
-         						<select name="isPassed">
+         						<select name="isPassed.code">
          							<option>이수구분</option>
          							<option value="ns">구분없음</option>
          							<option value="me">전공필수</option>

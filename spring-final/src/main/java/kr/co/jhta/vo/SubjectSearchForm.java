@@ -2,9 +2,11 @@ package kr.co.jhta.vo;
 
 public class SubjectSearchForm {
 
-	private int pageNo = 1;
+	//private int pageNo = 1;
 	private String opt;
+	private Semester selectNo;
 	private String keyword;
+	/**
 	private int beginIndex;
 	private int endIndex;
 	private int display;
@@ -16,11 +18,24 @@ public class SubjectSearchForm {
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
+	*/
 	public String getOpt() {
 		return opt;
 	}
+	
+
+
 	public void setOpt(String opt) {
 		this.opt = opt;
+	}
+	
+	public Semester getSelectNo() {
+		return selectNo;
+	}
+	
+	
+	public void setSelectNo(Semester selectNo) {
+		this.selectNo = selectNo;
 	}
 	public String getKeyword() {
 		return keyword;
@@ -28,6 +43,7 @@ public class SubjectSearchForm {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	/*
 	public int getBeginIndex() {
 		return beginIndex;
 	}
@@ -58,6 +74,6 @@ public class SubjectSearchForm {
 	public void setOrderby(String orderby) {
 		this.orderby = orderby;
 	}
-	
+	*/
 	
 }

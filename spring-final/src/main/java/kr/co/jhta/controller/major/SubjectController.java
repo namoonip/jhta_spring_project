@@ -38,24 +38,27 @@ public class SubjectController {
 	private SubjectService subjectService;
 	
 	
-	@RequestMapping(value="/subjectmain", method=RequestMethod.GET)
-	public String subjectMain(Model model) {
-		
+	@RequestMapping("/subjectmain")
+	public String subjectMain(SubjectSearchForm subjectsearchform, Model model) {
 		List<Semester> semeList = semesterService.getAllSemester();
-		List<Subject> subjectList = subjectService.getAllList();
+		List<Subject> resultList = subjectService.getSubjectByOpt(subjectsearchform);
+//		List<Subject> resultList = subjectService.getAllList();
+		
 		
 		model.addAttribute("semeList", semeList);
-		model.addAttribute("subjectlist", subjectList);
-		
+		model.addAttribute("resultList", resultList);
 			
 		return "major/subjectmain";
 	}
 	
+	
 	@RequestMapping(value="searchsubject", method=RequestMethod.POST)
-	public String searchSubject(SubjectSearchForm searchForm, Model model) {
+	public String searchSubject(SubjectSearchForm subjectsearchform, Model model) {
 		
 		
-		model.addAttribute("searchsubject", searchForm);
+		List<Subject> resultList = subjectService.getSubjectByOpt(subjectsearchform);
+				model.addAttribute("resultList" , resultList);
+		//model.addAttribute("searchsubject", subjectsearchform);
 		
 		
 		return "major/subjectmain";

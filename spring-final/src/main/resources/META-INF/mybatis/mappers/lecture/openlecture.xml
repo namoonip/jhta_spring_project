@@ -48,4 +48,17 @@
 	where
 		U_PROF_ID = #{id}	
 </select>
+
+<insert id="addInvestgation" parameterType="kr.co.jhta.vo.InvestGationAttribute">
+	insert into L_OPENLECTUREREGISTER(
+		L_ASSESSMENTNUMBER,
+		L_INVESTIGATING_CONTENTS,
+		L_PROFESSOR_ID
+	)
+	values(
+		investgation_seq.nextval,
+		#{contents},
+		#{professorId}
+		)
+</insert>		
 </mapper>

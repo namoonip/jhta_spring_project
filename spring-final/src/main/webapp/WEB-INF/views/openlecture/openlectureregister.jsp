@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
@@ -23,11 +22,10 @@
 		
 		$('#search-button').on("click", function(event){
 			
-			//event.preventDefault();
-			
+			event.preventDefault();
 			
 			var Search = $("#fixed-header-drawer-exp").val();
-
+			
 			$.ajax({
 				type:"GET",
 				url:"search/"+Search,
@@ -65,36 +63,39 @@
 					$table.append(html);
 					}
 					
-					
 				}
 				
 			})
 			
-			
-			
-			
-			
-			
+				
 		});	
 		
 		// 추가하기
 		$("#add-text").on("click",function(){
-
-			var html = "<div class='form-group'>"
-				html +="<div class='col-sm-1'></div>"
-				html +="<div class='col-sm-1'>"
-				html +="<label class='' style='color: black'>조사항목 :</label>"
-				html +="</div>"
-				html +="<div class='col-sm-7'>"
-				html +="<textarea class='form-control'style='resize: none'></textarea>"
-				html +="</div>"
-				html +="<div class='col-sm-3'>";
-				html +="<button class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab' style='color:black'><i class='material-icons md-48'>delete_forever</i></button>"
-				html +="</div>";
-				html +="</div>"
-		
-			$("#content").append(html);
 			
+			
+			if($("#content .form-group").length < 7){
+				
+				var html = "<div class='form-group'>"
+					html +="<div class='col-sm-1'></div>"
+					html +="<div class='col-sm-1'>"
+					html +="<label style='color: black'>조사항목 :</label>"
+					html +="</div>"
+					html +="<div class='col-sm-7'>"
+					html +="<textarea name='contents' class='form-control'style='resize: none'></textarea>"
+					html +="</div>"
+					html +="<div class='col-sm-3'>";
+					html +="<button class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab' style='color:black'><i class='material-icons md-48'>delete_forever</i></button>"
+					html +="</div>";
+					html +="</div>"
+				
+				$("#content").append(html);
+
+			}else{
+				alert("최대 생성 개수를 초과하였습니다.");
+			}
+				
+				
 		
 		});
 		
@@ -105,7 +106,6 @@
 			
 		});
 	
-		
 		$("#add-infromation").click(function(){
 			
 			if($('[name="options"]').is(':checked')){
@@ -113,8 +113,17 @@
 				
 				$("#division").attr("value",text[0]);
 				$("#professorNumber").attr("value",text[1]);
+				$("#detailProfessorCode").attr("value",text[1]);
+				$("#detailProfessorName").attr("value",text[2]);
 				$("#professorName").attr("value",text[2]);
 				$("#professorClass").attr("value",text[3]);
+				$("#professorIdHidden").attr("value",text[4]);
+				$("#detailProfessorPhone").attr("value",text[5]);
+				$("#detailProfessorAddr").attr("value",text[6]);
+				$("#detailProfessorGrade").attr("value",text[7]);
+				$("#detailProfessorEmail").attr("value",text[8]);
+				
+				
 				
 				$("#add-infromation").attr("data-dismiss","modal");
 			} else{
@@ -126,6 +135,32 @@
 	
 </script>
 <style>
+
+.wrap_table {padding:30px 0px; position:relative; width:1172px;}
+.wrap_table > div {overflow:auto; height:153px;}
+.wrap_table table {width:1172px;}
+.wrap_table table caption {height:0; overflow:hidden;}
+.wrap_table table thead,
+.wrap_table table tfoot {
+    position:absolute;
+    display:table;
+    width:1172px;
+    border-bottom:1px solid #ccc;
+}
+.wrap_table table thead {top:0;}
+.wrap_table table tfoot {bottom:0;}
+.wrap_table table th,
+.wrap_table table td {
+    text-align:center;
+    border-right:1px solid #ccc;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    vertical-align:middle;
+}
+.wrap_table table tr th:first-child,
+.wrap_table table tr td:first-child {border-left:1px solid #ccc;}
+.wrap_table table tbody tr:first-child td {border-top:0;}
 
 button.delete{
 	border: 0;
@@ -175,7 +210,6 @@ select.menu{
 								      <div class="modal-body">
 								      	<div class="row">
 								      		<div class="col-sm-12">
-						      		
 												<div class="mdl-layout__header-row">
 											      <div id="search-option" class="mdl-layout-spacer"></div>
 											      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
@@ -185,8 +219,8 @@ select.menu{
 											        <div id="search-text" class="mdl-textfield__expandable-holder">
 											          <input class="mdl-textfield__input" type="text" id="fixed-header-drawer-exp" placeholder="아이디 입력">
 											        </div>
-											   		<button class="mdl-button mdl-js-button mdl-button--mini-fab" id="search-button"><i class="material-icons">check</i></button>
 											      </div>
+											   		  <button class="mdl-button mdl-js-button" id="search-button"><i class="material-icons">check</i></button>
 											    </div>
 								      		</div>
 										</div>
@@ -206,7 +240,7 @@ select.menu{
 									      				<tr>
 									      					<td>
 																  <input type="radio" id="option-${professorList.no }" name="options" 
-																  value="${professorList.no }-${professorList.code }-${professorList.name }-${professorList.division }">
+																  value="${professorList.no }-${professorList.code }-${professorList.name }-${professorList.division }-${professorList.id}-${professorList.phone}-${professorList.addr}-${professorList.grade}-${professorList.email}">
 															</td>
 									      					<td id="code-${professorList.code }">${professorList.code }</td>
 									      					<td id="no-${professorList.no }">${professorList.no } </td>
@@ -229,7 +263,7 @@ select.menu{
 							<form class="form-horizontal">
 								<div class="form-group">
 										<div class="col-sm-2">
-											<label class="pull-right" style="color:black">코드 번호:</label>
+											<label class="pull-right" style="color:black">코드 번호 :</label>
 										</div>
 										<div class="col-sm-6">
 											<input id="division" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
@@ -277,52 +311,145 @@ select.menu{
 							</div>
 						</div>
 						<div class="row">
-							<form class="form-horizontal" id="content">
+							<form class="form-horizontal" action="investigating.do">
+								<div class="col-sm-12" id="content">
 									<div class="form-group">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-1">
-									    	<label class="" style="color: black">조사항목 :</label>
+									    	<label style="color: black">조사항목 :</label>
 										</div>
 										<div class="col-sm-7">
-									  		<textarea class="form-control" style="resize: none"></textarea>
+									  		<textarea name="contents" class="form-control" style="resize: none"></textarea>
+									  		
 										</div>
 										<div class="col-sm-3"></div>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-1">
-									    	<label class="" style="color: black">조사항목 :</label>
+									    	<label style="color: black">조사항목 :</label>
 										</div>
 										<div class="col-sm-7">
-									  		<textarea class="form-control" style="resize: none"></textarea>
+									  		<textarea name="contents" class="form-control" style="resize: none"></textarea>
 										</div>
 										<div class="col-sm-3"></div>
 									</div>
 									<div class="form-group">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-1">
-									    	<label class="" style="color: black">조사항목 :</label>
+									    	<label style="color: black">조사항목 :</label>
 										</div>
 										<div class="col-sm-7">
-									  		<textarea class="form-control" style="resize: none"></textarea>
+									  		<textarea name="contents" class="form-control" style="resize: none" ></textarea>
 										</div>
 										<div class="col-sm-3"></div>
 									</div>
+								</div>
+								<div class="col-sm-10">
+									<input id="professorIdHidden" name="professorId" type="hidden" value="" />
+									<input id="content-Number" name="contentNumber" type="hidden" />
+								</div>
+								<div class="col-sm-2">
+									<button class="mdl-button mdl-js-button mdl-button--primary" type="submit">추가</button>
+									<button class="mdl-button mdl-js-button mdl-button--accent">취소</button>
+								</div>
 							</form>			
 						</div>
-						<div class="row">
-							<div class="col-sm-10"></div>
-							<div class="col-sm-2">
-								<button class="mdl-button mdl-js-button mdl-button--primary">추가</button>
-								<button class="mdl-button mdl-js-button mdl-button--accent">취소</button>
-							</div>
-						</div>
 					</div>	
-	  		</div>
+	  		  
 			  <div class="mdl-tabs__panel" id="lannisters-panel">
-			  
-			  
-			  </div>
+			  		<div class="row">
+				  		<h3>교수 정보</h3>
+						  		<form class="form-horizontal">
+						  		<div class="col-sm-6">
+									<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">소속 학과:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorGrade" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+									<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">교수 이름:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorName" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+									<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">교수 번호:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorPhone" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+						  		</div>
+						  		<div class="col-sm-6">
+						  			<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">교수 주소:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorAddr" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+									<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">교수 메일:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorEmail" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+									<div class="form-group">
+											<div class="col-sm-3">
+												<label class="pull-right" style="color:black">교수 코드:</label>
+											</div>
+											<div class="col-sm-5">
+												<input id="detailProfessorCode" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
+											</div>
+											<div class="col-sm-4"></div>
+									</div>
+						  		</div>			
+							</form>
+			  		  </div>
+				  		<hr />
+				  	  <div class="row">
+				  		<h3>과목 조회</h3>
+				  			<div class="wrap_table">
+							    <div align="center">
+							        <table>
+							            <thead>
+							                <tr>
+							                    <th style="width: 25%">교과 코드</th>
+							                    <th style="width: 25%">교과 이름</th>
+							                    <th style="width: 25%">교수 이름</th>
+							                    <th style="width: 25%">평       점</th>
+							                </tr>
+							            </thead>
+							            <tbody>
+							                <tr>
+							                    <td style="width: 25%">John</td>
+							                    <td style="width: 25%">John</td>
+							                    <td style="width: 25%">John</td>
+							                    <td style="width: 25%">John</td>
+							                </tr>
+							            </tbody>
+							            <tfoot></tfoot>
+							        </table>
+							    </div>
+							</div>
+				  		</div>
+			  		</div>
+	  		</div>
 	</div>
 </body>
 </html>

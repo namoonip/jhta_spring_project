@@ -18,7 +18,7 @@
 				U_STU_NAME as name, 
 				U_STU_NO as no, 
 				U_STU_PARENTNAME as parentName, 
-				U_STU_PARENTPHON as parentPhone, 
+				U_STU_PARENTPHONE as parentPhone, 
 				U_STU_PHONE as phone, 
 				U_STU_PROFESSOR as professor, 
 				U_STU_PWD as pwd, 
@@ -29,7 +29,7 @@
 	</select>
 	
 	<insert id="addNewStudent">
-		insert INTO U_STUDENT (U_STU_NO, U_STU_ID, U_STU_NAME, U_STU_GENDER, U_STU_DIVISION, U_STU_PWD, U_STU_REGISTER, U_STU_SCORE, U_STU_PHONE, U_STU_ADDR1, U_STU_ADDR2, U_STU_EMAIL, U_STU_GRADE, U_STU_SSN, U_STU_ENTERDATE, U_STU_LEAVEDATE, U_STU_PARENTNAME, U_STU_PROFESSOR, U_STU_PARENTPHON) 
+		insert INTO U_STUDENT (U_STU_NO, U_STU_ID, U_STU_NAME, U_STU_GENDER, U_STU_DIVISION, U_STU_PWD, U_STU_REGISTER, U_STU_SCORE, U_STU_PHONE, U_STU_ADDR1, U_STU_ADDR2, U_STU_EMAIL, U_STU_GRADE, U_STU_SSN, U_STU_ENTERDATE, U_STU_LEAVEDATE, U_STU_PARENTNAME, U_STU_PROFESSOR, U_STU_PARENTPHONE) 
 						VALUES(U_STUDENT_SEQ, #{id}, #{name}, #{gender}, #{division}, #{pwd}, #{register}, #{score}, #{phone}, #{addr1}, #{addr2}, #{email}, #{grade}, #{ssn}, sysdate, #{leaveDate}, #{parentName}, #{professor}, #{parentPhon})
 	</insert>
 	
@@ -47,7 +47,7 @@
 				U_STU_NAME as name, 
 				U_STU_NO as no, 
 				U_STU_PARENTNAME as parentName, 
-				U_STU_PARENTPHON as parentPhone, 
+				U_STU_PARENTPHONE as parentPhone, 
 				U_STU_PHONE as phone, 
 				U_STU_PROFESSOR as professor, 
 				U_STU_PWD as pwd, 

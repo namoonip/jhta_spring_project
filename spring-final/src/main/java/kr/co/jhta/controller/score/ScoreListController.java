@@ -1,6 +1,7 @@
 package kr.co.jhta.controller.score;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import kr.co.jhta.service.score.AttendanceService;
 import kr.co.jhta.service.score.ReportService;
 import kr.co.jhta.service.score.ScoreService;
 import kr.co.jhta.service.sitemap.SitemapService;
+import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.Attendance;
 import kr.co.jhta.vo.Report;
 import kr.co.jhta.vo.Score;
@@ -27,6 +30,8 @@ import kr.co.jhta.vo.Scorelist;
 import kr.co.jhta.vo.Semester;
 import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
+import kr.co.jhta.vo.SubjectRegister;
+import kr.co.jhta.vo.stu.Regisubject;
 import kr.co.jhta.vo.stu.Student;
 
 
@@ -50,6 +55,9 @@ public class ScoreListController {
 	
 	@Autowired
 	private SitemapService sitemapService;
+	
+	@Autowired
+	private StudentService stuService;
 			
 	@RequestMapping("/scorelist.do")
 	public String scorelist(Model model){
@@ -96,7 +104,10 @@ public class ScoreListController {
 	}
 	
 	@RequestMapping(value="/scoreform.do", method=RequestMethod.POST)
-	public String scoreupdate(@Valid @ModelAttribute("scoreupdate") Score scores){
+	public String scoreupdate(@Valid @ModelAttribute("scoreupdate") Score scores, Errors errors){
+		if(errors.hasErrors()){
+			return "score/scoreform";
+		}
 		scoreService.updateScoreByNo(scores);
 		return "redirect:/scorelist.do";
 	}
@@ -109,4 +120,26 @@ public class ScoreListController {
 		return sitemapService.getAllSitemapSecService(sitemap);
 	}
 	
+	@RequestMapping(value="/scoreSearchInfo", method=RequestMethod.POST)
+	public @ResponseBody List<Scorelist> searchScoreList(@RequestParam(value="code") String code1, @RequestParam(value="codes") String code2, @RequestParam(value="stucode") String stucode){
+		
+		List<Scorelist> scorelist2 = new ArrayList<Scorelist>();
+		
+		if(code1.equals("all")){
+			int stuno = stuService.getStudentById(stucode).getNo();
+			SubjectRegister regi= scoreService.getRegiListByStuNo(stuno);
+			System.out.println(regi);
+			Scorelist list = new Scorelist();
+			list.setNo(regi.getRegiNo());
+			list.setScore(scoreService.getScoreinfoByRno(regi.getRegiNo()));
+			System.out.println(list.getScore());
+			list.setSubject(scoreService.getSubjectInfoByNo(regi.getjNo()));
+			list.setStudent(scoreService.getStudentInfoByNo(regi.getStuNo()));
+			scorelist2.add(list);
+		}
+		if(!code1.equals("all")){
+			
+		}
+		return scorelist2;
+	}
 }

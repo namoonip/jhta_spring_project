@@ -4,7 +4,7 @@ public class SubjectIsPassed {
 
 	private int no;
 	private String code;
-	private String isPassed;
+	private String isPassedName;
 	
 	public SubjectIsPassed() {
 		// TODO Auto-generated constructor stub
@@ -22,13 +22,14 @@ public class SubjectIsPassed {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getIsPassed() {
-		return isPassed;
+
+	public String getIsPassedName() {
+		return isPassedName;
 	}
-	public void setIsPassed(String isPassed) {
-		this.isPassed = isPassed;
+
+	public void setIsPassedName(String isPassedName) {
+		this.isPassedName = isPassedName;
 	}
-	
 	
 
 }
