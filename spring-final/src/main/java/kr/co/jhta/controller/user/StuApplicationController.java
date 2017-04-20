@@ -40,13 +40,11 @@ public class StuApplicationController {
 		Leave leave = new Leave();
 		leave.setCode(leaveForm.getcCode());
 		leave.setStuNo(student.getNo());
-		if(leaveForm.getScorePass() != null) {
-			if(leaveForm.getScorePass().equals("true")) {
-				leave.setScorePass("true");
-			} else {
-				leave.setScorePass("false");
-			}			
-		}
+		if(leaveForm.getScorePass().equals("true")) {
+			leave.setScorePass("true");
+		} else {
+			leave.setScorePass("false");
+		}			
 		Long beforedParsedDate = Long.parseLong(leaveForm.getReinDate());
 		Date date = new Date(beforedParsedDate);
 		leave.setReinDate(date);

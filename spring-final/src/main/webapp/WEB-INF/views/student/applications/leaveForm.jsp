@@ -16,18 +16,20 @@ $(function() {
 	$("#checkbox-leave").click(function() {
 		if($("#checkbox-leave:checked").val()) {
 			$("#change-Leave").css("display", "");
-			
-			console.log($("#leave-Code").val());
+			$("#leave-Enroll").hide();
+			$("#change-Enroll").css("display", "");
 			return;
 		} else {
 			$("#change-Leave").css("display", "none");
+			$("#change-Enroll").hide();
+			$("#leave-Enroll").css("display", "");
 			return;
 		}
 	});
 	
 	$("select[name='chageReason']").click(function() {
-		
-		console.log($("select[name='chageReason'] :selected").val());
+		var reason = $("select[name='chageReason'] :selected").val();
+		$("#change-Reason").val(reason);
 	});
 
 	// 신청 제약
@@ -105,7 +107,12 @@ $(function() {
 		var selectInDate = selectedDate.getTime();
 		$("#reinDate").val(selectInDate);
 	});
-			
+	
+	$("#change-Enroll").click(function(event) {
+		event.preventDefault();
+		
+		$('form').submit();
+	});
 })
 </script>
 <style type="text/css">
@@ -214,8 +221,8 @@ $(function() {
 					<th>학적변동</th>
 					<th>변동일자</th>
 					<th>결재상태</th>
-					<th>취소</th>
 					<th>비고</th>
+					<th>취소</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -247,6 +254,8 @@ $(function() {
 								</c:otherwise>
 							</c:choose>
 						</th>
+						<th>${leave.cName }<input type="hidden" id="leave-Code" value="${leave.code }"/>
+						</th>	
 						<th>
 							<c:choose>
 								<c:when test="${leave.pass eq 'true' }">
@@ -256,9 +265,7 @@ $(function() {
 									<a href="enrollCancel?lNo=${leave.no}" class="btn btn-default">취소</a>							
 								</c:otherwise>
 							</c:choose>
-						</th>		
-						<th>${leave.cName }<input type="hidden" id="leave-Code" value="${leave.code }"/>
-						</th>						
+						</th>											
 					</tr>
 				</c:forEach>
 			</tbody>      	
@@ -266,7 +273,7 @@ $(function() {
       </div>
       <div class="row" style="padding: 20px;">
       	<h4>휴학 (연장)신청</h4>
-      	<form action="enrollLeave" method="POST">
+      	<form action="enrollLeave" method="POST" id="formActionRoot">
 	   		<table class="table table-bordered">
 	   			<colgroup>
 	   				<col width="12%" />
@@ -324,7 +331,8 @@ $(function() {
 	   					<th> 
 	   						<label for="">해당없음
 	   							<!-- 성적이 한개라도 취득 되어있으면 Check-->
-	   							<input type="checkbox" id="scoreChage" name="scorePass" value="${leave.no }" />
+	   							<input type="checkbox" name="scorePass" value="false" />
+	   							<input type="hidden" name="scorePass" value="true" />
 	   							<!-- 성적이 취득되어있지 않으면 disabled-->
 	   						</label> 
 	   					</th>
@@ -345,7 +353,10 @@ $(function() {
 	   		</table>
    			<input type="hidden" id="reinDate" name="reinDate"/>
 	   		<div class="form-group text-center">
-	   			<button type="submit" class="btn btn-default" id="leave-Enroll">신청</button>
+			   	<button type="submit" class="btn btn-default" id="leave-Enroll">신청</button>		
+			   	<a href="enrollChange?lNo=${leave.no }&chStr=${chStr}" class="btn btn-default" id="change-Enroll" style="display: none;">변경</a>
+			   	<input type="hidden" id="change-Reason"/>
+			   	<c:set var="chStr" value="" scope="request" />		
 	   			<a class="btn btn-default" href="stuMain">취소</a>
 	   		</div>
    		</form>
