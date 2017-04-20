@@ -14,17 +14,31 @@
 <script type="text/javascript" src="resources/jquery/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>openlecture register</title>
-<script>
-
+<script type="text/javascript">
 
 	$(function(){
 		
+		//데이터 저장
+		$("[name='contents']").on("click", function(){
+			
+			if($("#professorIdHidden").val() == ""){
+				alert("상세 정보를 입력하세요.");
+			}
+			
+		});
 		
-		$('#search-button').on("click", function(event){
+		
+		
+		
+		
+		//선택 조회하기
+		$("#search-button").on("click", function(){
 			
 			event.preventDefault();
 			
 			var Search = $("#fixed-header-drawer-exp").val();
+			
+			console.log(Search);
 			
 			$.ajax({
 				type:"GET",
@@ -32,42 +46,58 @@
 				dataType:"json",
 				success: function(data){
 					
-					var $table = $("#professorinformationtbody").empty();
+					var $tbody = $("#professorinformationtbody").empty();
 					
-					var code = data.code;
-					var no = data.no;
-					var name= data.name;
-					var division = data.division;
-					
-					if(code == null){
+					for(i=0; i<data.length; i++){
+						
+						var no = data[i].no;
+						console.log(no);
+						var professorName = data[i].name;
+						console.log(professorName);
+						var code = data[i].code;
+						console.log(code);
+						var subjectName = data[i].subjectName;
+						console.log(subjectName);
+						var subjectNo = data[i].subjectNo;
+						console.log(subjectNo);
 						
 						var html = "<tr>";
-							html += "<td colspan='5'><label>요청 하신 정보가 존재하지 않습니다.</label></td>";
-							html +="</tr>";
-						
-						$table.append(html);
-						
-					}else{
-						
+						html += "<td><input type='radio' name='options' value='"+code+'-'+subjectNo+'-'+professorName+'-'+subjectName+"'></td>";
+						html += "<td>"+code+"</td>";
+						html += "<td>"+subjectNo+"</td>";
+						html += "<td>"+professorName+"</td>";
+						html += "<td>"+subjectName+"</td>";
+						html += "</tr>"
 					
-					var html = "<tr>";
-					html += "<td>";
-					html += "<input type='radio' name='options' value='"+code+'-'+no+'-'+name+'-'+division+"' checked='checked'>";
-					html += "</td>";
-					html += "<td>"+data.code+"</td>";
-					html += "<td>"+data.no+"</td>";
-					html += "<td>"+data.name+"</td>";
-					html += "<td>"+data.division+"</td>";
-					html += "<tr>"
-					
-					$table.append(html);
-					}
+						$tbody.append(html);	
+
+					}	
 					
 				}
 				
-			})
+			});	
+		});
+		
+		//정보를 화면에 표시하기
+		$("#add-infromation").on("click", function(){
 			
+			if($('[name="options"]').is(':checked')){
+				var text = $('[name="options"]').filter(':checked').val().split("-");
 				
+				console.log(text);
+				
+				
+				$("#code").attr("value",text[0]);
+				$("#subjectNo").attr("value",text[1]);
+				$("#professorName").attr("value",text[2]);
+				$("#subjectName").attr("value",text[3]);
+				$("#professorIdHidden").attr("value",text[4]);
+				$("#professorSubject").attr("value",text[1]);
+				$("#add-infromation").attr("data-dismiss","modal");
+				
+			} else{
+				alert("하나를 선택해주세요.");
+			};
 		});	
 		
 		// 추가하기
@@ -94,9 +124,6 @@
 			}else{
 				alert("최대 생성 개수를 초과하였습니다.");
 			}
-				
-				
-		
 		});
 		
 		// 미래에 일어날 버튼을 위한 처리
@@ -105,63 +132,10 @@
 			$(this).parents('.form-group').remove();
 			
 		});
-	
-		$("#add-infromation").click(function(){
-			
-			if($('[name="options"]').is(':checked')){
-				var text = $('[name="options"]').filter(':checked').val().split("-");
-				
-				$("#division").attr("value",text[0]);
-				$("#professorNumber").attr("value",text[1]);
-				$("#detailProfessorCode").attr("value",text[1]);
-				$("#detailProfessorName").attr("value",text[2]);
-				$("#professorName").attr("value",text[2]);
-				$("#professorClass").attr("value",text[3]);
-				$("#professorIdHidden").attr("value",text[4]);
-				$("#detailProfessorPhone").attr("value",text[5]);
-				$("#detailProfessorAddr").attr("value",text[6]);
-				$("#detailProfessorGrade").attr("value",text[7]);
-				$("#detailProfessorEmail").attr("value",text[8]);
-				
-				
-				
-				$("#add-infromation").attr("data-dismiss","modal");
-			} else{
-				alert("하나를 선택해주세요.");
-			};
-		});	
+		
 	});
-
-	
 </script>
 <style>
-
-.wrap_table {padding:30px 0px; position:relative; width:1172px;}
-.wrap_table > div {overflow:auto; height:153px;}
-.wrap_table table {width:1172px;}
-.wrap_table table caption {height:0; overflow:hidden;}
-.wrap_table table thead,
-.wrap_table table tfoot {
-    position:absolute;
-    display:table;
-    width:1172px;
-    border-bottom:1px solid #ccc;
-}
-.wrap_table table thead {top:0;}
-.wrap_table table tfoot {bottom:0;}
-.wrap_table table th,
-.wrap_table table td {
-    text-align:center;
-    border-right:1px solid #ccc;
-    border-top:1px solid #ccc;
-    border-left:1px solid #ccc;
-    border-bottom:1px solid #ccc;
-    vertical-align:middle;
-}
-.wrap_table table tr th:first-child,
-.wrap_table table tr td:first-child {border-left:1px solid #ccc;}
-.wrap_table table tbody tr:first-child td {border-top:0;}
-
 button.delete{
 	border: 0;
 	outline:0;
@@ -182,17 +156,9 @@ select.menu{
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarsubject.jsp" %>
 	<div class="container">
-			<h1>강의 평가 등록/조회</h1>
+			<h1>강의 평가 등록</h1>
+			<hr />
 			<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-				 <div class="mdl-tabs__tab-bar">
-				 <div class="col-sm-1"></div>
-				 <div class="col-sm-4">
-	      			<a href="#starks-panel" class="mdl-tabs__tab is-active">강의평가 등록</a>
-	      			<a href="#lannisters-panel" class="mdl-tabs__tab">강의 평가 조회</a>
-				 </div>
-				 <div class="col-sm-7"></div>
-	  			 </div>
-				  <div class="mdl-tabs__panel is-active" id="starks-panel">  
 						<div class="row">
 							<h3>&nbsp;&nbsp;상세 정보 등록</h3>
 							<div class="col-sm-10"></div>
@@ -210,6 +176,7 @@ select.menu{
 								      <div class="modal-body">
 								      	<div class="row">
 								      		<div class="col-sm-12">
+								      		<form action="">
 												<div class="mdl-layout__header-row">
 											      <div id="search-option" class="mdl-layout-spacer"></div>
 											      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
@@ -220,8 +187,9 @@ select.menu{
 											          <input class="mdl-textfield__input" type="text" id="fixed-header-drawer-exp" placeholder="아이디 입력">
 											        </div>
 											      </div>
-											   		  <button class="mdl-button mdl-js-button" id="search-button"><i class="material-icons">check</i></button>
+											   		  <button id="search-button" hidden="hidden"><i class="material-icons">check</i></button>
 											    </div>
+								      		</form>
 								      		</div>
 										</div>
 										<div class="row">
@@ -230,7 +198,7 @@ select.menu{
 									      			<tr>
 									      				<th></th>
 									      				<th>코드 번호</th>
-									      				<th>교수 번호</th>
+									      				<th>과목 번호</th>
 									      				<th>교수 이름</th>
 									      				<th>교수 과목</th>
 									      			</tr>
@@ -240,12 +208,12 @@ select.menu{
 									      				<tr>
 									      					<td>
 																  <input type="radio" id="option-${professorList.no }" name="options" 
-																  value="${professorList.no }-${professorList.code }-${professorList.name }-${professorList.division }-${professorList.id}-${professorList.phone}-${professorList.addr}-${professorList.grade}-${professorList.email}">
+																  value="${professorList.code }-${professorList.subjectNo }-${professorList.name }-${professorList.subjectName }-${professorList.id }">
 															</td>
 									      					<td id="code-${professorList.code }">${professorList.code }</td>
-									      					<td id="no-${professorList.no }">${professorList.no } </td>
-								      						<td id="name-${professorList.name }">${professorList.name } </td>
-									      					<td id="division-${professorList.division }">${professorList.division } </td>
+									      					<td id="subjectno-${professorList.subjectNo }">${professorList.subjectNo } </td>
+									      					<td id="professorName-${professorList.name }">${professorList.name } </td>
+								      						<td id="subjectname-${professorList.subjectName }">${professorList.subjectName } </td>
 									      				</tr>
 									      			</c:forEach>
 									      		</tbody>
@@ -266,16 +234,16 @@ select.menu{
 											<label class="pull-right" style="color:black">코드 번호 :</label>
 										</div>
 										<div class="col-sm-6">
-											<input id="division" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
+											<input id="code" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
 										</div>
 										<div class="col-sm-4"></div>
 								</div>
 								<div class="form-group">
 										<div class="col-sm-2">
-											<label class="pull-right" style="color:black">교수 번호 : </label>
+											<label class="pull-right" style="color:black">과목 번호 : </label>
 										</div>
 										<div class="col-sm-6">
-											<input id="professorNumber" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
+											<input id="subjectNo" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
 										</div>
 										<div class="col-sm-4"></div>
 								</div>
@@ -293,7 +261,7 @@ select.menu{
 											<label class="pull-right" style="color:black">교수 과목 : </label>
 										</div>
 										<div class="col-sm-6">
-											<input id="professorClass" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
+											<input id="subjectName" class="mdl-textfield__input" type="text" style="width: 100%" name="information" value="" disabled="disabled"/>
 										</div>
 										<div class="col-sm-4"></div>
 								</div>				
@@ -347,108 +315,15 @@ select.menu{
 								</div>
 								<div class="col-sm-10">
 									<input id="professorIdHidden" name="professorId" type="hidden" value="" />
-									<input id="content-Number" name="contentNumber" type="hidden" />
+									<input id="professorSubject" name="subjectNo" type="hidden" value="">
 								</div>
 								<div class="col-sm-2">
-									<button class="mdl-button mdl-js-button mdl-button--primary" type="submit">추가</button>
+									<button id="infrosubmit" class="mdl-button mdl-js-button mdl-button--primary" type="submit">추가</button>
 									<button class="mdl-button mdl-js-button mdl-button--accent">취소</button>
 								</div>
 							</form>			
 						</div>
-					</div>	
-	  		  
-			  <div class="mdl-tabs__panel" id="lannisters-panel">
-			  		<div class="row">
-				  		<h3>교수 정보</h3>
-						  		<form class="form-horizontal">
-						  		<div class="col-sm-6">
-									<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">소속 학과:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorGrade" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">교수 이름:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorName" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">교수 번호:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorPhone" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-						  		</div>
-						  		<div class="col-sm-6">
-						  			<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">교수 주소:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorAddr" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">교수 메일:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorEmail" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-3">
-												<label class="pull-right" style="color:black">교수 코드:</label>
-											</div>
-											<div class="col-sm-5">
-												<input id="detailProfessorCode" class="mdl-textfield__input" type="text" style="width: 100%" value="" disabled="disabled"/>
-											</div>
-											<div class="col-sm-4"></div>
-									</div>
-						  		</div>			
-							</form>
-			  		  </div>
-				  		<hr />
-				  	  <div class="row">
-				  		<h3>과목 조회</h3>
-				  			<div class="wrap_table">
-							    <div align="center">
-							        <table>
-							            <thead>
-							                <tr>
-							                    <th style="width: 25%">교과 코드</th>
-							                    <th style="width: 25%">교과 이름</th>
-							                    <th style="width: 25%">교수 이름</th>
-							                    <th style="width: 25%">평       점</th>
-							                </tr>
-							            </thead>
-							            <tbody>
-							                <tr>
-							                    <td style="width: 25%">John</td>
-							                    <td style="width: 25%">John</td>
-							                    <td style="width: 25%">John</td>
-							                    <td style="width: 25%">John</td>
-							                </tr>
-							            </tbody>
-							            <tfoot></tfoot>
-							        </table>
-							    </div>
-							</div>
-				  		</div>
-			  		</div>
+						
 	  		</div>
 	</div>
 </body>

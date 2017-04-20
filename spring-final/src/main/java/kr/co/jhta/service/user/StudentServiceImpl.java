@@ -2,7 +2,6 @@ package kr.co.jhta.service.user;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +14,6 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	StudentDao stuDao;
-	
-	
-	@Override
-	public void addNewStudentService() {
-		
-	}
-
 	
 	@Override
 	public List<Student> getAllStudentService() {
@@ -64,6 +56,20 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public void updateStudentProfessorService(String profName) {
 		stuDao.updateStudentProfessor(profName);
+	}
+
+
+	@Override
+	public String getTnameByTcodeService(String tCode) {
+		String tName = stuDao.getTnameByTcode(tCode);
+		return tName;
+	}
+
+
+	@Override
+	public String getCnameByRegisterService(String register) {
+		String cName = stuDao.getCnameByRegister(register);
+		return cName;
 	}
 	
 }

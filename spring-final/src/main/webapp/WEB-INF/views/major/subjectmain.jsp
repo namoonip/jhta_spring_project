@@ -101,7 +101,7 @@ $(function () {
       					<td>${subject.subjectName }</td>
       					<td>${subject.professor.name }</td>
       					<td>${subject.division }</td>
-      					<td>${subject.isPassed.isPassedName }</td>
+      					<td>${subject.passed.passedName }</td>
       					<td>${subject.score }</td>
       					<td>${subject.grade }</td>
       				</tr>

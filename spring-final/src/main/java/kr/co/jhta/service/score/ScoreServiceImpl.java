@@ -10,6 +10,7 @@ import kr.co.jhta.dao.score.ReportDao;
 import kr.co.jhta.dao.score.ScoreDao;
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Semester;
+import kr.co.jhta.vo.SemesterAvg;
 import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
@@ -101,7 +102,6 @@ public class ScoreServiceImpl implements ScoreService{
 
 	@Override
 	public List<Regisubject> getRegisInfoByhash(HashMap<String, Object> list) {
-
 		return scoreDao.getRegisInfoByhash(list);
 	}
 
@@ -114,6 +114,20 @@ public class ScoreServiceImpl implements ScoreService{
 	public SubjectRegister getRegiListByStuNo(int stuno) {
 		return scoreDao.getRegiListByStuNo(stuno);
 	}
-	
+
+	@Override
+	public List<Regisubject> getSearchInfoByCode(HashMap<String, Object> searchcode) {		
+		return scoreDao.getSearchInfoByCode(searchcode);
+	}
+
+	@Override
+	public List<Regisubject> getSearchInfoBySno(int sno) {
+		return scoreDao.getSearchInfoBySno(sno);
+	}
+
+	@Override
+	public SemesterAvg getSemesterAvgBySno(int sno) {
+		return scoreDao.getSemesterAvgBySno(sno);
+	}
 	
 }

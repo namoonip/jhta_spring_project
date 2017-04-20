@@ -31,12 +31,18 @@ public class StuController {
 	@RequestMapping(value="/stuInfo", method=RequestMethod.GET)
 	public String stuInfo(Model model, Student student) {
 		if(student.getName() == null) {
-			return "redirect:/login";
+			return "redirect:/login?err=deny";
 		}
 		model.addAttribute("student", student);
 		StudentForm studentForm = new StudentForm();
 		BeanUtils.copyProperties(student, studentForm);
 		model.addAttribute("studentForm", studentForm);
+		
+		// 과목 이름으로 출력을 위해 service사용
+		String tName = stuService.getTnameByTcodeService(student.getDivision());
+		model.addAttribute("tName", tName);
+		String cName = stuService.getCnameByRegisterService(student.getRegister());
+		model.addAttribute("cName", cName);
 		return "/student/stuInfo/stuInfo";
 	}
 	

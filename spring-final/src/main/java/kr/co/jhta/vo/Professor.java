@@ -20,6 +20,8 @@ public class Professor {
 	private String forei;
 	private Date entrydate;
 	private Date leavedate;
+	
+	
 	public int getNo() {
 		return no;
 	}

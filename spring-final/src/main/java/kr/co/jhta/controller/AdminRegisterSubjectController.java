@@ -68,7 +68,7 @@ public class AdminRegisterSubjectController {
 		// 검색했을 때 과목 정보를 가져오는 코드
 		List<Map<String, Object>> subTempList = lectureService.getSubjectList(major);
 		
-		// 검색했을 때 과목 이름을 가져오는 코드
+		// 검색했을 때 전공 이름을 가져오는 코드
 		SiteMap searchDept = lectureService.getDetpList(major);
 		
 		// 검색했을 때 수강신청기간 정보를 가져오는 코드
@@ -166,11 +166,6 @@ public class AdminRegisterSubjectController {
 		enrollDao.updateMinusNowNum(dno);
 		
 		return "redirect:adminregstudent";
-	}
-	
-	@RequestMapping("/adminsendemail")
-	public String adminSendEmail() {
-		return "administer/adminsendemail";
 	}
 	
 	@RequestMapping("/adminsendemailbox")

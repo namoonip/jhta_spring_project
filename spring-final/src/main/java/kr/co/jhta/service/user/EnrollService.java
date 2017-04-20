@@ -13,4 +13,5 @@ public interface EnrollService {
 	void updateMinusNowNumService(int enrollNo);
 	Enroll getEnrollCheckNumService(int enrollNo);
 	List<Enroll> getAllEnrollByTcodeService(String siteCode);
+	void addEnroll(Enroll enroll);
 }

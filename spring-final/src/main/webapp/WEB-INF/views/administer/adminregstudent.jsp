@@ -13,8 +13,9 @@
 <script type="text/javascript">
 $(function() {
 	$(".form-inline").submit(function() {
-		if ($("#select-major").val() == 0 || !$(":radio:checked").length) {
+		if ($("#select-major").val() == 0 || !$(":radio:checked").length || !$(":text").text().trim()) {
 			alert("검색 값을 입력하세요.");
+			$(":text").focus();
 			return false;
 		}
 	});

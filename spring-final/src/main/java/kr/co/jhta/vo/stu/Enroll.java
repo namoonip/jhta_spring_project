@@ -1,6 +1,5 @@
 package kr.co.jhta.vo.stu;
 
-import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectDivision;
 

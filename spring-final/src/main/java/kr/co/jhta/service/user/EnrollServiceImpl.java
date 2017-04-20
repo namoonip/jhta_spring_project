@@ -58,4 +58,9 @@ public class EnrollServiceImpl implements EnrollService{
 		List<Enroll> enrollList = enrollDao.getAllEnrollByTcode(siteCode);
 		return enrollList;
 	}		
+	@Override
+	public void addEnroll(Enroll enroll) {
+		enrollDao.addEnroll(enroll);
+		
+	}
 }

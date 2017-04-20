@@ -21,4 +21,7 @@ public interface SubjectService {
 	void deleteSub(int no);
 	Subject getByNoList(int no);
 	void subupdate(Subject subject);
+	Subject getSubByNo(int sno);
+	
+	String getPassCodeByNo(int sno);
 }

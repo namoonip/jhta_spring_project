@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Semester;
+import kr.co.jhta.vo.SemesterAvg;
 import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectRegister;
@@ -29,4 +30,8 @@ public interface ScoreDao {
 	List<Regisubject> getRegisInfoByhash(HashMap<String, Object> list);
 	Score getScoreinfoByRno(int rno);
 	SubjectRegister getRegiListByStuNo(int stuno);
+	
+	List<Regisubject> getSearchInfoByCode(HashMap<String, Object> searchcode);
+	List<Regisubject> getSearchInfoBySno(int sno);
+	SemesterAvg getSemesterAvgBySno(int sno);
 }

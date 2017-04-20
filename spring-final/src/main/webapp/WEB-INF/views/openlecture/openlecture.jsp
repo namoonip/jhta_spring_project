@@ -15,19 +15,7 @@
 		
 	});
 </script>
-<style>
- hr {
-    border: none;
-    border-top: 1px dotted black;
-    color: #fff;
-    background-color: #fff;
-    height: 1px;
-    width: 100%;
-}
-table,th,td,tr {
-		border: 1px solid black;
-}
-</style>
+
 <title>open lecture</title>
 </head>
 <body>

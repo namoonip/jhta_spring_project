@@ -4,8 +4,14 @@ public class InvestGationAttribute {
 
 	private String professorId;
 	private String contents;
+	private int subjectNo;
 	
-	
+	public int getSubjectNo() {
+		return subjectNo;
+	}
+	public void setSubjectNo(int subjectNo) {
+		this.subjectNo = subjectNo;
+	}
 	public String getProfessorId() {
 		return professorId;
 	}

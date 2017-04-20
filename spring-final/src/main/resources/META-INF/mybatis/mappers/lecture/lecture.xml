@@ -7,16 +7,14 @@
 	<select id="getMajorList" parameterType="string" resultType="subject">
 		select
 			s.j_no as no,
-			s.j_reference as reference,
-			s.j_progress as progress,
 			s.j_subject_name as subjectName,
 			s.j_semester as semester,
 			s.j_grade as grade,
 			s.j_is_passed as isPassed,
 			s.j_score as score,
-			s.j_outline as outline,
 			s.J_t_code as "siteCode.code",
-			s.j_sub_prof as professor
+			s.j_sub_prof as professor,
+			s.j_division as division
 		from
 			j_subject s
 		where

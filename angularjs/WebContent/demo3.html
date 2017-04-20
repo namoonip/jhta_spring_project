@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="resources/angular/angular.min.js"></script>
+<script type="text/javascript">
+	
+	var myApp = angular.module("myApp", []);
+	
+	/* 필터 적용하기 */
+	myApp.filter("secretName", function() {
+		// {{todo.writer | seretName:'+'}}
+		// 	   표현식의 값		첫번째 파라미터
+		// function(필터가 붙여진 표현식의 값, 필터의 첫번째 파라미터값, 필터의 두번째 파라미터값, ...)
+		return function(value, c) { 
+			// value에는 todo.writer값이 전달되고,
+			// c에서는 '_'가 전달된다. sercetName 뒤에 변수 전달
+			var firstName = value.substring(0, 1);
+			return firstName + c + c;
+		}
+	});
+
+	myApp.controller("todoCtrl", function($scope) {
+		$scope.todos = [
+						{title:"수업하기", writer:"홍길동", day:"2017-4-20", completed:"미처리"}, 
+						{title:"영화보기", writer:"이순신", day:"2017-4-22", completed:"미처리"}
+		];
+		
+		$scope.completeTodoQty = function() {
+			var qty = 0;
+			for(var i=0; i<$scope.todos.length; i++) {
+				var todo = $scope.todos[i];				
+				if (todo['completed'] == '처리완료') {
+					qty++;
+				}
+			}
+			return qty;
+		}
+		
+		$scope.addTodo= function(newTitle, newWriter, newDay) {
+			var todo = {title:newTitle, writer:newWriter, day:newDay, completed:"미처리"};
+			$scope.todos.push(todo);
+
+		}
+		
+		$scope.removeTodo = function(delIndex) {
+			$scope.todos.splice(delIndex, 1);
+		}
+		
+		$scope.completedTodo = function(completedIndex) {
+			$scope.todos[completedIndex]['completed'] = "처리완료";
+		}
+	})
+
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container" ng-controller="todoCtrl">
+
+	<h3>Todo 리스트 <small>처리완료 건수 :</small> <span class="label label-primary">{{completeTodoQty()}}</span></h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>날짜</th>
+				<th>완료여부</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="todo in todos"> <!--  | orderBy:'writer' //정렬 기능 -->
+				<td>{{$index+1}}</td>
+				<td>{{todo.title}}</td>
+				<td>{{todo.writer | secretName:'_'}}</td>	<!-- secretName필터 적용하기 -->
+				<td>{{todo.day}}</td>
+				<td>{{todo.completed}}</td>
+				<td>
+					<button class="btn btn-primary btn-xs" ng-click="completedTodo($index)">처리 완료</button>
+					<button class="btn btn-danger btn-xs" ng-click="removeTodo($index)">삭제</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<form class="well" ng-submit="addTodo(t, w, d)">
+			<div class="form-group">
+				<label for="">제목</label>
+				<!-- ng-model은 화면의 안으로 값이 들어가도록 만드는 값이 들어간다. -->
+				<!-- application안에 t라는 이름으로 값이 들어가게 된다. -->
+				<input type="text" class="form-control" ng-model="t" />
+			</div>			
+			<div class="form-group">
+				<label for="">작성자</label>
+				<input type="text" class="form-control" ng-model="w" />
+			</div>
+			<div class="form-group">
+				<label for="">날짜</label>
+				<input type="text" class="form-control" ng-model="d" />
+			</div>
+			<div class="form-group text-right">
+				<!-- 이벤트가 지속적으로 감지되게 때문에 등록되는 순간 이벤드가 바로 실행된다. -->
+				<button type="submit" class="btn btn-default">등록</button>
+			</div>
+	</form>		
+		
+</div>
+</body>
+</html>

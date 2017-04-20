@@ -15,7 +15,7 @@
 			var attper = $("#att_Btn").val();
 			alert(attper);
 			$('#attDataBox').empty();
-			$('#attDataBox').append('<label>홍길동 디지털코드 출석정보</label><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="'+attper+'" aria-valuemin="0" aria-valuemax="15" style="width: 60%;" id="attDataBar">'+attper+'</div></div>');			
+			$('#attDataBox').append('<label>홍길동 디지털코드 출석정보</label><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="'+attper+'" aria-valuemin="0" aria-valuemax="15" style="width: '+attper+'%;" id="attDataBar">'+attper+'</div></div>');			
 		});
 		
 		$("#score_box1").change(function() {
@@ -31,9 +31,10 @@
 				type: "POST",
 				success: function(data) {
 					$("#score_box2").empty();
-					
-					for (var i=0; i<data.length; i++) {
+					$("#score_box2").append('<option value="siteall">전공</option>');
+					for (var i=0; i<data.length; i++) {						
 						$("#score_box2").append("<option value="+data[i].code+">"+data[i].name+"</option>");
+						console.log(data[i].code);
 					}
 				}
 			});
@@ -93,30 +94,36 @@
 			var code1 = $("#score_box1").val();
 			var code2 = $("#score_box2").val();
 			var stucode = $("#score_box3").val();
-	
-			$.ajax({
-				url: "scoreSearchInfo?code="+code1+"&codes="+code2+"&stucode="+stucode,
-				dataType: "json",
-				type: "POST",
-				success: function(data) {
+			console.log(code1);
+			console.log(code2);
+			console.log(stucode);
+				$.ajax({
+					url: "scoreSearchInfo?code="+code1+"&codes="+code2+"&stucode="+stucode,
+					dataType: "json",
+					type: "POST",
+					success: function(data) {
 					$("#score_td_box").empty();
-					
+						
 					for (var i=0; i<data.length; i++) {
 						$("#score_td_box").append('<tr style="text-align: left;" id=tr_'+data[i].no+'></tr>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].no+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].student.name+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].student.id+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.semeSelect+'</td>');
-						$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.subjectName+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].subject.subjectName+'</td>');
+						$("#tr_"+data[i].no).append('<td>'+data[i].subject.passed.passedName+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.credit+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.grade+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.reportScore+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.attScore+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.midtermScore+'</td>');
-						$("#tr_"+data[i].no).append('<td>'+data[i].score.endtermScore+'</td>');				
+						$("#tr_"+data[i].no).append('<td>'+data[i].score.endtermScore+'</td>');			
+						$("#tr_"+data[i].no).append('<td><a href="scoreform.do?sno='+data[i].score.no+'" class="btn btn-primary btn-xs">수정</a></td>');			
+						$("#tr_"+data[i].no).append('<td><button class="btn btn-primary btn-xs" type="button" id="scoreprint" value='+data[i].score.no+'>출력</button></td>');	
+
 					}
 				}
-			});
+			});	
 		});
 	});
 </script>
@@ -130,15 +137,14 @@
 		<h3>성적관리</h3>
 		<hr style="border:solid 0.5px #2C7BB5;">		                            	   
 			<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#score" aria-controls="score" role="tab" data-toggle="tab" aria-expanded="true">성적</a></li>
-					<li role="presentation"><a href="#attendance" aria-controls="attendance" role="tab" data-toggle="tab" aria-expanded="false">출결</a></li>
-					<li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab" aria-expanded="false">과제현황</a></li>
+				<li role="presentation" class="active"><a href="#score" aria-controls="score" role="tab" data-toggle="tab" aria-expanded="true">성적</a></li>
+				<li role="presentation"><a href="#attendance" aria-controls="attendance" role="tab" data-toggle="tab" aria-expanded="false">출결</a></li>
+				<li role="presentation"><a href="#report" aria-controls="report" role="tab" data-toggle="tab" aria-expanded="false">과제현황</a></li>
 			</ul>
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="score">
 					<table class="table table-condensed">
 						<tbody>
-							<tbody>
 							<tr>
 								<td bgcolor="#dceef3" style="color: #333; width: 10%; vertical-align: middle; height: 30px;"><strong>조회</strong></td>
 								<td bgcolor="#f0fcff">
@@ -151,7 +157,7 @@
 								</td>
 								<td bgcolor="#f0fcff">
 									<select class="form-control" id="score_box2">
-										<option value="siteAll">전공</option>
+										<option value="siteall">전공</option>
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">
@@ -161,7 +167,6 @@
 									<button class="btn btn-primary" type="button" id="score_search_btn">조회하기</button>
 								</td>
 							</tr>
-						</tbody>
 						</tbody>
 					</table>
 					<div class="panel panel-body" id="score_table">
@@ -173,6 +178,7 @@
 									<th>학번</th>
 									<th>학기</th>
 									<th>과목명</th>
+									<th>이수구분</th>
 									<th>학점</th>
 									<th>등급</th>
 									<th>과제</th>
@@ -188,9 +194,10 @@
 								<tr style="text-align: left;">
 									<td>${scorelist2.no}</td>
 									<td>${scorelist2.student.name}</td>
-									<td>${scorelist2.student.id}</td>
+									<td><a href="scoreInfo.do?stuno=${scorelist2.student.no }">${scorelist2.student.id}</a></td>
 									<td>${scorelist2.subject.selectNo.semeSelect}</td>
 									<td>${scorelist2.subject.subjectName}</td>
+									<td>${scorelist2.subject.passed.passedName}</td>
 									<td>${scorelist2.score.credit}</td>
 									<td>${scorelist2.score.grade}</td>
 									<td>${scorelist2.score.reportScore}</td>

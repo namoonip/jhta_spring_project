@@ -108,5 +108,26 @@ public class SubjectController {
 		return "redirect:/admin/subjectmain";
 	}
 	
+	@RequestMapping(value="detailsubject", method=RequestMethod.GET)
+	public String detailsubject(@RequestParam("sno") int sno, Model model) {
+		
+		Subject subject = subjectService.getSubByNo(sno);
+		
+		String code = subjectService.getPassCodeByNo(sno);
+		String tcode = subject.getSiteCode().getCode();
+		
+		System.out.println(tcode);
+		
+		List<Professor> proListByTcode = professorService.getProListByTCode(tcode);
+		subject.getPassed().setCode(tcode);
+		
+		System.out.println(subject.getProfessor().getId());
+		
+		model.addAttribute("subjectbyno", subject);
+		model.addAttribute("prolistbytcode", proListByTcode);
+		
+		return "major/subjectdetail";
+	}
+	
 	
 }

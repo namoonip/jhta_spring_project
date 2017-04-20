@@ -28,4 +28,8 @@ List<Subject> getAllList();
 	Subject getByNoList(int no);
 	
 	void subupdate(Subject subject);
+	
+	Subject getSubByNo(int sno);
+	
+	String getPassCodeByNo(int sno);
 }
