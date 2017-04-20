@@ -31,6 +31,11 @@ public class EnrollForm {
 	public void setEnrollTime(String enrollTime) {
 		this.enrollTime = enrollTime;
 	}
+	@Override
+	public String toString() {
+		return "EnrollForm [no=" + no + ", subjectNo=" + subjectNo + ", enrollDay=" + enrollDay + ", enrollTime="
+				+ enrollTime + "]";
+	}
 
 	
 	

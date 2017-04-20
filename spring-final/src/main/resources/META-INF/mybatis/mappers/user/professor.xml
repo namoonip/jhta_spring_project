@@ -31,9 +31,9 @@
 			u_prof_name as name,
 			u_prof_gender as gender,
 			u_prof_code as code,
-			u_prof_division as division,
+			T_NAME as division,
 			u_prof_pwd as pwd,
-			u_prof_register as register,
+			C_NAME as register,
 			u_prof_phone as phone,
 			u_prof_addr as addr,
 			u_prof_email as email,
@@ -43,8 +43,13 @@
 			u_prof_entrydate as entrydate,
 			u_prof_leavedate as leavedate
 		from
-			u_professor
-		where u_prof_id = #{id}
+			u_professor A, C_CODEREGISTER B, T_SITEMAP C
+		where 
+			A.U_PROF_REGISTER = B.C_CODE
+		AND	
+			A.U_PROF_DIVISION = C.T_CODE
+		and
+			A.u_prof_id = #{id}
 	</select>
 	
 	<select id="getProListByTCode" parameterType="string" resultType="kr.co.jhta.vo.Professor">
@@ -57,7 +62,25 @@
 		where u_prof_code = #{code}
 	</select>
 	
+	<update id="updateProfessorInfo" parameterType="kr.co.jhta.vo.Professor">
+		UPDATE 
+			U_professor
+		SET
+			U_prof_PHONE = #{phone},
+			U_prof_EMAIL = #{email},
+			U_prof_ADDR = #{addr}
+		WHERE 
+			U_prof_ID = #{id}
+	</update>
 	
+	<update id="updateProfessorPwd" parameterType="kr.co.jhta.vo.Professor">
+		UPDATE 
+			U_professor
+		SET 
+			U_prof_PWD = #{pwd}
+		WHERE 
+			U_prof_ID = #{id}
+	</update>
 	
 	
 

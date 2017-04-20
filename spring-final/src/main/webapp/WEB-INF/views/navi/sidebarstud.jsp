@@ -64,9 +64,9 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>학과 게시판</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>자유 게시판</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>수강 이의 신청</a></li>
+                            <li><a href="studeptboard"><i class="fa fa-caret-right"></i>학과 게시판</a></li>
+                            <li><a href="stufreeboard"><i class="fa fa-caret-right"></i>자유 게시판</a></li>
+                            <li><a href="stuqnaboard"><i class="fa fa-caret-right"></i>Q&amp;A 게시판</a></li>
                         </ul>
                     </li>
                     <li>

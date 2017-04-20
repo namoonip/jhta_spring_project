@@ -21,4 +21,7 @@ public interface OpenLectureService {
 	List<ProfessorSubject> subjectInquiries(String id);
 	
 	List<LectureEvaluationSheet> getLecturEevaluationSheet(int subjectNo);
+	
+	void professorSubjectdelete(int subjectNo);
+	
 }

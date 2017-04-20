@@ -1,6 +1,5 @@
 package kr.co.jhta.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -30,10 +29,7 @@ public class HakjukController {
 
 	@Autowired
 	private ProfessorService professorService;
-	
-	@Autowired
-	private StudentService studService;
-	
+		
 	@Autowired
 	private HakjukService hakjukService;
 	
@@ -44,10 +40,8 @@ public class HakjukController {
 	 */
 	@RequestMapping(value = "/searchstud",method=RequestMethod.GET)
 	public String searchstudGET(Model model){
-		List<Student> studList = hakjukService.getAllStudentService();
-		List<SiteMap> sitemapList = sitemapService.getAllSitemapPreService();
-		model.addAttribute("studList",studList);
-		model.addAttribute("sitemapList",sitemapList);
+		model.addAttribute("studList",hakjukService.getAllStudentService());
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService());
 		return "collegeregister/searchstud";
 	}
 	
@@ -56,12 +50,9 @@ public class HakjukController {
 	 */
 	@RequestMapping(value = "/searchstud",method=RequestMethod.POST)
 	public String searchstudPOST(StudentSearchForm ssf, Model model){
-		
 		System.out.println(ssf);
-		List<SiteMap> sitemapList = sitemapService.getAllSitemapPreService();
-		List<Student> studList = hakjukService.searchStudent(ssf);
-		model.addAttribute("studList",studList);
-		model.addAttribute("sitemapList",sitemapList);
+		model.addAttribute("studList",sitemapService.getAllSitemapPreService());
+		model.addAttribute("sitemapList",hakjukService.searchStudent(ssf));
 		return "collegeregister/searchstud";
 	}
 	
@@ -73,7 +64,6 @@ public class HakjukController {
 	
 	@RequestMapping("/studinfo")
 	public String studinfo(@RequestParam("id") String id,Model model){
-		System.out.println("id = "+id);
 		Student stud = hakjukService.getStudentByIdService(id);
 		if(stud == null){
 			return "redirect:/admin/searchstud";
@@ -88,7 +78,9 @@ public class HakjukController {
 	 */
 	
 	@RequestMapping("/searchprof")
-	public String searchprof(){
+	public String searchprof(Model model){
+		model.addAttribute("profList",hakjukService.getAllProfessorService()); // 모든 교수를 조회하여 jsp에 전달
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService()); // 대학 정보 전달
 		return "collegeregister/searchprof";
 	}	
 	/**
@@ -97,7 +89,12 @@ public class HakjukController {
 	 * @return
 	 */
 	@RequestMapping("/profinfo")
-	public String profinfo(@RequestParam("id") String id){
+	public String profinfo(@RequestParam("id") String id,Model model){
+		Professor prof = hakjukService.getProfessorByIdService(id);
+		if(prof == null){
+			return "redirect:/admin/searchprof";
+		}
+		model.addAttribute("prof",prof);
 		return "collegeregister/profinfo";
 	}
 	 

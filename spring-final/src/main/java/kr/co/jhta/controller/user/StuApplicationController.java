@@ -1,14 +1,18 @@
 package kr.co.jhta.controller.user;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.appli.LeaveService;
 import kr.co.jhta.service.user.ApplicationService;
 import kr.co.jhta.service.user.StudentService;
+import kr.co.jhta.vo.appli.Leave;
 import kr.co.jhta.vo.appli.LeaveForm;
 import kr.co.jhta.vo.stu.Student;
 
@@ -23,10 +27,32 @@ public class StuApplicationController {
 	@Autowired
 	LeaveService leaveService;
 	
+	@RequestMapping(value="enrollCancel", method=RequestMethod.GET)
+	public String leaveCancel(@RequestParam("lNo") int lNo, Model model, Student student) {
+		
+		leaveService.deleteEnrollByNoService(lNo, student.getNo());
+		return "redirect:/stud/leave";
+	}
+	
 	@RequestMapping(value="/enrollLeave", method=RequestMethod.POST)
 	public String leaveEnroll(Model model, Student student, LeaveForm leaveForm){
 		
-		return null;
+		Leave leave = new Leave();
+		leave.setCode(leaveForm.getcCode());
+		leave.setStuNo(student.getNo());
+		if(leaveForm.getScorePass() != null) {
+			if(leaveForm.getScorePass().equals("true")) {
+				leave.setScorePass("true");
+			} else {
+				leave.setScorePass("false");
+			}			
+		}
+		Long beforedParsedDate = Long.parseLong(leaveForm.getReinDate());
+		Date date = new Date(beforedParsedDate);
+		leave.setReinDate(date);
+		leaveService.addNewLeaveService(leave);
+		/*selectSemeter:2 update 추가하기 (student remainleave - 하기)*/
+		return "redirect:/stud/leave";
 	}
 		
 		
@@ -43,6 +69,4 @@ public class StuApplicationController {
 		return "/student/applications/ReinstatementForm";
 	}
 
-	
-	
 }

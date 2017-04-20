@@ -8,8 +8,16 @@ public class ProfessorSubject {
 	private String subjectPassd; // 전공 필수/선택
 	private String subjectPorfessor;
 	private String subjectProfeesorId; //FK
+	private String register;
 	
 	
+	
+	public String getRegister() {
+		return register;
+	}
+	public void setRegister(String register) {
+		this.register = register;
+	}
 	public int getSubjectNo() {
 		return subjectNo;
 	}

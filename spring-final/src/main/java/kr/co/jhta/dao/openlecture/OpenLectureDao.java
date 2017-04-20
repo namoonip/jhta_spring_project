@@ -15,7 +15,12 @@ public interface OpenLectureDao {
 	
 	void addInvestgation(InvestGationAttribute item);
 	
+	//테이블 조회
 	List<ProfessorSubject> subjectInquiries(String id);
 	
+	//테이블 모달 조회
 	List<LectureEvaluationSheet> getLecturEevaluationSheet(int subjectNo);
+	
+	//삭제
+	void professorSubjectdelete(int subjectNo);
 }

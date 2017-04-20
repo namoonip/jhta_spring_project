@@ -1,6 +1,7 @@
 package kr.co.jhta.dao.appli;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,4 +12,7 @@ public interface LeaveDao {
 	
 	void addNewLeave(Leave leave);
 	List<Leave> getAllEnrolledLeaveByStuNo(int stuNo);
+	
+	void deleteEnrollByNo(Map<String, Object> map);
+	String getCnameByCcode(String cCode);
 }

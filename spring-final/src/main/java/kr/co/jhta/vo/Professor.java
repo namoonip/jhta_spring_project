@@ -124,5 +124,12 @@ public class Professor {
 	public void setLeavedate(Date leavedate) {
 		this.leavedate = leavedate;
 	}
+	@Override
+	public String toString() {
+		return "Professor [no=" + no + ", id=" + id + ", name=" + name + ", gender=" + gender + ", sitemap=" + sitemap
+				+ ", code=" + code + ", division=" + division + ", pwd=" + pwd + ", register=" + register + ", phone="
+				+ phone + ", addr=" + addr + ", email=" + email + ", grade=" + grade + ", ssn=" + ssn + ", forei="
+				+ forei + ", entrydate=" + entrydate + ", leavedate=" + leavedate + "]";
+	}
 	
 }

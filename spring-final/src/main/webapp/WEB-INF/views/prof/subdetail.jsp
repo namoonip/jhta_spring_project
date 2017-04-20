@@ -46,7 +46,7 @@
 						</tr>
 						<tr>
 							<th>이수구분</th>
-							<td>${subno.isPassed.isPassedName}</td>
+							<td>${subno.passed.passedName}</td>
 						</tr>
 						<tr>
 							<th>학과코드</th>

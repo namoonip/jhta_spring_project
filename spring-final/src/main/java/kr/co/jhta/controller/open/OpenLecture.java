@@ -27,14 +27,14 @@ public class OpenLecture {
 	}
 	
 	
-	@RequestMapping("/openregister.do")
+	@RequestMapping("/openratingregister.do")
 	public String openLectureRegister(Model model){
 	
 		List<ProfessorOpenLecture> openlecturelist = lectureservice.getInformationOfProfessorList();
 		model.addAttribute("openlecturelist",openlecturelist);
 		
 		
-		return "openlecture/openlectureregister";
+		return "openlecture/openlectureratingregister";
 	}
 	
 	@RequestMapping("/investigating.do")
@@ -48,6 +48,7 @@ public class OpenLecture {
 		}else{
 			
 			List<String> itemsList =  items.getContents();
+			String register = items.getRegister();
 			String id = items.getProfessorId();
 			int no =items.getSubjectNo();
 			String professorId = items.getProfessorId();
@@ -55,9 +56,11 @@ public class OpenLecture {
 			
 			for(int i=0; i<itemsList.size(); i++){
 				
+				item.setRegister(register);
 				item.setSubjectNo(no);
 				item.setContents(itemsList.get(i));
 				item.setProfessorId(professorId);
+				
 				lectureservice.addInvestgation(item);
 			}
 			

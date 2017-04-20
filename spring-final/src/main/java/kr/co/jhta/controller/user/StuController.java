@@ -39,7 +39,7 @@ public class StuController {
 		model.addAttribute("studentForm", studentForm);
 		
 		// 과목 이름으로 출력을 위해 service사용
-		String tName = stuService.getTnameByTcodeService(student.getDivision());
+		String tName = stuService.getTnameByTcodeService(student.getNo(), student.getDivision());
 		model.addAttribute("tName", tName);
 		String cName = stuService.getCnameByRegisterService(student.getRegister());
 		model.addAttribute("cName", cName);
@@ -71,9 +71,11 @@ public class StuController {
 		boolean isPassed = false;
 		if(student.getPwd().equals(stuPwd)) {
 			isPassed = true;
+			student.setPwd(Repwd);
 			stuService.updateStudentPwdService(student);
 			model.addAttribute("student", student);
-			return "/student/stuInfo/stuPwdEdit";
+			model.addAttribute("confirm", isPassed);
+			return "/student/stuInfo/stuPwdCheck";
 		}		
 		model.addAttribute("confirm", isPassed);
 		return "/student/stuInfo/stuPwdCheck";

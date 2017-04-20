@@ -18,7 +18,7 @@
 <%@ include file="/WEB-INF/views/navi/sidebarmajor.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px; ">
     	<div class="row text-right">
-			홈
+			홈 > 과목관리 > <strong>교과상세/수정</strong>
     	</div>
     	<div class="row">
     		<h4><span class="glyphicon glyphicon-th-list"></span> 과목상세</h4>
@@ -27,7 +27,7 @@
     	
     	<div class="panel panel-default panel-body">
     		<div class="row well">
-    			<form action="" method="post" name="subjectbyno">
+    			<form action="editsubject" method="post" name="subjectbyno">
     				<input type="hidden" name="no" value="${subjectbyno.no }">
     				<table class="table table-condensed">
     					<tr>
@@ -65,7 +65,7 @@
          					<td>
          						<select name="professor.id" id="select-prof">
          							<c:forEach var="prof" items="${prolistbytcode }">
-         							<option value="${prof.id }" ${subjectbyno.professor.id eq '${prof.id}' ? 'selected=selected' : '' }>${prof.name }</option>
+         							<option value="${prof.id }" ${subjectbyno.professor.id eq prof.id ? 'selected=selected' : '' }>${prof.name }</option>
          							</c:forEach>
          						</select>
          					</td>
@@ -79,6 +79,10 @@
          					</td>
          				</tr>
     				</table>
+    				<div>
+    					<a href="subjectmain" class="btn btn-default pull-right">취소</a>
+    					<button type="submit" class="btn btn-primary pull-right">수정</button>
+    				</div>
     			</form>
     		</div>
     	</div>

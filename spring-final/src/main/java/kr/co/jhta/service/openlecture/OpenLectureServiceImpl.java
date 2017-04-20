@@ -48,4 +48,10 @@ public class OpenLectureServiceImpl implements OpenLectureService {
 		
 		return openLecturedao.getLecturEevaluationSheet(subjectNo);
 	}
+	
+	@Override
+	public void professorSubjectdelete(int subjectNo) {
+		
+		openLecturedao.professorSubjectdelete(subjectNo);
+	}
 }

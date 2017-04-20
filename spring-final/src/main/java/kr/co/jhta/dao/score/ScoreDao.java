@@ -33,5 +33,6 @@ public interface ScoreDao {
 	
 	List<Regisubject> getSearchInfoByCode(HashMap<String, Object> searchcode);
 	List<Regisubject> getSearchInfoBySno(int sno);
-	SemesterAvg getSemesterAvgBySno(int sno);
+	List<SemesterAvg> getSemesterAvgBySno(int sno);
+	SemesterAvg getSemesterAvgTotalBySno(int sno);
 }

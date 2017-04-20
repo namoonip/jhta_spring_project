@@ -86,7 +86,6 @@ $(function() {
 	      			<col width="10%" />
 	      			<col width="10%" />
 	      			<col width="5%" />
-	      			<col width="6%" />
 	      			<col width="10%" />
 	      			<col width="8%" />
 	      		</colgroup>
@@ -100,7 +99,6 @@ $(function() {
 	      				<th>강의시간</th>
 	      				<th>강의요일</th>
 	      				<th>학점</th>
-	      				<th>분반</th>
 	      				<th>신청인원</th>
 	      				<th>신청</th>
 	      			</tr>
@@ -117,7 +115,6 @@ $(function() {
 	      					<th>${enroll.enrollTime }</th>	<!-- 강의 시간 -->
 	      					<th>${enroll.enrollDay }</th>	<!-- 강의 요일-->
 	      					<th>${enroll.subject.score }</th>	<!-- 학점 -->
-	      					<th>${enroll.division.divisionNo }</th>	<!-- 분반 -->
 	      					<th>
 	      						<c:choose>
 	      							<c:when test="${enroll.enrollNum eq enroll.division.limitNumber}">

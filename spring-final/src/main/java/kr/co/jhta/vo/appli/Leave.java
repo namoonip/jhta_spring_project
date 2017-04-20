@@ -1,5 +1,6 @@
 package kr.co.jhta.vo.appli;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Leave {
@@ -11,12 +12,15 @@ public class Leave {
 	private String pass;
 	private Date okayDate;
 	private Date reinDate;
-	private int remainNum;	// 남아있는 신청 가능한 학기
+	private String scorePass;
+	private String cName;
 	
 	public Leave() {}
+
 	
+
 	public Leave(int no, int stuNo, String code, Date enrollDate, String pass, Date okayDate, Date reinDate,
-			int remainNum) {
+			String scorePass, String cName) {
 		super();
 		this.no = no;
 		this.stuNo = stuNo;
@@ -25,9 +29,12 @@ public class Leave {
 		this.pass = pass;
 		this.okayDate = okayDate;
 		this.reinDate = reinDate;
-		this.remainNum = remainNum;
+		this.scorePass = scorePass;
+		this.cName = cName;
 	}
-	
+
+
+
 	public int getNo() {
 		return no;
 	}
@@ -70,11 +77,50 @@ public class Leave {
 	public void setReinDate(Date reinDate) {
 		this.reinDate = reinDate;
 	}
-	public int getRemainNum() {
-		return remainNum;
+	public String getScorePass() {
+		return scorePass;
 	}
-	public void setRemainNum(int remainNum) {
-		this.remainNum = remainNum;
+	public void setScorePass(String scorePass) {
+		this.scorePass = scorePass;
+	}
+	
+	public int getPeriod() {
+		Calendar c = Calendar.getInstance();
+		c.setTime(enrollDate);
+		int month = c.get(Calendar.MONTH) + 1;
+		
+		if (month <7) {
+			return 1;
+		} else {
+			return 2;
+		}
+		
+	}
+	
+	public int getYear() {
+		Calendar c = Calendar.getInstance();
+		c.setTime(enrollDate);
+		return c.get(Calendar.YEAR);		
+	}
+	
+	
+	
+	public String getcName() {
+		return cName;
+	}
+
+
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Leave [no=" + no + ", stuNo=" + stuNo + ", code=" + code + ", enrollDate=" + enrollDate + ", pass="
+				+ pass + ", okayDate=" + okayDate + ", reinDate=" + reinDate + ", scorePass=" + scorePass + "]";
 	}
 
 }

@@ -84,12 +84,6 @@
 			});
 		});
 		
-		$("#scoreprint").click(function (e) {
-			var scoreno = $(this).val();
-			window.open('data:application/vnd.ms-excel,filename="test.xls",' + encodeURIComponent($('#score_table').html()), '_blank');
-			e.preventDefault(); 
-		});
-		
 		$("#score_search_btn").click(function() {
 			var code1 = $("#score_box1").val();
 			var code2 = $("#score_box2").val();
@@ -108,7 +102,7 @@
 						$("#score_td_box").append('<tr style="text-align: left;" id=tr_'+data[i].no+'></tr>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].no+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].student.name+'</td>');
-						$("#tr_"+data[i].no).append('<td>'+data[i].student.id+'</td>');
+						$("#tr_"+data[i].no).append('<td><a href="scoreInfo.do?stuno='+data[i].no+'>'+data[i].student.id+'</a></td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.semeSelect+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].subject.subjectName+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].subject.passed.passedName+'</td>');
@@ -118,9 +112,7 @@
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.attScore+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.midtermScore+'</td>');
 						$("#tr_"+data[i].no).append('<td>'+data[i].score.endtermScore+'</td>');			
-						$("#tr_"+data[i].no).append('<td><a href="scoreform.do?sno='+data[i].score.no+'" class="btn btn-primary btn-xs">수정</a></td>');			
-						$("#tr_"+data[i].no).append('<td><button class="btn btn-primary btn-xs" type="button" id="scoreprint" value='+data[i].score.no+'>출력</button></td>');	
-
+						$("#tr_"+data[i].no).append('<td><a href="scoreform.do?sno='+data[i].score.no+'" class="btn btn-primary btn-xs">수정</a></td>');
 					}
 				}
 			});	
@@ -161,7 +153,7 @@
 									</select>
 								</td>
 								<td bgcolor="#f0fcff">
-									<input class="form-control" type="text" placeholder="이름 또는 학번" id="score_box3"/>
+									<input class="form-control" type="text" placeholder="학번을 입력하세요" id="score_box3"/>
 								</td>
 								<td bgcolor="#f0fcff">
 									<button class="btn btn-primary" type="button" id="score_search_btn">조회하기</button>
@@ -186,7 +178,6 @@
 									<th>중간</th>
 									<th>기말</th>
 									<th>수정</th>
-									<th>출력</th>
 								</tr>
 							</thead>
 							<tbody id="score_td_box">
@@ -205,7 +196,6 @@
 									<td>${scorelist2.score.midtermScore}</td>
 									<td>${scorelist2.score.endtermScore}</td>
 									<td><a href="scoreform.do?sno=${scorelist2.score.no }" class="btn btn-primary btn-xs">수정</a></td>
-									<td><button class="btn btn-primary btn-xs" type="button" id="scoreprint" value="${scorelist2.score.no }">출력</button></td>
 								</tr>
 								</c:forEach>	
 							</tbody>

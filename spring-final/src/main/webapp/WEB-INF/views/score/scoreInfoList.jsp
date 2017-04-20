@@ -9,38 +9,62 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#scoreprint").click(function (e) {
+		var scoreno = $(this).val();
+		var stuname = $("#stuname").val();
+		alert(stuname);
+		window.open('data:application/vnd.ms-excel,'+stuname+'_Score_Info' + encodeURIComponent($('#scoreDate').html()), '_blank');
+		e.preventDefault(); 
+	});
+});
+</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
-	<div class="container" style="margin-left: 250px; padding-top: 25px;">
+	<div class="container" style="margin-left: 250px; padding-top: 25px;" id="scoreDate">
 		<div class="panel panel-heading">
+			<input type="hidden" value="${stuinfo.name }" id="stuname">
+			<label><strong>${stuinfo.name } 성적 정보</strong></label>
 			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th bgcolor="#f0fcff">
+							<label>전체 평점 평균</label>
+						</th>
+						<th bgcolor="#f0fcff">
+							<label>전체 백분율</label>
+						</th>
+						<th bgcolor="#f0fcff">
+							<label>전체 신청학점</label>
+						</th>
+						<th bgcolor="#f0fcff">
+							<label>전체 취득학점</label>
+						</th>
+					</tr>
+				</thead>
 				<tbody>
 					<tr>
-						<td bgcolor="#dceef3" style="color: #333; width: 10%; vertical-align: middle; height: 30px;"><strong>전체 취득점수</strong></td>
-						<td bgcolor="#f0fcff">
-							<label>평점평균</label>
-							<input class="form-control" type="text" id="score_box3" disabled="disabled"/>		
+						<td>
+							<p><strong>${savgtotal.credit3 }</strong></p>
 						</td>
-						<td bgcolor="#f0fcff">
-							<label>백분율</label>
-							<input class="form-control" type="text" id="score_box3" disabled="disabled"/>
+						<td>
+							<p><strong>${savgtotal.credit4 }</strong></p>
 						</td>
-						<td bgcolor="#f0fcff">
-							<label>신청학점</label>
-							<input class="form-control" type="text" id="score_box3" disabled="disabled"/>
+						<td>
+							<p><strong>${savgtotal.credit1 }</strong></p>
 						</td>
-						<td bgcolor="#f0fcff">
-							<label>취득학점</label>
-							<input class="form-control" type="text" id="score_box3" disabled="disabled"/>
+						<td>
+							<p><strong>${savgtotal.credit2 }</strong></p>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="panel panel-body">
-			<label>전체성적 리스트 (홍진호)</label>
+			<label>전체성적 리스트</label>
 			<table class="table table-condensed">
 				<thead>
 					<tr bgcolor="#f0fcff">
@@ -79,12 +103,11 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<label>학기별 리스트 (홍진호)</label>
+			<label>학기별 리스트</label>
 			<table class="table table-condensed">
 				<thead>
 					<tr bgcolor="#f0fcff">
 						<th>학기</th>
-						<th>이수학년</th>
 						<th>신청학점</th>
 						<th>취득학점</th>
 						<th>평균점수</th>
@@ -97,24 +120,35 @@
 					</tr>
 				</thead>
 				<tbody id="score_td_box">
-					<tr style="text-align: left;">
-						<td>${savg.semename }</td>
-						<td>1</td>
-						<td>${savg.credit1 }</td>
-						<td>${savg.credit2 }</td>
-						<td>${savg.credit3 }</td>
-						<td>${savg.credit4 }</td>
-						<td>N</td>
-						<td>${savg.pass1 }</td>
-						<td>${savg.pass2 }</td>
-						<td>${savg.pass3 }</td>
-						<td>${savg.pass4 }</td>
-					</tr>
+					<c:forEach var="savg" items="${savg }">
+						<tr style="text-align: left;">
+							<td>${savg.semename }</td>
+							<td>${savg.credit1 }</td>
+							<td>${savg.credit2 }</td>
+							<td>${savg.credit3 }</td>
+							<td>${savg.credit4 }</td>
+							<c:choose>
+								<c:when test="${savg.grade gt 2}">
+									<td>Y</td>
+								</c:when>
+								<c:otherwise>
+									<td>N</td>
+								</c:otherwise>
+							</c:choose>
+							<td>${savg.pass1 }</td>
+							<td>${savg.pass2 }</td>
+							<td>${savg.pass3 }</td>
+							<td>${savg.pass4 }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 		<div class="panel panel-footer">
-			<label>자료가 *건 조회되었습니다.</label>
+			<div class="text-right">
+				<a href="scorelist.do" class="btn btn-info">메인</a>
+				<button class="btn btn-success" type="button" id="scoreprint">엑셀</button>
+			</div>
 		</div>
 	</div>
 </body>

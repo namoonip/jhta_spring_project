@@ -15,8 +15,6 @@
 		select
 	   r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
-	   r.R_GRADE as "grade",
-	   r.R_MAXGRADE as "maxGrade",
 	    e.E_NO as "enroll.no", 
 	    e.E_ENROLLTIME as "enroll.enrollTime", 
 	    e.E_ENROLLDAY as "enroll.enrollDay",
@@ -64,8 +62,6 @@
 	<select id="getAllRegiList" resultType="kr.co.jhta.vo.SubjectRegister">
 		select
 			r_regi_no as regiNo,
-			r_maxgrade as maxgrade,
-			r_grade as grade,
 			j_no as jNo,
 			u_stu_no as stuNo
 		from
@@ -89,8 +85,6 @@
 	<select id="getRegiListByNo" parameterType="int" resultType="kr.co.jhta.vo.SubjectRegister">
 		select
 			r_regi_no as regiNo,
-			r_maxgrade as maxgrade,
-			r_grade as grade,
 			j_no as jNo,
 			u_stu_no as stuNo
 		from
@@ -205,8 +199,6 @@
 	<select id="getRegisInfoByhash" parameterType="hashmap" resultType="kr.co.jhta.vo.stu.Regisubject">
 		select r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
-	   r.R_GRADE as "grade",
-	   r.R_MAXGRADE as "maxGrade",
 	    e.E_NO as "enroll.no", 
 	    e.E_ENROLLTIME as "enroll.enrollTime", 
 	    e.E_ENROLLDAY as "enroll.enrollDay",
@@ -279,8 +271,6 @@
 	   r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
 	   r.J_NO as "subject.no",
-	   r.R_GRADE as "grade",
-	   r.R_MAXGRADE as "maxGrade",
 		   u.U_STU_ID as "student.id",
 		   u.U_STU_NAME as "student.name",
 		   u.U_STU_DIVISION as "student.division",
@@ -330,8 +320,6 @@
 	   r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
 	   r.J_NO as "subject.no",
-	   r.R_GRADE as "grade",
-	   r.R_MAXGRADE as "maxGrade",
 		   u.U_STU_ID as "student.id",
 		   u.U_STU_NAME as "student.name",
 		   u.U_STU_DIVISION as "student.division",
@@ -369,20 +357,21 @@
 		and sc.REGISTER = r.R_REGI_NO
 		and r.U_STU_NO = u.U_STU_NO
 		and r.U_STU_NO = #{sno }
+		order by r.R_REGI_NO
 	</select>
 	
 	<select id="getSemesterAvgBySno" parameterType="int" resultType="kr.co.jhta.vo.SemesterAvg">
 		select
 			sem.S_SEME_SELECT as semename,
-			sum(r.R_MAXGRADE)as credit1,
-			sum(r.R_GRADE) as credit2,
-			avg(r.R_GRADE) as credit3,
+			sum(s.j_score) as credit1,
+			sum(sc.S_CREDIT) as credit2,
+			trunc(avg(sc.S_CREDIT), 1) as credit3,
 			avg(sc.S_REPORT_SCORE*0.1 + sc.S_ATTENDANCE_SCORE*0.3 + sc.S_MIDTERM_SCORE*0.3 + sc.S_ENDTERM_SCORE*0.3) as credit4,
 			count(case when sc.s_grade = 'F' then 0 end) as grade,
-			count(case when s.J_IS_PASSED ='전공필수' then 0 end) as pass1,
-			count(case when s.J_IS_PASSED ='전공선택' then 0 end) as pass2,
-			count(case when s.J_IS_PASSED ='교양선택' then 0 end) as pass3,
-			count(case when s.J_IS_PASSED ='교양필수' then 0 end) as pass4
+			count(case when s.J_IS_PASSED ='me' then 0 end) as pass1,
+			count(case when s.J_IS_PASSED ='ms' then 0 end) as pass2,
+			count(case when s.J_IS_PASSED ='cs' then 0 end) as pass3,
+			count(case when s.J_IS_PASSED ='ce' then 0 end) as pass4
 		from  
 			J_SUBJECT s,
 			T_SITEMAP t,
@@ -398,5 +387,34 @@
 		and r.U_STU_NO = u.U_STU_NO
 		and r.U_STU_NO = #{sno }
 		group by sem.S_SEME_SELECT
+	</select>
+	
+	<select id ="getSemesterAvgTotalBySno" parameterType="int" resultType="kr.co.jhta.vo.SemesterAvg">
+		select
+		r.U_STU_NO as sno,
+		sum(s.j_score) as credit1,
+		sum(sc.S_CREDIT) as credit2,
+		trunc(avg(sc.S_CREDIT), 1) as credit3,
+		avg(sc.S_REPORT_SCORE*0.1 + sc.S_ATTENDANCE_SCORE*0.3 + sc.S_MIDTERM_SCORE*0.3 + sc.S_ENDTERM_SCORE*0.3) as credit4,
+		count(case when sc.s_grade = 'F' then 0 end) as grade,
+		count(case when s.J_IS_PASSED ='me' then 0 end) as pass1,
+		count(case when s.J_IS_PASSED ='ms' then 0 end) as pass2,
+		count(case when s.J_IS_PASSED ='cs' then 0 end) as pass3,
+		count(case when s.J_IS_PASSED ='ce' then 0 end) as pass4
+from  
+		J_SUBJECT s,
+		T_SITEMAP t,
+		R_REGISUBJECT r,
+		S_SCORE sc,
+		U_STUDENT u,
+		S_SEMESTER sem
+where 
+		t.T_CODE = s.J_T_CODE
+	and r.J_NO = s.J_NO
+	and sem.S_NO = s.J_SEMESTER
+	and sc.REGISTER = r.R_REGI_NO
+	and r.U_STU_NO = u.U_STU_NO
+	and r.U_STU_NO = #{sno }
+group by r.U_STU_NO
 	</select>
 </mapper>

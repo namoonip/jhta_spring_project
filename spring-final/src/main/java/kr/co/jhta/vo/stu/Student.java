@@ -23,17 +23,16 @@ public class Student {
 	private int score;
 	private String phone;
 	private String professor;
+	private int remainLeave;
 	
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}		
-	
-	
 
 	public Student(int no, String addr1, String addr2, String email, int grade, String ssn, Date enterDate,
 			Date leaveDate, String parentName, String parentPhone, String id, String pwd, String name, String gender,
-			String division, String register, int score, String phone, String professor) {
+			String division, String register, int score, String phone, String professor, int remainLeave) {
 		super();
 		this.no = no;
 		this.addr1 = addr1;
@@ -54,9 +53,8 @@ public class Student {
 		this.score = score;
 		this.phone = phone;
 		this.professor = professor;
+		this.remainLeave = remainLeave;
 	}
-
-
 
 	public int getNo() {
 		return no;
@@ -201,20 +199,18 @@ public class Student {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	
-	
 	public String getProfessor() {
 		return professor;
 	}
-
-
-
 	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
-
-
+	public int getRemainLeave() {
+		return remainLeave;
+	}
+	public void setRemainLeave(int remainLeave) {
+		this.remainLeave = remainLeave;
+	}
 
 	@Override
 	public String toString() {
@@ -224,7 +220,5 @@ public class Student {
 				+ ", gender=" + gender + ", division=" + division + ", register=" + register + ", score=" + score
 				+ ", phone=" + phone + "]";
 	}
-	
-	
 	
 }

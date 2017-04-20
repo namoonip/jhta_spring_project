@@ -9,7 +9,7 @@ public class Enroll {
 	private Subject subject;
 	private SubjectDivision division;
 	private String enrollDay;
-	private int enrollTime;
+	private String enrollTime;
 	private int enrollNum;
 	private int stuNo;
 	
@@ -18,7 +18,7 @@ public class Enroll {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Enroll(int no, Subject subject, SubjectDivision division, String enrollDay, int enrollTime, int enrollNum,
+	public Enroll(int no, Subject subject, SubjectDivision division, String enrollDay, String enrollTime, int enrollNum,
 			int stuNo) {
 		super();
 		this.no = no;
@@ -72,11 +72,14 @@ public class Enroll {
 	public void setEnrollDay(String enrollDay) {
 		this.enrollDay = enrollDay;
 	}
-	public int getEnrollTime() {
+
+	public String getEnrollTime() {
 		return enrollTime;
 	}
-	public void setEnrollTime(int enrollTime) {
+
+	public void setEnrollTime(String enrollTime) {
 		this.enrollTime = enrollTime;
 	}
+	
 	
 }

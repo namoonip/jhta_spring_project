@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,12 +29,6 @@ public class OpenLectureRest {
 		
 		List<ProfessorOpenLecture> professorId = openlectureservice.getInformationProfessor(id);
 		
-		
-		if (professorId == null) {
-			
-			ProfessorOpenLecture professor = new ProfessorOpenLecture();
-		}
-		
 		return professorId;
 	}
 	
@@ -55,6 +50,15 @@ public class OpenLectureRest {
 		List<LectureEvaluationSheet> evaluationSheet = openlectureservice.getLecturEevaluationSheet(subjectNo);
 		
 		return evaluationSheet;
+		
+	}
+	
+	//테이블 행 삭제관련 ajax
+	@DeleteMapping(path="/deletesubject/{deleteNo}")
+	public void EvaluationSheetDelete(@PathVariable("deleteNo")int subjectNo){
+	
+		openlectureservice.professorSubjectdelete(subjectNo);
+		
 		
 	}
 }

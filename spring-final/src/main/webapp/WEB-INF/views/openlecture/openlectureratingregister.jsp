@@ -18,19 +18,6 @@
 
 	$(function(){
 		
-		//데이터 저장
-		$("[name='contents']").on("click", function(){
-			
-			if($("#professorIdHidden").val() == ""){
-				alert("상세 정보를 입력하세요.");
-			}
-			
-		});
-		
-		
-		
-		
-		
 		//선택 조회하기
 		$("#search-button").on("click", function(){
 			
@@ -60,9 +47,13 @@
 						console.log(subjectName);
 						var subjectNo = data[i].subjectNo;
 						console.log(subjectNo);
+						var id = data[i].id;
+						var register = data[i].register;
 						
+						//강의개설후 강의 평가한 과목은 y 아닌과목은 n으로 함
+						if(register != 'y'){	
 						var html = "<tr>";
-						html += "<td><input type='radio' name='options' value='"+code+'-'+subjectNo+'-'+professorName+'-'+subjectName+"'></td>";
+						html += "<td><input type='radio' name='options' value='"+code+'-'+subjectNo+'-'+professorName+'-'+subjectName+'-'+id+'-'+register+"'></td>";
 						html += "<td>"+code+"</td>";
 						html += "<td>"+subjectNo+"</td>";
 						html += "<td>"+professorName+"</td>";
@@ -70,6 +61,7 @@
 						html += "</tr>"
 					
 						$tbody.append(html);	
+						}
 
 					}	
 					
@@ -82,9 +74,8 @@
 		$("#add-infromation").on("click", function(){
 			
 			if($('[name="options"]').is(':checked')){
-				var text = $('[name="options"]').filter(':checked').val().split("-");
 				
-				console.log(text);
+				var text = $('[name="options"]').filter(':checked').val().split("-");
 				
 				
 				$("#code").attr("value",text[0]);
@@ -208,7 +199,7 @@ select.menu{
 									      				<tr>
 									      					<td>
 																  <input type="radio" id="option-${professorList.no }" name="options" 
-																  value="${professorList.code }-${professorList.subjectNo }-${professorList.name }-${professorList.subjectName }-${professorList.id }">
+																  value="${professorList.code }-${professorList.subjectNo }-${professorList.name }-${professorList.subjectName }">
 															</td>
 									      					<td id="code-${professorList.code }">${professorList.code }</td>
 									      					<td id="subjectno-${professorList.subjectNo }">${professorList.subjectNo } </td>
@@ -316,6 +307,7 @@ select.menu{
 								<div class="col-sm-10">
 									<input id="professorIdHidden" name="professorId" type="hidden" value="" />
 									<input id="professorSubject" name="subjectNo" type="hidden" value="">
+									<input id="professorreister" name="register"  type="hidden" value="y"/>
 								</div>
 								<div class="col-sm-2">
 									<button id="infrosubmit" class="mdl-button mdl-js-button mdl-button--primary" type="submit">추가</button>

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.jhta.service.board.BoardService;
 import kr.co.jhta.service.sitemap.SitemapService;
+import kr.co.jhta.service.user.RegisubjectService;
 import kr.co.jhta.vo.Board;
 import kr.co.jhta.vo.BoardForm;
 import kr.co.jhta.vo.BoardView;
@@ -28,6 +29,8 @@ import kr.co.jhta.vo.PageNation;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.SearchForm;
 import kr.co.jhta.vo.SiteMap;
+import kr.co.jhta.vo.stu.Regisubject;
+import kr.co.jhta.vo.stu.Student;
 
 @Controller
 public class BoardController {
@@ -41,8 +44,13 @@ public class BoardController {
 	@Autowired
 	private SitemapService sitemapSerivce;
 	
+	@Autowired
+	private RegisubjectService regisubjectService;
+	
+	
 	@RequestMapping(value="/admin/homeboard", method=RequestMethod.GET)
 	public String homeboard(SearchForm searchForm, Model model){
+		
 		if (searchForm.getSearchBoardType() == null) {
 			searchForm.setSearchBoardType("N");
 			
@@ -153,7 +161,7 @@ public class BoardController {
 		return "redirect:/admin/detail?bno="+bno;
 	}
 	
-	// 게시판 디테일
+	// 어드민 게시판 디테일
 	@RequestMapping(value="/admin/detail", method=RequestMethod.GET)
 	public String detailBoard(@RequestParam int bno, Model model, HttpSession session){
 
@@ -193,7 +201,7 @@ public class BoardController {
 	}
 	
 	
-	// 게시글 등록
+	// 어드민 게시글 등록
 	@RequestMapping(value="/admin/boardForm", method=RequestMethod.POST)
 	public String addBoard(@Valid BoardForm boardForm, Errors errors, HttpSession session)throws Exception{
 		
@@ -304,6 +312,8 @@ public class BoardController {
 	public String profqnaBoard(){
 		return "/profboard/profqnaboard";
 	}
+	
+	
 	@RequestMapping(value="/prof/profdeptboard", method=RequestMethod.GET)
 	public String profdeptBoard(HttpSession session, SearchForm searchForm, Model model){
 		
@@ -311,9 +321,6 @@ public class BoardController {
 		SiteMap sitemap = sitemapSerivce.getSitemapByCodeService(prof.getDivision());
 		
 		searchForm.setDepartment(sitemap.getName());
-		
-		System.out.println(searchForm);
-		
 		int rows = boardService.searchBoardCount(searchForm);
 		
 		PageNation pageNation = null;
@@ -333,13 +340,10 @@ public class BoardController {
 		model.addAttribute("search", searchForm);
 		model.addAttribute("pagination", pageNation);
 		model.addAttribute("boardList", boardList);
-		
-		System.out.println(searchForm);
-		System.out.println(pageNation);
-		System.out.println(boardList);
-		
 		return "/profboard/profdeptboard";
 	}
+	
+	
 	@RequestMapping(value="/prof/profboardform", method=RequestMethod.GET)
 	public String profDeptBoardForm(Model model){
 		
@@ -347,6 +351,8 @@ public class BoardController {
 		
 		return "/profboard/profdeptboardform";
 	}
+	
+	
 	@RequestMapping(value="/prof/profboardform", method=RequestMethod.POST)
 	public String addProfDeptBoardForm(@Valid BoardForm boardForm, Errors err, Model model, HttpSession session)throws Exception{
 		
@@ -354,7 +360,7 @@ public class BoardController {
 		SiteMap sitemap = sitemapSerivce.getSitemapByCodeService(prof.getDivision());
 		
 		if (err.hasErrors()) {
-			return "/board/boardform";
+			return "/prof/boardform";
 		}
 		
 		MultipartFile upFile = boardForm.getAttachFile();
@@ -376,4 +382,127 @@ public class BoardController {
 		
 		return "redirect:/prof/profdeptboard";
 	}
+	
+	@RequestMapping(value="/prof/profdetail", method=RequestMethod.GET)
+	public String profBoardDetail (@RequestParam int bno, Model model, HttpSession session){
+		
+		System.out.println("실행");
+		
+		Professor professor = (Professor)session.getAttribute("LOGIN_USER");
+		
+		if (professor == null) {
+			return "redirect:/login?err=deny";
+		}
+		
+		// 조회수 중복 증가 ㄴㄴ
+		List<BoardView> viewUser = boardService.getBoardViewUser(bno);
+		if (!viewUser.isEmpty()) {
+			for (BoardView vUser : viewUser) {
+				if (!professor.getName().equals(vUser.getUserId())) {
+					BoardView view = new BoardView();
+					view.setBno(bno);
+					view.setUserId(professor.getName());
+					boardService.addBoardView(view);
+					boardService.updateCount(bno);
+				}else {
+					Board board = boardService.getBoard(bno);
+					model.addAttribute("board", board);
+					return "profboard/profdeptboarddetail";
+				}
+			}
+		}else {
+			BoardView view = new BoardView();
+			view.setBno(bno);
+			view.setUserId(professor.getName());
+			boardService.addBoardView(view);
+			boardService.updateCount(bno);
+		}
+		Board board = boardService.getBoard(bno);
+		model.addAttribute("board", board);
+		
+		return "profboard/profdeptboarddetail";
+	}
+	
+	@RequestMapping(value="/prof/modified", method=RequestMethod.GET)
+	public String profBoardModified(@RequestParam int bno, Model model ){
+		Board board = boardService.getBoard(bno);
+		
+		model.addAttribute("boardForm", new BoardForm());
+		model.addAttribute("board", board);
+		
+		return "profboard/profmodified";
+	}
+	
+	@RequestMapping(value="/prof/modified", method=RequestMethod.POST)
+	public String profBoardModifiedAdd(@Valid BoardForm boardForm, HttpSession session, Errors err, @RequestParam int bno, Model model)throws Exception{
+		if (err.hasErrors()) {
+			return "/board/boardmodified";
+		}
+		Professor professor = (Professor)session.getAttribute("LOGIN_USER");
+		
+		if (professor == null) {
+			return "redirect:/login?err=deny";
+		}
+		
+		MultipartFile upFile = boardForm.getAttachFile();
+
+		Board board = boardService.getBoard(bno);
+		
+		if (!upFile.isEmpty()) {
+			String filename = upFile.getOriginalFilename();
+			board.setFileName(filename);
+			IOUtils.copy(upFile.getInputStream(), new FileOutputStream(new File(DIRECTORY, filename)));
+			boardForm.setFileName(filename);
+		}
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bno", bno);
+		map.put("title", boardForm.getTitle());
+		map.put("contents", boardForm.getContents());
+		map.put("fileName", boardForm.getFileName());
+		
+		boardService.updateBoard(map);
+		
+		return "redirect:/prof/profdetail?bno="+bno;
+	}
+	
+	
+	// 학생게시판
+	
+	// 학생 학과
+	@RequestMapping(value="/stud/studeptboard", method=RequestMethod.GET)
+	public String studeptboard (HttpSession session, Model model) {
+		System.out.println("studeptboard 실행");
+		Student student = (Student)session.getAttribute("LOGIN_USER");
+		System.out.println(student);
+		
+		return "/stuboard/studeptboard";
+	}
+	
+	// 학생 자유
+	@RequestMapping(value="/stud/stufreeboard", method=RequestMethod.GET)
+	public String stufreeboard (HttpSession session, Model model) {
+		System.out.println("stufreeboard 실행");
+		Student student = (Student)session.getAttribute("LOGIN_USER");
+		
+		System.out.println(student);
+		
+		return "/stuboard/stufreeboard";
+	}
+	
+	// 학생 qna
+	@RequestMapping(value="/stud/stuqnaboard", method=RequestMethod.GET)
+	public String stuqnaboard (Student student, Model model) {
+		System.out.println(student);
+		
+		List<Regisubject> regiList = regisubjectService.getRegisByUserNoService(student.getNo());
+		
+		System.out.println(regiList);
+		
+		return "/stuboard/stuqnaboard";
+	}
+	
+	
+	
+	
 }

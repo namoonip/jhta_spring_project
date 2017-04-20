@@ -11,7 +11,7 @@
 			   e.E_ENROLLNUM as enrollNum,
 			   	s.J_NO as "subject.no",
 			   	s.J_T_CODE as "subject.siteCode.code",
-			    s.J_IS_PASSED as "subject.isPassed", 
+			    s.J_IS_PASSED as "subject.passed.passedName", 
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
@@ -39,7 +39,7 @@
 			   e.E_ENROLLNUM as enrollNum,
 			   	s.J_NO as "subject.no",
 			   	s.J_T_CODE as "subject.siteCode.code",
-			    s.J_IS_PASSED as "subject.isPassed.isPassed", 
+			    s.J_IS_PASSED as "subject.passed.passedName", 
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
@@ -68,7 +68,7 @@
 			   e.E_ENROLLNUM as enrollNum,
 			   	s.J_NO as "subject.no",
 			   	s.J_T_CODE as "subject.siteCode.code",
-			    s.J_IS_PASSED as "subject.isPassed.isPassed", 
+			    s.J_IS_PASSED as "subject.passed.passedName", 
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
@@ -99,9 +99,9 @@
 			E_ENROLLNUM)
 		values
 			(enrollment_seq.nextval,
-			#{day},
+			#{enrollDay},
 			#{subject.no},
-			#{time},
+			#{enrollTime},
 			0)
 	</insert>
 	
@@ -144,4 +144,15 @@
  		and E_NO = #{enrollNo}
 	</select>	
 	
+	<!-- <select id="getEnrollById" paraterType="string" resultType="Enroll">
+		select
+			e_no,
+			e_enrollday,
+			e_j_subject_no
+			
+		from
+		
+		where
+			
+	</select> -->
 </mapper>

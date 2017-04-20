@@ -126,4 +126,69 @@
 		and a.u_stu_register = c.c_code
 		and u_stu_register in ('AD1000', 'AD2000')
 	</select>
+	
+	<select id="getAllProfessor" resultType="Professor">
+		select 
+			u_prof_no as no,
+			u_prof_id as id,
+			u_prof_name as name,
+			u_prof_gender as gender,
+			u_prof_code as code,
+			T_NAME as division,
+			u_prof_pwd as pwd,
+			C_NAME as register,
+			u_prof_phone as phone,
+			u_prof_addr as addr,
+			u_prof_email as email,
+			u_prof_grade as grade,
+			u_prof_ssn as ssn,
+			u_prof_forei as forei,
+			u_prof_entrydate as entrydate,
+			u_prof_leavedate as leavedate
+		from
+			u_professor A, C_CODEREGISTER B, T_SITEMAP C
+		where 
+			A.U_PROF_REGISTER = B.C_CODE
+		AND	
+			A.U_PROF_DIVISION = C.T_CODE			
+		AND	
+			U_PROF_REGISTER = 'PF1000'
+	</select>
+	<select id="getProfessorById" resultType="Professor" parameterType="string">
+		select 
+			u_prof_no as no,
+			u_prof_id as id,
+			u_prof_name as name,
+			u_prof_gender as gender,
+			u_prof_code as code,
+			T_NAME as division,
+			u_prof_pwd as pwd,
+			C_NAME as register,
+			u_prof_phone as phone,
+			u_prof_addr as addr,
+			u_prof_email as email,
+			u_prof_grade as grade,
+			u_prof_ssn as ssn,
+			u_prof_forei as forei,
+			u_prof_entrydate as entrydate,
+			u_prof_leavedate as leavedate
+		from
+			u_professor A, C_CODEREGISTER B, T_SITEMAP C
+		where 
+			A.U_PROF_REGISTER = B.C_CODE
+		AND	
+			A.U_PROF_DIVISION = C.T_CODE			
+		AND	
+			U_PROF_REGISTER = 'PF1000'
+		AND 
+			U_PROF_ID = #{id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

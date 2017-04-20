@@ -21,7 +21,7 @@
 			C.u_prof_name as "professor.name",
 			D.s_seme_select as "selectNo.semeSelect",
 			A.j_grade as grade,
-			B.is_passed as "passed.isPassedName",
+			B.is_passed as "passed.passedName",
 			E.t_name as "siteCode.name",
 			A.j_score as score,
 			A.j_division as division,
@@ -73,6 +73,28 @@
 					and C.u_prof_name like '%'|| #{keyword} || '%'
 				</if>
 			</if>
+	</select>
+	
+	<select id="getEnorollByNo" parameterType="string" resultType="subject">
+		select
+			A.j_no as no,
+			A.j_subject_name as subjectName,
+			A.j_sub_prof as "professor.id",
+			A.j_semester as "selectNo.no",
+			A.j_grade as grade,
+			A.j_is_passed as "passed.code",
+			A.j_t_code as "siteCode.code",
+			A.j_score as score,
+			A.j_limit_stu as limitStu,
+			B.E_NO as no,
+			B.E_ENROLLDAY as enrollDay,
+			B.E_J_SUBJECT_NO as "subject.no",
+			B.E_ENROLLTIME as enrollTime,
+			B.E_ENROLLNUM as enrollNum
+		from
+			j_subject A, E_ENROLLMENT B
+		where
+			j_sub_prof = #{value}
 	</select>
 	
 	<select id="getSubByNo" parameterType="int" resultType="subject">
@@ -177,4 +199,45 @@
 			j_no = #{no}
 	
 	</update>
+
+	<update id="editSubjectByNo" parameterType="kr.co.jhta.vo.SubjectEditForm">
+		update j_subject
+		set
+			j_subject_name = #{subjectName},
+			j_limit_stu = #{limitStu},
+			j_is_passed = #{passed.code},
+			j_grade = #{grade},
+			j_sub_prof = #{professor.id},
+			j_score = #{score}
+		where
+			j_no = #{no}
+	</update>
+	<select id="getenroll" parameterType="string" resultType="subject">
+		select
+			B.J_SUBJECT_NAME as subjectName,
+			C.U_prof_name as "professor.name",
+			D.S_SEME_SELECT as "selectNo.semeSelect",
+			B.J_GRADE as grade,
+			E.IS_PASSED as "passed.passedName",
+			F.T_NAME as "siteCode.name",
+			B.J_SCORE as score,
+			A.E_ENROLLDAY as enday,
+			A.E_ENROLLTIME as entime
+		FROM
+			E_ENROLLMENT A, J_SUBJECT B, U_PROFESSOR C, S_SEMESTER D,
+			 J_IS_PASSED E, T_SITEMAP F
+		WHERE
+			A.E_J_SUBJECT_NO = B.J_NO
+		AND
+			B.J_SUB_PROF = C.U_PROF_ID
+		AND
+			B.J_SEMESTER = D.S_NO
+		AND
+			B.J_IS_PASSED = E.PASS_CODE
+		AND
+			B.J_T_CODE = F.T_CODE
+		AND
+			B.J_SUB_PROF = #{value}
+	</select>
+
 </mapper>

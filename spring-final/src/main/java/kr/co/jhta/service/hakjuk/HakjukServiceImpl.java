@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.jhta.dao.hakjuk.HakjukDAO;
 import kr.co.jhta.dao.user.StudentDao;
+import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
 import kr.co.jhta.vo.stu.Student;
 
@@ -48,4 +49,16 @@ public class HakjukServiceImpl implements HakjukService{
 	public List<Student> getAllAdmissionStudService() {
 		return hakjukDao.getAllAdmissionStud();
 	}
+	
+	@Override
+	public List<Professor> getAllProfessorService() { // 모든 재직 교수 정보 조회
+		return hakjukDao.getAllProfessor();
+	}
+	@Override
+	public Professor getProfessorByIdService(String id) { // 아이디를 받아서 교수 한명의 정보 조회
+		return hakjukDao.getProfessorById(id);
+	}
+	
+	
+	
 }

@@ -15,6 +15,6 @@ public interface StudentService {
 	void updateStudentInfoService(Student student);
 	void updateStudentProfessorService(String profName);
 	
-	String getTnameByTcodeService(String tCode);
+	String getTnameByTcodeService(int stuNo, String tCode);
 	String getCnameByRegisterService(String register);
 }

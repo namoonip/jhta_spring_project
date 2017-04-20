@@ -126,8 +126,14 @@ public class ScoreServiceImpl implements ScoreService{
 	}
 
 	@Override
-	public SemesterAvg getSemesterAvgBySno(int sno) {
+	public List<SemesterAvg> getSemesterAvgBySno(int sno) {
 		return scoreDao.getSemesterAvgBySno(sno);
 	}
+
+	@Override
+	public SemesterAvg getSemesterAvgTotalBySno(int sno) {
+		return scoreDao.getSemesterAvgTotalBySno(sno);
+	}
+	
 	
 }

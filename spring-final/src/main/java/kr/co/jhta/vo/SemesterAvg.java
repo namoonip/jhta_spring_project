@@ -4,7 +4,7 @@ public class SemesterAvg {
 	private String semename;
 	private int credit1;
 	private int credit2;
-	private int credit3;
+	private double credit3;
 	private int credit4;
 	private int grade;
 	private int pass1;
@@ -20,7 +20,7 @@ public class SemesterAvg {
 	public int getCredit2() {
 		return credit2;
 	}
-	public int getCredit3() {
+	public double getCredit3() {
 		return credit3;
 	}
 	public int getCredit4() {
@@ -50,7 +50,7 @@ public class SemesterAvg {
 	public void setCredit2(int credit2) {
 		this.credit2 = credit2;
 	}
-	public void setCredit3(int credit3) {
+	public void setCredit3(double credit3) {
 		this.credit3 = credit3;
 	}
 	public void setCredit4(int credit4) {

@@ -52,6 +52,7 @@
 		<mapper resource="META-INF/mybatis/mappers/application/disenroll.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/application/leave.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/application/reinstate.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/message/message.xml"/>
 		<!-- <mapper resource="META-INF/mybatis/mappers/board/review.xml"/> -->
 		<!-- <mapper resource="META-INF/mybatis/mappers/messege.xml"/> -->
 	</mappers>

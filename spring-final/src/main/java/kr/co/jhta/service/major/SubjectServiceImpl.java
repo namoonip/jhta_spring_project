@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.jhta.dao.major.SubjectDao;
 import kr.co.jhta.vo.Subject;
+import kr.co.jhta.vo.SubjectEditForm;
 import kr.co.jhta.vo.SubjectIsPassed;
 import kr.co.jhta.vo.SubjectSearchForm;
 
@@ -68,6 +69,11 @@ public class SubjectServiceImpl implements SubjectService{
 	@Override
 	public String getPassCodeByNo(int sno) {
 		return subjectDao.getPassCodeByNo(sno);
+	}
+	
+	@Override
+	public void editSubjectByNo(SubjectEditForm editform) {
+		subjectDao.editSubjectByNo(editform);
 	}
 	
 }

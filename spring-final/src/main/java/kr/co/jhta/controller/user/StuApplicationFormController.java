@@ -27,6 +27,8 @@ public class StuApplicationFormController {
 	@Autowired
 	LeaveService leaveService;
 	
+	static String ccName = "";
+	
 	@RequestMapping(value="/leave", method=RequestMethod.GET)
 	public String stuLeave(Model model, Student student) {
 		if(student.getName() == null) {
@@ -35,16 +37,20 @@ public class StuApplicationFormController {
 		
 		// 기본 정보 담기
 		model.addAttribute("student", student);
-		String tName = stuService.getTnameByTcodeService(student.getDivision());
+		String tName = getTnameInController(student);
 		model.addAttribute("tName", tName);
+		
 		String cName = stuService.getCnameByRegisterService(student.getRegister());
 		model.addAttribute("cName", cName);
-		List<Leave> leaveList = leaveService.getAllEnrolledLeaveByStuNoService(student.getNo());
-		model.addAttribute("leaveList", leaveList);
 		
 		// 휴학 정보 담기
-		
-		
+		List<Leave> leaveList = leaveService.getAllEnrolledLeaveByStuNoService(student.getNo());
+		for(Leave leave : leaveList ) {
+			ccName = leaveService.getCnameByCcodeService(leave.getCode());
+			leave.setcName(ccName);
+		}
+		model.addAttribute("leaveList", leaveList);
+				
 		return "/student/applications/leaveForm";
 	}
 		
@@ -53,12 +59,20 @@ public class StuApplicationFormController {
 		
 		// 기본 정보 담기
 		model.addAttribute("student", student);
-		String tName = stuService.getTnameByTcodeService(student.getDivision());
+		
+		String tName = getTnameInController(student);
 		model.addAttribute("tName", tName);
+		
 		String cName = stuService.getCnameByRegisterService(student.getRegister());
 		model.addAttribute("cName", cName);
 		
 		return "/student/applications/ReinstatementForm";
 	}
-
+	
+	
+	// 학적상태를 학생 번호와 C코드를 받아 반환한다.
+	public String getTnameInController(Student student) {
+		String tName = stuService.getTnameByTcodeService(student.getNo(), student.getDivision());
+		return tName;
+	}
 }
