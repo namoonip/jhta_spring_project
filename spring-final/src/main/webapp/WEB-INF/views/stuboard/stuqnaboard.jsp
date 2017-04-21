@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +12,33 @@
 <title></title>
 <script type="text/javascript">
 	$(function(){
-		console.log('실행');
+		var code = $('select[name="subjectSelect"]').val();
+		$.ajax({
+			type:'post',
+			url: '/jhta/stud/stuqnaboard.json',
+			data : {subjectCode : code},
+			dataType: 'json',
+			success : function(data){
+				var $tbody = $('tbody');
+				$(data).each(function(index, item){
+					var htmlContent = "<tr>";
+						htmlContent += "<td><input type='checkbox' id='deleteCheck-"+item.no+"'</td>";
+						htmlContent += "<td>"+item.no+"</td>";
+						htmlContent += "<td><a href='detail?bno="+item.no+"'>"+item.title+"</a></td>";
+						htmlContent += "<td>"+item.writer+"</td>";
+						htmlContent += "<td>"+item.regdate+"</td>";
+						htmlContent += "<td>"+item.countView+"</td>";
+						htmlContent += "</tr>";
+						$tbody.append(htmlContent);
+				});
+			}
+		});
+		
+		$('select[name="subjectSelect"]').change(function(){
+			console.log("실행");
+		});
+		
+		
 	});
 </script>
 </head>
@@ -28,8 +55,32 @@
 		</div>
 		<div style="margin-top: 20px;"></div>
 		<div class="row well">
-			<select class="stuClass">
+			<select class="form-control" name="subjectSelect">
+			<c:forEach var="sub" items="${subject }">
+				<option value="${sub.subjectCode }">${sub.sbjectName}</option>
+			</c:forEach>
 			</select>
+		</div>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>
+						<input type="checkbox" id="allCheck">
+					</th>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>등록일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+		<div class="text-center">
+			<%@ include file="/WEB-INF/views/board/nav.jsp" %>
 		</div>
 	</div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %>

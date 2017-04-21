@@ -2,8 +2,10 @@ package kr.co.jhta.controller.board;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -493,11 +495,22 @@ public class BoardController {
 	// 학생 qna
 	@RequestMapping(value="/stud/stuqnaboard", method=RequestMethod.GET)
 	public String stuqnaboard (Student student, Model model) {
-		System.out.println(student);
 		
 		List<Regisubject> regiList = regisubjectService.getRegisByUserNoService(student.getNo());
 		
-		System.out.println(regiList);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String , Object>> mapList = new ArrayList<Map<String,Object>>();
+
+		for (Regisubject subject : regiList) {
+			
+			map.put("sbjectName", subject.getSubject().getSubjectName());
+			map.put("subjectCode", subject.getSubject().getSiteCode().getCode());
+			mapList.add(map);
+	
+		}
+		
+		
+		model.addAttribute("subject", mapList);
 		
 		return "/stuboard/stuqnaboard";
 	}

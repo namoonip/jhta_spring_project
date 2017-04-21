@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.jhta.service.message.MessageService;
-import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.Email;
 
 @Controller
@@ -39,8 +38,10 @@ public class EmailController {
 	@RequestMapping(value="/adminsendprocess", method=RequestMethod.POST)
 	public String adminSendProcess(@ModelAttribute(name="email") Email email) {
 		MimeMessage message = mailSender.createMimeMessage();
+		
+		// List 파일을 Array 로 바꿔주는 코드
 		String[] addressList = email.getAddress().toArray(new String[email.getAddress().size()]);
-		System.out.println(email.getFile().getOriginalFilename());
+		
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			

@@ -50,8 +50,11 @@ public class OpenLectureServiceImpl implements OpenLectureService {
 	}
 	
 	@Override
-	public void professorSubjectdelete(int subjectNo) {
+	public List<ProfessorSubject> professorSubjectdelete(int subjectNo, String id) {
 		
 		openLecturedao.professorSubjectdelete(subjectNo);
+		
+		
+		return openLecturedao.subjectInquiries(id) ;
 	}
 }

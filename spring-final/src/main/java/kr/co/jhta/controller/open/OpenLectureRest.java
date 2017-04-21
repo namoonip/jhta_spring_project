@@ -33,7 +33,7 @@ public class OpenLectureRest {
 	}
 	
 	
-	//조회관련 테이블
+	//강의 평가 조회 테이블
 	@GetMapping(path="/searchtable/{SearchTable}")
 	public @ResponseBody List<ProfessorSubject> getProfessorSubject(@PathVariable("SearchTable") String id){
 		
@@ -54,12 +54,12 @@ public class OpenLectureRest {
 	}
 	
 	//테이블 행 삭제관련 ajax
-	@DeleteMapping(path="/deletesubject/{deleteNo}")
-	public void EvaluationSheetDelete(@PathVariable("deleteNo")int subjectNo){
+	@DeleteMapping(path="/deletesubject/{deleteNo}/{deleteId}")
+	public List<ProfessorSubject> EvaluationSheetDelete(@PathVariable("deleteNo")int subjectNo, @PathVariable("deleteId") String id){
 	
-		openlectureservice.professorSubjectdelete(subjectNo);
+		openlectureservice.professorSubjectdelete(subjectNo, id);
 		
-		
-	}
+		return openlectureservice.subjectInquiries(id);
+	}	
 }
 

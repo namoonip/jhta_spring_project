@@ -112,6 +112,7 @@ public class BoardAjaxController {
 					mapList.put("lectureList", lectureService.getMajorList(subjectCode));
 					
 					return mapList;
+					
 				}
 			}
 		}
@@ -128,5 +129,36 @@ public class BoardAjaxController {
 		return lectureService.getMajorList(subjectCode.replace("=", ""));
 		
 	}
+	
+	@PostMapping(path="/stud/stuqnaboard.json")
+	public @ResponseBody List<Board> getSubjectByCode(@RequestBody String subjectCode,  SearchForm searchForm){
+		String code = subjectCode.replace("subjectCode=", "");
+		searchForm.setSubjectNo(code);
+		searchForm.setSearchBoardType("Q");
+		
+		int rows = boardService.searchBoardCount(searchForm);
+		
+		System.out.println(rows);
+		System.out.println("실행");
+		System.out.println(searchForm);
+		
+		PageNation pageNation = null;
+		Map<String, Object> mapList = new HashMap<String, Object>();
+		if (searchForm.getDisplay() != 0) {
+			pageNation = new PageNation(searchForm.getDisplay(), searchForm.getPageNo(), rows);
+		}else {
+			pageNation = new PageNation(searchForm.getPageNo(), rows);
+		}
+		
+		searchForm.setBeginIndex(pageNation.getBeginIndex());
+		searchForm.setEndIndex(pageNation.getEndIndex());
+		
+		List<Board> boardList = boardService.searchBoard(searchForm);
+		
+		System.out.println(boardList);
+		
+		return boardService.searchBoard(searchForm);
+	}
+	
 	
 }

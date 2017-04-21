@@ -17,8 +17,10 @@ $(function() {
 		var name = $("tr[class='active'] td:eq(1)").text();
 		var address = $("tr[class='active'] td:eq(3)").text();
 		
-		$("#receiver-box").append("<span class='badge'>"+name+"</span> ");
-		$("#mail-form").append('<input type="hidden" name="address" value="'+address+'">')
+		if (name && address) {
+			$("#receiver-box").append("<span class='badge' onclick='click()'>"+name+"</span> ");
+			$("#mail-form").append('<input type="hidden" name="address" value="'+address+'">')	
+		}
 		
 		$(".modal-body tbody").empty();
 		$("#search-word").val("");
@@ -57,6 +59,12 @@ $(function() {
 		$(".modal-body tbody").empty();
 		$("#search-word").val("");
 	});
+	
+	$("span[class='badge']").click(function() {
+		$(this).click(function() {
+			alert("........");
+		});
+	})
 })
 </script>
 <style>

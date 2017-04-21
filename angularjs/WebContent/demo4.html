@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="resources/angular/angular.min.js"></script>
+<script type="text/javascript">
+ var myapp = angular.module("myApp", []);
+ 
+ /* repeat에 반환되는 값은 배열이다. */
+ myapp.filter("myFilter", function() {
+	return function(items, loc) {
+		/* items에는 모든 emp가 들어온다. */
+		var filteredItems = [];
+		if(loc) {
+			items.forEach(function(item, index) {
+				if(item.addr == loc) {
+					filteredItems.push(item);
+				}
+			});
+			
+		} else {
+			/* loc가 없는 경우 item 전체를 반환한다. */
+			return items;	
+		}
+		
+		return filteredItems;
+	} 
+ });
+ 
+ myapp.controller('empCtrl', function($scope) {
+	 $scope.employees = [
+		 {id:100, firstName:"홍", lastName:"길동", email:"hong@naver.com", addr:"서울"},
+		 {id:101, firstName:"이", lastName:"순신", email:"sunsin@naver.com", addr:"경기"},
+		 {id:102, firstName:"류", lastName:"관순", email:"kawn@naver.com", addr:"전남"},
+		 {id:103, firstName:"강", lastName:"감찬", email:"kang@naver.com", addr:"황해"},
+		 {id:104, firstName:"윤", lastName:"봉길", email:"bongs@naver.com", addr:"강원"},
+		 {id:105, firstName:"이", lastName:"성계", email:"songsnaver.com", addr:"충청"},
+		 {id:106, firstName:"김", lastName:"구", email:"nine9@naver.com", addr:"경남"},
+		 {id:107, firstName:"김", lastName:"유신", email:"yousin@naver.com", addr:"전남"},
+		 {id:108, firstName:"이", lastName:"황", email:"hwang@naver.com", addr:"전북"},
+		 {id:109, firstName:"류", lastName:"성룡", email:"rong@naver.com", addr:"서울"},
+		 {id:110, firstName:"김", lastName:"좌진", email:"jin@naver.com", addr:"충청"},
+		 {id:111, firstName:"김", lastName:"두한", email:"do@naver.com", addr:"경남"},
+		 {id:112, firstName:"안", lastName:"창호", email:"chang@naver.com", addr:"전남"},
+		 {id:113, firstName:"안", lastName:"중근", email:"jung@naver.com", addr:"전북"},
+		 {id:114, firstName:"윤", lastName:"동주", email:"dongju@naver.com", addr:"강원"},
+		 {id:115, firstName:"김", lastName:"소월", email:"so23@naver.com", addr:"서울"},
+		 {id:116, firstName:"박", lastName:"목월", email:"mon321@naver.com", addr:"경기"},
+		 {id:117, firstName:"황", lastName:"순원", email:"won88@naver.com", addr:"경북"}
+	 ];
+	$scope.xyz = "id";
+	$scope.location =""
+ });
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<div class="row" ng-controller="empCtrl">
+		<h3>직원 리스트</h3>
+		
+		<div class="row well">
+			<!-- location이라는 모델에 radio의 value가 담긴다. -->
+			<input type="radio" ng-model="location" value=""/>전체			
+			<input type="radio" ng-model="location" value="서울"/>서울			
+			<input type="radio" ng-model="location" value="강원"/>강원			
+			<input type="radio" ng-model="location" value="경기"/>경기			
+			<input type="radio" ng-model="location" value="경남"/>경남			
+			<input type="radio" ng-model="location" value="경북"/>경북			
+			<input type="radio" ng-model="location" value="전남"/>전남			
+			<input type="radio" ng-model="location" value="전북"/>전북			
+			<input type="radio" ng-model="location" value="충청"/>충청			
+			<input type="radio" ng-model="location" value="전북"/>전북
+			<input type="radio" ng-model="location" value="황해"/>황해
+		</div>
+		
+		<div class="row">
+			<label for="">정렬 기준</label>
+			<select ng-model="xyz">	<!-- xyz라는 모델에 select의 value가 담긴다. -->
+				<option value="id">Employee ID</option>
+				<option value="firstName">Employee First Name</option>
+				<option value="lastName">Employee Last Name</option>
+				<option value="email">Employee Email</option>
+				<option value="addr">Employee Address</option>
+			</select>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>first name</th>
+					<th>last name</th>
+					<th>email</th>
+					<th>address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- '|'는 필터 구분자이다. -->
+				<tr ng-repeat="emp in employees | myFilter:location | orderBy:xyz">
+					<td>{{emp.id}}</td>
+					<td>{{emp.firstName}}</td>
+					<td>{{emp.lastName}}</td>
+					<td>{{emp.email}}</td>
+					<td>{{emp.addr}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

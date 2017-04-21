@@ -23,8 +23,7 @@
 	});
 
 	myApp.controller("todoCtrl", function($scope) {
-		$scope.todos = [
-						{title:"수업하기", writer:"홍길동", day:"2017-4-20", completed:"미처리"}, 
+		$scope.todos = [{title:"수업하기", writer:"홍길동", day:"2017-4-20", completed:"미처리"}, 
 						{title:"영화보기", writer:"이순신", day:"2017-4-22", completed:"미처리"}
 		];
 		
@@ -42,7 +41,6 @@
 		$scope.addTodo= function(newTitle, newWriter, newDay) {
 			var todo = {title:newTitle, writer:newWriter, day:newDay, completed:"미처리"};
 			$scope.todos.push(todo);
-
 		}
 		
 		$scope.removeTodo = function(delIndex) {
@@ -106,8 +104,7 @@
 				<!-- 이벤트가 지속적으로 감지되게 때문에 등록되는 순간 이벤드가 바로 실행된다. -->
 				<button type="submit" class="btn btn-default">등록</button>
 			</div>
-	</form>		
-		
+	</form>				
 </div>
 </body>
 </html>

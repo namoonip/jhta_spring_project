@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="getRegisByUserNo" parameterType="int" resultType="Regisubject">
-select 
+	select 
 		r.R_REGI_NO as "no",
 	   r.U_STU_NO as "student.no",
 	    e.E_NO as "enroll.no", 

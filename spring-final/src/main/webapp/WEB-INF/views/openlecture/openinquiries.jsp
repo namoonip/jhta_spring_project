@@ -46,7 +46,7 @@
 
 	$(function(){
 		
-		
+	//테이블 조회	
 	$("#search-button").on("click", function(){
 		
 			event.preventDefault();
@@ -67,12 +67,13 @@
 							var	subjectCode = data[i].subjectCode;
 							var	subjectName = data[i].subjectName;
 							var	subjectPassd = data[i].subjectPassd;
+							var subjectId = data[i].subjectId;
 							var register = data[i].register;
 							
 							if(register == null){
 								
 								var html = "<tr>"
-								html += "<td style=width:10%><input type='radio' name='subjectradio' value='"+subjectNo+"'/></td>"
+								html += "<td style=width:10%><input type='radio' name='subjectradio' value='"+subjectNo+'-'+subjectId+"'/></td>"
 								html += "<td style=width:15%>"+subjectCode+"</td>";
 								html += "<td style=width:15%>"+subjectNo+"</td>";
 								html += "<td style=width:30%>"+subjectName+"</td>";
@@ -99,11 +100,12 @@
 						
 						}
 					
-					
+					//모달 강의 평가 
 						$("button[id^='openlecture']").on("click", function(event){
 						
-							var SubjectNo = $(this).attr('id').replace('openlecture-','');
-						console.log(SubjectNo)
+						var SubjectNo = $(this).attr('id').replace('openlecture-','');
+						
+						
 						$.ajax({
 							type:"GET",
 							url:"subjectNo/"+SubjectNo,
@@ -151,22 +153,22 @@
 									for(i=0; i<data.length; i++){
 										
 									html+='<tr id="">';
-									html+='<td style="width:10%" align="center" style="size: 1">'+i+'</td>';
+									html+='<td style="width:10%" align="center" style="size: 1">'+(i+1)+'</td>';
 									html+='<td style="width:40%" align="center" style="size: 1">'+data[i].contents+'</td>';
 									html+='<td style="width:10%" align="center" style="size: 1">';
-									html+='<input type="radio" checked="checked" name="appraise-1" style="size: 1"/>';
+									html+='<input type="radio" checked="checked" name="appraise" style="size: 1"/>';
 									html+='</td>';
 									html+='<td style="width:10%" align="center" style="size: 1">';
-									html+='<input type="radio" name="appraise-1" style="size: 1"/>';
+									html+='<input type="radio" name="appraise" style="size: 1"/>';
 									html+='</td>';
 									html+='<td style="width:10%" align="center" style="size: 1">';
-									html+='<input type="radio" name="appraise-1" style="size: 1"/>';
+									html+='<input type="radio" name="appraise" style="size: 1"/>';
 									html+='</td>';
 									html+='<td style="width:10%" align="center" style="size: 1">';
-									html+='<input type="radio" name="appraise-1" style="size: 1"/>';
+									html+='<input type="radio" name="appraise" style="size: 1"/>';
 									html+='</td>';
 									html+='<td style="width:10%" align="center" style="size: 1">';
-									html+='<input type="radio" name="appraise-1" style="size: 1"/>';
+									html+='<input type="radio" name="appraise" style="size: 1"/>';
 									html+='</td>';
 									html+='</tr>';
 									}
@@ -187,20 +189,27 @@
 					
 				}
 			});
+			
+			
 		//삭제 ajax
-		
 		$("#subjectdelete").on("click", function(){
 			
-			var deleteNo = $(":checked").val();
+			var text = $(":checked").val().split("-")
+			var deleteNo = text[0];
+			var deleteId = text[1];
+			
+			console.log(deleteNo);
+			console.log(deleteId);
 			
 			$.ajax({
 				type:"DELETE",
-				url:"deletesubject/"+deleteNo,
+				url:"deletesubject/"+deleteNo+"/"+deleteId,
 				dataType:"json",
 				success: function(data){
 				
 								var $tbody = $("#professorlist").empty();	
-					
+						
+							
 								for(i=0; i<data.length; i++){
 							
 								var subjectNo =data[i].subjectNo;
@@ -209,35 +218,20 @@
 								var	subjectPassd = data[i].subjectPassd;
 								var register = data[i].register;
 								
-								if(register == null){
-									
-									var html = "<tr>"
-									html += "<td style=width:10%><input type='radio' name='subjectradio' value='"+subjectNo+"'/></td>"
-									html += "<td style=width:15%>"+subjectCode+"</td>";
-									html += "<td style=width:15%>"+subjectNo+"</td>";
-									html += "<td style=width:30%>"+subjectName+"</td>";
-									html += "<td style=width:15%>"+subjectPassd+"</td>";
-									html += "<td style=width:15%><button disabled value='"+register+"' id='openlecture-"+subjectNo+"' type='button' class='btn btn-default btn-xs'data-toggle='modal' data-target='.bs-example-modal-lg'><i class='glyphicon glyphicon-list-alt'></i></button></td>";
-									html += "</tr>";
-									
-									$tbody.append(html);
-									
-								}else{
-									
-									var html = "<tr>"
-									html += "<td style=width:10%><input type='radio' name='subjectradio' value='"+subjectNo+"'/></td>"
-									html += "<td style=width:15%>"+subjectCode+"</td>";
-									html += "<td style=width:15%>"+subjectNo+"</td>";
-									html += "<td style=width:30%>"+subjectName+"</td>";
-									html += "<td style=width:15%>"+subjectPassd+"</td>";
-									html += "<td style=width:15%><button value='"+register+"' id='openlecture-"+subjectNo+"' type='button' class='btn btn-default btn-xs'data-toggle='modal' data-target='.bs-example-modal-lg'><i class='glyphicon glyphicon-list-alt'></i></button></td>";
-									html += "</tr>";
-									
-									$tbody.append(html);
-									
-								}
-				
-							}
+							
+								var html = "<tr>"
+								html += "<td style=width:10%><input type='radio' name='subjectradio' value='"+subjectNo+"'/></td>"
+								html += "<td style=width:15%>"+subjectCode+"</td>";
+								html += "<td style=width:15%>"+subjectNo+"</td>";
+								html += "<td style=width:30%>"+subjectName+"</td>";
+								html += "<td style=width:15%>"+subjectPassd+"</td>";
+								html += "<td style=width:15%><button disabled value='"+register+"' id='openlecture-"+subjectNo+"' type='button' class='btn btn-default btn-xs'data-toggle='modal' data-target='.bs-example-modal-lg'><i class='glyphicon glyphicon-list-alt'></i></button></td>";
+								html += "</tr>";
+								
+								$tbody.append(html);
+								
+						}
+							
 					}
 			});
 		});
