@@ -11,4 +11,5 @@ public interface LeaveService {
 	
 	void deleteEnrollByNoService(int lNo, int stuNo);
 	String getCnameByCcodeService(String cCode);
+	void updateLeaveService(int lNo, int stuNo, String cCode);
 }

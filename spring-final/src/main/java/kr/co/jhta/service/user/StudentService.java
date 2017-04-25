@@ -17,4 +17,9 @@ public interface StudentService {
 	
 	String getTnameByTcodeService(int stuNo, String tCode);
 	String getCnameByRegisterService(String register);
+	
+	void updateAddScoreService(int score, int stuNo); 
+	void updateMinusScoreService(int score, int stuNo);
+	
+	int getNowScoreService(int stuNo);
 }

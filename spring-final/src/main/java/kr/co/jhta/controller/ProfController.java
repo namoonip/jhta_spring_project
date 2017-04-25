@@ -20,7 +20,9 @@ import kr.co.jhta.service.major.SemesterService;
 import kr.co.jhta.service.major.SubjectService;
 import kr.co.jhta.service.professor.ProfessorService;
 import kr.co.jhta.service.professor.SyllabusService;
+import kr.co.jhta.service.report.PreportService;
 import kr.co.jhta.service.user.EnrollService;
+import kr.co.jhta.vo.Preport;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.ProfessorForm;
 import kr.co.jhta.vo.Semester;
@@ -54,6 +56,9 @@ public class ProfController {
 	@Autowired
 	private EnrollService enrollService;
 	
+	@Autowired
+	private PreportService preportService;
+	
 	@RequestMapping("/home")
 	public String testMain() {
 		return "/prof/profMain";
@@ -69,8 +74,8 @@ public class ProfController {
 	public String syllForm(Model model, HttpSession session){
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
 		model.addAttribute("prof", prof);
-		List<Subject> subList = subjectService.getByProIdList(prof.getId());
-		model.addAttribute("subList", subList);
+		List<Preport> pList = preportService.getProfEnroll(prof.getId());
+		model.addAttribute("pList",pList);
 		model.addAttribute("syllabusform", new Syllabusform());
 		
 		return "/prof/syllabusform";
@@ -198,6 +203,7 @@ public class ProfController {
 		Subject subject = new Subject();
 		subject.setNo(enrollform.getSubjectNo());
 		enroll.setSubject(subject);
+		
 		BeanUtils.copyProperties(enrollform, enroll);
 		enrollService.addEnroll(enroll);
 		
@@ -205,11 +211,16 @@ public class ProfController {
 		return "redirect:/prof/subinfo";
 	}
 	
+	@RequestMapping("/timeschedule")
+	public String timeschedule(){
+		return "/prof/timeschedule";
+	}
 	
 	@RequestMapping("/subinfo")
 	public String subinfo(Model model, HttpSession session){
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
-		List<Subject> subList = subjectService.getByProIdList(prof.getId());
+		System.out.println(prof.getId());
+		List<Enroll> subList = enrollService.getProfEnroll(prof.getId());
 		model.addAttribute("subList", subList);
 		
 		return "/prof/subinfo";
@@ -224,44 +235,34 @@ public class ProfController {
 	@RequestMapping("/subdetail")
 	public String subdetail(@RequestParam("no")int no, Model model, Subject sub){
 		
-		Subject subno = subjectService.getByNoList(sub.getNo());
+		Subject subno = subjectService.getByENoList(no);
 		model.addAttribute("subno", subno);
 		return "/prof/subdetail";
 	}
 	@RequestMapping(value="/subupdate", method=RequestMethod.GET)
-	public String subupdateform(@RequestParam("no")int no, Model model, @Valid @ModelAttribute("subjackform")SubjectAddForm subjackform, Subject sub){
-		Subject subno = subjectService.getByNoList(sub.getNo());
-		model.addAttribute("subno", subno);
-		List<SubjectIsPassed> passList = subjectService.getPassAllList();
-		model.addAttribute("passList", passList);
-		List<Semester> semeList = semesterService.getAllSemester();
-		model.addAttribute("semeList", semeList);
+	public String subupdateform(@RequestParam("no")int no, Model model, @Valid @ModelAttribute("enrollform")EnrollForm enrollform, HttpSession session){
+		Enroll enroll = enrollService.getEnrollByENoService(no);
+		model.addAttribute("enroll", enroll);
+		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
+		List<Subject> subList = subjectService.getByProIdList(prof.getId());
+		model.addAttribute("subList", subList);
 		
 		return "/prof/subupdate";
 	}
 	@RequestMapping(value="/subupdate", method=RequestMethod.POST)
-	public String subupdate(@RequestParam("no") int no,@Valid @ModelAttribute("subjackform")SubjectAddForm subjackform, Errors errors) throws Exception{
-		System.out.println(subjackform);
+	public String subupdate(@RequestParam("no") int no,@Valid @ModelAttribute("enrollform")EnrollForm enrollform, Errors errors) throws Exception{
+		System.out.println(enrollform);
 		if(errors.hasErrors()){
 			System.out.println(errors.getAllErrors());
-			return "/prof/addsubjectform";
+			return "/prof/subupdate";
 		}
 		Subject subject = new Subject();
-		subject.setNo(no);
-		Professor prof = new Professor();
-		prof.setId(subjackform.getProfessor());
-		subject.setProfessor(prof);
-		Semester seme = new Semester();
-		seme.setNo(subjackform.getSelectNo());
-		subject.setSelectNo(seme);
-		SubjectIsPassed pass = new SubjectIsPassed();
-		pass.setCode(subjackform.getPassed());
-		subject.setPassed(pass);
-		SiteMap site = new SiteMap();
-		site.setCode(subjackform.getCode());
-		subject.setSiteCode(site);
-		BeanUtils.copyProperties(subjackform, subject);
-		subjectService.subupdate(subject);
+		Enroll enroll = new Enroll();
+		enroll.setNo(no);
+		subject.setNo(enrollform.getSubjectNo());
+		enroll.setSubject(subject);
+		BeanUtils.copyProperties(enrollform, enroll);
+		enrollService.updateEnroll(enroll);
 		return "redirect:/prof/subinfo";
 	}
 	@RequestMapping(value="/profinfo", method=RequestMethod.GET)
@@ -303,38 +304,15 @@ public class ProfController {
 		if(professor.getPwd().equals(profPwd)){
 			System.out.println(profPwd + "." +professor);
 			isPassed = true;
+			professor.setPwd(Repwd);
 			professorService.updateProfessorPwd(professor);
+			model.addAttribute("confirm", isPassed);
 			model.addAttribute("professor",professor);
 			return "/prof/profpwdcheck";
 		}
-		model.addAttribute("confirm", isPassed);
 		return "redirect:/prof/profpwdcheck";
 	}
+	
+	
 
-	/*
-	@RequestMapping(value="/stuPwdEdit", method=RequestMethod.GET)
-	public String stuPwdEditForm() {
-		return "/student/stuInfo/stuPwdEdit";
-	}
-	
-	@RequestMapping(value="/stuPwdEdit", method=RequestMethod.POST)
-	public String stuPwdEditProcess() {
-		
-		return null;
-	}
-	
-	@RequestMapping(value="/stuPwdCheck", method=RequestMethod.POST) 
-	public String stuPwdCheck(Student student, Model model, 
-						@RequestParam(value="stuPwd", required=true) String stuPwd,
-						@RequestParam(value="Repwd", required=true) String Repwd) {
-		boolean isPassed = false;
-		if(student.getPwd().equals(stuPwd)) {
-			isPassed = true;
-			stuService.updateStudentPwdService(student);
-			model.addAttribute("student", student);
-			return "/student/stuInfo/stuPwdEdit";
-		}		
-		model.addAttribute("confirm", isPassed);
-		return "/student/stuInfo/stuPwdCheck";
-	}*/
 }

@@ -63,4 +63,12 @@ public class EnrollServiceImpl implements EnrollService{
 		enrollDao.addEnroll(enroll);
 		
 	}
+	@Override
+	public List<Enroll> getProfEnroll(String id) {
+		return enrollDao.getProfEnroll(id);
+	}
+	@Override
+	public void updateEnroll(Enroll enroll) {
+		enrollDao.updateEnroll(enroll);
+	}
 }

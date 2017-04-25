@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,6 +11,16 @@
   <script src="../resources/fullcalendar/lib/moment.min.js"></script>
   <script src="../resources/fullcalendar/lib/jquery.min.js"></script>
   <script src="../resources/fullcalendar/fullcalendar.min.js"></script>
+  <style type="text/css">
+   th { 
+   	  text-align: center !important;
+      vertical-align: middle !important;
+      }
+   td{
+   	  text-align: center !important;
+      vertical-align: middle !important;
+   }
+</style>
 <script type="text/javascript">
 $(function() {
 	
@@ -196,18 +208,74 @@ $(function() {
 	      <div class="col-xs-6">
 	      	<div class="panel panel-default">
 		      	<div class="panel-heading">
-					<strong>최근 공지사항</strong><span style="padding-left: 5px;"><a href="" class="btn-default btn-xs">more</a></span>
+					<strong>최근 공지사항</strong>
 		        </div> 
 		       	<div class="panel-body">
-		
+					<table class="table table-default">
+						<colgroup>
+							<col width="10%">
+							<col width="*%">
+							<col width="15%">
+							<col width="20%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="board" items="${boardList }">
+								<tr>
+									<td>${board.no }</td>
+									<td><a href="stuNoticeBoarddetail?bno=${board.no }">${board.title }</a></td>
+									<td>${board.writer }</td>
+									<td><fmt:formatDate value="${board.regdate }"/> </td>
+									<td>${board.countView }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 		        </div>
 	      	</div>
 	      	<div class="panel panel-default">
 		      	<div class="panel-heading">
-					<strong>Q&amp;A</strong><span style="padding-left: 5px;"><a href="" class="btn-default btn-xs">more</a></span>
+					<strong>학과 게시판</strong><div class="pull-right"><span style="padding-left: 5px;"><a href="studeptboard" class="btn-default btn-xs">more</a></span></div>
 		        </div> 
 		       	<div class="panel-body">
-		
+					<table class="table table-default">
+						<colgroup>
+							<col width="10%">
+							<col width="*%">
+							<col width="15%">
+							<col width="20%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="board" items="${deptList }">
+								<tr>
+									<td>${board.no }</td>
+									<td><a href="stuDeptBoarddetail?bno=${board.no }">${board.title }</a></td>
+									<td>${board.writer }</td>
+									<td><fmt:formatDate value="${board.regdate }"/> </td>
+									<td>${board.countView }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 		        </div>
 	      	</div>
 	      </div>

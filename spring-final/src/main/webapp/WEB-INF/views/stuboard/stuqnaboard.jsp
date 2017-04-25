@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,34 +11,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title></title>
+<style type="text/css">
+   th { 
+   	  text-align: center !important;
+      vertical-align: middle !important;
+      }
+   td{
+   	  text-align: center !important;
+      vertical-align: middle !important;
+   }
+</style>
 <script type="text/javascript">
 	$(function(){
-		var code = $('select[name="subjectSelect"]').val();
-		$.ajax({
-			type:'post',
-			url: '/jhta/stud/stuqnaboard.json',
-			data : {subjectCode : code},
-			dataType: 'json',
-			success : function(data){
-				var $tbody = $('tbody');
-				$(data).each(function(index, item){
-					var htmlContent = "<tr>";
-						htmlContent += "<td><input type='checkbox' id='deleteCheck-"+item.no+"'</td>";
-						htmlContent += "<td>"+item.no+"</td>";
-						htmlContent += "<td><a href='detail?bno="+item.no+"'>"+item.title+"</a></td>";
-						htmlContent += "<td>"+item.writer+"</td>";
-						htmlContent += "<td>"+item.regdate+"</td>";
-						htmlContent += "<td>"+item.countView+"</td>";
-						htmlContent += "</tr>";
-						$tbody.append(htmlContent);
-				});
-			}
-		});
+		
+		var code = '';
+		code = $('select[name="subjectSelect"]').val();
+		$('#search-form :input[name="subjectNo"]').val(code);
 		
 		$('select[name="subjectSelect"]').change(function(){
-			console.log("실행");
+			 code = $('select[name="subjectSelect"]').val();
+			$('#search-form :input[name="subjectNo"]').val(code);
 		});
 		
+		$('#search-btn').click(function(){
+			
+			$('#search-form').submit();
+		});
 		
 	});
 </script>
@@ -55,34 +54,69 @@
 		</div>
 		<div style="margin-top: 20px;"></div>
 		<div class="row well">
-			<select class="form-control" name="subjectSelect">
-			<c:forEach var="sub" items="${subject }">
-				<option value="${sub.subjectCode }">${sub.sbjectName}</option>
-			</c:forEach>
-			</select>
+			<div class="form-inline">
+				<select class="form-control" name="subjectSelect" style="width: 300px;">
+				<c:forEach var="item" items="${subject }">
+					<option value="${item.division }">${item.subjectName }</option>
+				</c:forEach>
+				</select>
+				<button id="search-btn" class="btn btn-primary">검색</button>
+			</div>
 		</div>
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>
-						<input type="checkbox" id="allCheck">
-					</th>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>등록일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				
-			</tbody>
-		</table>
+		<div class="row">
+			<table class="table table-striped">
+				<colgroup>
+						<col width="5%">
+						<col width="5%">
+						<col width="*">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>
+							<input type="checkbox" id="allCheck">
+						</th>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>등록일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="board" items="${boardList }">
+						<tr>
+							<td>
+								<input type="checkbox" id="deleteCheck-${board.no }">
+							</td>
+							<td>${board.no }</td>
+							<td><a href="stuqnadetail?bno=${board.no }">${board.title }</a></td>
+							<td>${board.writer }</td>
+							<td><fmt:formatDate value="${board.regdate }"/> </td>
+							<td>${board.countView }</td>
+						</tr>
+						</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="text-right">
+			<a href="stuqnaboardform" class="btn btn-primary btn-xs">Q&amp;A 등록</a>
+		</div>
 		<div class="text-center">
-			<%@ include file="/WEB-INF/views/board/nav.jsp" %>
+			<div class="text-center">
+				<%@ include file="/WEB-INF/views/board/nav.jsp" %>
+			</div>
 		</div>
 	</div>
+	<form id="search-form" action="stuqnaboard" method="post">
+		<input type="hidden" name="pageNo" value="1">
+		<input type="hidden" name="searchType"  value="${serch.searchType }">
+		<input id="keyword" type="hidden" name="keyword" value="${search.keyword }" >
+		<input type="hidden" name="display"  value="10">
+		<input type="hidden" name="subjectNo" value="">
+	</form>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
 </html>

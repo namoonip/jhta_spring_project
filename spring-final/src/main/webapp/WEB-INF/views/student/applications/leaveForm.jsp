@@ -12,20 +12,7 @@
 	.show { display: none !important;}
 </style>
 <script type="text/javascript">
-$(function() {
-	$("#checkbox-leave").click(function() {
-		if($("#checkbox-leave:checked").val()) {
-			$("#change-Leave").css("display", "");
-			$("#leave-Enroll").hide();
-			$("#change-Enroll").css("display", "");
-			return;
-		} else {
-			$("#change-Leave").css("display", "none");
-			$("#change-Enroll").hide();
-			$("#leave-Enroll").css("display", "");
-			return;
-		}
-	});
+$(function() {	
 	
 	$("select[name='chageReason']").click(function() {
 		var reason = $("select[name='chageReason'] :selected").val();
@@ -45,6 +32,10 @@ $(function() {
 				$("select[name='chageReason']").focus();
 				return false;
 			}
+		}
+		if(($("#leave-Pass").val() == 'false') && ($("#checkbox-leaveHidden").val() == 'false')) {
+			alert("미승인 신청내역이 존재합니다.");
+			return false;
 		}
 	});	
 	
@@ -113,6 +104,20 @@ $(function() {
 		
 		$('form').submit();
 	});
+	
+	$("#checkbox-leave").click(function() {
+		if($("#checkbox-leave:checked").val()) {
+			$("#checkbox-leaveHidden").val('true');
+			$("#change-Leave").css("display", "");
+			$("#leave-Enroll").text("변경");
+			return;
+		} else {
+			$("#change-Leave").css("display", "none");
+			$("#checkbox-leaveHidden").val('false');
+			$("#leave-Enroll").text("신청");
+			return;
+		}
+	});
 })
 </script>
 <style type="text/css">
@@ -148,7 +153,7 @@ $(function() {
 	        		<tr>
 	        			<th>구분</th>
 	        			<td colspan="3">
-	        				<c:out value="${cName }" />
+	        				<c:out value="${student.cName }" />
 	        			</td>
 	        		</tr>
 	        		<tr>
@@ -170,7 +175,7 @@ $(function() {
 	        		</tr>
 	        		<tr>
 	        			<th>전공</th>
-	        			<td><c:out value="${tName}"/></td>
+	        			<td><c:out value="${student.tName}"/></td>
 	        			<th>학년</th>
 	        			<td><c:out value="${student.grade }"/></td>
 	        		</tr>
@@ -202,12 +207,14 @@ $(function() {
       			<col width="5%" />
       			<col width="12%" />
       			<col width="5%" />
-      			<col width="15%" />
+      			<col width="10%" />
       			<col width="*" />
+      			<col width="5%" />
       			<col width="10%" />
       			<col width="10%" />
       			<col width="8%" />
-      			<col width="10%" />
+      			<col width="8%" />
+      			<col width="5%" />
       		</colgroup>
 			<thead>
 				<tr>
@@ -220,6 +227,7 @@ $(function() {
 					<th>성명</th>
 					<th>학적변동</th>
 					<th>변동일자</th>
+					<th>복학일자</th>
 					<th>결재상태</th>
 					<th>비고</th>
 					<th>취소</th>
@@ -234,19 +242,25 @@ $(function() {
 				<c:forEach var="leave" items="${leaveList}">
 					<input type="hidden" value="${leave.enrollDate}" id="leaveEnrollDate" />
 					<tr>
-						<th><input type="checkbox" id="checkbox-leave" value="choiceCheck"/></th>
+						<th><input type="checkbox" id="checkbox-leave" name="checkboxTrue" value="true"/>
+							<input type="hidden" name="checkboxTrue" value="false"/>
+						</th>
 						<th>${leave.year }</th>
 						<th>${leave.period }</th>
-						<th>${tName }</th>
+						<th>${student.tName }</th>
 						<th>${student.grade }</th>
 						<th>${student.id }</th>
 						<th>${student.name }</th>
-						<th>${cName }</th>
+						<th>${student.cName }</th>
 						<th>
 							<fmt:formatDate value="${leave.enrollDate }" pattern="YYYY-MM-dd"/></th>
+
+						<th>
+							<fmt:formatDate value="${leave.reinDate }" pattern="YYYY-MM-dd"/></th>
 						<th>
 							<c:choose>
 								<c:when test="${leave.pass eq 'false' }">
+									<input type="hidden" id="leave-Pass" value="false" />
 									<font color="red"><strong>미승인</strong></font>
 								</c:when>
 								<c:otherwise>
@@ -274,6 +288,7 @@ $(function() {
       <div class="row" style="padding: 20px;">
       	<h4>휴학 (연장)신청</h4>
       	<form action="enrollLeave" method="POST" id="formActionRoot">
+      	<input type="hidden" name="checkboxTrue" id="checkbox-leaveHidden" />
 	   		<table class="table table-bordered">
 	   			<colgroup>
 	   				<col width="12%" />
@@ -300,7 +315,7 @@ $(function() {
 	   				</tr>
 	   				<tr>
 	   					<th>현재 학생 정보</th>
-	   					<td colspan="3">${tName}학과 ${student.grade }학년 / ${cName } / 현재 이수학기 : <span id="now-Semester" class="${student.grade}"></span></td>
+	   					<td colspan="3">${student.tName}학과 ${student.grade }학년 / ${student.cName } / 현재 이수학기 : <span id="now-Semester" class="${student.grade}"></span></td>
 	   					<th>잔여휴학 학기</th>
 	   					<th>
 	   						${student.remainLeave }
@@ -308,21 +323,21 @@ $(function() {
 	   				</tr>
 	   					<!-- 리스트에서 해당 휴학을 선택했을 때만 면동가능하도록  -->
    					<c:if test="${!empty leaveList}">
+   					<c:forEach var="leave" items="${leaveList }">
+   						<input type="hidden" name="reEno" id="re-Eno" value="${leave.no }"/>
+   					</c:forEach>
 		   				<tr style="display : none;" id="change-Leave">
 		   					<th>변동 사유</th>
 		   					<th colspan="5">
-		   						<div class="form-group">
-		   							<input type="hidden" name="reEno" id="re-Eno"/>
-		   							<select name="chageReason" class="form-control">
-		   								<option value="LV1000">일반휴학</option>
-		   								<c:if test="${student.gender eq 'M' }">
-		   									<option value="LV2000">군휴학</option>
-		   									<option value="LV3000">질병 휴학</option>
-		   									<option value="LV4000">출산/육아 휴학</option>
-		   									<option value="LV5000">창업 휴학</option>
-		   								</c:if>
-		   							</select>
-		   						</div>
+	   							<select name="chageReason" class="form-control">
+	   								<option value="LV1000">일반휴학</option>
+	   								<c:if test="${student.gender eq 'M' }">
+	   									<option value="LV2000">군휴학</option>
+	   									<option value="LV3000">질병 휴학</option>
+	   									<option value="LV4000">출산/육아 휴학</option>
+	   									<option value="LV5000">창업 휴학</option>
+	   								</c:if>
+	   							</select>
 		   					</th>
 		   				</tr>
    					</c:if>
@@ -339,12 +354,10 @@ $(function() {
 	   						
 	   					<th>휴학학기 수</th>
 	   					<th>
-	   						<div class="form-group">
-	   							<select name="selectSemeter" id="select-Semester" class="form-control">
-	   								<option value="">선택</option>
-	   								<option value="2">2</option>
-	   							</select>
-	   						</div>
+   							<select name="selectSemeter" id="select-Semester" class="form-control">
+   								<option value="">선택</option>
+   								<option value="2">2</option>
+   							</select>
 	   					</th>
 	   					<th>복학학년도 학기</th>
 	   					<th id="change-BackYear"></th>
@@ -354,10 +367,7 @@ $(function() {
    			<input type="hidden" id="reinDate" name="reinDate"/>
 	   		<div class="form-group text-center">
 			   	<button type="submit" class="btn btn-default" id="leave-Enroll">신청</button>		
-			   	<a href="enrollChange?lNo=${leave.no }&chStr=${chStr}" class="btn btn-default" id="change-Enroll" style="display: none;">변경</a>
-			   	<input type="hidden" id="change-Reason"/>
-			   	<c:set var="chStr" value="" scope="request" />		
-	   			<a class="btn btn-default" href="stuMain">취소</a>
+	   			<a class="btn btn-default" href="home">취소</a>
 	   		</div>
    		</form>
       </div>      

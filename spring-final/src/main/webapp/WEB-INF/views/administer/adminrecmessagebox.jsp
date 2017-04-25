@@ -18,9 +18,9 @@
 		<div class="row" style="margin-bottom: 15px;">
 			<div class="col-sm-12">
 				<div class="btn-group">
-					<a href="adminsendemailbox" class="btn btn-info">받은쪽지</a>
-					<a href="adminrecievemailbox" class="btn btn-info">보낸쪽지</a>
-					<a href="adminsendemail" class="btn btn-info">쪽지쓰기</a>
+					<a href="adminrecmessagebox" class="btn btn-info">받은쪽지</a>
+					<a href="adminsendmessagebox" class="btn btn-info">보낸쪽지</a>
+					<a href="adminmessageform" class="btn btn-info">쪽지쓰기</a>
 				</div>			
 			</div>
 		</div>

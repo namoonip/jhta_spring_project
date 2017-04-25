@@ -35,4 +35,8 @@ List<Subject> getAllList();
 	String getPassCodeByNo(int sno);
 	
 	void editSubjectByNo (SubjectEditForm editform);
+	
+	List<Subject> getallenroll();
+	
+	Subject getByENoList(int no);
 }

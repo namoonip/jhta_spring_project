@@ -17,4 +17,6 @@ public interface EnrollDao {
 	List<Enroll> getAllEnrollByTcode(String siteCode);
 	void addEnroll(Enroll enroll);
 	List<Enroll> getEnrollById(String id);
+	List<Enroll> getProfEnroll(String id);
+	void updateEnroll(Enroll enroll);
 }

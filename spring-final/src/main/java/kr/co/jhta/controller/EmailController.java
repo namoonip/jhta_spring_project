@@ -65,7 +65,7 @@ public class EmailController {
 		return "redirect:/adminsendemail";
 	}
 	
-	@RequestMapping("/adminAddressSearch")
+	@RequestMapping("/adminaddresssearch")
 	public @ResponseBody List<?> adminAddressSearch(String checkedRadio, String searchWord) {
 		List<?> resultList = new ArrayList<Object>();
 		

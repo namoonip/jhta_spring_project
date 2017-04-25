@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.jhta.dao.report.PreportDao">
+
+	<insert id="addreport" parameterType="Preport">
+		insert into p_report(
+			p_no,
+			p_e_no,
+			p_prof_no,	
+			p_title,
+			p_content,
+			p_report_st,
+			p_report_end,
+			p_upfile
+		)values(
+			preport_comm.nextval,
+			#{enroll.no},
+			#{professor.no},
+			#{title},
+			#{content},
+			#{prost},
+			#{proend},
+			#{upfile}
+		)
+	</insert>
+	<select id="getProftitle" parameterType="int" resultType="Preport">
+	SELECT
+		A.J_SUBJECT_NAME as"subject.subjectName",
+		B.P_TITLE as "title",
+		B.P_no as no,
+		C.E_no as "enroll.no"
+	from
+		J_SUBJECT A, P_REPORT B, E_enrollment C
+	where
+		C.E_NO = B.P_E_NO
+	and
+		A.J_NO = C.E_J_SUBJECT_NO
+	and
+		B.P_prof_no = #{value}
+	</select>
+	<select id="getupdate" parameterType="int" resultType="Preport">
+	SELECT
+		A.J_SUBJECT_NAME as"subject.subjectName",
+		B.P_TITLE as "title",
+		B.P_no as no
+		B.P_content as content
+	from
+			J_SUBJECT A, P_REPORT B, E_enrollment C
+	where
+		C.E_NO = B.P_E_NO
+	and
+		A.J_NO = C.E_J_SUBJECT_NO
+	and
+		B.P_NO = #{value}
+	</select>
+	<select id ="getByProfNo" parameterType="int" resultType="Preport">
+		select
+			B.E_NO as "enroll.no",		
+			A.J_SUBJECT_NAME as "subject.subjectName",
+			D.P_TITLE as title,
+			D.P_CONTENT as content,
+			C.U_PROF_NO as "professor.no"
+		from
+			J_SUBJECT A, E_ENROLLMENT B, U_PROFESSOR C, P_REPORT D
+		where
+			A.J_NO = B.E_J_SUBJECT_NO
+		and
+			C.U_PROF_ID = A.J_SUB_PROF
+		AND
+			D.P_E_NO = B.E_NO
+		and
+			B.E_NO = #{value}
+	</select>
+	<select id="getProfEnroll" parameterType="string" resultType="Preport">
+		select
+			B.E_NO as "enroll.no",
+			A.J_SUBJECT_NAME as "subject.subjectName"
+		from
+			J_SUBJECT A, E_ENROLLMENT B, U_PROFESSOR C
+		where
+			A.J_NO = B.E_J_SUBJECT_NO
+		and
+			C.U_PROF_ID = A.J_SUB_PROF
+		and
+			C.U_PROF_ID = #{value}
+	</select>
+	
+	<select id="getupdatereport" parameterType="int" resultType="Preport">
+		select
+			B.E_NO as "enroll.no",
+			A.J_SUBJECT_NAME as "subject.subjectName",
+			D.P_NO as no,
+			D.P_TITLE as title,
+			C.U_PROF_NO as "professor.no",
+			D.P_CONTENT as content,
+			D.P_report_st as prost,
+			D.P_report_end as proend
+		from
+			J_SUBJECT A, E_ENROLLMENT B, U_PROFESSOR C, P_REPORT D
+		where
+			A.J_NO = B.E_J_SUBJECT_NO
+		and
+			C.U_PROF_ID = A.J_SUB_PROF
+		and
+			D.P_E_NO = B.E_NO
+		and
+			D.P_NO = #{value}
+	</select>
+	<update id="getByNoupdate" parameterType="Preport">
+		UPDATE 
+			P_REPORT
+		SET 
+			p_title = #{title},
+			p_content = #{content},
+			p_report_st = #{prost},
+			p_report_end = #{proend}
+		WHERE 
+			p_no = #{no}
+	</update>
+	<delete id="deleteReport" parameterType="int">
+  		delete 
+  			from p_report
+  		where
+  			 p_no = #{no}
+	</delete>
+</mapper>

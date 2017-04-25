@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kr.co.jhta.dao.supplementLectureDao.SupplementLectureDao">
+ <!-- collegeBox 조회 SQL -->
+ <select id="getMajorList" parameterType="string" resultType="kr.co.jhta.vo.SupplementLectureVo">
+ 	select
+ 		T_NO 			AS collegeNo,
+ 		T_CODE 			AS collegeCode,
+ 		T_NAME 			AS collegeName,
+ 		T_PRECODE 		AS majorCode
+ 	from
+ 		T_SITEMAP
+ 	where 
+ 		T_PRECODE = #{linkCode}		
+ </select>
+ 
+ <!-- 테이블 조회 -->
+ <select id="getTableList" parameterType="string" resultType="kr.co.jhta.vo.SupplementLectureTableVo">
+ 	select
+ 		U.U_PROF_ID              		AS professorId,
+ 		J.J_NO                			AS subjectNo,
+ 		U.U_PROF_CODE 					AS majorCode,
+ 		J.J_SUBJECT_NAME 				AS subjectName,
+ 		U.U_PROF_NAME 					AS professorName,
+		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+ 		U.U_PROF_NO 					AS professorNumber,
+ 		J.J_IS_PASSED 					AS majorOption,
+ 		J.J_SCORE 						AS majorScore,
+ 		S_SUPPLEMENTLECTURE_NUMBER 		AS subjectLectureNumber
+ 	from
+ 		S_SUPPLEMENTLECTURE S,
+ 		J_SUBJECT J,
+ 		U_PROFESSOR U
+ 	where
+		U.U_PROF_ID = J.J_SUB_PROF
+	AND
+		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
+	AND
+		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
+	AND	 		
+ 		U.U_PROF_CODE = #{majorCode}		
+ </select>
+ 
+<!-- 모달  신청 조회하기 -->
+<select id="getTableModal" parameterType="int" resultType="kr.co.jhta.vo.SupplementLectureTableVo">
+ 	select
+ 		U.U_PROF_ID              		AS professorId,
+ 		J.J_NO                			AS subjectNo,
+ 		U.U_PROF_CODE 					AS majorCode,
+ 		J.J_SUBJECT_NAME 				AS subjectName,
+ 		U.U_PROF_NAME 					AS professorName,
+		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+ 		U.U_PROF_NO 					AS professorNumber,
+ 		J.J_IS_PASSED 					AS majorOption,
+ 		J.J_SCORE 						AS majorScore,
+ 		S.S_SUPPLEMENTLECTURE_NUMBER 	AS subjectLectureNumber,
+ 		E.E_ENROLLDAY                   AS subjectDate,
+ 		E.E_ENROLLTIME                  AS subjectTime,
+		S.S_APPLICATION_START_DATE     	AS applicationDate,
+		S.S_APPLICATION_END_DATE 		AS applicationDateEnd
+ 	from
+ 		S_SUPPLEMENTLECTURE S,
+ 		J_SUBJECT J,
+ 		U_PROFESSOR U,
+ 		E_ENROLLMENT E
+ 	where
+		U.U_PROF_ID = J.J_SUB_PROF
+	and
+		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
+	and
+		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
+	and	
+		E.E_J_SUBJECT_NO = J.J_NO
+	and	 		
+ 		J.J_NO = #{subjectNo}		
+ </select>
+ 
+ <!-- 모달 취소 조회하기-->
+<select id="getTableModalCancle" parameterType="int" resultType="kr.co.jhta.vo.SupplementLectureTableVo">
+ 	select
+ 		U.U_PROF_ID              		AS professorId,
+ 		J.J_NO                			AS subjectNo,
+ 		U.U_PROF_CODE 					AS majorCode,
+ 		J.J_SUBJECT_NAME 				AS subjectName,
+ 		U.U_PROF_NAME 					AS professorName,
+		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+ 		U.U_PROF_NO 					AS professorNumber,
+ 		J.J_IS_PASSED 					AS majorOption,
+ 		J.J_SCORE 						AS majorScore,
+ 		S.S_SUPPLEMENTLECTURE_NUMBER 		AS subjectLectureNumber
+ 	from
+ 		S_SUPPLEMENTLECTURE S,
+ 		J_SUBJECT J,
+ 		U_PROFESSOR U
+ 	where
+		U.U_PROF_ID = J.J_SUB_PROF
+	AND
+		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
+	AND
+		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
+	AND	 		
+ 		J.J_NO = #{subjectNo}		
+ </select>
+
+ 
+ </mapper>

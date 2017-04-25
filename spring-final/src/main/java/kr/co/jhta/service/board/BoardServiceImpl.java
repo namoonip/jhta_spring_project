@@ -92,5 +92,43 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public void addStuQnaBoard(Board board) {
+		boardDao.addStuQnaBoard(board);
+		
+	}
+
+	@Override
+	public void addFreeBoard(Board board) {
+		boardDao.addFreeBoard(board);
+		
+	}
+
+	@Override
+	public void addDeptBoard(Board board) {
+		boardDao.addDeptBoard(board);
+		
+	}
+
+	@Override
+	public List<Board> getProfQnaBoard(String id) {
+		return boardDao.getProfQnaBoard(id);
+	}
+
+	@Override
+	public int countProfBoard(String id) {
+		return boardDao.countProfBoard(id);
+	}
+
+	@Override
+	public List<Board> searchNoticeBoardByCount(String BOARDTYPE) {
+		return boardDao.searchNoticeBoardByCount(BOARDTYPE);
+	}
+
+	@Override
+	public List<Board> searchDeptBoardByCount(SearchForm searchForm) {
+		return boardDao.searchDeptBoardByCount(searchForm);
+	}
+
 	
 }

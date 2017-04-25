@@ -66,15 +66,15 @@ $(function() {
 				<hr />
 				<div class="text-left">
 					<p>
-						<label for="stuPwd" style="padding-left: 30px; padding-right: 28px;">현재 비밀번호</label> 
+						<label for="stuPwd" style="padding-left: 30px; padding-right: 28px;">*현재 비밀번호</label> 
 						<input type="password" id="stuPwd" name="stuPwd"/>	
 					</p>
 					<p>
-						<label for="Repwd" style="padding-left: 30px; padding-right: 42px;">새 비밀번호</label>
+						<label for="Repwd" style="padding-left: 30px; padding-right: 42px;">*새 비밀번호</label>
 						<input type="password" id="Repwd" name="Repwd"/>	
 					</p>
 					<p>
-						<label for="RepwdCheck" style="padding-left: 30px; padding-right: 10px;">새 비밀번호 확인</label>
+						<label for="RepwdCheck" style="padding-left: 30px; padding-right: 10px;">*새 비밀번호 확인</label>
 						<input type="password" id="RepwdCheck"/> <span id="RepwdCheckSpan"></span>
 					</p>
 				</div>

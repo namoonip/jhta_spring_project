@@ -106,7 +106,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<table class="table">
+			<table class="table table-default">
 				<colgroup>
 					<col width="5%">
 					<col width="5%">

@@ -36,13 +36,7 @@ public class StuApplicationFormController {
 		}
 		
 		// 기본 정보 담기
-		model.addAttribute("student", student);
-		String tName = getTnameInController(student);
-		model.addAttribute("tName", tName);
-		
-		String cName = stuService.getCnameByRegisterService(student.getRegister());
-		model.addAttribute("cName", cName);
-		
+		model.addAttribute("student", student);		
 		// 휴학 정보 담기
 		List<Leave> leaveList = leaveService.getAllEnrolledLeaveByStuNoService(student.getNo());
 		for(Leave leave : leaveList ) {
@@ -58,14 +52,7 @@ public class StuApplicationFormController {
 	public String setReinstate(Model model, Student student){
 		
 		// 기본 정보 담기
-		model.addAttribute("student", student);
-		
-		String tName = getTnameInController(student);
-		model.addAttribute("tName", tName);
-		
-		String cName = stuService.getCnameByRegisterService(student.getRegister());
-		model.addAttribute("cName", cName);
-		
+		model.addAttribute("student", student);		
 		return "/student/applications/ReinstatementForm";
 	}
 	

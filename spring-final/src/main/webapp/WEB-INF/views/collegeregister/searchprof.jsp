@@ -30,10 +30,22 @@
 				}
 			});
 		});
+  		
+  		$("#search-btn").click(function (event) {
+			event.preventDefault();
+			$("[name='register']").val($("#register").find("option:selected").val());
+			if($("#division").find("option:selected").val() != 'not'){
+				$("[name='division']").val($("#division").find("option:selected").val());	
+			}else{
+				$("[name='division']").val('');
+			}
+			$("[name='grade']").val($("#grade").find("option:selected").val());
+			$("[name='sort']").val($("#sort").find("option:selected").val());
+			$("[name='q']").val($("#q").val());
+			$("#search-form").submit();
+		});
 	});
   </script>
-  
-  
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
@@ -56,8 +68,8 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<select class="form-control">
-										<option value="">전체</option>	
+									<select class="form-control" id="register">
+										<option value="all">전체</option>	
 										<option value="">재직</option>
 										<option value="">휴직</option>
 										<option value="">출장</option>
@@ -90,7 +102,7 @@
 								<p>직위 구분</p>
 							</div>
 							<div class="col-md-2">
-								<select class="form-control" id="division">
+								<select class="form-control" id="grade">
 									<option value="all">전체</option>
 									<option value="정교수">정교수</option>
 									<option value="부교수">부교수</option>
@@ -105,17 +117,17 @@
 						</div>
 						<div class="row">
 							<div class="col-md-2">
-								<select class="form-control">
-									<option value="">이름</option>	
-									<option value="">교번</option>
-									<option value="">전화번호</option>
+								<select class="form-control" id="sort">
+									<option value="U_PROF_NAME">이름</option>	
+									<option value="U_PROF_ID">교번</option>
+									<option value="U_PROF_PHONE">전화번호</option>
 								</select>
 							</div>
 							<div class="col-md-6">
-								<input class="form-control" type="text" name="q" placeholder="전화번호로 검색시 '-'을 생략하여 입력하세요."/>
+								<input class="form-control" type="text" id="q" placeholder="전화번호로 검색시 '-'을 입력하세요."/>
 							</div>
 							<div class="col-md-1">
-								<button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-search"></span> 검색</button>
+								<button type="submit" class="btn btn-sm btn-primary" id="search-btn"><span class="glyphicon glyphicon-search"></span> 검색</button>
 							</div>
 						</div>
 					</form>
@@ -130,7 +142,7 @@
 							</select>	
 						</div>
 						<div class="col-md-6 text-right">
-							<p>조회된 교수 수 : 5 명</p>
+							<p>조회된 교수 수 : ${rows } 명</p>
 						</div>
 					</div>
 					<div class="row">
@@ -146,6 +158,11 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:if test="${empty profList }">
+									<tr class="text-center">
+										<td colspan="6">조회된 교수님이 없습니다.</td>
+									</tr>
+								</c:if>
 								<c:forEach var="prof" items="${profList }" varStatus="status">
 									<tr onclick="location.href='profinfo?id=${prof.id}'" style="cursor: pointer;">
 										<td>${status.count }</td>
@@ -162,6 +179,13 @@
 				</div>
 			</div>
 		</div>
+		<form action="/jhta/admin/searchprofcon" method="post" id="search-form">
+			<input type="hidden" name="register">
+			<input type="hidden" name="division">
+			<input type="hidden" name="grade">
+			<input type="hidden" name="sort">
+			<input type="hidden" name="q">
+		</form>
 	</div>
 </body>
 </html>

@@ -37,6 +37,7 @@
 						<th>성적열람기간</th>
 						<th>성적이의기간</th>
 						<th>성적정정기간</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody style="font-size: 9pt">
@@ -75,6 +76,9 @@
 						<td>
 							<fmt:formatDate value="${semester.gradeEditTermStart }" pattern="yyyy-MM-dd"/> ~
 							<fmt:formatDate value="${semester.gradeEditTermEnd }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>
+							<a href="deleteSeme?no=${semester.no }" class="btn btn-danger btn-xs">삭제</a>
 						</td>
 					</tr>
 					

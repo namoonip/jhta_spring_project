@@ -26,24 +26,6 @@ public class ScoreServiceImpl implements ScoreService{
 	@Autowired
 	private AttendanceDao attDao;
 	
-	@Autowired
-	private ReportDao repDao;
-
-	@Override
-	public List<SubjectRegister> getAllRegiList() {
-		return scoreDao.getAllRegiList();
-	}
-
-	@Override
-	public List<Score> getAllScoreList() {
-		return scoreDao.getAllScoreList();
-	}
-
-	@Override
-	public SubjectRegister getRegiListByNo(int regiNo) {
-		return scoreDao.getRegiListByNo(regiNo);
-	}
-
 	@Override
 	public Student getStudentInfoByNo(int stuNo) {
 		return scoreDao.getStudentInfoByNo(stuNo);
@@ -73,7 +55,6 @@ public class ScoreServiceImpl implements ScoreService{
 	public void addScore() {
 		scoreDao.addScore();
 		attDao.addAttendance();
-		repDao.addReport();
 		
 	}
 	
@@ -86,7 +67,6 @@ public class ScoreServiceImpl implements ScoreService{
 	public void delScore(int rno) {
 		int sno = scoreDao.getScoreNoByRno(rno);
 		attDao.delAttendance(sno);
-		repDao.delReport(sno);
 		scoreDao.delScore(rno);
 	}
 
@@ -133,6 +113,16 @@ public class ScoreServiceImpl implements ScoreService{
 	@Override
 	public SemesterAvg getSemesterAvgTotalBySno(int sno) {
 		return scoreDao.getSemesterAvgTotalBySno(sno);
+	}
+
+	@Override
+	public List<Regisubject> getAllSearchInfo() {
+		return scoreDao.getAllSearchInfo();
+	}
+
+	@Override
+	public int getScoreCount() {
+		return scoreDao.getScoreCount();
 	}
 	
 	

@@ -41,10 +41,6 @@
 			$("[name='grade']").val($("#grade").find("option:selected").val());
 			$("[name='sort']").val($("#sort").find("option:selected").val());
 			$("[name='q']").val($("#q").val());
-			console.log($("[name='register']").val());
-			console.log($("[name='sort']").val());
-			console.log($("[name='q']").val());
-			console.log($("[name='grade']").val());
 			$("#search-form").submit();
 		});
 	});
@@ -142,7 +138,7 @@
 							</select>	
 						</div>
 						<div class="col-md-6 text-right">
-							<p>조회된 학생 수 : 5 명</p>
+							<p>조회된 학생 수 : ${rows } 명</p>
 						</div>
 					</div>
 					<div class="row">

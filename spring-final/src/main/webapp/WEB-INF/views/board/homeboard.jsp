@@ -94,7 +94,7 @@
 				dataType:'json',
 				success : function(data){
 					console.log(data);
-					$(data.pagiNation).each(function(index, item){
+					$(data).each(function(index, item){
 						var htmlContent = "<tr>";
 							htmlContent += "<td><input type='checkbox' id='deleteCheck-"+item.no+"'</td>";
 							htmlContent += "<td>"+item.no+"</td>";
@@ -103,7 +103,6 @@
 							htmlContent += "<td>"+item.regdate+"</td>";
 							htmlContent += "<td>"+item.countView+"</td>";
 							htmlContent += "</tr>";
-						
 						$tbody.append(htmlContent);
 					});
 				}

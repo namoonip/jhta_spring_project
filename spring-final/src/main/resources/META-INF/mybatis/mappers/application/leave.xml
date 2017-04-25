@@ -43,4 +43,11 @@
 		AND c.C_CODE = #{cCode}
 	</select>
 	
+	<update id="updateLeave" parameterType="map">
+		UPDATE L_LEAVE 
+		SET C_CODE = #{cCode}, L_ENROLLDATE = sysdate
+		WHERE L_NO = #{lNo}
+		AND STU_NO = #{stuNo}
+	</update>
+	
 </mapper>

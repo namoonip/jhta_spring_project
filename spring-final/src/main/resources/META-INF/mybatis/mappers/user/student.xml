@@ -4,6 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.user.StudentDao">
 
+	<select id="getNowScore" parameterType="int" resultType="int">
+		SELECT U_STU_NOWSCORE 
+		FROM U_STUDENT 
+		WHERE U_STU_NO = #{stuNo}
+	</select>
+	
+	<update id="updateAddScore" parameterType="map">
+		UPDATE U_STUDENT 
+		SET U_STU_NOWSCORE = U_STU_NOWSCORE + #{score}
+		WHERE U_STU_NO = #{stuNo}
+	</update>
+	
+	<update id="updateMinusScore" parameterType="map">
+		UPDATE U_STUDENT 
+		SET U_STU_NOWSCORE = U_STU_NOWSCORE - #{score}
+		WHERE U_STU_NO = #{stuNo}
+	</update>
+
+
 	<select id="getAllStudent" resultType="Student">
 		select U_STU_NO as no, 
 				U_STU_ADDR1 as addr1, 
@@ -25,7 +44,9 @@
 				U_STU_REGISTER as register, 
 				U_STU_SCORE as score, 
 				U_STU_SSN as ssn,
-				U_STU_REMAINLEAVE as remainLeave
+				U_STU_REMAINLEAVE as remainLeave,
+				U_STU_MAXONESCORE as maxOneScore,
+				U_STU_NOWSCORE as nowScore
 		from U_STUDENT
 	</select>
 	
@@ -55,7 +76,9 @@
 				U_STU_REGISTER as register, 
 				U_STU_SCORE as score, 
 				U_STU_SSN as ssn,
-				U_STU_REMAINLEAVE as remainLeave
+				U_STU_REMAINLEAVE as remainLeave,
+				U_STU_MAXONESCORE as maxOneScore,
+				U_STU_NOWSCORE as nowScore
 		from U_STUDENT
 		where U_STU_ID = #{id}
 	</select>
@@ -82,7 +105,7 @@
 	</update>
 	
 	<select id="getTnameByTcode" parameterType="map" resultType="string">
-		select t.T_NAME as tName
+		select DISTINCT t.T_NAME as tName
 		from U_STUDENT s, T_SITEMAP t
 		where s.U_STU_DIVISION = t.T_CODE
 		and s.U_STU_DIVISION = #{tCode}
@@ -90,7 +113,7 @@
 	</select>
 	
 	<select id="getCnameByRegister" parameterType="string" resultType="string">
-		select c.C_NAME 
+		select DISTINCT c.C_NAME 
 		from U_STUDENT u, C_CODEREGISTER c 
 		WHERE c.C_CODE = u.U_STU_REGISTER
 		AND u.U_STU_REGISTER = #{register}

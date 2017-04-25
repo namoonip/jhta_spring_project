@@ -24,37 +24,15 @@ public class Student {
 	private String phone;
 	private String professor;
 	private int remainLeave;
+	private String tName;
+	private String cName;	
+	private int maxOneScore;
+	private int nowScore;
 	
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}		
-
-	public Student(int no, String addr1, String addr2, String email, int grade, String ssn, Date enterDate,
-			Date leaveDate, String parentName, String parentPhone, String id, String pwd, String name, String gender,
-			String division, String register, int score, String phone, String professor, int remainLeave) {
-		super();
-		this.no = no;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.email = email;
-		this.grade = grade;
-		this.ssn = ssn;
-		this.enterDate = enterDate;
-		this.leaveDate = leaveDate;
-		this.parentName = parentName;
-		this.parentPhone = parentPhone;
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.gender = gender;
-		this.division = division;
-		this.register = register;
-		this.score = score;
-		this.phone = phone;
-		this.professor = professor;
-		this.remainLeave = remainLeave;
-	}
 
 	public int getNo() {
 		return no;
@@ -212,13 +190,42 @@ public class Student {
 		this.remainLeave = remainLeave;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [no=" + no + ", addr1=" + addr1 + ", addr2=" + addr2 + ", email=" + email + ", grade=" + grade
-				+ ", ssn=" + ssn + ", enterDate=" + enterDate + ", leaveDate=" + leaveDate + ", parentName="
-				+ parentName + ", parentPhone=" + parentPhone + ", id=" + id + ", pwd=" + pwd + ", name=" + name
-				+ ", gender=" + gender + ", division=" + division + ", register=" + register + ", score=" + score
-				+ ", phone=" + phone + "]";
+	
+	
+	public String gettName() {
+		return tName;
 	}
+
+
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+
+
+	public String getcName() {
+		return cName;
+	}
+
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
+	public int getMaxOneScore() {
+		return maxOneScore;
+	}
+
+	public void setMaxOneScore(int maxOneScore) {
+		this.maxOneScore = maxOneScore;
+	}
+
+	public int getNowScore() {
+		return nowScore;
+	}
+
+	public void setNowScore(int nowScore) {
+		this.nowScore = nowScore;
+	}
+
 	
 }

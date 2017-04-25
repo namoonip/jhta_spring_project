@@ -6,17 +6,13 @@ public class LeaveForm {
 	private String scorePass;
 	private int selectSemeter;
 	private String reinDate;
+	private int reEno;
+	private String checkboxTrue;
+	private String chageReason;
+	
 	public LeaveForm() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	public LeaveForm(String cCode, String scorePass, int selectSemeter, String reinDate) {
-		super();
-		this.cCode = cCode;
-		this.scorePass = scorePass;
-		this.selectSemeter = selectSemeter;
-		this.reinDate = reinDate;
-	}
+
 	public String getcCode() {
 		return cCode;
 	}
@@ -42,4 +38,29 @@ public class LeaveForm {
 		this.reinDate = reinDate;
 	}
 
+	public int getReEno() {
+		return reEno;
+	}
+
+	public void setReEno(int reEno) {
+		this.reEno = reEno;
+	}
+
+	public String getCheckboxTrue() {
+		return checkboxTrue;
+	}
+
+	public void setCheckboxTrue(String checkboxTrue) {
+		this.checkboxTrue = checkboxTrue;
+	}
+
+	public String getChageReason() {
+		return chageReason;
+	}
+
+	public void setChageReason(String chageReason) {
+		this.chageReason = chageReason;
+	}
+	
+	
 }

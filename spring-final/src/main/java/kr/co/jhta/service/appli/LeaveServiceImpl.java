@@ -23,8 +23,7 @@ public class LeaveServiceImpl implements LeaveService{
 
 	@Override
 	public List<Leave> getAllEnrolledLeaveByStuNoService(int stuNo) {
-		List<Leave> leaveList = leaveDao.getAllEnrolledLeaveByStuNo(stuNo);
-		return leaveList;
+		return leaveDao.getAllEnrolledLeaveByStuNo(stuNo);
 	}
 
 	@Override
@@ -37,8 +36,16 @@ public class LeaveServiceImpl implements LeaveService{
 
 	@Override
 	public String getCnameByCcodeService(String cCode) {
-		String cName = leaveDao.getCnameByCcode(cCode);
-		return cName;
+		return leaveDao.getCnameByCcode(cCode);
+	}
+
+	@Override
+	public void updateLeaveService(int lNo, int stuNo, String cCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lNo", lNo);
+		map.put("stuNo", stuNo);
+		map.put("cCode", cCode);
+		leaveDao.updateLeave(map);
 	}
 
 }

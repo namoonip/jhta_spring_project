@@ -45,37 +45,15 @@ public class StudentForm {
 	private String register;
 	private int score;
 	private String professor;
+	private int maxOneScore;
+	private int nowScore;
+	
 	
 	public StudentForm() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public StudentForm(String addr1, String addr2, String email, Date leaveDate, String parentPhone, String pwd,
-			String phone, int no, int grade, String ssn, Date enterDate, String parentName, String id, String name,
-			String gender, String division, String register, int score, String professor) {
-		super();
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.email = email;
-		this.leaveDate = leaveDate;
-		this.parentPhone = parentPhone;
-		this.pwd = pwd;
-		this.phone = phone;
-		this.no = no;
-		this.grade = grade;
-		this.ssn = ssn;
-		this.enterDate = enterDate;
-		this.parentName = parentName;
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.division = division;
-		this.register = register;
-		this.score = score;
-		this.professor = professor;
-	}
-	
+		
 	public String getAddr1() {
 		return addr1;
 	}
@@ -190,5 +168,22 @@ public class StudentForm {
 	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
+
+	public int getMaxOneScore() {
+		return maxOneScore;
+	}
+
+	public void setMaxOneScore(int maxOneScore) {
+		this.maxOneScore = maxOneScore;
+	}
+
+	public int getNowScore() {
+		return nowScore;
+	}
+
+	public void setNowScore(int nowScore) {
+		this.nowScore = nowScore;
+	}
+	
 	
 }

@@ -34,7 +34,7 @@
 				<img src="/jhta/resources/images/student/PeoPleDefault.png" alt="person" style="width: 130px; height: 140px;" />
 			</div>
 			<div class="col-xs-10">
-				<p>기본 정보</p>
+				<p>[기본 정보]</p>
 				<table class="table table-bordered">
 					<colgroup>
 						<col width="20%" />
@@ -78,7 +78,6 @@
 				</table>
 			</div>
 		</div>
-
 		<div class="row">
 			<p>[추가 정보]</p>
 			<table class="table table-bordered">

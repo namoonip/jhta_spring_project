@@ -76,4 +76,12 @@ public class SubjectServiceImpl implements SubjectService{
 		subjectDao.editSubjectByNo(editform);
 	}
 	
+	@Override
+	public List<Subject> getallenroll() {
+		return subjectDao.getallenroll();
+	}
+	@Override
+	public Subject getByENoList(int no) {
+		return subjectDao.getByENoList(no);
+	}
 }

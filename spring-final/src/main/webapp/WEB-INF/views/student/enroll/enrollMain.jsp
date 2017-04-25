@@ -12,6 +12,23 @@
 <script type="text/javascript">
 $(function() {
 	
+	if($("#add-False").val() == "true" ) {
+		alert("최대 학점이상 신청할 수 없습니다.");
+		return;
+	}
+	
+	$("#enrollSend").click(function(event) {
+		event.defaultView();
+		if($("#applyScore").text() == $("#maxOneScore").text()) {
+			alert("최대 수강학점을 초과하여 신청할 수 없습니다.");
+			return;
+		}
+	});
+	
+	if( $("#applyScore").text() == $("#maxOneScore").text()) {
+		$("#enrollSend").css("disabled", "disabled");
+	}
+	
 	$("#select-dept").change(function() {
 		var dept = $(this).val();
 		
@@ -33,7 +50,7 @@ $(function() {
 			}
 		});
 	});
- // access=deny 처리 하기
+	
 })
 </script>
 </head>
@@ -41,6 +58,9 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/stunavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
+   <c:if test="${addFals != '' }">
+		<input type="hidden" value="${addFalse}" id="add-False">   
+   </c:if>
     <div class="row text-right">
          	홈
       </div>
@@ -91,61 +111,62 @@ $(function() {
 	      		</colgroup>
 	      		<thead>
 	      			<tr>
-	      				<th>번호</th>
+	      				<th>학과</th>
 	      				<th>이수구분</th>
 	      				<th>학년</th>
 	      				<th>과목명</th>
 	      				<th>담당교수</th>
-	      				<th>강의시간</th>
 	      				<th>강의요일</th>
+	      				<th>강의시간</th>
 	      				<th>학점</th>
 	      				<th>신청인원</th>
 	      				<th>신청</th>
 	      			</tr>
 	      		</thead>
 	      		<tbody>
-	      			<c:forEach var="enroll" items="${enrollList}">
+	      			<c:forEach var="subject" items="${subList}" >
 	      				<tr>
-	      					<th>${enroll.subject.siteCode.code}</th>
-	      					<th>${enroll.subject.isPassed.isPassed }</th>
-	      					<th>${enroll.subject.grade }</th>	<!-- 학년 -->
-	      					<th>${enroll.subject.subjectName }</th>	<!-- 과목명 -->
-	      					<th>${enroll.division.divisionProfessor }</th>	<!-- 담당교수 -->
+	      					<th>${subject.siteCode.name}</th>
+	      					<th>${subject.passed.passedName }</th>
+	      					<th>${subject.grade }</th>	<!-- 학년 -->
+	      					<th>${subject.subjectName }</th>	<!-- 과목명 -->
+	      					<th>${subject.professor.name }</th>	<!-- 담당교수 -->
 	      					<%-- ${enroll.subject.professor } --%>
-	      					<th>${enroll.enrollTime }</th>	<!-- 강의 시간 -->
-	      					<th>${enroll.enrollDay }</th>	<!-- 강의 요일-->
-	      					<th>${enroll.subject.score }</th>	<!-- 학점 -->
+	      					<th>${subject.enroll.enrollDay }</th>	<!-- 강의 요일-->
+	      					<th>${subject.enroll.enrollTime }</th>	<!-- 강의 시간 -->
+	      					<th>${subject.score }</th>	<!-- 학점 -->
 	      					<th>
 	      						<c:choose>
-	      							<c:when test="${enroll.enrollNum eq enroll.division.limitNumber}">
+	      							<c:when test="${subject.enroll.enrollNum eq subject.limitStu}">
 	      								<strong><font color="red">마감</font></strong>
 	      							</c:when>
 	      							<c:otherwise>
-					      				${enroll.enrollNum } / ${enroll.division.limitNumber}	<!-- 신청 인원 -->
+					      				${subject.enroll.enrollNum } / ${subject.limitStu}	<!-- 신청 인원 -->
 	      							</c:otherwise>
 	      						</c:choose>	  
 	      					</th>    					
 	      					<th>
-	      						<c:choose>
-	      							<c:when test="${regisubList == null }">
-	      								<a href="enrollSend?enrollNo=${enroll.no }" class="btn btn-default">신청</a>	
-	      							</c:when>
-	      							<c:otherwise>
-	      								<c:forEach var="regisub" items="${regisubList }">
-	      									<c:choose>
-		      									<c:when test="${regisub.subject.siteCode.code eq enroll.subject.siteCode.code}">
+	      						<c:set var="isExist" value="false" /> 
+      							<c:forEach var="regisub" items="${regisubList }">
+    								<c:if test="${regisub.subject.no eq subject.no }">
+    									<c:set var="isExist" value="true" />  
+    								</c:if>						 
+      							</c:forEach>
+      							<c:choose>
+									<c:when test="${subject.enroll.enrollNum eq subject.limitStu}">
+   										<strong><font color="red">마감</font></strong>
+   									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${isExist eq 'true'}">
 												<strong><font color="blue">신청 완료</font></strong>
-												</c:when>
-												<c:when test="${enroll.enrollNum eq enroll.division.limitNumber}">
-													<strong><font color="red">마감</font></strong>
-												</c:when>
-												<c:otherwise>
-													<a href="enrollSend?enrollNo=${enroll.no }" class="btn btn-default">신청</a>							
-												</c:otherwise>
-											</c:choose>
-		      							</c:forEach>
-	      							</c:otherwise>
-	      						</c:choose>														
+											</c:when>
+											<c:otherwise>
+												<a href="enrollSend?enrollNo=${subject.enroll.no }&plusScore=${subject.score}" class="btn btn-default" id="">신청</a>
+											</c:otherwise>											 
+										</c:choose>									
+									</c:otherwise>      							
+      							</c:choose>   							
 	      					</th>
 	      				</tr>
 	      			</c:forEach>
@@ -174,7 +195,7 @@ $(function() {
 	      		</colgroup>
 	      		<thead>
 	      			<tr>
-	      				<th>번호</th>
+	      				<th>학과</th>
 	      				<th>이수구분</th>
 	      				<th>학년</th>
 	      				<th>과목명</th>
@@ -182,36 +203,38 @@ $(function() {
 	      				<th>강의시간</th>
 	      				<th>강의요일</th>
 	      				<th>학점</th>
-	      				<th>분반</th>
 	      				<th>신청인원</th>
 	      				<th>취소</th>
 	      			</tr>
 	      		</thead>
 	      		<tbody id="enrolled">
 	      			<c:forEach var="regisub" items="${regisubList }">
+	      				<c:if test="${empty regisubList }">
+	      					<tr>
+	      						<th colspan="10">수강 신청 내역이 없습니다.</th>
+	      					</tr>
+	      				</c:if>
 	      				<tr>
-	      					<th>${regisub.subject.siteCode.code}</th>
-	      					<th>${regisub.subject.isPassed.isPassed }</th>
+	      					<th>${regisub.subject.siteCode.name}</th>
+	      					<th>${regisub.subject.passed.passedName }</th>
 	      					<th>${regisub.subject.grade }</th>	<!-- 학년 -->
 	      					<th>${regisub.subject.subjectName }</th>	<!-- 과목명 -->
-	      					<th>${regisub.division.divisionProfessor }</th>	<!-- 담당교수 -->
-	      					<%-- ${enroll.subject.professor } --%>
+	      					<th>${regisub.subject.professor.name }</th>	<!-- 담당교수 -->
 	      					<th>${regisub.enroll.enrollTime }</th>	<!-- 강의 시간 -->
 	      					<th>${regisub.enroll.enrollDay }</th>	<!-- 강의 요일-->
 	      					<th>${regisub.subject.score }</th>	<!-- 학점 -->
-	      					<th>${regisub.division.divisionNo }</th>	<!-- 분반 -->
 							<th>
 	      						<c:choose>
-	      							<c:when test="${regisub.enroll.enrollNum eq regisub.division.limitNumber}">
+	      							<c:when test="${regisub.enroll.enrollNum eq regisub.subject.limitStu}">
 	      								<strong><font color="red">마감</font></strong>
 	      							</c:when>
 	      							<c:otherwise>
-					      				${regisub.enroll.enrollNum } / ${regisub.division.limitNumber}	<!-- 신청 인원 -->
+					      				${regisub.enroll.enrollNum } / ${regisub.subject.limitStu}	<!-- 신청 인원 -->
 	      							</c:otherwise>
 	      						</c:choose>	  
 	      					</th>
 	      					<th>
-	      						<a href="enrollCancle?cancleNo=${regisub.enroll.no }" class="btn btn-default">취소</a>
+	      						<a href="enrollCancle?cancleNo=${regisub.enroll.no }&minusScore=${regisub.subject.score}" class="btn btn-default">취소</a>
 	      					</th>
 	      				</tr>
 	      			</c:forEach>
@@ -219,7 +242,7 @@ $(function() {
 	      	</table>
 	    <!-- </form> -->
       	<div class="row text-center">
-      		신청 학점 / 최대 신청학점
+      		<p><font size="4;">현재 신청 학점 <span id="applyScore">${applyScore}</span> / 최대 신청 학점 <span id="maxOneScore">${student.maxOneScore}</span></font></p>
       	</div>
       </div>
     </div>

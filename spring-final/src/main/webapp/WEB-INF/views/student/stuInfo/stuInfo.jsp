@@ -41,7 +41,7 @@
 	        		<tr>
 	        			<th>구분</th>
 	        			<td colspan="3">
-	        				<c:out value="${cName }" />
+	        				<c:out value="${student.cName }" />
 	        			</td>
 	        		</tr>
 	        		<tr>
@@ -63,7 +63,7 @@
 	        		</tr>
 	        		<tr>
 	        			<th>전공</th>
-	        			<td><c:out value="${tName}"/></td>
+	        			<td><c:out value="${student.tName}"/></td>
 	        			<th>학년</th>
 	        			<td><c:out value="${student.grade }"/></td>
 	        		</tr>
@@ -99,14 +99,14 @@
       			<tbody>
       				<tr>
       					<th rowspan="2">개인</th>
-      					<th>휴대폰</th>
+      					<th>*휴대폰</th>
       					<td><form:input type="text" path="phone" value="${student.phone }"/>
       						<button type="submit" class="btn btn-default">수정</button>
       						<form:errors path="phone" cssClass="text-danger"/>
       					</td>
       				</tr>
       				<tr>
-      					<th>이메일</th>
+      					<th>*이메일</th>
       					<td><form:input type="text" path="email" value="${student.email }" />
       						<button type="submit" class="btn btn-default">수정</button>
       						<form:errors path="email" cssClass="text-danger"/>
@@ -114,7 +114,7 @@
       				</tr>
       				<tr>
       					<th rowspan="6">자택</th>
-      					<th rowspan="3">주소</th>
+      					<th rowspan="3">*주소</th>
       					<td><form:input type="text" path="addr1"/>
       						<a href="" class="btn btn-default">우편번호 검색</a>
       					</td>
@@ -134,7 +134,7 @@
       					<td><c:out value="${student.parentName }"/></td>
       				</tr>
       				<tr>
-      					<th>보호자 연락처</th>
+      					<th>*보호자 연락처</th>
       					<td><form:input type="text" path="parentPhone" value="${student.parentPhone }"/>
       						<button type="submit" class="btn btn-default">수정</button>
       						<form:errors path="parentPhone" cssClass="text-danger"/>

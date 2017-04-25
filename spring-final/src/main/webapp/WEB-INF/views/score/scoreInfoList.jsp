@@ -12,10 +12,7 @@
 <script type="text/javascript">
 $(function () {
 	$("#scoreprint").click(function (e) {
-		var scoreno = $(this).val();
-		var stuname = $("#stuname").val();
-		alert(stuname);
-		window.open('data:application/vnd.ms-excel,'+stuname+'_Score_Info' + encodeURIComponent($('#scoreDate').html()), '_blank');
+		window.open('data:application/vnd.ms-excel, Score_Info' + encodeURIComponent($('#scoreDate').html()), '_blank');
 		e.preventDefault(); 
 	});
 });
@@ -25,8 +22,17 @@ $(function () {
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top: 25px;" id="scoreDate">
+	<div class="row text-right">
+			홈 > 성적관리 > 성적조회 > 성적상세정보 >
+		</div>
+		<div class="row">
+			<h4><span class="glyphicon glyphicon-th-list"></span> 성적 상세정보</h4>
+			<hr style="border:solid 0.5px #2C7BB5;">
+		</div>
 		<div class="panel panel-heading">
-			<input type="hidden" value="${stuinfo.name }" id="stuname">
+			
+		</div>
+		<div class="panel panel-body">
 			<label><strong>${stuinfo.name } 성적 정보</strong></label>
 			<table class="table table-condensed">
 				<thead>
@@ -62,8 +68,6 @@ $(function () {
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="panel panel-body">
 			<label>전체성적 리스트</label>
 			<table class="table table-condensed">
 				<thead>
@@ -113,10 +117,13 @@ $(function () {
 						<th>평균점수</th>
 						<th>백분율점수</th>
 						<th>학사경고</th>
-						<th>전필</th>
-						<th>전선</th>
-						<th>교필</th>
-						<th>교선</th>
+						<th>전.필</th>
+						<th>전.선</th>
+						<th>교.필</th>
+						<th>교.선</th>
+						<th>일.선</th>
+						<th>구분</th>
+						<th>학.기</th>
 					</tr>
 				</thead>
 				<tbody id="score_td_box">
@@ -139,6 +146,9 @@ $(function () {
 							<td>${savg.pass2 }</td>
 							<td>${savg.pass3 }</td>
 							<td>${savg.pass4 }</td>
+							<td>${savg.pass5 }</td>
+							<td>${savg.pass6 }</td>
+							<td>${savg.pass7 }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -147,6 +157,7 @@ $(function () {
 		<div class="panel panel-footer">
 			<div class="text-right">
 				<a href="scorelist.do" class="btn btn-info">메인</a>
+				<a href="attinfolist.do?stuno=${stuinfo.no }" class="btn btn-primary">출석</a>
 				<button class="btn btn-success" type="button" id="scoreprint">엑셀</button>
 			</div>
 		</div>

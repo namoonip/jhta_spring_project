@@ -17,8 +17,6 @@ public class Leave {
 	
 	public Leave() {}
 
-	
-
 	public Leave(int no, int stuNo, String code, Date enrollDate, String pass, Date okayDate, Date reinDate,
 			String scorePass, String cName) {
 		super();

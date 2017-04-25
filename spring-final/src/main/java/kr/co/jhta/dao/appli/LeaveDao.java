@@ -15,4 +15,5 @@ public interface LeaveDao {
 	
 	void deleteEnrollByNo(Map<String, Object> map);
 	String getCnameByCcode(String cCode);
+	void updateLeave(Map<String, Object> map);
 }

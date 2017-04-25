@@ -14,4 +14,6 @@ public interface EnrollService {
 	Enroll getEnrollCheckNumService(int enrollNo);
 	List<Enroll> getAllEnrollByTcodeService(String siteCode);
 	void addEnroll(Enroll enroll);
+	List<Enroll> getProfEnroll(String id);
+	void updateEnroll(Enroll enroll);
 }

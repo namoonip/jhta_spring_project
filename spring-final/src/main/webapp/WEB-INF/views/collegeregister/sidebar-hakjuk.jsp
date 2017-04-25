@@ -32,7 +32,7 @@
                         </a>
                         <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="leave"><i class="fa fa-caret-right"></i>휴학 신청 목록</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>휴학 승인 목록</a></li>
+                            <li><a href="enterleave"><i class="fa fa-caret-right"></i>휴학 승인 목록</a></li>
                         </ul>
                     </li>
                     <li>
@@ -42,7 +42,7 @@
                         </a>
                         <ul id="submenu-5" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="reinstatement"><i class="fa fa-caret-right"></i>복학 신청 목록</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>복학 승인 목록</a></li>
+                            <li><a href="enterreinstatement"><i class="fa fa-caret-right"></i>복학 승인 목록</a></li>
                         </ul>
                     </li>
                     <li>
@@ -62,9 +62,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href=""><i class="fa fa-caret-right"></i>제적 처리</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>제적예정자 목록</a></li>
-                            <li><a href="disenrollment"><i class="fa fa-caret-right"></i>제적자 목록</a></li>
+                            <li><a href="jejukmain"><i class="fa fa-caret-right"></i>제적 처리</a></li>
+                            <li><a href=""><i class="fa fa-caret-right"></i>제적자 목록</a></li>
                         </ul>
                     </li>
                     <li>
@@ -73,8 +72,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-8" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href=""><i class="fa fa-caret-right"></i>자퇴 신청 목록</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>자퇴 승인 목록</a></li>
+                            <li><a href="dropoff"><i class="fa fa-caret-right"></i>자퇴 신청 목록</a></li>
+                            <li><a href="enterdropoff"><i class="fa fa-caret-right"></i>자퇴 승인 목록</a></li>
                         </ul>
                     </li>
                 </ul>

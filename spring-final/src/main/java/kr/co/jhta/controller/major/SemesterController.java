@@ -56,11 +56,18 @@ public class SemesterController {
 	}
 	
 	@RequestMapping(value="/detailSeme")
-	public String detailSeme(@RequestParam("no") int no, Model model){
+	public String detailSeme(@RequestParam int no, Model model){
 		
 		Semester semester = semesterService.getSemesterByNo(no);
 		model.addAttribute("semeupdateform", semester);
 		return "major/semedetail"; 
+	}
+	
+	@RequestMapping(value="/deleteSeme")
+	public String deleteSeme(@RequestParam int no) {
+		
+		semesterService.delSemesterByNo(no);
+		return "redirect:/admin/semester";
 	}
 	
 	@RequestMapping(value="/editseme", method=RequestMethod.POST )

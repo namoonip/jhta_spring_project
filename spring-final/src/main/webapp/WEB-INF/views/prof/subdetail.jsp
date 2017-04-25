@@ -56,11 +56,18 @@
 							<th>학점</th>
 							<td>${subno.score}</td>
 						</tr>
-						
+						<tr>
+							<th>강의요일</th>
+							<tD>${subno.enroll.enrollDay}</tD>	
+						</tr>
+						<tr>
+							<th>강의시간</th>
+							<td>${subno.enroll.enrollTime}</td>
+						</tr>
 			</tbody>
 		</table>
 		<div class="pull-right">
-			<a href="/jhta/prof/subupdate?no=${subno.no }" class="btn btn-primary">수정</a>
+			<a href="/jhta/prof/subupdate?no=${subno.enroll.no }" class="btn btn-primary">수정</a>
 			<a href="/jhta/prof/subinfo" class="btn btn-warning">뒤로</a>
 		</div>
 	</div>

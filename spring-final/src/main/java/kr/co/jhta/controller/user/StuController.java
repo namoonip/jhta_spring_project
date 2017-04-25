@@ -1,5 +1,7 @@
 package kr.co.jhta.controller.user;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -12,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.jhta.service.board.BoardService;
+import kr.co.jhta.service.sitemap.SitemapService;
 import kr.co.jhta.service.user.StudentService;
+import kr.co.jhta.vo.Board;
+import kr.co.jhta.vo.SearchForm;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.stu.Student;
 import kr.co.jhta.vo.stu.StudentForm;
 
@@ -21,10 +28,28 @@ import kr.co.jhta.vo.stu.StudentForm;
 public class StuController {
 	
 	@Autowired
-	StudentService stuService;
+	private StudentService stuService;
+	
+	@Autowired
+	private BoardService boardService;
+	@Autowired
+	private SitemapService sitemapService;
 	
 	@RequestMapping("/home")
-	public String stuMain() {
+	public String stuMain(Student student, Model model, SearchForm searchForm) {
+		
+		final String BOARDTYPE = "N";
+		
+		List<Board> boardList = boardService.searchNoticeBoardByCount(BOARDTYPE);
+		model.addAttribute("boardList", boardList);
+		
+		SiteMap siteMap = sitemapService.getSitemapByCodeService(student.getDivision());
+		searchForm.setDepartment(siteMap.getName());
+		searchForm.setSearchBoardType("D");
+		List<Board> deptList = boardService.searchDeptBoardByCount(searchForm);
+		
+		model.addAttribute("deptList", deptList);
+		
 		return "/student/stuMain";
 	}
 	
@@ -39,10 +64,6 @@ public class StuController {
 		model.addAttribute("studentForm", studentForm);
 		
 		// 과목 이름으로 출력을 위해 service사용
-		String tName = stuService.getTnameByTcodeService(student.getNo(), student.getDivision());
-		model.addAttribute("tName", tName);
-		String cName = stuService.getCnameByRegisterService(student.getRegister());
-		model.addAttribute("cName", cName);
 		return "/student/stuInfo/stuInfo";
 	}
 	

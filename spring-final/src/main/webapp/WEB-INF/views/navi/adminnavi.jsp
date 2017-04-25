@@ -157,7 +157,7 @@
 						      <li><a href="semester" style="color: white;">교과 관리</a></li>
 						      <li><a href="#" style="color: white;">수업 관리</a></li>
 						      <li><a href="#" style="color: white;">수강 관리</a></li>
-						      <li><a href="#" style="color: white;">성적 관리</a></li>
+						      <li><a href="scorelist.do" style="color: white;">성적 관리</a></li>
     						</ul>
                     </div>
                     

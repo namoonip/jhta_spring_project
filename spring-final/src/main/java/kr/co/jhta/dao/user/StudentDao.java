@@ -19,4 +19,9 @@ public interface StudentDao {
 	
 	String getTnameByTcode(Map<String, Object> map);
 	String getCnameByRegister(String register);
+	
+	void updateAddScore(Map<String, Object> map); 
+	void updateMinusScore(Map<String, Object> map);
+	
+	int getNowScore(int stuNo);
 }

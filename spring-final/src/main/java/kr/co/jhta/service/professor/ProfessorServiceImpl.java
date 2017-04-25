@@ -23,7 +23,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	public Professor loginByProfessor(LoginForm loginForm) {
 
 		Professor prof = professordao.getProfessorById(loginForm.getUserId());
-				
+		System.out.println(prof);
 		if(prof == null){
 			return null;
 		}

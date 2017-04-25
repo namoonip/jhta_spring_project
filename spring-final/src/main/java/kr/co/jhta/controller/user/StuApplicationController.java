@@ -38,18 +38,24 @@ public class StuApplicationController {
 	public String leaveEnroll(Model model, Student student, LeaveForm leaveForm){
 		
 		Leave leave = new Leave();
-		leave.setCode(leaveForm.getcCode());
-		leave.setStuNo(student.getNo());
-		if(leaveForm.getScorePass().equals("true")) {
-			leave.setScorePass("true");
-		} else {
-			leave.setScorePass("false");
-		}			
-		Long beforedParsedDate = Long.parseLong(leaveForm.getReinDate());
-		Date date = new Date(beforedParsedDate);
-		leave.setReinDate(date);
-		leaveService.addNewLeaveService(leave);
-		/*selectSemeter:2 update 추가하기 (student remainleave - 하기)*/
+		if(leaveForm.getCheckboxTrue().equals("true")) {
+			leaveService.updateLeaveService(leaveForm.getReEno(), student.getNo(), leaveForm.getChageReason());
+			return "redirect:/stud/leave";
+			
+		}  else {
+			leave.setCode(leaveForm.getcCode());
+			leave.setStuNo(student.getNo());
+			if(leaveForm.getScorePass().equals("true")) {
+				leave.setScorePass("true");
+			} else {
+				leave.setScorePass("false");
+			}			
+			Long beforedParsedDate = Long.parseLong(leaveForm.getReinDate());
+			Date date = new Date(beforedParsedDate);
+			leave.setReinDate(date);
+			leaveService.addNewLeaveService(leave);
+			/*selectSemeter:2 update 추가하기 (student remainleave - 하기)*/
+		}
 		return "redirect:/stud/leave";
 	}
 		

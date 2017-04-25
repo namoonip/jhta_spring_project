@@ -63,6 +63,4 @@ public class PageNation {
 		return "PageNation [pagesPerBlock=" + pagesPerBlock + ", rowsPerPage=" + rowsPerPage + ", totalRows="
 				+ totalRows + ", currentPage=" + currentPage + "]";
 	}
-	
-	
 }

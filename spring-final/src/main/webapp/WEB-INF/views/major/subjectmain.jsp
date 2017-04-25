@@ -69,13 +69,7 @@ $(function () {
       			</table>
       		</form>
     	
-    		<div class="row text-left pull-left">
-    			<select name="rows" >
-    				<option value="10" ${searchsubject eq 10? 'selected=selected' : '' }>10건씩 정렬</option>
-    				<option value="50" ${searchsubject eq 50? 'selected=selected' : '' }>50건씩 정렬</option>
-    				<option value="100" ${searchsubject eq 100? 'selected=selected' : '' }>100건씩 정렬</option>
-    			</select>
-    		</div>
+    		
       		<a href="addsubject" class="btn btn-primary btn-sm pull-right">교과등록</a>
       	
       	</div>

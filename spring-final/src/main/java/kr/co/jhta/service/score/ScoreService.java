@@ -18,11 +18,8 @@ import kr.co.jhta.vo.stu.Student;
 @Transactional
 @Service
 public interface ScoreService {
-	List<SubjectRegister> getAllRegiList();
-	List<Score> getAllScoreList();
 	List<Regisubject> getRegisInfoByhash(HashMap<String, Object> list);
 	
-	SubjectRegister getRegiListByNo(int regiNo);
 	Student getStudentInfoByNo(int stuNo);
 	Subject getSubjectInfoByNo(int jNo);
 	
@@ -42,5 +39,7 @@ public interface ScoreService {
 	List<Regisubject> getSearchInfoBySno(int sno);
 	List<SemesterAvg> getSemesterAvgBySno(int sno);
 	SemesterAvg getSemesterAvgTotalBySno(int sno);
+	List<Regisubject> getAllSearchInfo();
+	int getScoreCount();
 	
 }

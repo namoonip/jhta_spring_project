@@ -15,24 +15,20 @@
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
-				s.J_SUB_PROF as "subject.professor",
-			     j.J_DIV_NUM as "division.divisionNo", 
-			     j.J_DIV_PROF as "division.divisionProfessor",
-			     j.J_LIMIT_NUM as "division.limitNumber",
-				 j.J_DIV_NO as "division.no",
+				s.J_SUB_PROF as "subject.professor.name",
+				s.J_LIMIT_STU as "subject.limitStu",
 				  t.T_NO as "subject.siteCode.no",
 				  t.T_CODE as "subject.siteCode.code",
-				  t.T_NAME as "subject.siteCode.name"
+				  t.T_NAME as "subject.siteCode.name",
+				  t.T_PRECODE as "subject.siteCode.preCode"
 		from E_ENROLLMENT e, 
-			 J_DIVISION j,
 			 J_SUBJECT s,
 			 T_SITEMAP t
-		where e.E_J_DIV_NO = j.J_DIV_NO
-		and e.E_J_SUBJECT_NO = s.J_NO
+		where e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
 	</select>
 	
-	<select id="getAllEnrollByTcode" parameterType="String" resultType="Enroll">
+	<select id="getAllEnrollByTcode" parameterType="string" resultType="Enroll">
 		select e.E_NO as no, 
 			   e.E_ENROLLTIME as enrollTime, 
 			   e.E_ENROLLDAY as enrollDay,
@@ -43,20 +39,16 @@
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
-				s.J_SUB_PROF as "subject.professor",
-			     j.J_DIV_NUM as "division.divisionNo", 
-			     j.J_DIV_PROF as "division.divisionProfessor",
-			     j.J_LIMIT_NUM as "division.limitNumber",
-				 j.J_DIV_NO as "division.no",
+				s.J_SUB_PROF as "subject.professor.name",
+				s.J_LIMIT_STU as "subject.limitStu",
 				  t.T_NO as "subject.siteCode.no",
 				  t.T_CODE as "subject.siteCode.code",
-				  t.T_NAME as "subject.siteCode.name"
+				  t.T_NAME as "subject.siteCode.name",
+				  t.T_PRECODE as "subject.siteCode.preCode"
 		from E_ENROLLMENT e, 
-			 J_DIVISION j,
 			 J_SUBJECT s,
 			 T_SITEMAP t
-		where e.E_J_DIV_NO = j.J_DIV_NO
-		and e.E_J_SUBJECT_NO = s.J_NO
+		where e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
 		and s.J_T_CODE = #{value}
 	</select>
@@ -67,27 +59,38 @@
 			   e.E_ENROLLDAY as enrollDay,
 			   e.E_ENROLLNUM as enrollNum,
 			   	s.J_NO as "subject.no",
+			   	s.J_subject_name as "subject.subjectName",
 			   	s.J_T_CODE as "subject.siteCode.code",
 			    s.J_IS_PASSED as "subject.passed.passedName", 
 			    s.J_GRADE as "subject.grade", 
 			    s.J_SUBJECT_NAME as "subject.subjectName", 
 			    s.J_SCORE as "subject.score",
-				s.J_SUB_PROF as "subject.professor",
-			     j.J_DIV_NUM as "division.divisionNo", 
-			     j.J_DIV_PROF as "division.divisionProfessor",
-			     j.J_LIMIT_NUM as "division.limitNumber",
-				 j.J_DIV_NO as "division.no",
+				s.J_SUB_PROF as "subject.professor.name",
+				s.J_LIMIT_STU as "subject.limitStu",
 				  t.T_NO as "subject.siteCode.no",
 				  t.T_CODE as "subject.siteCode.code",
-				  t.T_NAME as "subject.siteCode.name"
+				  t.T_NAME as "subject.siteCode.name",
+				  t.T_PRECODE as "subject.siteCode.preCode"
 		from E_ENROLLMENT e, 
-			 J_DIVISION j,
 			 J_SUBJECT s,
 			 T_SITEMAP t
-		where e.E_J_DIV_NO = j.J_DIV_NO
-		and e.E_J_SUBJECT_NO = s.J_NO
+		where e.E_J_SUBJECT_NO = s.J_NO
 		and t.T_CODE = s.J_T_CODE
 		and e.E_NO = #{Eno}
+	</select>
+	<select id="getProfEnroll" parameterType="string" resultType="Enroll">
+		SELECT
+			B.e_no as no,
+			A.j_subject_name as "subject.subjectName",
+			B.e_enrollday as enrollDay,
+			B.e_enrolltime as enrollTime,
+			A.j_no as "subject.no"
+		FROM
+			J_SUBJECT A, E_ENROLLMENT B
+		WHERE
+			A.J_NO = B.E_J_SUBJECT_NO			
+		AND
+			A.J_SUB_PROF=#{value}
 	</select>
 	
 	<insert id="addEnroll" parameterType="Enroll">
@@ -98,30 +101,34 @@
 			E_ENROLLTIME,
 			E_ENROLLNUM)
 		values
-			(enrollment_seq.nextval,
+			(addenroll_comm.nextval,
 			#{enrollDay},
 			#{subject.no},
 			#{enrollTime},
 			0)
 	</insert>
+	<update id="updateEnroll" parameterType="Enroll">
+		update E_Enrollment
+			set
+				E_J_SUBJECT_NO = #{subject.no, jdbcType=INTEGER},
+				E_ENROLLDAY = #{enrollDay},
+				E_ENROLLTIME = #{enrollTime}
+			where
+				E_NO = #{no}
+	</update>
 	
 	<insert id="addRegisub" parameterType="Enroll">
-		INSERT INTO R_REGISUBJECT 
-				(R_REGI_NO, <!-- 1 -->
-				 R_GRADE, 	<!-- 2 -->
-				 R_MAXGRADE, <!-- 3 -->
+		INSERT INTO R_REGISUBJECT (
+				R_REGI_NO, <!-- 1 -->
 				 J_NO, 		<!-- 4 -->
 				 U_STU_NO, 	<!-- 5 -->
-				 E_NO, 		<!-- 6 -->
-				 J_DIV_NO) 	<!-- 7 -->
+				 E_NO)		<!-- 6 -->
 		VALUES(	
 				R_REGISUBJECT_SEQ.nextval, 
-				#{subject.score}, 
-				20,
 				#{subject.no},
-				#{stuNo},
-				#{no}, 
-				#{division.no})	
+				#{student.no, jdbcType=INTEGER},
+				#{no}
+			)	
 	</insert>
 	
 	<update id="updatePlusNowNum" parameterType="int">
@@ -138,9 +145,9 @@
 	
 	<select id="getEnrollCheckNum" parameterType="int" resultType="Enroll">
 		select e.E_ENROLLNUM as enrollNum,
-	   		   j.J_LIMIT_NUM as "division.limitNumber"
- 		from E_ENROLLMENT e, J_DIVISION j 
- 		where e.E_J_DIV_NO = j.J_DIV_NO
+	   		   j.J_LIMIT_STU as limitStu
+ 		from E_ENROLLMENT e, J_subject j
+ 		where e.E_j_subject_no = j.J_NO
  		and E_NO = #{enrollNo}
 	</select>	
 	

@@ -80,8 +80,8 @@
          				</tr>
     				</table>
     				<div>
-    					<a href="subjectmain" class="btn btn-default pull-right">취소</a>
     					<button type="submit" class="btn btn-primary pull-right">수정</button>
+    					<a href="subjectmain" class="btn btn-default pull-right">취소</a>
     				</div>
     			</form>
     		</div>
