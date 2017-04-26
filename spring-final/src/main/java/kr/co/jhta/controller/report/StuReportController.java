@@ -16,7 +16,6 @@ import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.Preport;
 import kr.co.jhta.vo.PreportContent;
 import kr.co.jhta.vo.SiteMap;
-import kr.co.jhta.vo.stu.Enroll;
 import kr.co.jhta.vo.stu.Regisubject;
 import kr.co.jhta.vo.stu.Student;
 
@@ -37,17 +36,6 @@ public class StuReportController {
 	RegisubjectService regisubjectService;
 	
 	private int nowScore = 0; 
-	
-	
-	@RequestMapping(value="/editReport")
-	public String editReport(PreportContent stuReport, Model model, Student student) {	
-		stuReport = stuRepService.getStuReportByCnoService(stuReport.getNo());
-		model.addAttribute("stuReport", stuReport);
-		model.addAttribute("student", student);
-		
-		return "student/report/editStuReport";
-	}
-	
 	
 	@RequestMapping(value="/deleteReprot")
 	public String deleteReportStu(@RequestParam(value="cno") int cno,
@@ -79,36 +67,7 @@ public class StuReportController {
 		model.addAttribute("isSamePerson",isSamePerson);
 		return "redirect:/stud/ReportHome";
 	}
-	
-	
-	@RequestMapping(value="/addNewReport", method=RequestMethod.POST)
-	public String addNewReportProcess(@RequestParam(value="eno") int eno, @RequestParam(value="rno") int rno,
-											PreportContent stuReport, Model model, Student student) {
-		Enroll enroll = new Enroll();
-		enroll.setNo(eno);
-		Preport preport = new Preport();
-		preport.setNo(rno);
-		stuReport.setStudent(student);
-		stuReport.setEnroll(enroll);
-		stuReport.setReport(preport);
 		
-		stuRepService.addNewReportService(stuReport);
-		
-		model.addAttribute("eno", eno);
-		return "redirect:/stud/ReportHome";
-	}
-	
-	@RequestMapping(value="/stuReportAfter", method=RequestMethod.POST)
-	public String stuReportAfterForm(Model model, Student student, 
-						@RequestParam(value="rno") int rno) {
-		
-		model.addAttribute("student", student);
-		Preport profReport = stuRepService.getProfReportByPnoService(rno);
-		model.addAttribute("profReport", profReport);
-		
-		return "student/report/stuAfterReportForm";
-	}
-	
 	@RequestMapping(value="/showProfReport", method=RequestMethod.GET)
 	public String showProfReport(Model model, Student student, @RequestParam(value="pno") int pno) {
 		

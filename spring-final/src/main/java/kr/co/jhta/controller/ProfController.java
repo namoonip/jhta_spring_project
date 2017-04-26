@@ -34,9 +34,6 @@ import kr.co.jhta.vo.Syllabus;
 import kr.co.jhta.vo.Syllabusform;
 import kr.co.jhta.vo.stu.Enroll;
 import kr.co.jhta.vo.stu.EnrollForm;
-import kr.co.jhta.vo.stu.Student;
-import kr.co.jhta.vo.stu.StudentForm;
-
 @Controller
 @RequestMapping("/prof")
 public class ProfController {
@@ -226,8 +223,9 @@ public class ProfController {
 		return "/prof/subinfo";
 	}
 	@RequestMapping("/subdel")
-	public String deleteSub(@RequestParam("no") int no, Subject subject){
-		subjectService.deleteSub(subject.getNo());
+	public String deleteSub(@RequestParam("no") int no){
+		System.out.println(no);
+		enrollService.deleteEnroll(no);
 		
 		
 		return "redirect:/prof/subinfo";
@@ -242,7 +240,10 @@ public class ProfController {
 	@RequestMapping(value="/subupdate", method=RequestMethod.GET)
 	public String subupdateform(@RequestParam("no")int no, Model model, @Valid @ModelAttribute("enrollform")EnrollForm enrollform, HttpSession session){
 		Enroll enroll = enrollService.getEnrollByENoService(no);
+		int sele = enroll.getSubject().getNo(); //170
+		System.out.println(sele);
 		model.addAttribute("enroll", enroll);
+		model.addAttribute("sele", sele);
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
 		List<Subject> subList = subjectService.getByProIdList(prof.getId());
 		model.addAttribute("subList", subList);
@@ -272,7 +273,7 @@ public class ProfController {
 		professorService.getProfessorById(prof.getId());
 		System.out.println(prof);
 		model.addAttribute("prof", prof);
-		return "/prof/profinfo";
+		return "/prof/profInfo";
 	}
 	
 	@RequestMapping(value="/profinfo", method=RequestMethod.POST)
@@ -280,7 +281,7 @@ public class ProfController {
 						BindingResult errors, Professor professor, Model model)throws Exception{
 		if(errors.hasErrors()){
 			model.addAttribute("prof",professor);
-			return "/prof/profinfo";
+			return "/prof/profInfo";
 		}
 		System.out.println(professorForm);
 		System.out.println(professor);

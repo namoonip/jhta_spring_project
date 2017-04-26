@@ -687,4 +687,83 @@
 		where
 			d_no = #{no}
 	</update>
+	
+	<select id="getAllDropoffByNotFalse" resultType="kr.co.jhta.vo.hakjuk.Dropoff">
+		SELECT 
+			D_NO as no, 
+			d.c_name as code, 
+			D_STUNO as "student.no", 
+			D_PASS as pass,
+			D_PASSDATE as passDate,  
+			D_ENROLLDATE as enrollDate,
+			c.T_NAME as "student.division",
+			b.U_STU_ID as "student.id",
+			b.U_STU_name as "student.name"
+		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
+		WHERE
+			a.D_code = d.C_CODE
+		and 
+			a.D_STUNO = b.U_STU_NO
+		and 
+			b.U_STU_DIVISION = c.T_CODE
+		and
+			D_PASS != 'false'
+	</select>
+	
+	<select id="getAllDropoffByNotFalseForm" resultType="kr.co.jhta.vo.hakjuk.Dropoff" parameterType="kr.co.jhta.vo.hakjuk.ReinForm">
+		SELECT 
+			D_NO as no, 
+			d.c_name as code, 
+			D_STUNO as "student.no", 
+			D_PASS as pass,
+			D_PASSDATE as passDate,  
+			D_ENROLLDATE as enrollDate,
+			c.T_NAME as "student.division",
+			b.U_STU_ID as "student.id",
+			b.U_STU_name as "student.name"
+		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
+		WHERE
+			a.D_code = d.C_CODE
+		and 
+			a.D_STUNO = b.U_STU_NO
+		and 
+			b.U_STU_DIVISION = c.T_CODE
+		and
+			D_PASS != 'false'
+		<if test="q != '' ">
+			and  ${sort} = #{q}
+		</if>
+		<if test="division != '' ">
+			and b.U_STU_DIVISION = #{division}
+		</if>
+	</select>
+	<select id="getDropoffByNotFalseNO" resultType="kr.co.jhta.vo.hakjuk.Dropoff" parameterType="int">
+		SELECT 
+			D_NO as no, 
+			d.c_name as code, 
+			D_STUNO as "student.no", 
+			D_PASS as pass,
+			D_PASSDATE as passDate,  
+			D_ENROLLDATE as enrollDate,
+			c.T_NAME as "student.division",
+			b.U_STU_ID as "student.id",
+			b.U_STU_name as "student.name"
+		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
+		WHERE
+			a.D_code = d.C_CODE
+		and 
+			a.D_STUNO = b.U_STU_NO
+		and 
+			b.U_STU_DIVISION = c.T_CODE
+		and
+			D_PASS != 'false'
+		and
+			d_no = #{no}
+	</select>
+	<insert id="addProfessor" parameterType="kr.co.jhta.vo.hakjuk.AddProfForm">
+		insert into u_professor(U_PROF_NO, U_PROF_ID, U_PROF_NAME, U_PROF_GENDER, U_PROF_CODE, U_PROF_PWD, U_PROF_REGISTER, U_PROF_PHONE, U_PROF_ADDR, U_PROF_EMAIL, U_PROF_GRADE, U_PROF_SSN, U_PROF_FOREI, U_PROF_ENTRYDATE, U_PROF_DIVISION)
+		values(u_prof_seq.nextval,#{id},#{name},#{gender},#{code},#{pwd},#{register},#{phone},#{addr},#{email},#{grade},#{ssn},#{forei},sysdate,#{division})
+	</insert>
+	
+	
 </mapper>

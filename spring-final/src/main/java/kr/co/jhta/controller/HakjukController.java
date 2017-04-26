@@ -23,6 +23,7 @@ import kr.co.jhta.vo.hakjuk.ReinForm;
 import kr.co.jhta.vo.hakjuk.Reinstatement;
 import kr.co.jhta.vo.hakjuk.SearchForm;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
+import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.stu.AddStudentForm;
 import kr.co.jhta.vo.stu.Student;
 
@@ -38,6 +39,11 @@ public class HakjukController {
 		
 	@Autowired
 	private HakjukService hakjukService;
+	
+	@RequestMapping(value = "/home",method=RequestMethod.GET)
+	public String home(Model model){
+		return "redirect:/admin/searchstud";
+	}
 	
 	
 	/**
@@ -185,8 +191,44 @@ public class HakjukController {
 		BeanUtils.copyProperties(addstud, stud);
 		stud.setProfessor(addstud.getProfessor());
 		hakjukService.admissionsStud(stud);
-		return "redirect:/admin/admissionstud";
+		return "redirect:/admin/admissions";
 	}
+	
+	/**
+	 * 교수 정보 등록화면
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/admissionprof")
+	public String admissionprof(Model model){
+		List<SiteMap> sitemapList = sitemapService.getAllSitemapPreService();
+		SiteMap sitemap = new SiteMap();
+		sitemap.setPreCode(sitemapList.get(0).getCode());
+		List<SiteMap> subsitemapList = sitemapService.getAllSitemapSecService(sitemap);
+		model.addAttribute("sitemapList",sitemapList);
+		model.addAttribute("majors",subsitemapList);
+		return "collegeregister/admissionprof";
+	}
+	/**
+	 * 교수정보 등록화면에서 등록 버튼 submit 시 insert문
+	 * @param studemail
+	 * @param studemailaddr
+	 * @param addstud
+	 * @return
+	 */
+	
+	@RequestMapping(value="/addprof", method=RequestMethod.POST)
+	public String addprofessor(String studemail,String studemailaddr,AddProfForm addprof){
+		
+		String email = studemail+"@"+studemailaddr;
+		addprof.setAddr(addprof.getAddr1()+addprof.getAddr2());
+		addprof.setEmail(email);
+		addprof.setCode(addprof.getDivision());
+		addprof.setPwd(addprof.getSsn().split("-")[0]);
+		hakjukService.addProfessorService(addprof);
+		return "redirect:/admin/admissionprof";
+	}
+	
 	
 	/**
 	 * 미승인 된 휴학 목록을 표시하는 화면
@@ -419,6 +461,22 @@ public class HakjukController {
 		return "collegeregister/dropinfo";
 	}
 	/**
+	 * 자퇴 승인처리가 된 하나의 자퇴를 확인
+	 * @param no
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/dropinfoOK")
+	public String dropinfook(int no, Model model){
+		System.out.println(no);
+		Dropoff drop = hakjukService.getDropoffByNotFalseNOService(no);
+		Student student = hakjukService.getStudentByIdService(drop.getStudent().getId());
+		model.addAttribute("drop",drop);
+		model.addAttribute("student",student);
+		return "collegeregister/dropinfoOK";
+	}
+	
+	/**
 	 * 자퇴 승인 업데이트
 	 * @param no
 	 * @return
@@ -439,10 +497,22 @@ public class HakjukController {
 		return "redirect:/admin/dropoff";
 	}
 	
+	@RequestMapping("/enterdropoff")
+	public String enterdropoff(Model model){
+		model.addAttribute("dropList",hakjukService.getAllDropoffByNotFalseService());
+		model.addAttribute("rows",hakjukService.getAllDropoffByFalseService().size());
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService());
+		return "collegeregister/enterdropoff";
+	}
 	
-	
-	
-	
+	@RequestMapping(value = "/enterdropoff",method=RequestMethod.POST)
+	public String enterdropoff(ReinForm rf,Model model){
+		System.out.println(rf);
+		model.addAttribute("dropList",hakjukService.getAllDropoffByNotFalseFormService(rf));
+		model.addAttribute("rows",hakjukService.getAllDropoffByNotFalseFormService(rf).size());
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService());
+		return "collegeregister/enterdropoff";
+	}
 	
 }
 

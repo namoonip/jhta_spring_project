@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,9 +52,8 @@ public class MessageController {
 		List<Message> messageAllList = messageService.getReceiveMessageAdmin(prof.getId());
 		
 		int totalRows = messageAllList.size();
-		PageNation pagination = new PageNation(5, pno, totalRows);
+		PageNation pagination = new PageNation(10, pno, totalRows);
 		model.addAttribute("pagination", pagination);
-		
 		List<Message> messageList = new ArrayList<Message>();
 		
 		for (int i=pagination.getBeginIndex()-1; i<pagination.getEndIndex(); i++) {
@@ -68,7 +66,20 @@ public class MessageController {
 	}
 	
 	@RequestMapping("adminrecmessagebox")
-	public String adminRecieveEmailBox() {
+	public String adminRecieveEmailBox(Model model, Professor prof, @RequestParam(name="pno", defaultValue="1") int pno) {
+		List<Message> messageAllList = messageService.getSendMessageAdmin(prof.getId());
+		
+		int totalRows = messageAllList.size();
+		PageNation pagination = new PageNation(10, pno, totalRows);
+		model.addAttribute("pagination", pagination);
+		List<Message> messageList = new ArrayList<Message>();
+		
+		for (int i=pagination.getBeginIndex()-1; i<pagination.getEndIndex(); i++) {
+			messageList.add(messageAllList.get(i));
+		}
+		
+		model.addAttribute("messageList", messageList);
+		
 		return "administer/adminrecmessagebox";
 	}
 	
@@ -97,7 +108,7 @@ public class MessageController {
 				if (!file.isEmpty()) {
 					IOUtils.copy(file.getInputStream(), new FileOutputStream(new File(directory, file.getOriginalFilename())));
 					message.setFilename(file.getOriginalFilename());
-				}
+				} 
 				
 				messageService.addMessage(message);
 			}			

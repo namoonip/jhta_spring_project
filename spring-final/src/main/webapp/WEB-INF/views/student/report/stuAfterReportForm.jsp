@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -81,7 +82,7 @@ $(function() {
       </div>
       
       <div class="row">
-	      <form action="addNewReport" method="POST">
+	      <form:form action="stuReportAfter" method="POST" modelAttribute="preportContentForm" enctype="multipart/form-data">
 	      <input type="hidden" name="rno" value="${profReport.no}" />
 	      <input type="hidden" name="eno" value="${param.eno}" />	      
 		      <table class="table table-bordered">
@@ -111,13 +112,15 @@ $(function() {
 		      		<tr>
 						<th>*제목</th>  			
 		      			<th colspan="3">
-		      				<input name="title" type="text" class="form-control" id="input-title" placeholder="학과.학번.이름으로 제출해주시기 바랍니다."/>
+		      				<form:input path="title" type="text" cssClass="form-control" id="input-title" placeholder="학과.학번.이름으로 제출해주시기 바랍니다."/>
+		      				<form:errors path="title" cssClass="text-danger"/>
 		      			</th>
 		      		</tr>
 		      		<tr>
 		      			<th>*내용</th>
 		      			<th colspan="3">
-		      				<textarea name="content" id="input-content" cols="30" rows="10" class="form-control"></textarea>
+		      				<form:textarea path="content" id="input-content" cols="30" rows="10" cssClass="form-control"></form:textarea>
+		      				<form:errors path="content" cssClass="text-danger"/>
 		      			</th>
 		      		</tr>
 		      		<tr>
@@ -128,7 +131,13 @@ $(function() {
 		      		</tr>
 		      		<tr>
 		      			<th>파일첨부</th>
-		      			<th colspan="3"><input type="file" class="form-control" name="fileName" id="file"/></th>
+		      			<th colspan="3">
+		      				<form:input type="file" cssClass="form-control" path="file" />
+		      				<form:input type="file" cssClass="form-control" path="file2" />
+		      				<form:input type="file" cssClass="form-control" path="file3" />
+		      				<form:input type="file" cssClass="form-control" path="file4" />
+		      				<form:input type="file" cssClass="form-control" path="file5" />
+		      			</th>
 		      		</tr>
 		      		<tr>
 		      			<th>비공개</th>
@@ -143,7 +152,7 @@ $(function() {
 	      		<button type="submit" class="btn btn-default" id="submit-btn" disabled="disabled">제출</button>
 	      		<a href="stuMain" class="btn btn-default">취소</a>
 	      	</div>
-      	</form>
+      	</form:form>
       </div>
 </div>
 </body>

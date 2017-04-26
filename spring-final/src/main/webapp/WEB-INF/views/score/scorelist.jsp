@@ -88,6 +88,9 @@
 		});
 	});
 </script>
+<style>
+
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
@@ -134,7 +137,24 @@
 							</tbody>
 						</table>
 						<div class="panel panel-body" id="score_table">
-							<table class="table table-condensed">
+						<div style="overflow:scroll; width:1100px; height:300px;">
+							<table class="table table-hover">
+								<colgroup>
+									<col style="width: 5%">
+									<col style="width: 5%">
+									<col style="width: 7%">
+									<col style="width: 5%">
+									<col style="width: 10%">
+									<col style="width: 6%">
+									<col style="width: 5%">
+									<col style="width: 5%">
+									<col style="width: 6%">
+									<col style="width: 5%">
+									<col style="width: 5%">
+									<col style="width: 5%">
+									<col style="width: 5%">
+
+								</colgroup>
 								<thead>
 									<tr bgcolor="#f0fcff">
 										<th>수강번호</th>
@@ -172,6 +192,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+						</div>
 					</div>
 				</div>
 			</div>

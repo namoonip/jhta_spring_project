@@ -8,5 +8,7 @@ public interface TimeChartDao {
 
 	List<TimeChart> getEnroll(int no);
 
+	List<TimeChart> getProfEnroll(String profId);
+
 
 }

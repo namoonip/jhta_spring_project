@@ -203,9 +203,6 @@
 												<div class="col-md-10">
 													<input type="text" name="addr1" class="form-control" /> 
 												</div>
-												<div class="col-md-2">
-													<a href="#" class="btn btn-success">우편번호 검색</a>
-												</div>
 											</div>
 										</td>
 									</tr>

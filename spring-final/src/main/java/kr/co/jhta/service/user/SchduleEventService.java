@@ -3,8 +3,11 @@ package kr.co.jhta.service.user;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.co.jhta.vo.ScheduleEvent;
 
+@Transactional
 public interface SchduleEventService {
 
 	ScheduleEvent addNewSchEventService(ScheduleEvent schedule);

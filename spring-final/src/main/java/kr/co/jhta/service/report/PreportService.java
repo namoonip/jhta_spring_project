@@ -2,8 +2,11 @@ package kr.co.jhta.service.report;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.co.jhta.vo.Preport;
 
+@Transactional
 public interface PreportService {
 	void addreport(Preport preport);
 	List<Preport> getProftitle(int no);

@@ -16,12 +16,19 @@ public class SupplementLectureTableVo {
 	private int subjectLectureNumber;
 	private String subjectDate;
 	private String subjectTime;
-	private Date applicationDate;
-	private Date applicationDateEnd;
 	
 	
 	
 	
+	
+	@Override
+	public String toString() {
+		return "SupplementLectureTableVo [professorId=" + professorId + ", subjectNo=" + subjectNo + ", majorCode="
+				+ majorCode + ", subjectName=" + subjectName + ", professorName=" + professorName
+				+ ", supplementLectureCheck=" + supplementLectureCheck + ", professorNumber=" + professorNumber
+				+ ", majorOption=" + majorOption + ", majorScore=" + majorScore + ", subjectLectureNumber="
+				+ subjectLectureNumber + ", subjectDate=" + subjectDate + ", subjectTime=" + subjectTime + "]";
+	}
 	public String getSubjectDate() {
 		return subjectDate;
 	}
@@ -33,18 +40,6 @@ public class SupplementLectureTableVo {
 	}
 	public void setSubjectTime(String subjectTime) {
 		this.subjectTime = subjectTime;
-	}
-	public Date getApplicationDate() {
-		return applicationDate;
-	}
-	public void setApplicationDate(Date applicationDate) {
-		this.applicationDate = applicationDate;
-	}
-	public Date getApplicationDateEnd() {
-		return applicationDateEnd;
-	}
-	public void setApplicationDateEnd(Date applicationDateEnd) {
-		this.applicationDateEnd = applicationDateEnd;
 	}
 	public String getProfessorId() {
 		return professorId;

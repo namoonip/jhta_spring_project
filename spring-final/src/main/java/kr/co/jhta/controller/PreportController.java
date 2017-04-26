@@ -22,6 +22,7 @@ import kr.co.jhta.vo.PreportContent;
 import kr.co.jhta.vo.PreportForm;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.stu.Enroll;
+import kr.co.jhta.vo.stu.Student;
 
 @Controller
 @RequestMapping("/prof/report")
@@ -120,5 +121,13 @@ public class PreportController {
 		
 		return "redirect:/prof/report/reportinfo";
 	}
+	@RequestMapping(value="/reporttodetail")
+	public String reporttodetail(@RequestParam("no")int no, Model model){
+			PreportContent profReport = stureportService.getStuAllReportByEno1(no);
+			System.out.println(profReport);
+			model.addAttribute("profReport", profReport);
+			
 	
+		return "/report/reporttodetail";
+	}
 }

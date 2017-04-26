@@ -132,5 +132,18 @@
 		L_OPENLECTUREREGISTER
 	where
 		L_SUBJECTCODE = #{subjectNo}
-</delete>		
+</delete>
+<!-- 강의 평가 점수 등록 -->
+<insert id="insertLectureRating" parameterType="kr.co.jhta.vo.LectureRatingScore">
+
+	
+insert into L_LECTURERATINGSCORE(
+	L_RATINGNUMBER,
+	L_RATINGSUBJECT_NO,
+	L_RATINGPROFESSOR_ID,
+	L_RATINGSCORE
+	)
+values(investgation_seq.nextval, #{subjectNo}, #{professorId}, #{ratingScore})	
+</insert>
+		
 </mapper>

@@ -105,7 +105,7 @@
 			D.s_seme_select as "selectNo.semeSelect",
 			A.j_grade as grade,
 			B.pass_code as "passed.code",
-			E.t_name as "siteCode.name",
+			A.j_t_code as "siteCode.code",
 			A.j_score as score,
 			A.j_division as division,
 			A.j_limit_stu as limitStu
@@ -181,6 +181,7 @@
 		and 
 			A.j_no = #{value}
 	</select>
+	
 	<select id="getByENoList" parameterType="int" resultType="subject">
 		select
 			A.j_no as no,

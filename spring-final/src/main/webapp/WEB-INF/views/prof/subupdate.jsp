@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-
+	
 </script>
 </head>
 <body>
@@ -30,9 +30,12 @@
 			<form:form method="post" action="/jhta/prof/subupdate?no=${enroll.no }" modelAttribute="enrollform">
 				<div class="form-group">
 					<label>과목 선택</label>
-					<form:select path="subjectNo" id="subjectNo" cssClass="form-control" selected="${enroll.subject.subjectName }">
+					<form:select path="subjectNo" id="subjectNo" cssClass="form-control" >
 						<c:forEach var="sublist" items="${subList }" varStatus="status">
-							<form:option id="semester-${status.count }" value="${sublist.no }">${sublist.subjectName }</form:option>							
+							<c:if test="${sublist.no eq sele }">
+								<form:option id="semester-${status.count }" value="${sublist.no }" selected="selected" >${sublist.subjectName }</form:option>	
+							</c:if>
+							<form:option id="semester-${status.count }" value="${sublist.no }">${sublist.subjectName }</form:option>
 						</c:forEach>
 					</form:select>			
 				</div>

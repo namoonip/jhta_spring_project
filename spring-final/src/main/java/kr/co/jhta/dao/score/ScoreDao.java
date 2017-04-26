@@ -34,4 +34,5 @@ public interface ScoreDao {
 	List<SemesterAvg> getSemesterAvgBySno(int sno);
 	SemesterAvg getSemesterAvgTotalBySno(int sno);
 	int getScoreCount();
+	List<Regisubject> getAllScorelistByProfID (String pid);
 }

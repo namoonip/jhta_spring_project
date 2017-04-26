@@ -13,8 +13,14 @@ public class TimeChartController {
 	
 	// 학생 시간표
 	@RequestMapping(value="/stud/studenttime", method=RequestMethod.GET)
-	public String getAllTimeSubject(Student student, Model model) {
+	public String getAllTimeSubject() {
 		
 		return "/timechart/studenttimechart";
+	}
+	
+	// 교수 시간표
+	@RequestMapping(value="/prof/proftime", method=RequestMethod.GET)
+	public String getAllTimeProfSubject(){
+		return "/timechart/proftimechart";
 	}
 }

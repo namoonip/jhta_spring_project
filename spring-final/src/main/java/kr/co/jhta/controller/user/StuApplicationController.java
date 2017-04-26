@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.appli.LeaveService;
-import kr.co.jhta.service.user.ApplicationService;
 import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.appli.Leave;
 import kr.co.jhta.vo.appli.LeaveForm;
@@ -20,8 +19,6 @@ import kr.co.jhta.vo.stu.Student;
 @RequestMapping("/stud")
 public class StuApplicationController {
 
-	@Autowired
-	ApplicationService appliService;
 	@Autowired
 	StudentService stuService;
 	@Autowired

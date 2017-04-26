@@ -28,7 +28,7 @@ $(function() {
                         </a>
                         <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="lookupScore"><i class="fa fa-caret-right"></i>현학기 성적 조회</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>전체학기 성적 조회</a></li>
+                            <li><a href="lookupAllScore"><i class="fa fa-caret-right"></i>전체학기 성적 조회</a></li>
                         </ul>
                     </li>
                     <li>
@@ -39,7 +39,6 @@ $(function() {
                         <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="leave"><i class="fa fa-caret-right"></i>휴학 신청</a></li>
                             <li><a href="reinstate"><i class="fa fa-caret-right"></i>복학 신청</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>전과 신청</a></li>
                             <li><a href="#"><i class="fa fa-caret-right"></i>자퇴 신청</a></li>
                             <li><a href="#"><i class="fa fa-caret-right"></i>신청 조회 및 변경</a></li>
                         </ul>

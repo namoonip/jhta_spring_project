@@ -4,6 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="kr.co.jhta.dao.supplementLectureDao.SupplementLectureDao">
+ <!-- 강의 전체 조회 -->
+ <select id="TotalTableList" resultType="kr.co.jhta.vo.SupplementLectureTableVo">
+ 	select
+ 		U.U_PROF_ID              		AS professorId,
+ 		J.J_NO                			AS subjectNo,
+ 		U.U_PROF_CODE 					AS majorCode,
+ 		J.J_SUBJECT_NAME 				AS subjectName,
+ 		U.U_PROF_NAME 					AS professorName,
+		E.E_S_SUPPLEMENTLECTURE  		AS supplementLectureCheck,
+ 		U.U_PROF_NO 					AS professorNumber,
+ 		J.J_IS_PASSED 					AS majorOption,
+ 		J.J_SCORE 						AS majorScore,
+ 		E.E_ENROLLDAY                   AS subjectDate,
+ 		E.E_ENROLLTIME                  AS subjectTime
+ 	from
+ 		J_SUBJECT J,
+ 		U_PROFESSOR U,
+ 		E_ENROLLMENT E
+ 	where
+		U.U_PROF_ID = J.J_SUB_PROF
+	and	
+		E.E_J_SUBJECT_NO = J.J_NO
+ </select>
  <!-- collegeBox 조회 SQL -->
  <select id="getMajorList" parameterType="string" resultType="kr.co.jhta.vo.SupplementLectureVo">
  	select
@@ -25,22 +48,21 @@
  		U.U_PROF_CODE 					AS majorCode,
  		J.J_SUBJECT_NAME 				AS subjectName,
  		U.U_PROF_NAME 					AS professorName,
-		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+		E.E_S_SUPPLEMENTLECTURE  		AS supplementLectureCheck,
  		U.U_PROF_NO 					AS professorNumber,
  		J.J_IS_PASSED 					AS majorOption,
  		J.J_SCORE 						AS majorScore,
- 		S_SUPPLEMENTLECTURE_NUMBER 		AS subjectLectureNumber
+ 		E.E_ENROLLDAY                   AS subjectDate,
+ 		E.E_ENROLLTIME                  AS subjectTime
  	from
- 		S_SUPPLEMENTLECTURE S,
  		J_SUBJECT J,
- 		U_PROFESSOR U
+ 		U_PROFESSOR U,
+ 		E_ENROLLMENT E
  	where
 		U.U_PROF_ID = J.J_SUB_PROF
-	AND
-		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
-	AND
-		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
-	AND	 		
+	and	
+		E.E_J_SUBJECT_NO = J.J_NO
+	and	 		
  		U.U_PROF_CODE = #{majorCode}		
  </select>
  
@@ -52,26 +74,18 @@
  		U.U_PROF_CODE 					AS majorCode,
  		J.J_SUBJECT_NAME 				AS subjectName,
  		U.U_PROF_NAME 					AS professorName,
-		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+		E.E_S_SUPPLEMENTLECTURE  		AS supplementLectureCheck,
  		U.U_PROF_NO 					AS professorNumber,
  		J.J_IS_PASSED 					AS majorOption,
  		J.J_SCORE 						AS majorScore,
- 		S.S_SUPPLEMENTLECTURE_NUMBER 	AS subjectLectureNumber,
  		E.E_ENROLLDAY                   AS subjectDate,
- 		E.E_ENROLLTIME                  AS subjectTime,
-		S.S_APPLICATION_START_DATE     	AS applicationDate,
-		S.S_APPLICATION_END_DATE 		AS applicationDateEnd
+ 		E.E_ENROLLTIME                  AS subjectTime
  	from
- 		S_SUPPLEMENTLECTURE S,
  		J_SUBJECT J,
  		U_PROFESSOR U,
  		E_ENROLLMENT E
  	where
 		U.U_PROF_ID = J.J_SUB_PROF
-	and
-		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
-	and
-		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
 	and	
 		E.E_J_SUBJECT_NO = J.J_NO
 	and	 		
@@ -86,24 +100,78 @@
  		U.U_PROF_CODE 					AS majorCode,
  		J.J_SUBJECT_NAME 				AS subjectName,
  		U.U_PROF_NAME 					AS professorName,
-		S.S_SUPPLEMENTLECTURE_Y_OR_N  	AS supplementLectureCheck,
+		E.E_S_SUPPLEMENTLECTURE  		AS supplementLectureCheck,
  		U.U_PROF_NO 					AS professorNumber,
  		J.J_IS_PASSED 					AS majorOption,
  		J.J_SCORE 						AS majorScore,
- 		S.S_SUPPLEMENTLECTURE_NUMBER 		AS subjectLectureNumber
+ 		E.E_ENROLLDAY                   AS subjectDate,
+ 		E.E_ENROLLTIME                  AS subjectTime
  	from
- 		S_SUPPLEMENTLECTURE S,
  		J_SUBJECT J,
- 		U_PROFESSOR U
+ 		U_PROFESSOR U,
+ 		E_ENROLLMENT E
  	where
 		U.U_PROF_ID = J.J_SUB_PROF
-	AND
-		J.J_NO = S.S_SUPPLEMENTLECTURE_SUBJECT
-	AND
-		S.S_SUPPLEMENTLECTURE_PRO_ID = U.U_PROF_ID
-	AND	 		
+	and	
+		E.E_J_SUBJECT_NO = J.J_NO
+	and	 		
  		J.J_NO = #{subjectNo}		
  </select>
-
  
+ <!-- 휴강 신청 하기 -->
+ <insert id="supplementLectureApplication" parameterType="kr.co.jhta.vo.SupplementLectureTableVo">
+ 	insert into S_SUPPLEMENTLECTURE (
+ 				S_SUPPLEMENTLECTURE_NUMBER,
+ 				S_MAJOR_SCORE,
+ 				S_SUPPLEMENTLECTURE_TIME,
+ 				S_SUPPLEMENTLECTURE_DAY,
+ 				S_SUPPLEMENTLECTURE_Y_OR_N,				
+ 				S_SUPPLEMENTLECTURE_PRO_NO,			
+ 				S_SUPPLEMENTLECTURE_SUBJECT,	
+ 				S_SUPPLEMENTLECTURE_PRO_ID,
+ 				S_MAJOR_CODE,
+ 				S_SUBJECT_NAME,
+ 				S_SUBJECT_PROFESSOR_NAME,
+ 				S_MAJOR_OPTION			
+ 	)
+ 	values(
+ 				investgation_seq.nextval,
+ 				#{majorScore},
+ 				#{subjectTime},
+ 				#{subjectDate},
+ 				#{supplementLectureCheck},
+ 				#{professorNumber},
+ 				#{subjectNo},
+ 				#{professorId},
+ 				#{majorCode},
+ 				#{subjectName},
+ 				#{professorName},
+ 				#{majorOption}
+ 				)	
+ </insert>
+ <!-- 신청서 신청 업데이트 -->
+ <update id="updateSelectLecturecheckedUpdate" parameterType="int">
+	update 
+ 		E_ENROLLMENT
+ 	set	
+ 		E_S_SUPPLEMENTLECTURE = 'y'
+ 	where
+ 		E_J_SUBJECT_NO = #{subjectNo}
+ </update>
+ <!-- 신청서 삭제 -->
+ <delete id="deleteSupplementLecture" parameterType="int">
+ 	delete from 
+ 		S_SUPPLEMENTLECTURE
+ 	where
+ 		S_SUPPLEMENTLECTURE_SUBJECT = #{subjectNo}
+ </delete>
+ <!-- 신청서 취소 업데이트 -->
+  <update id="updateSelectLecturecheckedUpdateCancle" parameterType="int">
+	update 
+ 		E_ENROLLMENT
+ 	set	
+ 		E_S_SUPPLEMENTLECTURE = 'n'
+ 	where
+ 		E_J_SUBJECT_NO = #{subjectNo}
+ </update>
  </mapper>

@@ -4,7 +4,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta http-equiv="viewport" content="width=device-width, initial-scale=1">
+            <link type="text/css" rel="stylesheet" href="resources/bootstrap/css/bootstrap.css">
+            <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <link rel="stylesheet" href="resources/material/material.min.css">
+            <script src="resources/material/material.min.js"></script>
+            <script type="text/javascript" src="resources/jquery/jquery-3.2.0.min.js"></script>
+            <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 	th { text-align: center !important;
 		vertical-align: middle !important;}
@@ -23,7 +31,7 @@ $(function() {
          	홈
       </div>
       <div class="row">
-         <h4><span class="glyphicon glyphicon-th-list"></span> 정보 수정</h4>
+         <h4><span class="glyphicon glyphicon-th-list"></span> 과목 성적 정보</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
       <div class="row">
@@ -48,9 +56,10 @@ $(function() {
       </div>
       <hr />
       <div class="row">
-      	신청 목록
+      	과목 성적 목록
       	<table class="table table-bordered">
       		<colgroup>
+      			<col width="10%" />
       			<col width="10%" />
       			<col width="10%" />
       			<col width="10%" />
@@ -63,14 +72,38 @@ $(function() {
       			<tr>
       				<th>번호</th>
       				<th>이수구분</th>
+      				<th>학기</th>
       				<th>학년</th>
       				<th>과목명</th>
       				<th>담당교수</th>
       				<th>학점</th>
       				<th>성적</th>
+      				<th>강의평가</th>
       			</tr>
       		</thead>
-      		<tbody id="searchBody"></tbody>
+      		<tbody id="searchBody">
+      			<c:forEach var="regilist" items="${regilist }">
+      				<tr>
+      					<td align="center">${regilist.no}</td>
+						<td align="center">${regilist.subject.passed.passedName}</td>
+						<td align="center">${regilist.subject.selectNo.semeSelect}</td>
+						<td align="center">${regilist.subject.grade}</td>
+						<td align="center">${regilist.subject.subjectName}</td>
+						<td align="center">${regilist.subject.professor.name}</td>
+						<td align="center">${regilist.score.credit}</td>
+						<c:choose>
+							<c:when test="${regilist.score.test eq 'N'}">
+								<td align="center">미평가</td>
+								<td align="center">${regilist.score.test } <a href="../lecturerating.do"><i class="material-icons">rate_review</i></a></td>
+							</c:when>
+							<c:otherwise>
+								<td align="center">${regilist.score.grade}</td>
+								<td align="center">완료</td>
+							</c:otherwise>
+						</c:choose>
+      				</tr>
+      			</c:forEach>
+      		</tbody>
       	</table>
       </div>
       <div>

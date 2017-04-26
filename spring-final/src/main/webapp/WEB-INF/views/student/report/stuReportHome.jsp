@@ -88,8 +88,24 @@ $(function() {
 			     			<td><a href="showStuReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}">${stuReport.title}</a></td>
 			     			<td>${stuReport.student.name}</td>
 			     			<td>
+			     				<c:if test="${stuReport.filename ne null }">
+			     					<c:set var="fileSpanTag" value="true" />
+			     				</c:if>
+			     				<c:if test="${stuReport.filename2 ne null }">
+			     					<c:set var="fileSpanTag" value="true" />
+			     				</c:if>
+			     				<c:if test="${stuReport.filename3 ne null }">
+			     					<c:set var="fileSpanTag" value="true" />
+			     				</c:if>
+			     				<c:if test="${stuReport.filename4 ne null }">
+			     					<c:set var="fileSpanTag" value="true" />
+			     				</c:if>
+			     				<c:if test="${stuReport.filename5 ne null }">
+			     					<c:set var="fileSpanTag" value="true" />
+			     				</c:if>
+			     				${fileSpanTag}
 			     				<c:choose>
-			     					<c:when test="${stuReport.fileName ne null }">
+			     					<c:when test="${param.fileSpanTag eq 'true' }">
 			     						<span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 			     					</c:when>
 			     				</c:choose>

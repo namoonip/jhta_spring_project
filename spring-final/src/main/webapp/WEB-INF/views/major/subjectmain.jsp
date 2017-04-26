@@ -81,7 +81,6 @@ $(function () {
       					<th>시행학과</th>
       					<th>과목명</th>
       					<th>교수명</th>
-      					<th>분반수</th>
       					<th>이수구분</th>
       					<th>학점</th>
       					<th>학년</th>
@@ -91,10 +90,9 @@ $(function () {
       			<c:forEach var="subject" items="${resultList }">
       				<tr>
       					<td>${subject.selectNo.semeSelect }</td>
-      					<td><a href="detailsubject?sno=${subject.no }">${subject.siteCode.name }</a></td>
-      					<td>${subject.subjectName }</td>
+      					<td>${subject.siteCode.name }</td>
+      					<td><a href="detailsubject?sno=${subject.no }">${subject.subjectName }</a></td>
       					<td>${subject.professor.name }</td>
-      					<td>${subject.division }</td>
       					<td>${subject.passed.passedName }</td>
       					<td>${subject.score }</td>
       					<td>${subject.grade }</td>

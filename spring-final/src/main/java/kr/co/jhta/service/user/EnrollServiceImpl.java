@@ -71,4 +71,8 @@ public class EnrollServiceImpl implements EnrollService{
 	public void updateEnroll(Enroll enroll) {
 		enrollDao.updateEnroll(enroll);
 	}
+	@Override
+	public void deleteEnroll(int no) {
+		enrollDao.deleteEnroll(no);
+	}
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.jhta.service.appli.LeaveService;
-import kr.co.jhta.service.user.ApplicationService;
 import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.appli.Leave;
 import kr.co.jhta.vo.stu.Student;
@@ -17,9 +16,6 @@ import kr.co.jhta.vo.stu.Student;
 @Controller
 @RequestMapping("/stud")
 public class StuApplicationFormController {
-	
-	@Autowired
-	ApplicationService appliService;
 	
 	@Autowired
 	StudentService stuService;
@@ -38,13 +34,14 @@ public class StuApplicationFormController {
 		// 기본 정보 담기
 		model.addAttribute("student", student);		
 		// 휴학 정보 담기
+		
 		List<Leave> leaveList = leaveService.getAllEnrolledLeaveByStuNoService(student.getNo());
 		for(Leave leave : leaveList ) {
 			ccName = leaveService.getCnameByCcodeService(leave.getCode());
 			leave.setcName(ccName);
 		}
+		
 		model.addAttribute("leaveList", leaveList);
-				
 		return "/student/applications/leaveForm";
 	}
 		
@@ -52,6 +49,7 @@ public class StuApplicationFormController {
 	public String setReinstate(Model model, Student student){
 		
 		// 기본 정보 담기
+		System.out.println(student);
 		model.addAttribute("student", student);		
 		return "/student/applications/ReinstatementForm";
 	}

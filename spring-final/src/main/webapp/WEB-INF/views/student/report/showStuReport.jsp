@@ -18,11 +18,11 @@ $(function() {
 		
 	var parseNowDate = Date.parse(today);
 	var endDate = Date.parse($("#proend").text());
-	
-	if(parseNowDate <= endDate) {
+		
+	if(parseNowDate >= endDate) {
 		$("#submit-btn").css("display", "none");
 	}
-		
+	
 })
 </script>
 <style type="text/css">
@@ -43,10 +43,8 @@ $(function() {
       </div>
       
       <div class="row">
-	      <form action="editReport" method="POST">
-	      <input type="hidden" name="cno" value="${stuReport.no}" />
 	      <div class="form-group text-right"> 
-	      	<button type="submit" class="btn btn-default" id="submit-btn">수정</button>
+	      	<a href="editReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}" class="btn btn-default" id="submit-btn">수정</a>
 	      	<a href="deleteReprot?cno=${stuReport.no }&eno=${stuReport.enroll.no}" class="btn btn-default">삭제</a>
 	      </div>
 		      <table class="table table-bordered">
@@ -67,7 +65,7 @@ $(function() {
 		      			<th>제출일</th>
 		      			<th><span id="enroll-Today"></span></th>
 		      			<th>마감일</th>
-		      			<th><span id="proend"><fmt:formatDate value="${stuReport.report.proend }" pattern="YYYY년 MM월 dd일 23시 55분"/></span></th>
+		      			<th><span id="proend"><fmt:formatDate value="${stuReport.report.proend }" pattern="YYYY-MM-dd 23:55"/></span></th>
 		      		</tr>
 		      		<tr>
 		      			<th>과제</th>
@@ -76,21 +74,33 @@ $(function() {
 		      		<tr>
 						<th>*제목</th>  			
 		      			<td colspan="3">
-		      				input${stuReport.title }
+		      				${stuReport.title }
 		      			</td>
 		      		</tr>
 		      		<tr>
 		      			<th>*내용</th>
-		      			<td colspan="3" style="height: 976px;">
+		      			<td colspan="3" style="height: 214px;">
 		      				${stuReport.content }
 		      			</td>
 		      		</tr>
 		      		<tr>
 		      			<th>파일첨부</th>
 		      			<td colspan="3">
-		      				<c:if test="${stuReport.fileName ne null}">
-		      					${stuReport.fileName }
-		      				</c:if>		      				
+		      				<c:if test="${stuReport.filename ne null}">
+		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename }</a><br />
+		      				</c:if>      				
+		      				<c:if test="${stuReport.filename2 ne null}">
+		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename2 }</a><br />
+		      				</c:if>
+		      				<c:if test="${stuReport.filename3 ne null}">
+		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename3 }</a><br />
+		      				</c:if>
+		      				<c:if test="${stuReport.filename4 ne null}">
+		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename4 }</a><br />
+		      				</c:if>
+		      				<c:if test="${stuReport.filename5 ne null}">
+		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename5 }</a><br />
+		      				</c:if>
 		      			</td>
 		      		</tr>
 		      		<tr>
@@ -104,7 +114,6 @@ $(function() {
 	      	<div class="form-group text-right">      
 	      		<a href="ReportHome?eno=${stuReport.enroll.no}" class="btn btn-default">돌아가기</a>
 	      	</div>
-      	</form>
       </div>
 </div>
 </body>

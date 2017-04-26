@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.jhta.dao.score.AttendanceDao;
-import kr.co.jhta.dao.score.ReportDao;
 import kr.co.jhta.dao.score.ScoreDao;
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.Semester;
@@ -123,6 +122,11 @@ public class ScoreServiceImpl implements ScoreService{
 	@Override
 	public int getScoreCount() {
 		return scoreDao.getScoreCount();
+	}
+
+	@Override
+	public List<Regisubject> getAllScorelistByProfID(String pid) {
+		return scoreDao.getAllScorelistByProfID(pid);
 	}
 	
 	

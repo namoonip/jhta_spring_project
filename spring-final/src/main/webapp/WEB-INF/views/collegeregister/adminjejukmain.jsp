@@ -25,14 +25,14 @@ $(function () {
 <%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px; ">
     	<div class="row text-right">
-			홈 > 과목관리 > <strong>과목검색</strong>
+			홈 > 학적관리 > 제적관리 > <strong>학생검색</strong>
     	</div>
     	<div class="row">
-    	<h4><span class="glyphicon glyphicon-th-list"></span> 과목검색</h4>
+    	<h4><span class="glyphicon glyphicon-th-list"></span> 학생검색</h4>
         <hr style="border:solid 0.5px #2C7BB5;">
     	</div>
     	<div class="panel panel-default panel-body">
-    		<form method="post" action="studentjejuk" name="subjectsearchform" id="student-search-form" class="form-inline">
+    		<form method="post" action="searchstubyopt" name="searchForm" class="form-inline">
     			<table class="table table-condensed">
       				<tr>
       					<td><label>검색옵션</label></td>
@@ -45,14 +45,44 @@ $(function () {
       						</div>
       						<div class="form-group">
       							<label>검색어</label>
-      							<input type="text" name="keyword" value="keyword" required="required">
+      							<input type="text" name="keyword" required="required">
       						</div>
       						<button type="submit" class="btn btn-default" id="search-btn">검색</button>
       					</td>
       				</tr>
       			</table>
-    		
+    			
     		</form>
+    	</div>
+    	<div class="panel panel-body">
+    		<table class="table table-condensed">
+    			<thead>
+    				<tr>
+    					<th>학번</th>
+    					<th>이름</th>
+    					<th>전공</th>
+    					<th>학년</th>
+    					<th>학적상태</th>
+    					<th>입학년도</th>
+    					<th>연락처</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    			<c:forEach var="student" items="${resultList }">
+    				<tr>
+    					<td>${student.id }</td>
+    					<td><a href="registerjejuk?sno=${student.no }">${student.name }</a></td>
+    					<td>${student.division }</td>
+    					<td>${student.grade }</td>
+    					<td>${student.register }</td>
+    					<td>
+    						<fmt:formatDate value="${student.enterDate }" pattern="yyyy-MM-dd"/>
+    					</td>
+    					<td>${student.phone }</td>
+    				</tr>
+    			</c:forEach>
+    			</tbody>
+    		</table>
     	</div>
     </div>
 </body>

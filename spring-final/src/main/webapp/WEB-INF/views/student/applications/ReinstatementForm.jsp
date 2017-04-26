@@ -37,7 +37,7 @@ $(function() {
          홈
       </div>
       <div class="row">
-         <h4><span class="glyphicon glyphicon-th-list"></span> 휴학 신청</h4>
+         <h4><span class="glyphicon glyphicon-th-list"></span> 복학 신청</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
       <div class="row">
@@ -57,7 +57,7 @@ $(function() {
 	        		<tr>
 	        			<th>구분</th>
 	        			<td colspan="3">
-	        				<c:out value="${cName }" />
+	        				<c:out value="${student.cName }" />
 	        			</td>
 	        		</tr>
 	        		<tr>
@@ -79,7 +79,7 @@ $(function() {
 	        		</tr>
 	        		<tr>
 	        			<th>전공</th>
-	        			<td><c:out value="${tName}"/></td>
+	        			<td><c:out value="${student.tName}"/></td>
 	        			<th>학년</th>
 	        			<td><c:out value="${student.grade }"/></td>
 	        		</tr>
@@ -103,16 +103,8 @@ $(function() {
       </div>  
       
       <div class="row" style="padding: 20px;">
-      	<h4>재입학 신청</h4>
+      	<h4>휴학 신청 내역</h4>
       	<table class="table table-bordered">
-      		<colgroup>
-      			<col width="" />
-      			<col width="" />
-      			<col width="" />
-      			<col width="" />
-      			<col width="" />
-      			<col width="" />
-      		</colgroup>
 			<thead>
 				<tr>
 					<th>학년도</th>
@@ -124,7 +116,6 @@ $(function() {
 					<th>학적변동</th>
 					<th>변동일자</th>
 					<th>결재상태</th>
-					<th>비고</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -140,7 +131,7 @@ $(function() {
       </div>
       
       <div class="row" style="padding: 20px;">
-      	<h4>재입학 신청</h4>
+      	<h4>복학 신청</h4>
       	<form action="">
 	   		<table class="table table-bordered">
 	   			<colgroup>
@@ -152,11 +143,10 @@ $(function() {
 	   			</colgroup>
 	   			<thead>
 	   				<tr>
-	   					<th>재입학 학년</th>
+	   					<th>복학 년도</th>
 	   					<th>
 	   						<div class="form-group">
 	   							<select name="reGrade" id="select-reGrade" class="form-control">
-
 		   								<option value="1">1</option>
 		   								<option value="2">2</option>
 		   								<option value="3">3</option>
@@ -164,7 +154,7 @@ $(function() {
 	   							</select>
 	   						</div>
 	   					</th>
-	   					<th>재입학 학기</th>
+	   					<th>복학 학기</th>
 	   					<th>
 	   						<div class="form-group">
 	   							<select name="" id="" class="form-control">

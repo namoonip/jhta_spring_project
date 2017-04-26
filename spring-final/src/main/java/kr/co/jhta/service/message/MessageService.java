@@ -15,6 +15,7 @@ public interface MessageService {
 	List<Professor> getAddressByProName(String searchWord);
 	void addMessage(Message message);
 	List<Message> getReceiveMessageAdmin(String id);
+	List<Message> getSendMessageAdmin(String id);
 	void deleteSendMessage(int dno);
 	List<SiteMap> getDivisionByName(String searchWord);
 	List<Student> getStudentByCode(String code);

@@ -25,7 +25,7 @@
                             <li><a href="/jhta/prof/addenrollform"><i class="fa fa-caret-right"></i>강의 등록</a></li>
                             <li><a href="/jhta/prof/syllinfo"><i class="fa fa-caret-right"></i>강의계획서 조회</a></li>
                             <li><a href="/jhta/prof/syllform"><i class="fa fa-caret-right"></i>강의계획서 등록</a></li>
-                            <li><a href="/jhta/prof/timeschedule"><i class="fa fa-caret-right"></i>시간표</a></li>
+                            <li><a href="/jhta/prof/proftime"><i class="fa fa-caret-right"></i>시간표</a></li>
                         </ul>
                     </li>
                     <li>
@@ -34,8 +34,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="#"><i class="fa fa-caret-right"></i>성적 입력</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>성적 정정</a></li>
+                            <li><a href="/jhta/prof/profscorelist"><i class="fa fa-caret-right"></i>성적 입력 / 정정</a></li>
                             <li><a href="#"><i class="fa fa-caret-right"></i>이의신청 관리</a></li>
                         </ul>
                     </li>

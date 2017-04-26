@@ -26,7 +26,8 @@
 		<table class="table table-condensed">
 				<colgroup>
 					<col width="25%">
-					<col width="75%">
+					<col width="60%">
+					<col width="15%">
 				</colgroup>
 			<thead>
 				<tr>
@@ -40,14 +41,13 @@
 					<tr>
 						<td>${item.student.name }</td>
 						<td>${item.title }</td>
-						<td><a href=""><button class="btn btn-default">확인</button></a></td>
+						<td><a href="/jhta/prof/report/reporttodetail?no=${item.enroll.no }"><button class="btn btn-default">확인</button></a></td>
 					</tr>
 				</c:forEach>					
 			</tbody>
 		</table>
 		<div class="pull-right">
-			<a href="/jhta/prof/subupdate?no=${subno.no }" class="btn btn-primary">수정</a>
-			<a href="/jhta/prof/subinfo" class="btn btn-warning">뒤로</a>
+			<a href="/jhta/prof/report/reportinfo" class="btn btn-warning">뒤로</a>
 		</div>
 	</div>
 </body>

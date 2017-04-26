@@ -6,10 +6,12 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.jhta.dao.hakjuk.HakjukDAO;
 import kr.co.jhta.dao.user.StudentDao;
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
 import kr.co.jhta.vo.hakjuk.LeaveSearchForm;
@@ -21,6 +23,7 @@ import kr.co.jhta.vo.hakjuk.StudentSearchForm;
 import kr.co.jhta.vo.stu.Student;
 
 @Service
+@Transactional
 public class HakjukServiceImpl implements HakjukService{
 	
 	
@@ -173,6 +176,23 @@ public class HakjukServiceImpl implements HakjukService{
 	public List<Dropoff> getAllDropoffByFalseFormService(ReinForm rf) {
 		return hakjukDao.getAllDropoffByFalseForm(rf);
 	}
-	
-	
+	@Override
+	public List<Dropoff> getAllDropoffByNotFalseService() {
+		return hakjukDao.getAllDropoffByNotFalse();
+	}
+	@Override
+	public List<Dropoff> getAllDropoffByNotFalseFormService(ReinForm rf) {
+		return hakjukDao.getAllDropoffByNotFalseForm(rf);
+	}
+	@Override
+	public Dropoff getDropoffByNotFalseNOService(int no) {
+		return hakjukDao.getDropoffByNotFalseNO(no);
+	}
+	@Override
+	public void addProfessorService(AddProfForm arf) {
+		Random rand = new Random();
+		String id = "P"+(new Date().getYear()-100)+""+(rand.nextInt(99)+10)+((arf.getName().hashCode()*rand.nextInt(99)+10)+"").substring(1,4);
+		arf.setId(id);
+		hakjukDao.addProfessor(arf);
+	}
 }

@@ -18,6 +18,7 @@ public interface MessageDao {
 	List<Professor> getAddressByProName(String name);
 	void addMessage(Message message);
 	List<Message> getReceiveMessageAdmin(String id);
+	List<Message> getSendMessageAdmin(String id);
 	void deleteSendMessage(int dno);
 	List<SiteMap> getDivisionByName(String name);
 	List<Student> getStudentByCode(String code);

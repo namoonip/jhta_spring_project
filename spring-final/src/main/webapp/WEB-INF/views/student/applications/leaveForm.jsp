@@ -118,6 +118,7 @@ $(function() {
 			return;
 		}
 	});
+	
 })
 </script>
 <style type="text/css">
@@ -236,7 +237,7 @@ $(function() {
 			<tbody>
 				<c:if test="${empty leaveList}">
 					<tr>
-						<th colspan="12">신청 내역이 없습니다.</th>
+						<th colspan="13">신청 내역이 없습니다.</th>
 					</tr>
 				</c:if>
 				<c:forEach var="leave" items="${leaveList}">
@@ -272,7 +273,7 @@ $(function() {
 						</th>	
 						<th>
 							<c:choose>
-								<c:when test="${leave.pass eq 'true' }">
+								<c:when test="${leave.pass != 'false' }">
 									<font color="red">취소 불가</font>
 								</c:when>
 								<c:otherwise>

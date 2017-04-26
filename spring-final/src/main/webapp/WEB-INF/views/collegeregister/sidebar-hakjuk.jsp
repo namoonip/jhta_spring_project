@@ -23,6 +23,7 @@
                         <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="admissionstud"><i class="fa fa-caret-right"></i>입학생 등록</a></li>
                             <li><a href="admissions"><i class="fa fa-caret-right"></i>입학생 조회</a></li>
+                            <li><a href="admissionprof"><i class="fa fa-caret-right"></i>교수 임용</a></li>
                         </ul>
                     </li>
                     <li>
@@ -46,24 +47,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
-                            <span class="sidebar-icon"></span><span class="sidebar-title">전과 관리</span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul id="submenu-6" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="changemajor"><i class="fa fa-caret-right"></i>전체 전과 내역 조회</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>전과 신청 목록</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>전과 승인 목록</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-7">
                             <span class="sidebar-icon"></i></span><span class="sidebar-title">제적 관리</span>
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-7" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="jejukmain"><i class="fa fa-caret-right"></i>제적 처리</a></li>
-                            <li><a href=""><i class="fa fa-caret-right"></i>제적자 목록</a></li>
+                            <li><a href="jejuklist"><i class="fa fa-caret-right"></i>제적자 목록</a></li>
                         </ul>
                     </li>
                     <li>
@@ -74,6 +64,16 @@
                         <ul id="submenu-8" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="dropoff"><i class="fa fa-caret-right"></i>자퇴 신청 목록</a></li>
                             <li><a href="enterdropoff"><i class="fa fa-caret-right"></i>자퇴 승인 목록</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-9">
+                            <span class="sidebar-icon"></span><span class="sidebar-title">커뮤니티 관리</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="submenu-9" class="panel-collapse collapse panel-switch" role="menu">
+                            <li><a href="../adminrecmessagebox"><i class="fa fa-caret-right"></i>쪽지 관리</a></li>
+                            <li><a href="adminsendemail"><i class="fa fa-caret-right"></i>메일 관리</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -2,9 +2,12 @@ package kr.co.jhta.service.user;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.co.jhta.vo.LoginForm;
 import kr.co.jhta.vo.stu.Student;
 
+@Transactional
 public interface StudentService {
 	// login UserCheck
 	Student loginByStudent(LoginForm loginForm);

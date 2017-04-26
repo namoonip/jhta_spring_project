@@ -46,7 +46,7 @@
 			</tbody>
 		</table>
 		<div class="add text-right">
-			<a href="/jhta/prof/addenrollform"><button class="btn btn-primary btn-xs">등록</button></a>
+			<a href="/jhta/prof/report/reportform"><button class="btn btn-primary btn-xs">등록</button></a>
 		</div>
 	</div>
 </body>

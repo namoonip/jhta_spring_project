@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,10 +19,6 @@ $(function() {
 		
 	var parseNowDate = Date.parse(today);
 	var endDate = Date.parse($("#proend").text());
-	
-	if(parseNowDate <= endDate) {
-		$("#submit-btn").removeAttr("disabled", "disabled");
-	}
 		
 	$("form").submit(function() {
 		
@@ -56,6 +53,27 @@ $(function() {
 		}
 	});
 	
+	$("#input-content").text($("#content").text());
+	
+	$(".deleteFile").on("click", function() {
+		
+		var filename = $(this).text();
+		var cno = $("#input-Cno").val();	
+		
+		/* $.ajax({
+			type:"POST",
+			url:"deleteReportFile/"+ cno + "/" + filename,
+			dataType:"json",
+			success:function(data) {
+				if(data == "success") {
+					$(this).parent().css("display","none");						
+				} 
+			}
+		});  */
+
+		console.log($("#file").attr("path"));
+	});
+	
 })
 </script>
 <style type="text/css">
@@ -76,12 +94,13 @@ $(function() {
       </div>
       
       <div class="row">
-	      <form action="addNewReport" method="POST">
-	      <input type="hidden" name="eno" value="${stuReport.no}" />
-	      <div class="form-group text-right"> 
-	      	<button type="submit" class="btn btn-default" id="submit-btn">수정</button>
-	      	<a href="deleteReprot?cno=${stuReport.no }&eno=${stuReport.enroll.no}" class="btn btn-default">삭제</a>
-	      </div>
+	      <form:form action="editReport" method="POST"  modelAttribute="preportContentForm" enctype="multipart/form-data">
+		      <input type="hidden" name="eno" value="${preportContent.enroll.no}" />
+		      <form:input type="hidden" path="no" value="${preportContent.no}" />
+		      <input type="hidden" id="input-Cno" value="${preportContent.no}"/>
+		      <div class="form-group text-right"> 
+		      	<a href="deleteReprot?cno=${preportContent.no }&eno=${preportContent.enroll.no}" class="btn btn-default">삭제</a>
+		      </div>
 		      <table class="table table-bordered">
 		      	<colgroup>
 		      		<col width="15%" />
@@ -100,22 +119,23 @@ $(function() {
 		      			<th>제출일</th>
 		      			<th><span id="enroll-Today"></span></th>
 		      			<th>마감일</th>
-		      			<th><span id="proend"><fmt:formatDate value="${stuReport.report.proend }" pattern="YYYY년 MM월 dd일 23시 55분"/></span></th>
+		      			<th><span id="proend"><fmt:formatDate value="${preportContent.report.proend }" pattern="YYYY-MM-dd 23:55"/></span></th>
 		      		</tr>
 		      		<tr>
 		      			<th>과제</th>
-		      			<th colspan="3">${stuReport.report.title}</th>
+		      			<th colspan="3">${preportContent.report.title}</th>
 		      		</tr>
 		      		<tr>
 						<th>*제목</th>  			
 		      			<td colspan="3">
-		      				<input type="text" name="title" class="form-control" id="input-title" value="${stuReport.title }" />
+		      				<form:input type="text" path="title" cssClass="form-control" id="input-title" value="${preportContent.title }" />
 		      			</td>
 		      		</tr>
 		      		<tr>
 		      			<th>*내용</th>
-		      			<td colspan="3" style="height: 300px;">
-		      				<textarea name="content" id="input-content" cols="30" rows="10" class="form-control">${stuReport.content }</textarea>
+		      			<td colspan="3" style="height: 214px;">
+		      				<span id="content" style="display:none;">${preportContent.content }</span>
+		      				<form:textarea path="content" id="input-content" cols="30" rows="10" cssClass="form-control"></form:textarea>
 		      			</td>
 		      		</tr>
 		      		<tr>
@@ -127,9 +147,22 @@ $(function() {
 		      		<tr>
 		      			<th>파일첨부</th>
 		      			<td colspan="3">
-		      				<c:if test="${stuReport.fileName ne null}">
-		      					${stuReport.fileName }
-		      				</c:if>		      				
+		      				<c:if test="${preportContent.filename ne null}">
+		      					<a class="btn btn-default btn-sm"><span class="deleteFile glyphicon glyphicon-remove" aria-hidden="true"">${preportContent.filename }</span></a>
+		      				</c:if>      				
+		      				<c:if test="${preportContent.filename2 ne null}">
+		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename2 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+		      				</c:if>      				
+		      				<c:if test="${preportContent.filename3 ne null}">
+		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename3 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+		      				</c:if>      				
+		      				<c:if test="${preportContent.filename4 ne null}">
+		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename4 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+		      				</c:if>      				
+		      				<c:if test="${preportContent.filename5 ne null}">
+		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename5 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+		      				</c:if>
+	      					<form:input type="file" cssClass="form-control" path="file" id="file"/>
 		      			</td>
 		      		</tr>
 		      		<tr>
@@ -143,9 +176,9 @@ $(function() {
 	      	<input type="hidden" value=${student.name } id="student-name" />
 	      	<div class="form-group text-center">      
 	      		<button type="submit" class="btn btn-default" id="submit-btn" disabled="disabled">제출</button>
-	      		<a href="stuMain" class="btn btn-default">취소</a>
+	      		<a href="ReportHome?eno=${preportContent.enroll.no}" class="btn btn-default">취소</a>
 	      	</div>
-      	</form>
+      	</form:form>
       </div>
 </div>
 </body>

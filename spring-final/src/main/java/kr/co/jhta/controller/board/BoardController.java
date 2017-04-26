@@ -358,7 +358,9 @@ public class BoardController {
 	@RequestMapping(value="/prof/profdeptboard", method=RequestMethod.GET)
 	public String profdeptBoard(SearchForm searchForm,Professor prof , Model model){
 		
-		SiteMap sitemap = sitemapSerivce.getSitemapByCodeService(prof.getDivision());
+		System.out.println(prof);
+		
+		SiteMap sitemap = sitemapSerivce.getSitemapByCodeService(prof.getCode());
 		
 		searchForm.setDepartment(sitemap.getName());
 		int rows = boardService.searchBoardCount(searchForm);

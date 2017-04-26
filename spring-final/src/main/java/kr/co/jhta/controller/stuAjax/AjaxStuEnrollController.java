@@ -1,4 +1,4 @@
-package kr.co.jhta.controller.enrollAjax;
+package kr.co.jhta.controller.stuAjax;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +23,6 @@ public class AjaxStuEnrollController {
 	@RequestMapping("/enrollMain/{no}")
 	public @ResponseBody Enroll enrollSubject(@PathVariable("no") int no) {
 		Enroll enroll = enrollService.getEnrollByENoService(no);
-//		enrollService.addRegisubService(enroll);
 		System.out.println(enroll.getNo());
 		return enroll;
 	}

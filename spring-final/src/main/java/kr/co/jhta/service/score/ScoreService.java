@@ -41,5 +41,6 @@ public interface ScoreService {
 	SemesterAvg getSemesterAvgTotalBySno(int sno);
 	List<Regisubject> getAllSearchInfo();
 	int getScoreCount();
+	List<Regisubject> getAllScorelistByProfID (String pid);
 	
 }

@@ -3,11 +3,8 @@ package kr.co.jhta.dao.user;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import kr.co.jhta.vo.stu.Student;
 
-@Transactional
 public interface StudentDao {
 	void addNewStudent(Student stud);
 	List<Student> getAllStudent();

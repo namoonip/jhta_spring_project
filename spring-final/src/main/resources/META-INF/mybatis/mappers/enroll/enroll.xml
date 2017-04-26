@@ -162,4 +162,10 @@
 		where
 			
 	</select> -->
+	<delete id="deleteEnroll" parameterType="int">
+  		delete 
+  			from e_enrollment
+  		where
+  			 e_no = #{value}
+	</delete>
 </mapper>

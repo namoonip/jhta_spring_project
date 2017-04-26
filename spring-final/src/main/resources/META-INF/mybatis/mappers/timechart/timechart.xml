@@ -42,4 +42,19 @@
 		and 
 			r.U_STU_NO = #{studentNo}
 	</select>
+	
+	<select id="getProfEnroll" parameterType="string" resultType="TimeChart">
+	select
+		B.E_NO as enrollNo,
+		B.E_ENROLLTIME as enrollTime,
+		B.E_ENROLLDAY as enrollDay,
+		A.J_SUBJECT_NAME as subjectName,
+		A.J_NO as subjectNo
+	from
+		j_subject A, e_enrollment B
+	where 
+		A.J_NO = B.E_J_subject_no
+	and 
+		j_sub_prof = #{value}
+	</select>
 </mapper>

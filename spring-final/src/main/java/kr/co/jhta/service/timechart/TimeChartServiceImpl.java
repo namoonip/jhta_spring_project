@@ -18,6 +18,11 @@ public class TimeChartServiceImpl implements TimeChartService{
 	public List<TimeChart> getEnroll(int no) {
 		return timeChartDao.getEnroll(no);
 	}
+
+	@Override
+	public List<TimeChart> getProfEnroll(String profId) {
+		return timeChartDao.getProfEnroll(profId);
+	}
 	
 	
 }

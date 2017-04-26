@@ -14,17 +14,19 @@
 <script type="text/javascript">
 $(function() {
 	$("#all-check").change(function() {
-		var isChecked = $(":input[name='dnoList']").attr("checked");
+		var isChecked = $(":input[name='dnoList']").is(":checked");
 		
 		if (!isChecked) {
-			$(":input[name='dnoList']").attr("checked", true);
+			$(":input[name='dnoList']").prop("checked", true);
+			$(this).prop("checked", true);
 		} else {
-			$(":input[name='dnoList']").attr("checked", false);
+			$(":input[name='dnoList']").prop("checked", false);
+			$(this).prop("checked", false);
 		}
 	});
 	
 	$("#delete-button").click(function() {
-		if (!$(":input[name='dnoList']").attr("checked")) {
+		if (!$(":input[name='dnoList']").is(":checked")) {
 			alert("삭제할 쪽지를 선택해주세요.");
 			return false;
 		}
@@ -34,7 +36,7 @@ $(function() {
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/adminSidebar.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<form method="get" action="deletemessage">
 		<div class="row" style="margin-bottom: 15px;">
@@ -56,11 +58,10 @@ $(function() {
 					<tbody>
 						<tr>
 							<td style="vertical-align: middle;">
-								읽지 않은 쪽지가 0통이 있습니다. 전체 받은 쪽지 (0통)
+								전체 쪽지 (${pagination.totalRows }통) 입니다.
 							</td>
 							<td class="text-right">
 								<button class="btn btn-default" id="delete-button">선택삭제</button>
-								<button class="btn btn-default">전체삭제</button>
 							</td>
 						</tr>
 					</tbody>
@@ -83,7 +84,7 @@ $(function() {
 							<th>
 								<input type="checkbox" name="all" id="all-check">
 							</th>
-							<th>보낸사람</th>
+							<th>받는사람</th>
 							<th>제목</th>
 							<th>첨부</th>
 							<th>보낸날짜</th>
@@ -96,7 +97,7 @@ $(function() {
 							<td>
 								<input type="checkbox" name="dnoList" value="${message.no }">
 							</td>
-							<td>${message.writerName }</td>
+							<td>${message.receiver }</td>
 							<td><a style="cursor: pointer;" data-toggle="modal" data-target="#modal-${message.no }">${message.title }</a></td>
 							<td><a href="messagedownload?no=${message.no }">${message.filename }</a></td>
 							<td><fmt:formatDate value="${message.sendTime }" pattern="M/dd"/></td>
@@ -107,7 +108,7 @@ $(function() {
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<p style="text-align: center;">${message.title }<p>
+										<p style="text-align: center;"><strong>${message.title }</strong><p>
 									</div>
 									<div class="modal-body">
 										<p>${message.contents }</p>
@@ -126,11 +127,15 @@ $(function() {
 		<div class="row text-center">
 			<div class="col-sm-12">
 				<ul class="pagination">
+				<c:if test="${pagination.beginPage ne pagination.currentBlock }">
 					<li><a href="adminsendmessagebox?pno=${pagination.beginPage-1 }"><span aria-hidden="true">&laquo;</span></a></li>
+				</c:if>
 				<c:forEach begin="${pagination.beginPage }" end="${pagination.endPage }" var="pageNo">
 					<li><a href="adminsendmessagebox?pno=${pageNo }">${pageNo }</a></li>
 				</c:forEach>
+				<c:if test="${pagination.totalBlocks ne pagination.currentBlock }">
 					<li><a href="adminsendmessagebox?pno=${pagination.endPage+1 }"><span aria-hidden="true">&raquo;</span></a></li>
+				</c:if>
 				</ul>
 			</div>
 		</div>

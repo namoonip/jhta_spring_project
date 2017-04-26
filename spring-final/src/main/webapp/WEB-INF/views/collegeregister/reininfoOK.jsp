@@ -132,10 +132,10 @@ $(function() {
 <%@ include file="sidebar-hakjuk.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
     	<div class="row text-right">
-			홈 > 학적관리 > 휴학관리 > <strong>복학 신청 목록</strong> 
+			홈 > 학적관리 > 휴학관리 > <strong>복학 승인 목록</strong> 
 		</div>
 		<div class="row" style="margin: 0px; padding: 0px;">
-			<h4><span class="glyphicon glyphicon-list-alt"></span> 복학 신청 내역</h4>
+			<h4><span class="glyphicon glyphicon-list-alt"></span> 복학 승인 내역</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
       <div class="row">
@@ -143,7 +143,7 @@ $(function() {
       		<img src="../resources/images/student/PeoPleDefault.png" alt="person" style="width: 130px; height: 140px;"/>
       	</div>
       	<div class="col-xs-10">
-      		<p>나의 정보</p>
+      		<p>학생 정보</p>
         	<table class="table table-bordered">
 	        	<colgroup>
 	        		<col width="20%" />

@@ -5,6 +5,12 @@
 <mapper namespace="kr.co.jhta.dao.report.StuReportDao">
 
 	<!-- StuReport -->
+	<select id="getAttchFileName" parameterType="int" resultType="string">
+		SELECT DISTINCT P_REPORTCONTENT.P_FILE
+		FROM P_REPORTCONTENT
+		WHERE P_REPORTCONTENT.P_CNO = #{cno}
+	</select>	
+	
 	<select id="getProfReportByPno" parameterType="int" resultType="kr.co.jhta.vo.Preport">
 		SELECT p.P_NO as no,
 			   p.P_TITLE as title,
@@ -28,7 +34,7 @@
 		AND e.E_J_SUBJECT_NO = j.J_NO  
 		AND p.P_NO = #{pno}
 	</select>
-	
+		
 	<select id="getAllProfReport" parameterType="int" resultType="kr.co.jhta.vo.Preport">
 		SELECT r.P_NO as no, 
 			   r.P_TITLE as title, 
@@ -52,6 +58,78 @@
 		AND e.E_NO = #{eno}
 	</select>
 	
+	<update id="deleteFilename1" parameterType="map">
+		UPDATE P_REPORTCONTENT 
+		SET P_FILE = ''
+		WHERE P_CNO = #{cno}
+		AND P_FILE = #{filefullname}
+	</update>	
+	<update id="deleteFilename2" parameterType="map">
+		UPDATE P_REPORTCONTENT 
+		SET P_FILE2 = ''
+		WHERE P_CNO = #{cno}
+		AND P_FILE2 = #{filefullname}
+	</update>	
+	<update id="deleteFilename3" parameterType="map">
+		UPDATE P_REPORTCONTENT 
+		SET P_FILE3 = ''
+		WHERE P_CNO = #{cno}
+		AND P_FILE3 = #{filefullname}
+	</update>	
+	<update id="deleteFilename4" parameterType="map">
+		UPDATE P_REPORTCONTENT 
+		SET P_FILE4 = ''
+		WHERE P_CNO = #{cno}
+		AND P_FILE4 = #{filefullname}
+	</update>	
+	<update id="deleteFilename5" parameterType="map">
+		UPDATE P_REPORTCONTENT 
+		SET P_FILE5 = ''
+		WHERE P_CNO = #{cno}
+		AND P_FILE5 = #{filefullname}
+	</update>	
+	
+	<select id="getFilenameByLike1" parameterType="map" resultType="string">
+		SELECT P_FILE 
+		FROM P_REPORTCONTENT 
+		WHERE P_CNO = #{cno}
+		AND P_FILE LIKE '%'||#{filename}||'%'
+	</select>
+	
+	<select id="getFilenameByLike2" parameterType="map" resultType="string">
+		SELECT P_FILE2 
+		FROM P_REPORTCONTENT 
+		WHERE P_CNO = #{cno}
+		AND P_FILE2 LIKE '%'||#{filename}||'%'
+	</select>
+	
+	<select id="getFilenameByLike3" parameterType="map" resultType="string">
+		SELECT P_FILE3 
+		FROM P_REPORTCONTENT 
+		WHERE P_CNO = #{cno}
+		AND P_FILE3 LIKE '%'||#{filename}||'%'
+	</select>
+	
+	<select id="getFilenameByLike4" parameterType="map" resultType="string">
+		SELECT P_FILE4 
+		FROM P_REPORTCONTENT 
+		WHERE P_CNO = #{cno}
+		AND P_FILE4 LIKE '%'||#{filename}||'%'
+	</select>
+	
+	<select id="getFilename1ByLike5" parameterType="map" resultType="string">
+		SELECT P_FILE5 
+		FROM P_REPORTCONTENT 
+		WHERE P_CNO = #{cno}
+		AND P_FILE5 LIKE '%'||#{filename}||'%'
+	</select>
+	
+	<update id="updateStuReport" parameterType="StuReport">
+		UPDATE P_REPORTCONTENT 
+		SET P_TITLE = #{title}, P_CONTENT =  #{content}, P_ENROLLDATE = sysdate, P_FILE = #{filename}
+		WHERE P_CNO = #{no}
+	</update>
+	
 	<delete id="deleteReportByCno" parameterType="map">
 		DELETE FROM P_REPORTCONTENT 
 		WHERE P_CNO = #{cno} 
@@ -63,7 +141,11 @@
 			   p.P_TITLE as title,
 			   p.P_CONTENT as content,
 			   p.P_ENROLLDATE as enrollDate,
-			   p.P_FILE as fileName,
+			   p.P_FILE as filename,
+			   p.P_FILE2 as filename2,
+			   p.P_FILE3 as filename3,
+			   p.P_FILE4 as filename4,
+			   p.P_FILE5 as filename5,
 			   p.P_SHOW as show,
 			   p.P_P_NO as "report.professor.no",
 			   p.P_S_NO as "student.no",
@@ -85,7 +167,11 @@
 			   s.P_S_NO 		as "student.no",
 			   s.P_TITLE 		as title,
 			   s.P_CONTENT 		as content,
-			   s.P_FILE 		as fileName,
+			   s.P_FILE 		as filename,
+			   s.P_FILE2 		as filename2,
+			   s.P_FILE3 		as filename3,
+			   s.P_FILE4 		as filename4,
+			   s.P_FILE5 		as filename5,
 			   s.P_SHOW			as show,
 			   s.P_P_NO       	as "report.professor.no",
 			   s.P_ENROLLDATE 	as enrollDate,
@@ -105,7 +191,11 @@
 			   P_S_NO 		as "student.no",
 			   P_TITLE 		as title,
 			   P_CONTENT 	as content,
-			   P_FILE 		as fileName,
+			   P_FILE 		as filename,
+			   P_FILE2 		as filename2,
+			   P_FILE3 		as filename3,
+			   P_FILE4 		as filename4,
+			   P_FILE5 		as filename5,
 			   P_SHOW		as show,
 			   P_P_NO       as "report.professor.no",
 			   P_ENROLLDATE as enrollDate,
@@ -122,6 +212,10 @@
 				 P_TITLE, 
 				 P_CONTENT,
 				 P_FILE,
+				 P_FILE2,
+				 P_FILE3,
+				 P_FILE4,
+				 P_FILE5,
 				 P_E_NO) 
 		VALUES
 				(P_REPORTCONTENT_SEQ.nextval, 
@@ -129,7 +223,11 @@
 				 #{student.no}, 
 				 #{title}, 
 				 #{content},
-				 #{fileName , jdbcType=VARCHAR},
+				 #{filename, jdbcType=VARCHAR},
+				 #{filename2, jdbcType=VARCHAR},
+				 #{filename3, jdbcType=VARCHAR},
+				 #{filename4, jdbcType=VARCHAR},
+				 #{filename5, jdbcType=VARCHAR},
 				 #{enroll.no})
 	</insert>
 	
@@ -150,7 +248,7 @@
 				 #{title}, 
 				 #{content},
 				 true,
-				 #{fileName , jdbcType=VARCHAR},
+				 #{filename , jdbcType=VARCHAR},
 				 #{enroll.no})
 	</insert>
 	

@@ -37,10 +37,9 @@
 	</delete>
 	
 	<select id="getCnameByCcode" parameterType="string" resultType="string">
-		SELECT c.C_NAME 
-		FROM C_CODEREGISTER c,L_LEAVE l
-		WHERE c.C_CODE = l.C_CODE
-		AND c.C_CODE = #{cCode}
+		SELECT c.C_NAME
+		FROM C_CODEREGISTER c
+		WHERE c.C_CODE = #{cCode}
 	</select>
 	
 	<update id="updateLeave" parameterType="map">

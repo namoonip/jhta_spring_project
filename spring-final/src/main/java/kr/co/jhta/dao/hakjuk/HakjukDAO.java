@@ -3,6 +3,7 @@ package kr.co.jhta.dao.hakjuk;
 import java.util.List;
 
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
 import kr.co.jhta.vo.hakjuk.LeaveSearchForm;
@@ -48,8 +49,14 @@ public interface HakjukDAO {
 	List<Reinstatement> getReinTrueByForm(ReinForm rf);
 	List<Dropoff> getAllDropoffByFalse();
 	Dropoff getDropoffByFalseNO(int no);
+	List<Dropoff> getAllDropoffByFalseForm(ReinForm rf);
 	
 	void updateDropoffokByNo(int no);
 	void updateDropoffnotByNo(int no);
-	List<Dropoff> getAllDropoffByFalseForm(ReinForm rf);
+	
+	List<Dropoff> getAllDropoffByNotFalse();
+	Dropoff getDropoffByNotFalseNO(int no);
+	List<Dropoff> getAllDropoffByNotFalseForm(ReinForm rf);
+	
+	void addProfessor(AddProfForm apf);
 }

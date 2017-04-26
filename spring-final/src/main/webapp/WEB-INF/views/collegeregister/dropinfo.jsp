@@ -201,7 +201,7 @@ $(function() {
       </div>  
       
       <div class="row" style="padding: 20px;">
-      	<h4><strong>휴학(연장) 신청 내역</strong></h4>
+      	<h4><strong>자퇴 신청 내역</strong></h4>
       	<table class="table table-bordered">
 			<thead>
 				<tr>

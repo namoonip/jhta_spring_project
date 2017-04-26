@@ -143,7 +143,7 @@ $(function() {
       		<img src="../resources/images/student/PeoPleDefault.png" alt="person" style="width: 130px; height: 140px;"/>
       	</div>
       	<div class="col-xs-10">
-      		<p>나의 정보</p>
+      		<p>학생 정보</p>
         	<table class="table table-bordered">
 	        	<colgroup>
 	        		<col width="20%" />

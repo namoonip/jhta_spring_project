@@ -3,6 +3,7 @@ package kr.co.jhta.service.hakjuk;
 import java.util.List;
 
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
 import kr.co.jhta.vo.hakjuk.LeaveSearchForm;
@@ -45,11 +46,17 @@ public interface HakjukService {
 	List<Reinstatement> getReinTrueByFormService(ReinForm rf);
 	List<Dropoff> getAllDropoffByFalseService();
 	Dropoff getDropoffByFalseNOService(int no);
+	List<Dropoff> getAllDropoffByFalseFormService(ReinForm rf);
+	
+	List<Dropoff> getAllDropoffByNotFalseService();
+	Dropoff getDropoffByNotFalseNOService(int no);
+	List<Dropoff> getAllDropoffByNotFalseFormService(ReinForm rf);
+	
 	
 	void updateDropOK(int no);
 	void updateDropNOT(int no);
 	
-	List<Dropoff> getAllDropoffByFalseFormService(ReinForm rf);
+	void addProfessorService(AddProfForm arf);
 	
 }
 

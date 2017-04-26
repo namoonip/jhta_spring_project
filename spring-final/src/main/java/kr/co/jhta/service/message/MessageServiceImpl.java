@@ -68,4 +68,9 @@ public class MessageServiceImpl implements MessageService {
 	public String getFilenameByNo(int messageNo) {
 		return messageDao.getFilenameByNo(messageNo);
 	}
+	
+	@Override
+	public List<Message> getSendMessageAdmin(String id) {
+		return messageDao.getSendMessageAdmin(id);
+	}
 }

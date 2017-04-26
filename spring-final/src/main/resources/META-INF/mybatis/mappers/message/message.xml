@@ -32,6 +32,30 @@
 			u_stu_name = #{stuName}
 	</select>
 	
+	<select id="getAddressByProName" parameterType="string" resultType="Professor">
+		select
+			u_prof_no as no,
+			u_prof_email as email,
+			u_prof_grade as grade,
+			u_prof_ssn as ssn,
+			u_prof_forei as forei,
+			u_prof_entrydate as entrydate,
+			u_prof_leavedate as leavedate,
+			u_prof_division as division,
+			u_prof_id as id,
+			u_prof_name as name,
+			u_prof_gender as gender,
+			u_prof_code as code,
+			u_prof_pwd as pwd,
+			u_prof_register as register,
+			u_prof_phone as phone,
+			u_prof_addr as addr
+		from
+			u_professor
+		where
+			u_prof_name = #{proName}
+	</select>
+	
 	<select id="getDivisionByName" parameterType="string" resultType="sitemap">
 		select
 			t_no as no,
@@ -124,7 +148,7 @@
 		insert into
 			p_message (p_no, p_title, p_writer, p_writername, p_receiver, p_filename, p_contents, p_sendtime)
 		values
-			(p_message_seq.nextval, #{title}, #{writer}, #{writerName}, #{receiver}, #{filename}, #{contents}, sysdate)
+			(p_message_seq.nextval, #{title}, #{writer}, #{writerName}, #{receiver}, #{filename, jdbcType=VARCHAR}, #{contents}, sysdate)
 	</insert>
 	
 	<update id="deleteSendMessage" parameterType="int">
@@ -155,6 +179,29 @@
 		where
 			p_writer = #{writer}
 			and p_isdeletedbysender != 'Y'
+		order by
+			p_sendtime desc
+	</select>
+	
+	<select id="getSendMessageAdmin" parameterType="string" resultType="kr.co.jhta.vo.Message">
+		select
+			p_no as no,
+			p_title as title,
+			p_writer as writer,
+			p_writername as writerName,
+			p_receiver as receiver,
+			p_contents as contents,
+			p_ischeck as isCheck,
+			p_filename as filename,
+			p_sendtime as sendTime,
+			p_checktime as checkTime,
+			p_isdeletedbysender as isDeletedBySender,
+			p_isdeletedbyreceiver as isDeleteByReceiver
+		from
+			p_message
+		where
+			p_receiver = #{writer}
+			and p_isdeletedbyreceiver != 'Y'
 		order by
 			p_sendtime desc
 	</select>

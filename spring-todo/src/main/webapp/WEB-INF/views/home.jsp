@@ -16,7 +16,6 @@
 	<div class="jumbotron">
 		<h1>일정관리 프로그램</h1>
 		<p>회원 가입, 로그인, 일정등록 및 수정 기능을 지원하는 프로그램입니다.</p>
-		
 		<c:choose>
 			<c:when test="${empty LOGIN_USER }">
 				<p class="text-right">

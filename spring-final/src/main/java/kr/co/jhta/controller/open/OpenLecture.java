@@ -27,6 +27,22 @@ public class OpenLecture {
 	}
 	
 	
+	//강의 평가 화면 보여 주기
+	@RequestMapping("/lecturerating.do")
+	public String lectureRating(){
+		
+		return "openlecture/rating";
+	}
+	/*
+	//강의 평가 점수 등록
+	@RequestMapping("/ratingInsert.do")
+	public String lectureRatingRegister(){
+		
+		
+		
+	}
+	*/
+	
 	@RequestMapping("/openratingregister.do")
 	public String openLectureRegister(Model model){
 	
