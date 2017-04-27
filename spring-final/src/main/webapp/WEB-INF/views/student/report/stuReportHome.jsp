@@ -85,29 +85,17 @@ $(function() {
 	     			<c:forEach var="stuReport" items="${stuReportList }">
 			     		<tr>
 			     			<td>${stuReport.no}</td>
-			     			<td><a href="showStuReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}">${stuReport.title}</a></td>
+			     			<td>
+			     				<a href="showStuReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}">${stuReport.title}</a>
+			     			</td>
 			     			<td>${stuReport.student.name}</td>
 			     			<td>
-			     				<c:if test="${stuReport.filename ne null }">
-			     					<c:set var="fileSpanTag" value="true" />
-			     				</c:if>
-			     				<c:if test="${stuReport.filename2 ne null }">
-			     					<c:set var="fileSpanTag" value="true" />
-			     				</c:if>
-			     				<c:if test="${stuReport.filename3 ne null }">
-			     					<c:set var="fileSpanTag" value="true" />
-			     				</c:if>
-			     				<c:if test="${stuReport.filename4 ne null }">
-			     					<c:set var="fileSpanTag" value="true" />
-			     				</c:if>
-			     				<c:if test="${stuReport.filename5 ne null }">
-			     					<c:set var="fileSpanTag" value="true" />
-			     				</c:if>
-			     				${fileSpanTag}
 			     				<c:choose>
-			     					<c:when test="${param.fileSpanTag eq 'true' }">
+			     					<c:when test="${stuReport.filename ne null}">
 			     						<span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
 			     					</c:when>
+			     					<c:otherwise>
+			     					</c:otherwise>
 			     				</c:choose>
 			     			</td>
 			     			<td><fmt:formatDate value="${stuReport.enrollDate}" pattern="YYYY-MM-dd HH:mm"/> </td>

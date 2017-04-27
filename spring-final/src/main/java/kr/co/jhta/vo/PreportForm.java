@@ -2,6 +2,8 @@ package kr.co.jhta.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class PreportForm {
 	private int enrollno;
 	private int profno;
@@ -10,10 +12,17 @@ public class PreportForm {
 	private Date prost;
 	private Date proend;
 	private String upfile;
+	private MultipartFile file;
 	
 	
 	
 	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public String getUpfile() {
 		return upfile;
 	}

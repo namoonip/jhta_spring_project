@@ -35,9 +35,11 @@ public class LoginController {
 		Sessioncheck sessioncheck = new Sessioncheck();
 		if(loginForm.getLoginType().equals("stud")){
 			Student stud = studentService.loginByStudent(loginForm);
-			System.out.println("stud = "+stud);
 			if(stud == null){
 				return "redirect:/login?err=fail";
+			}
+			if(stud.getRegister().equals("DM1000") || stud.getRegister().equals("OU1000")){
+				return "redirect:/login?err=deny";
 			}
 			sessioncheck.setCheck("stud");
 			session.setAttribute("SESSION_CHECK", sessioncheck);
@@ -45,7 +47,6 @@ public class LoginController {
 			return "redirect:/stud/home";
 		}else{
 			Professor prof = professorService.loginByProfessor(loginForm);
-			System.out.println("prof = "+prof);
 			if(prof == null){
 				return "redirect:/login?err=fail";
 			}

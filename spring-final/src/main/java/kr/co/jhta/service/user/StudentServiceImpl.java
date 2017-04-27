@@ -18,6 +18,11 @@ public class StudentServiceImpl implements StudentService{
 	StudentDao stuDao;
 	
 	@Override
+	public Student getStudentALLByIdService(String id) {
+		return stuDao.getStudentALLById(id);
+	}
+	
+	@Override
 	public List<Student> getAllStudentService() {
 		List<Student> stuList = stuDao.getAllStudent();
 		return stuList;

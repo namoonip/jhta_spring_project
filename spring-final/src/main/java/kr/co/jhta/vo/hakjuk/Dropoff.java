@@ -13,6 +13,14 @@ public class Dropoff {
 	private String pass;
 	private Date passDate;
 	private Date enrollDate;
+	private String reason;
+	
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public int getNo() {
 		return no;
 	}

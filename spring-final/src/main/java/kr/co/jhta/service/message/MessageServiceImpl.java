@@ -45,6 +45,11 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
+	public void deleteReceiveMessage(int dno) {
+		messageDao.deleteReceiveMessage(dno);
+	}
+	
+	@Override
 	public List<SiteMap> getDivisionByName(String searchWord) {
 		return messageDao.getDivisionByName(searchWord);
 	}
@@ -72,5 +77,10 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getSendMessageAdmin(String id) {
 		return messageDao.getSendMessageAdmin(id);
+	}
+	
+	@Override
+	public void addMessageCheck(int messageNo) {
+		messageDao.addMessageCheck(messageNo);
 	}
 }

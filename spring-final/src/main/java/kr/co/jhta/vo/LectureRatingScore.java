@@ -3,48 +3,35 @@ package kr.co.jhta.vo;
 public class LectureRatingScore {
 
 	private int ratingNumber;
-	private int subjectNo;
-	private String professorId;
+	private int scoreNo;
+	private String studentId;
 	private int ratingScore;
 	
-	@Override
-	public String toString() {
-		return "LectureRatingScore [ratingNumber=" + ratingNumber + ", subjectNo=" + subjectNo + ", professorId="
-				+ professorId + ", ratingScore=" + ratingScore + "]";
-	}
-
+	
 	public int getRatingNumber() {
 		return ratingNumber;
 	}
-
 	public void setRatingNumber(int ratingNumber) {
 		this.ratingNumber = ratingNumber;
 	}
-
-	public int getSubjectNo() {
-		return subjectNo;
+	public int getScoreNo() {
+		return scoreNo;
 	}
-
-	public void setSubjectNo(int subjectNo) {
-		this.subjectNo = subjectNo;
+	public void setScoreNo(int scoreNo) {
+		this.scoreNo = scoreNo;
 	}
-
-	public String getProfessorId() {
-		return professorId;
+	public String getStudentId() {
+		return studentId;
 	}
-
-	public void setProfessorId(String professorId) {
-		this.professorId = professorId;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
-
 	public int getRatingScore() {
 		return ratingScore;
 	}
-
 	public void setRatingScore(int ratingScore) {
 		this.ratingScore = ratingScore;
 	}
-	
 	
 	
 }

@@ -51,8 +51,8 @@ public class ScoreServiceImpl implements ScoreService{
 	}
 
 	@Override
-	public void addScore() {
-		scoreDao.addScore();
+	public void addScore(int pno) {
+		scoreDao.addScore(pno);
 		attDao.addAttendance();
 		
 	}
@@ -128,6 +128,14 @@ public class ScoreServiceImpl implements ScoreService{
 	public List<Regisubject> getAllScorelistByProfID(String pid) {
 		return scoreDao.getAllScorelistByProfID(pid);
 	}
-	
-	
+
+	@Override
+	public int getProfNoByEno(int eno) {
+		return scoreDao.getProfNoByEno(eno);
+	}
+
+	@Override
+	public List<String> getSemeNameByStuNo(int stno) {
+		return scoreDao.getSemeNameByStuNo(stno);
+	}	
 }

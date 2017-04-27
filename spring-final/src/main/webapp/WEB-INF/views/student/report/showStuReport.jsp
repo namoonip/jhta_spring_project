@@ -43,8 +43,15 @@ $(function() {
       </div>
       
       <div class="row">
-	      <div class="form-group text-right"> 
-	      	<a href="editReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}" class="btn btn-default" id="submit-btn">수정</a>
+	      <div class="form-group text-right">
+	      	<c:choose>
+	      		<c:when test="${stuReport.filename ne null}">
+			      	<a href="editReportFile?cno=${stuReport.no}&eno=${stuReport.enroll.no}" class="btn btn-default" id="submit-btn">수정</a>	      		
+	      		</c:when>
+	      		<c:otherwise>
+			      	<a href="editReport?cno=${stuReport.no}&eno=${stuReport.enroll.no}" class="btn btn-default" id="submit-btn">수정</a>	      			      		
+	      		</c:otherwise>
+	      	</c:choose> 
 	      	<a href="deleteReprot?cno=${stuReport.no }&eno=${stuReport.enroll.no}" class="btn btn-default">삭제</a>
 	      </div>
 		      <table class="table table-bordered">
@@ -89,18 +96,6 @@ $(function() {
 		      				<c:if test="${stuReport.filename ne null}">
 		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename }</a><br />
 		      				</c:if>      				
-		      				<c:if test="${stuReport.filename2 ne null}">
-		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename2 }</a><br />
-		      				</c:if>
-		      				<c:if test="${stuReport.filename3 ne null}">
-		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename3 }</a><br />
-		      				</c:if>
-		      				<c:if test="${stuReport.filename4 ne null}">
-		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename4 }</a><br />
-		      				</c:if>
-		      				<c:if test="${stuReport.filename5 ne null}">
-		      					<a href="fileDownload.do?cno=${stuReport.no}">${stuReport.filename5 }</a><br />
-		      				</c:if>
 		      			</td>
 		      		</tr>
 		      		<tr>

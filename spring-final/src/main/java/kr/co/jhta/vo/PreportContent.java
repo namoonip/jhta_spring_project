@@ -12,14 +12,11 @@ public class PreportContent {
 	private String title;
 	private String content;
 	private String filename;
-	private String filename2;
-	private String filename3;
-	private String filename4;
-	private String filename5;
 	private String show;
 	private Enroll enroll;
 	private Date enrollDate;
 	
+
 
 	public PreportContent(){
 		
@@ -96,46 +93,17 @@ public class PreportContent {
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-	
-	
-
-	public String getFilename2() {
-		return filename2;
-	}
-
-	public void setFilename2(String filename2) {
-		this.filename2 = filename2;
-	}
-
-	public String getFilename3() {
-		return filename3;
-	}
-
-	public void setFilename3(String filename3) {
-		this.filename3 = filename3;
-	}
-
-	public String getFilename4() {
-		return filename4;
-	}
-
-	public void setFilename4(String filename4) {
-		this.filename4 = filename4;
-	}
-
-	public String getFilename5() {
-		return filename5;
-	}
-
-	public void setFilename5(String filename5) {
-		this.filename5 = filename5;
-	}
 
 	@Override
 	public String toString() {
 		return "PreportContent [no=" + no + ", report=" + report + ", student=" + student + ", title=" + title
 				+ ", content=" + content + ", filename=" + filename + ", show=" + show + ", enroll=" + enroll
-				+ ", enrollDate=" + enrollDate + "]";
+				+ ", enrollDate=" + enrollDate + ", getNo()=" + getNo() + ", getReport()=" + getReport()
+				+ ", getStudent()=" + getStudent() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent()
+				+ ", getFilename()=" + getFilename() + ", getShow()=" + getShow() + ", getEnroll()=" + getEnroll()
+				+ ", getEnrollDate()=" + getEnrollDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+	
 
 }

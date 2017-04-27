@@ -29,7 +29,7 @@ public interface ScoreService {
 	void updateScoreByNo(Score score);
 	SiteMap getSitemapByCode(String code);
 	
-	void addScore();
+	void addScore(int pno);
 	void delScore(int rno);
 	int getScoreNoByRno(int rno);
 	
@@ -42,5 +42,6 @@ public interface ScoreService {
 	List<Regisubject> getAllSearchInfo();
 	int getScoreCount();
 	List<Regisubject> getAllScorelistByProfID (String pid);
-	
+	int getProfNoByEno(int eno);
+	List<String> getSemeNameByStuNo(int stno);
 }

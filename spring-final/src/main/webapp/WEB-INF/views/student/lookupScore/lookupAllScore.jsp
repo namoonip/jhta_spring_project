@@ -26,27 +26,7 @@ $(function() {
          <h4><span class="glyphicon glyphicon-th-list"></span> 학기 성적 목록</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
-      <div class="row">
-		<table class="table table-bordered" style="margin: auto;">
-			
-		</table>
-		<div style="padding-top: 20px;" class="text-center form-group">
-			<form action="">
-			<input type="hidden" name="" value=""/>
-			<input type="hidden" name="" value=""/>
-				<select class="w3-select w3-border" name="option1" style="width: 8%; height: 37px;">
-					<option value="gradeAll">전체</option>
-					<option value="grade1">1 학년</option>
-					<option value="grade2">2 학년</option>
-					<option value="grade3">3 학년</option>
-					<option value="grade4">4 학년</option>
-				</select>
-				<input type="text" name="searchInput" style="width: 30%; height: 37px;"/>
-				<button type="submit" class="" style="background-color: gray; height:30px; width:70px;">검색</button>	
-			</form>
-		</div>
-      </div>
-      <hr />
+      
       <div class="row">
       	학기 성적 목록
       	<table class="table table-bordered">
@@ -78,37 +58,84 @@ $(function() {
       		</thead>
       		<tbody id="searchBody">
       			<c:forEach var="savg" items="${savg }">
-					<tr style="text-align: left;">
-						<td>${savg.semename }</td>
-						<td>${savg.credit1 }</td>
-						<td>${savg.credit2 }</td>
-						<td>${savg.credit3 }</td>
-						<td>${savg.credit4 }</td>
-						<c:choose>
-							<c:when test="${savg.grade gt 2}">
-								<td>Y</td>
-							</c:when>
-							<c:otherwise>
-								<td>N</td>
-							</c:otherwise>
-						</c:choose>
-						<td>${savg.pass1 }</td>
-						<td>${savg.pass2 }</td>
-						<td>${savg.pass3 }</td>
-						<td>${savg.pass4 }</td>
-						<td>${savg.pass5 }</td>
-						<td>${savg.pass6 }</td>
-						<td>${savg.pass7 }</td>
-					</tr>
+      			<c:choose>
+      				<c:when test="${savg.testcount eq 0}">
+      					<tr style="text-align: center;">
+							<td>${savg.semename }</td>
+							<td>${savg.credit1 }</td>
+							<td>${savg.credit2 }</td>
+							<td>${savg.credit3 }</td>
+							<td>${savg.credit4 }</td>
+							<c:choose>
+								<c:when test="${savg.grade gt 2}">
+									<td>Y</td>
+								</c:when>
+								<c:otherwise>
+									<td>N</td>
+								</c:otherwise>
+							</c:choose>
+							<td>${savg.pass1 }</td>
+							<td>${savg.pass2 }</td>
+							<td>${savg.pass3 }</td>
+							<td>${savg.pass4 }</td>
+							<td>${savg.pass5 }</td>
+							<td>${savg.pass6 }</td>
+							<td>${savg.pass7 }</td>
+						</tr>
+      				</c:when>
+      				<c:otherwise>
+      				<tr style="text-align: center;">
+      					<td>${savg.semename }</td>
+      					<td colspan="12"><strong>${savg.testcount }개의 강의 평가가 안되있습니다.</strong></td>
+      				</tr>
+      				</c:otherwise>
+      			</c:choose>
 				</c:forEach>
       		</tbody>
       	</table>
-      </div>
-      <div>
-     	 <hr />
-      	<div class="row">
-      
-      	</div>
+      	
+      	전체 성적 목록
+      	<table class="table table-bordered">
+			<thead>
+				<tr style="text-align: center;">
+					<th>
+						<label>전체 평점 평균</label>
+					</th>
+					<th>
+						<label>전체 백분율</label>
+					</th>
+					<th>
+						<label>전체 신청학점</label>
+					</th>
+					<th>
+						<label>전체 취득학점</label>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr style="text-align: center;">
+				<c:choose>
+					<c:when test="${savgtotal.testcount eq 0 }">
+						<td>
+							<p><strong>${savgtotal.credit3 }</strong></p>
+						</td>
+						<td>
+							<p><strong>${savgtotal.credit4 }</strong></p>
+						</td>
+						<td>
+							<p><strong>${savgtotal.credit1 }</strong></p>
+						</td>
+						<td>
+							<p><strong>${savgtotal.credit2 }</strong></p>
+						</td>
+					</c:when>
+					<c:otherwise>
+						<td colspan="4"><strong>총 ${savgtotal.testcount }개의 강의 평가 안되있습니다.</strong></td>
+					</c:otherwise>
+				</c:choose>
+				</tr>
+			</tbody>
+		</table>
       </div>
    </div>
 </body>

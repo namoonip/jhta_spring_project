@@ -112,7 +112,7 @@ $(function() {
 		      		<tr>
 						<th>*제목</th>  			
 		      			<th colspan="3">
-		      				<form:input path="title" type="text" cssClass="form-control" id="input-title" placeholder="학과.학번.이름으로 제출해주시기 바랍니다."/>
+		      				<form:input path="title" type="text" cssClass="form-control" id="input-title" value="${student.tName} ${student.id} ${student.name } 과제 제출입니다."/>
 		      				<form:errors path="title" cssClass="text-danger"/>
 		      			</th>
 		      		</tr>
@@ -133,10 +133,6 @@ $(function() {
 		      			<th>파일첨부</th>
 		      			<th colspan="3">
 		      				<form:input type="file" cssClass="form-control" path="file" />
-		      				<form:input type="file" cssClass="form-control" path="file2" />
-		      				<form:input type="file" cssClass="form-control" path="file3" />
-		      				<form:input type="file" cssClass="form-control" path="file4" />
-		      				<form:input type="file" cssClass="form-control" path="file5" />
 		      			</th>
 		      		</tr>
 		      		<tr>

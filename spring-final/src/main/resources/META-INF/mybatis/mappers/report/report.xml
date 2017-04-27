@@ -22,9 +22,23 @@
 			#{content},
 			#{prost},
 			#{proend},
-			#{upfile}
+			#{upfile, jdbcType=VARCHAR}
 		)
 	</insert>
+	<select id="reportAllList" resultType="Preport">
+		select
+			p_no as no,
+			p_e_no as "enroll.no",
+			p_prof_no as "professor.no",	
+			p_title title,
+			p_content content,
+			p_report_st prost,
+			p_report_end proend,
+			p_upfile as upfile
+		from
+			p_report
+	</select>
+	
 	<select id="getProftitle" parameterType="int" resultType="Preport">
 	SELECT
 		A.J_SUBJECT_NAME as"subject.subjectName",
@@ -125,4 +139,9 @@
   		where
   			 p_no = #{no}
 	</delete>
+	<select id="getAttchFileName" parameterType="int" resultType="string">
+		SELECT p_upfile
+		FROM P_REPORt
+		WHERE P_NO = #{value}
+	</select>	
 </mapper>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="resources/bootstrap/bootstrap.min.css" />
+    <script type="text/javascript" src="resources/angular/angular.min.js"></script>
+    <script type="text/javascript">
+        var myapp = angular.module('myapp', []);
+
+        //모듈에 컨트롤러 추가
+        myapp.controller('productCtrl', function($scope) {
+            $scope.products = [{
+                    name: "아이패드",
+                    price: 1000033,
+                    company: "apple"
+                },
+                {
+                    name: "플레이스테이션",
+                    price: 10004400,
+                    company: "sony"
+                },
+                {
+                    name: "닌텐도DS",
+                    price: 1055000,
+                    company: "닌텐도"
+                },
+                {
+                    name: "아이폰",
+                    price: 1006600,
+                    company: "apple"
+                },
+                {
+                    name: "엑스박스",
+                    price: 1077000,
+                    company: "microsoft"
+                },
+                {
+                    name: "레고",
+                    price: 1000880,
+                    company: "레고"
+                },
+                {
+                    name: "갤럭시노트",
+                    price: 9900000,
+                    company: "삼성"
+                },
+                {
+                    name: "킨들",
+                    price: 10000990,
+                    company: "아마존"
+                },
+            ]
+        });
+
+        //모듈에 사용자정의 디렉티브를 추가
+        myapp.directive('itemWidget', function() {
+            return {
+                templateUrl: "item.html"
+            }
+        })
+    </script>
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <div class="container" ng-controller="productCtrl">
+        <div ng-repeat="product in products">
+            <div item-widget></div>
+        </div>
+    </div>
+</body>
+</html>

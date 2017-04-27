@@ -89,8 +89,8 @@ public class StuReportController {
 		if(!stuReportList.isEmpty()) {
 			model.addAttribute("stuReportList", stuReportList);
 		}
-		return "student/report/stuReportHome";
 		
+		return "student/report/stuReportHome";		
 	}
 	
 	@RequestMapping(value="/stuReport", method=RequestMethod.GET)
@@ -119,5 +119,5 @@ public class StuReportController {
 		return false;
 	}
 	
-	
+
 }

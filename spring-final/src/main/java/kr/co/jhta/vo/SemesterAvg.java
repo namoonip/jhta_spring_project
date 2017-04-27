@@ -14,7 +14,14 @@ public class SemesterAvg {
 	private int pass5;
 	private int pass6;
 	private int pass7;
+	private int testcount;
 	
+	public void setTestcount(int testcount) {
+		this.testcount = testcount;
+	}
+	public int getTestcount() {
+		return testcount;
+	}
 	public void setPass5(int pass5) {
 		this.pass5 = pass5;
 	}

@@ -38,7 +38,7 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
-	<form method="get" action="deletemessage">
+	<form method="get" action="deletesendmessage">
 		<div class="row" style="margin-bottom: 15px;">
 			<div class="col-sm-12">
 				<div class="btn-group">
@@ -86,8 +86,8 @@ $(function() {
 							</th>
 							<th>받는사람</th>
 							<th>제목</th>
-							<th>첨부</th>
-							<th>보낸날짜</th>
+							<th>보낸시간</th>
+							<th>상대방 확인시간</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -99,8 +99,8 @@ $(function() {
 							</td>
 							<td>${message.receiver }</td>
 							<td><a style="cursor: pointer;" data-toggle="modal" data-target="#modal-${message.no }">${message.title }</a></td>
-							<td><a href="messagedownload?no=${message.no }">${message.filename }</a></td>
-							<td><fmt:formatDate value="${message.sendTime }" pattern="M/dd"/></td>
+							<td><fmt:formatDate value="${message.sendTime }" pattern="HH:mm"/></td>
+							<td><fmt:formatDate value="${message.checkTime }" pattern="HH:mm"/></td>
 						</tr>
 						</c:if>
 						<div id="modal-${message.no }" class="modal fade" role="dialog">

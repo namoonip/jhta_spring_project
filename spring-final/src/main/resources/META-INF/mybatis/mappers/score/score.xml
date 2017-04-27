@@ -64,13 +64,15 @@
 		WHERE 
 			register = #{rno}
 	</delete>
-	<select id="addScore">
+	<select id="addScore" parameterType="int">
 		insert into s_score(
 			REGISTER,
-			S_SCORE_NO)
+			S_SCORE_NO,
+			S_U_NO)
 		values(
 			R_REGISUBJECT_SEQ.currval,
-			S_SCORE_SEQ.nextval)
+			S_SCORE_SEQ.nextval,
+			#{pno})
 	</select>
 	<select id="getAllRegiList" resultType="kr.co.jhta.vo.SubjectRegister">
 		select
@@ -390,7 +392,8 @@
 			count(case when s.J_IS_PASSED ='ce' then 0 end) as pass4,
 			count(case when s.J_IS_PASSED ='ns' then 0 end) as pass5,
 			count(case when s.J_IS_PASSED ='gs' then 0 end) as pass6,
-			count(case when s.J_IS_PASSED ='db' then 0 end) as pass7
+			count(case when s.J_IS_PASSED ='db' then 0 end) as pass7,
+			count(case when sc.S_TEST ='N' then 0 end) as testcount
 		from  
 			J_SUBJECT s,
 			T_SITEMAP t,
@@ -406,6 +409,7 @@
 		and r.U_STU_NO = u.U_STU_NO
 		and r.U_STU_NO = #{sno }
 		group by sem.S_SEME_SELECT
+		order by sem.S_SEME_SELECT
 	</select>
 	
 	<select id ="getSemesterAvgTotalBySno" parameterType="int" resultType="kr.co.jhta.vo.SemesterAvg">
@@ -422,7 +426,8 @@
 		count(case when s.J_IS_PASSED ='ce' then 0 end) as pass4,
 		count(case when s.J_IS_PASSED ='ns' then 0 end) as pass5,
 		count(case when s.J_IS_PASSED ='gs' then 0 end) as pass6,
-		count(case when s.J_IS_PASSED ='db' then 0 end) as pass7
+		count(case when s.J_IS_PASSED ='db' then 0 end) as pass7,
+		count(case when sc.S_TEST ='N' then 0 end) as testcount
 from  
 		J_SUBJECT s,
 		T_SITEMAP t,
@@ -577,5 +582,38 @@ group by r.U_STU_NO
 		and r.U_STU_NO = u.U_STU_NO
 		and r.U_STU_NO = #{stno}
 		order by r.R_REGI_NO
+	</select>
+	<select id="getProfNoByEno" parameterType="int" resultType="int">
+		select
+ u.U_PROF_NO as profno
+from
+E_ENROLLMENT e,
+J_SUBJECT j,
+U_PROFESSOR u
+where
+e.E_J_SUBJECT_NO = j.J_NO
+and j.J_SUB_PROF = u.U_PROF_ID
+and e.E_NO = #{eno}
+	</select>
+	
+	<select id="getSemeNameByStuNo" parameterType="int" resultType="String">
+		select
+	  sem.S_SEME_SELECT as sem
+from  
+	J_SUBJECT s,
+	T_SITEMAP t,
+	R_REGISUBJECT r,
+	S_SCORE sc,
+	U_STUDENT u,
+	S_SEMESTER sem
+where 
+	t.T_CODE = s.J_T_CODE
+and r.J_NO = s.J_NO
+and sem.S_NO = s.J_SEMESTER
+and sc.REGISTER = r.R_REGI_NO
+and r.U_STU_NO = u.U_STU_NO
+and r.U_STU_NO = #{stno}
+group by sem.S_SEME_SELECT
+order by sem.S_SEME_SELECT
 	</select>
 </mapper>

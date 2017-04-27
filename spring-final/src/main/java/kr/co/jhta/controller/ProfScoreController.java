@@ -33,10 +33,9 @@ public class ProfScoreController {
 	}
 	
 	@RequestMapping(value="/prof/scoreform", method=RequestMethod.GET)
-	public String scoreedit(@RequestParam String sno, Model model){
-		int no = Integer.parseInt(sno);
-		Score score = scoreService.getScoreByNo(no);
-		model.addAttribute("no", no);
+	public String scoreedit(@RequestParam int sno, Model model){
+		Score score = scoreService.getScoreByNo(sno);
+		model.addAttribute("no", sno);
 		model.addAttribute("score", score);
 		model.addAttribute("scoreupdate", new Score());
 		return "/prof/score/scoreform";

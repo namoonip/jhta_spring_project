@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.jhta.service.score.ScoreService;
 import kr.co.jhta.service.sitemap.SitemapService;
-import kr.co.jhta.vo.PageNation;
 import kr.co.jhta.vo.Score;
 import kr.co.jhta.vo.SearchForm;
 import kr.co.jhta.vo.SiteMap;

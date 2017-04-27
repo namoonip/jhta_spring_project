@@ -1,4 +1,4 @@
-package kr.co.jhta.controller;
+package kr.co.jhta.controller.hakjuk;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.jhta.service.hakjuk.HakjukService;
 import kr.co.jhta.service.professor.ProfessorService;
 import kr.co.jhta.service.sitemap.SitemapService;
-import kr.co.jhta.service.user.StudentService;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.SiteMap;
+import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.LeaveSearchForm;
 import kr.co.jhta.vo.hakjuk.ProfessorSearchForm;
@@ -23,7 +23,6 @@ import kr.co.jhta.vo.hakjuk.ReinForm;
 import kr.co.jhta.vo.hakjuk.Reinstatement;
 import kr.co.jhta.vo.hakjuk.SearchForm;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
-import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.stu.AddStudentForm;
 import kr.co.jhta.vo.stu.Student;
 
@@ -75,7 +74,6 @@ public class HakjukController {
 	 * @param id
 	 * @return
 	 */
-	
 	@RequestMapping("/studinfo")
 	public String studinfo(@RequestParam("id") String id,Model model){
 		Student stud = hakjukService.getStudentByIdService(id);
@@ -85,6 +83,41 @@ public class HakjukController {
 		model.addAttribute("stud",stud);
 		return "collegeregister/studinfo";
 	}
+		
+	/**
+	 * 
+	 *	학생 정보 수정화면 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updatestud",method=RequestMethod.GET)
+	public String updateStud(String id,Model model){
+		Student student = hakjukService.getStudentByIdsecondService(id);
+		List<SiteMap> sitemapList = sitemapService.getAllSitemapPreService();
+		SiteMap sitemap = hakjukService.getSiteMapByNameService(student.getDivision());
+		List<SiteMap> subsitemapList = sitemapService.getAllSitemapSecService(sitemap);
+		List<Professor> profList = professorService.getProListByTCode(sitemap.getCode());
+		model.addAttribute("sitemapList",sitemapList); // 대학 정보 전달
+		model.addAttribute("studSitemap",sitemap); // 해당 학생의 대학/학과 정보 전달
+		model.addAttribute("majors",subsitemapList); // 학과 정보 전달
+		model.addAttribute("professors",profList); // 해당 학과 내의 모든 교수 조회
+		model.addAttribute("student",student);
+		return "collegeregister/updatestud";
+	}
+	/**
+	 * 학생 정보 수정 후 submit되서 오는 class
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updatestud",method=RequestMethod.POST)
+	public String updateStudPost(AddStudentForm asf,String studemail,String studemailaddr,Model model){
+		asf.setEmail(studemail+"@"+studemailaddr);
+		hakjukService.updateStudentService(asf);
+		return "redirect:/admin/searchstud";
+	}
+	
 	
 	/**
 	 * 교수 정보 조회하는 화면
@@ -99,7 +132,7 @@ public class HakjukController {
 		return "collegeregister/searchprof";
 	}
 	/**
-	 * 조건이 있는 학생 정보 조회
+	 * 조건이 있는 교수 정보 조회
 	 * @param ssf
 	 * @param model
 	 * @return
@@ -116,7 +149,7 @@ public class HakjukController {
 	
 	
 	/**
-	 * 교수 id를 받아서 교수 하면 조회하여 상세정보 보여주는 페이지
+	 * 교수 id를 받아서 교수 한명 조회하여 상세정보 보여주는 페이지
 	 * @param id
 	 * @return
 	 */
@@ -129,12 +162,38 @@ public class HakjukController {
 		model.addAttribute("prof",prof);
 		return "collegeregister/profinfo";
 	}
-	 
+	/**
+	 * 교수 수정 화면
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/updateprof",method=RequestMethod.GET)
+	public String updateProf(String id,Model model){
+		Professor prof = hakjukService.getProfessorByIdService(id);
+		List<SiteMap> sitemapList = sitemapService.getAllSitemapPreService();
+		SiteMap sitemap = hakjukService.getSiteMapByNameService(prof.getDivision());
+		List<SiteMap> subsitemapList = sitemapService.getAllSitemapSecService(sitemap);
+		model.addAttribute("sitemapList",sitemapList); // 대학 정보 전달
+		model.addAttribute("profSitemap",sitemap); // 해당 교수의 대학/학과 정보 전달
+		model.addAttribute("majors",subsitemapList); // 학과 정보 전달
+		model.addAttribute("professor",prof);
+		return "collegeregister/updateprof";
+	}
+	@RequestMapping(value = "/updateprof",method=RequestMethod.POST)
+	public String updateProfPost(AddProfForm apf,String studemail,String studemailaddr){
+		apf.setEmail(studemail+"@"+studemailaddr);
+		apf.setCode(apf.getDivision());
+		System.out.println(apf);
+		hakjukService.updateProfessorService(apf);
+		return "redirect:/admin/searchprof";
+	}
 	/**
 	 * 입학생 조회목록
 	 * @return
 	 */
-	@RequestMapping("/admissions") 
+	@RequestMapping("/searchadmission") 
 	public String admissions(Model model){
 		List<SiteMap> sitemap = sitemapService.getAllSitemapPreService();
 		List<Student> studList = hakjukService.getAllAdmissionStudService();
@@ -154,7 +213,7 @@ public class HakjukController {
 		SiteMap sitemap = new SiteMap();
 		sitemap.setPreCode(sitemapList.get(0).getCode());
 		List<SiteMap> subsitemapList = sitemapService.getAllSitemapSecService(sitemap);
-		List<Professor> profList = professorService.getProListByTCode(sitemapList.get(0).getCode());
+		List<Professor> profList = professorService.getProListByTCode(subsitemapList.get(0).getCode());
 		model.addAttribute("sitemapList",sitemapList);
 		model.addAttribute("majors",subsitemapList);
 		model.addAttribute("professors",profList);
@@ -190,8 +249,8 @@ public class HakjukController {
 		stud.setPwd(addstud.getSsn().split("-")[0]);
 		BeanUtils.copyProperties(addstud, stud);
 		stud.setProfessor(addstud.getProfessor());
-		hakjukService.admissionsStud(stud);
-		return "redirect:/admin/admissions";
+		hakjukService.admissionsStud(stud,stud.getRegister());
+		return "redirect:/admin/admissionstud";
 	}
 	
 	/**
@@ -226,7 +285,7 @@ public class HakjukController {
 		addprof.setCode(addprof.getDivision());
 		addprof.setPwd(addprof.getSsn().split("-")[0]);
 		hakjukService.addProfessorService(addprof);
-		return "redirect:/admin/admissionprof";
+		return "redirect:/admin/searchprof";
 	}
 	
 	

@@ -1,4 +1,4 @@
-package kr.co.jhta.controller;
+package kr.co.jhta.controller.hakjuk;
 
 import java.util.HashMap;
 import java.util.List;

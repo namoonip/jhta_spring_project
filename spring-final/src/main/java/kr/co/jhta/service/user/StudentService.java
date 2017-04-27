@@ -10,6 +10,8 @@ import kr.co.jhta.vo.stu.Student;
 @Transactional
 public interface StudentService {
 	// login UserCheck
+	Student getStudentALLByIdService(String id);
+	
 	Student loginByStudent(LoginForm loginForm);
 	
 	List<Student> getAllStudentService();

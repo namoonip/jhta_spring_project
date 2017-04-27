@@ -3,6 +3,7 @@ package kr.co.jhta.service.report;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.stereotype.Controller;
 
 import kr.co.jhta.dao.report.PreportDao;
@@ -41,5 +42,13 @@ public class PreportServiceImpl implements PreportService {
 	@Override
 	public void deleteReport(int no) {
 		preportdao.deleteReport(no);
+	}
+	@Override
+	public String getAttchFileName(int no) {
+		return preportdao.getAttchFileName(no);
+	}
+	@Override
+	public List<Preport> reportAllList() {
+		return preportdao.reportAllList();
 	}
 }

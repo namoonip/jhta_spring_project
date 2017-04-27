@@ -33,7 +33,8 @@ public class EnrollServiceImpl implements EnrollService{
 	@Override
 	public void addRegisubService(Enroll enroll) {
 		enrollDao.addRegisub(enroll);
-		scoreService.addScore();
+		int pno = scoreService.getProfNoByEno(enroll.getNo());
+		scoreService.addScore(pno);
 	}
 
 	@Override
@@ -74,5 +75,10 @@ public class EnrollServiceImpl implements EnrollService{
 	@Override
 	public void deleteEnroll(int no) {
 		enrollDao.deleteEnroll(no);
+	}
+	
+	@Override
+	public List<Enroll> enrollAllList() {
+		return enrollDao.getAllEnroll();
 	}
 }

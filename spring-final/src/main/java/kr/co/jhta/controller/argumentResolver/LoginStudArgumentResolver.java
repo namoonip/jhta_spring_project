@@ -31,13 +31,7 @@ public class LoginStudArgumentResolver implements HandlerMethodArgumentResolver 
 		HttpSession session = request.getSession(true);
 		
 		Student student = (Student) session.getAttribute("LOGIN_USER");
-		
 
-		String tName = stuService.getTnameByTcodeService(student.getNo(), student.getDivision());
-	    String cName = stuService.getCnameByRegisterService(student.getRegister());
-	    student.settName(tName);
-	    student.setcName(cName);
-		
 		return student;		
 	}
 

@@ -17,6 +17,7 @@ public class AddProfForm {
 	private String addr1;
 	private String addr2;
 	private String addr;
+	
 	public String getName() {
 		return name;
 	}

@@ -41,7 +41,7 @@
 				<thead>
 					<tr>
 						<th class="ceth">과목</th>
-						<th>${profReport.enroll.subject.subjectName}</th>
+						<th>${profReport.report.subject.subjectName}</th>
 						<th class="ceth">교수</th>
 						<th>${profReport.report.professor.name }</th>
 					</tr>
@@ -68,21 +68,22 @@
 						<th class="ceth">첨부파일</th>
 						<td colspan="3">
 							<c:choose>
-								<c:when test="${profReport.report.upfile ne null}">
-									<a href="#">${profReport.report.upfile}</a>
+								<c:when test="${profReport.filename ne null}">
+									<a href="/jhta/prof/report/fileDownload?no=${profReport.no}">${profReport.filename }</a><br />
 								</c:when>
 								<c:otherwise>
 								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
+					
 				</thead>	
 			</table>
+		</form>
 			<div class="form-group text-center">      
-	      		<a href=""><button class="btn btn-default" id="submit-btn">성적 입력</button></a>
+	      		<a href="/jhta/prof/scoreform.do?sno="><button class="btn btn-default">성적 입력</button></a>
 	      		<a href="/jhta/prof/report/reportinfo" class="btn btn-default">뒤로</a>
 	      	</div>
-		</form>
 	</div>
 </div>
 </body>

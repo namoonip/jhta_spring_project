@@ -22,7 +22,7 @@
                         </a>
                         <ul id="submenu-3" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="admissionstud"><i class="fa fa-caret-right"></i>입학생 등록</a></li>
-                            <li><a href="admissions"><i class="fa fa-caret-right"></i>입학생 조회</a></li>
+                            <li><a href="searchadmission"><i class="fa fa-caret-right"></i>입학생 조회</a></li>
                             <li><a href="admissionprof"><i class="fa fa-caret-right"></i>교수 임용</a></li>
                         </ul>
                     </li>
@@ -72,7 +72,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-9" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="../adminrecmessagebox"><i class="fa fa-caret-right"></i>쪽지 관리</a></li>
+                            <li><a href="adminrecmessagebox"><i class="fa fa-caret-right"></i>쪽지 관리</a></li>
                             <li><a href="adminsendemail"><i class="fa fa-caret-right"></i>메일 관리</a></li>
                         </ul>
                     </li>

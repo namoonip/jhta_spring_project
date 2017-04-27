@@ -3,6 +3,7 @@ package kr.co.jhta.service.hakjuk;
 import java.util.List;
 
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
@@ -12,14 +13,20 @@ import kr.co.jhta.vo.hakjuk.ReinForm;
 import kr.co.jhta.vo.hakjuk.Reinstatement;
 import kr.co.jhta.vo.hakjuk.SearchForm;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
+import kr.co.jhta.vo.stu.AddStudentForm;
 import kr.co.jhta.vo.stu.Student;
 
 public interface HakjukService {
 	
-	void admissionsStud(Student stud);
+	SiteMap getSiteMapByNameService(String name);
+
+	void admissionsStud(Student stud,String register);
+	void updateStudentService(AddStudentForm asf);
+	void updateProfessorService(AddProfForm apf);
 	List<Student> searchStudent(StudentSearchForm ssf);
 	List<Student> getAllStudentService();
 	Student getStudentByIdService(String id);
+	Student getStudentByIdsecondService(String id);
 	List<Student> getAllAdmissionStudService();
 	List<Professor> getAllProfessorService();
 	Professor getProfessorByIdService(String id);

@@ -21,18 +21,8 @@ public interface StuReportDao {
 	void deleteReportByCno(Map<String, Object> map);
 	
 	void updateStuReport(PreportContent preportContent);
+	void updateStuReportNotFile(PreportContent preportContent);
 	
 	String getAttchFileName(int cno);
-	
-	String getFilenameByLike1(Map<String, Object> map);
-	String getFilenameByLike2(Map<String, Object> map);
-	String getFilenameByLike3(Map<String, Object> map);
-	String getFilenameByLike4(Map<String, Object> map);
-	String getFilenameByLike5(Map<String, Object> map);
-	
-	void deleteFilename1(Map<String, Object> map);
-	void deleteFilename2(Map<String, Object> map);
-	void deleteFilename3(Map<String, Object> map);
-	void deleteFilename4(Map<String, Object> map);
-	void deleteFilename5(Map<String, Object> map);
+	void deleteFilename(int cno);
 }

@@ -3,6 +3,7 @@ package kr.co.jhta.dao.hakjuk;
 import java.util.List;
 
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
@@ -12,13 +13,21 @@ import kr.co.jhta.vo.hakjuk.ReinForm;
 import kr.co.jhta.vo.hakjuk.Reinstatement;
 import kr.co.jhta.vo.hakjuk.SearchForm;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
+import kr.co.jhta.vo.stu.AddStudentForm;
 import kr.co.jhta.vo.stu.Student;
 
 public interface HakjukDAO {
 	
+	SiteMap getSiteMapByName(String name);
+	
+	void addAdmissions(Student stud);
+	void updateStudent(AddStudentForm asf);
+	void updateProfessor(AddProfForm apf);
+	
 	List<Student> getStudentListBySearchStud(StudentSearchForm ssf);
 	List<Student> getAllStudent();
 	Student getStudentById(String id);
+	Student getStudentByIdsecond(String id);
 	List<Student> getAllAdmissionStud();
 	List<Professor> getAllProfessor();
 	Professor getProfessorById(String id);

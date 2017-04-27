@@ -15,11 +15,8 @@
 <%@ include file="/WEB-INF/views/navi/stunavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px;">
-		<div class="row text-right">
-			홈 > 학적관리 > 입학관리 > 신입학 조회 
-		</div>
-		<div class="row">
-			<h4><span class="glyphicon glyphicon-th-list"></span> ${board.title }</h4>
+		<div class="row form-inline">
+			<h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;${board.title }</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
 		<div style="margin-top: 20px;"></div>

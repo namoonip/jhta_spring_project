@@ -13,6 +13,6 @@ public interface PreportDao {
 	Preport getupdatereport(int no);
 	void getByNoupdate(Preport preport);
 	void deleteReport(int no);
-	
-
+	String getAttchFileName(int no);
+	List<Preport> reportAllList();
 }

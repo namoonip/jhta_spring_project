@@ -7,6 +7,8 @@ public class Student {
 	private int no;
 	private String addr1;
 	private String addr2;
+	private String addr3;
+	private int zipcode;
 	private String email;
 	private int grade;
 	private String ssn;
@@ -227,5 +229,31 @@ public class Student {
 		this.nowScore = nowScore;
 	}
 
+	public String getAddr3() {
+		return addr3;
+	}
+
+	public void setAddr3(String addr3) {
+		this.addr3 = addr3;
+	}
+
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [no=" + no + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", zipcode="
+				+ zipcode + ", email=" + email + ", grade=" + grade + ", ssn=" + ssn + ", enterDate=" + enterDate
+				+ ", leaveDate=" + leaveDate + ", parentName=" + parentName + ", parentPhone=" + parentPhone + ", id="
+				+ id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", division=" + division
+				+ ", register=" + register + ", score=" + score + ", phone=" + phone + ", professor=" + professor
+				+ ", remainLeave=" + remainLeave + ", tName=" + tName + ", cName=" + cName + ", maxOneScore="
+				+ maxOneScore + ", nowScore=" + nowScore + "]";
+	}	
 	
 }

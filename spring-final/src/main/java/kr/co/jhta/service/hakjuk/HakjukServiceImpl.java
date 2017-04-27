@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.jhta.dao.hakjuk.HakjukDAO;
 import kr.co.jhta.dao.user.StudentDao;
 import kr.co.jhta.vo.Professor;
+import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.hakjuk.AddProfForm;
 import kr.co.jhta.vo.hakjuk.Dropoff;
 import kr.co.jhta.vo.hakjuk.Leave;
@@ -20,6 +21,7 @@ import kr.co.jhta.vo.hakjuk.ReinForm;
 import kr.co.jhta.vo.hakjuk.Reinstatement;
 import kr.co.jhta.vo.hakjuk.SearchForm;
 import kr.co.jhta.vo.hakjuk.StudentSearchForm;
+import kr.co.jhta.vo.stu.AddStudentForm;
 import kr.co.jhta.vo.stu.Student;
 
 @Service
@@ -34,12 +36,30 @@ public class HakjukServiceImpl implements HakjukService{
 	private HakjukDAO hakjukDao;
 	
 	@Override
-	public void admissionsStud(Student stud) { // 입학생 저장
+	public SiteMap getSiteMapByNameService(String name) {
+		return hakjukDao.getSiteMapByName(name);
+	}
+	
+	@Override
+	public void updateStudentService(AddStudentForm asf) {
+		hakjukDao.updateStudent(asf);
+	}
+	@Override
+	public void updateProfessorService(AddProfForm apf) {
+		hakjukDao.updateProfessor(apf);
+	}
+	
+	@Override
+	public void admissionsStud(Student stud,String register) { // 입학생 저장
 		Random rand = new Random();
-		String id = (new Date().getYear()-100)+""+(rand.nextInt(99)+10)+((stud.getName().hashCode()*rand.nextInt(99)+10)+"").substring(1,4);
-		System.out.println(id);
+		String id = (new Date().getYear()-100)+""+(rand.nextInt(89)+10)+((stud.getName().hashCode()*rand.nextInt(89)+10)+"").substring(1,4);
 		stud.setId(id);
+		stud.setRegister("AD3000");
 		studDao.addNewStudent(stud);
+		stud = studDao.getStudentById(id);
+		stud.setRegister(register);
+		System.out.println(stud);
+		hakjukDao.addAdmissions(stud);
 	}
 	
 	@Override
@@ -49,6 +69,10 @@ public class HakjukServiceImpl implements HakjukService{
 	@Override
 	public Student getStudentByIdService(String id) { // 한명의 학생 조회
 		return hakjukDao.getStudentById(id);
+	}
+	@Override
+	public Student getStudentByIdsecondService(String id) {
+		return hakjukDao.getStudentByIdsecond(id);
 	}
 	
 	@Override
@@ -167,10 +191,6 @@ public class HakjukServiceImpl implements HakjukService{
 	public void updateDropNOT(int no) {
 		Dropoff drop = hakjukDao.getDropoffByFalseNO(no);
 		hakjukDao.updateDropoffnotByNo(no);
-		Leave leave = new Leave();
-		leave.setCode("OU1000");
-		leave.setStudent(drop.getStudent());
-		hakjukDao.updateStudentRegister(leave);
 	}
 	@Override
 	public List<Dropoff> getAllDropoffByFalseFormService(ReinForm rf) {
@@ -191,7 +211,7 @@ public class HakjukServiceImpl implements HakjukService{
 	@Override
 	public void addProfessorService(AddProfForm arf) {
 		Random rand = new Random();
-		String id = "P"+(new Date().getYear()-100)+""+(rand.nextInt(99)+10)+((arf.getName().hashCode()*rand.nextInt(99)+10)+"").substring(1,4);
+		String id = "P"+(new Date().getYear()-100)+""+(rand.nextInt(89)+10)+((arf.getName().hashCode()*rand.nextInt(89)+10)+"").substring(1,4);
 		arf.setId(id);
 		hakjukDao.addProfessor(arf);
 	}

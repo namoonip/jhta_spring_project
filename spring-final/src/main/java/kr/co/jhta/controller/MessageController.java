@@ -41,13 +41,13 @@ public class MessageController {
 	
 	String directory = "C:\\spring_project\\final_upload";
 	
-	@RequestMapping("adminmessageform")
+	@RequestMapping("/admin/adminmessageform")
 	public String adminMessageForm(Model model) {
 		model.addAttribute("messageForm", new MessageForm());
 		return "administer/adminmessageform";
 	}
 	
-	@RequestMapping("adminsendmessagebox")
+	@RequestMapping("/admin/adminsendmessagebox")
 	public String adminSendEmailBox(Model model, Professor prof, @RequestParam(name="pno", defaultValue="1") int pno) {
 		List<Message> messageAllList = messageService.getReceiveMessageAdmin(prof.getId());
 		
@@ -65,7 +65,7 @@ public class MessageController {
 		return "administer/adminsendmessagebox";
 	}
 	
-	@RequestMapping("adminrecmessagebox")
+	@RequestMapping("/admin/adminrecmessagebox")
 	public String adminRecieveEmailBox(Model model, Professor prof, @RequestParam(name="pno", defaultValue="1") int pno) {
 		List<Message> messageAllList = messageService.getSendMessageAdmin(prof.getId());
 		
@@ -83,7 +83,7 @@ public class MessageController {
 		return "administer/adminrecmessagebox";
 	}
 	
-	@RequestMapping(value="sendmessage", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/sendmessage", method=RequestMethod.POST)
 	public String sendMessage(@ModelAttribute(name="messageForm") MessageForm messageForm, Professor prof, String option) throws IllegalAccessException, InvocationTargetException, FileNotFoundException, IOException {
 		String[] receiverList;
 		
@@ -152,11 +152,11 @@ public class MessageController {
 			}
 		}
 		
-		return "redirect:/adminrecmessagebox";
+		return "redirect:/admin/adminrecmessagebox";
 	}
 	
-	@RequestMapping(value="deletemessage")
-	public String deleteMessage(Integer[] dnoList) {
+	@RequestMapping(value="/admin/deletesendmessage")
+	public String deleteSendMessage(Integer[] dnoList) {
 		for (int dno : dnoList) {
 			messageService.deleteSendMessage(dno);
 		}
@@ -164,7 +164,16 @@ public class MessageController {
 		return "redirect:/adminsendmessagebox";
 	}
 	
-	@RequestMapping("/adminsearch")
+	@RequestMapping(value="/admin/deletereceivemessage")
+	public String deleteReceiveMessage(Integer[] dnoList) {
+		for (int dno : dnoList) {
+			messageService.deleteReceiveMessage(dno);
+		}
+		
+		return "redirect:/admin/adminrecmessagebox";
+	}
+	
+	@RequestMapping("/admin/adminsearch")
 	public @ResponseBody List<?> adminAddressSearch(String checkedRadio, String searchWord, String searchOption) {
 		List<?> resultList = new ArrayList<Object>();
 		
@@ -183,7 +192,7 @@ public class MessageController {
 		return resultList;
 	}
 	
-	@RequestMapping("messagedownload")
+	@RequestMapping("/admin/messagedownload")
 	public ModelAndView messageDownload(@RequestParam("no") int no) {
 		String filename = messageService.getFilenameByNo(no);
 		
@@ -193,5 +202,12 @@ public class MessageController {
 		mav.setView(fileView);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/admin/addmessagecheck", produces="application/json; charset=UTF-8")
+	public @ResponseBody String addMessageCheck(int messageNo) {
+		messageService.addMessageCheck(messageNo);
+		
+		return "{\"success\": \"성공\"}";
 	}
 }

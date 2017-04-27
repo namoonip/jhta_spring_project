@@ -21,16 +21,16 @@
                 .wrap_table {
                     padding: 30px 0;
                     position: relative;
-                    width: 1200px%;
+                    width: 1170px%;
                 }
 
                 .wrap_table>div {
                     overflow: auto;
-                    height: 153px;
+                    height: 200px;
                 }
 
                 .wrap_table table {
-                    width: 1181px;
+                    width: 1151px;
                 }
 
                 .wrap_table table caption {
@@ -42,7 +42,7 @@
                 .wrap_table table tfoot {
                     position: absolute;
                     display: table;
-                    width: 1181px;
+                    width: 1151px;
                     border-bottom: 1px solid #ccc;
                 }
 
@@ -281,7 +281,7 @@
 				<div class="modal-content" id="modaldata"></div>
 			</div>
 		</div>
-		<h1>강의 평가 조회</h1>
+		<h1>강의 평가 조회 /삭제</h1>
 		<hr />
 		<div class="row">
 			<h3>과목 조회</h3>
@@ -307,7 +307,6 @@
 				</form>
 			</div>
 		</div>
-		<hr />
 		<div class="wrap_table">
 			<div align="center">
 				<table>
@@ -326,19 +325,20 @@
 					<tfoot>
 						<tr>
 							<td>
-								<button id="subjectdelete" type="submit"
-									class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab pull-right'
-									style='color: black'>
-									<i class='material-icons md-48'>delete_forever</i>
-								</button>
 							</td>
 						</tr>
 					</tfoot>
 				</table>
 			</div>
 		</div>
+			<div class="row">
+					<button id="subjectdelete" type="submit"
+									class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab pull-right'
+									style='color: black'>
+									<i class='material-icons md-48'>delete_forever</i>
+					</button>
+				</div>
 		<hr />
-		<h3>교수 상세 정보</h3>
 	</div>
 </body>
 

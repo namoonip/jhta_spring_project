@@ -25,7 +25,9 @@ public class StuLookupScoreController {
 	public String lookupScore(HttpSession session, Model model) {
 		Student stu = (Student) session.getAttribute("LOGIN_USER");
 		List<Regisubject> regilist = scoreService.getSearchInfoBySno(stu.getNo());
+		List<String> semelist = scoreService.getSemeNameByStuNo(stu.getNo());
 		
+		model.addAttribute("semelist", semelist);
 		model.addAttribute("regilist", regilist);
 		
 		return "/student/lookupScore/lookupScore";
@@ -35,8 +37,11 @@ public class StuLookupScoreController {
 	public String lookupScorePost(HttpSession session, Model model) {
 		Student stu = (Student) session.getAttribute("LOGIN_USER");
 		List<SemesterAvg> savg = scoreService.getSemesterAvgBySno(stu.getNo());
+		SemesterAvg savgtotal = scoreService.getSemesterAvgTotalBySno(stu.getNo());
 		
 		model.addAttribute("savg", savg);
+		model.addAttribute("savgtotal", savgtotal);
+		
 		return "/student/lookupScore/lookupAllScore";
 	}
 }

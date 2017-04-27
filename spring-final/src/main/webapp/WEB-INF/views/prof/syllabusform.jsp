@@ -60,8 +60,8 @@
 				<div class="form-group">
 					<label>과목명</label>
 					<form:select path="subno" cssClass="form-control">
-						<c:forEach var="subject" items="${pList }" varStatus="status">
-							<form:option id="subname-${status.count }" value="${subject.no }">${subject.subject.subjectName }</form:option>							
+						<c:forEach var="enroll" items="${pList }" varStatus="status">
+							<form:option id="subname-${status.count }" value="${enroll.subject.no }">${enroll.subject.subjectName }</form:option>							
 						</c:forEach>
 					</form:select>
 					<form:input type="hidden" path="subname" id="subname1" value=""/>

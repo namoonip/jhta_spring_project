@@ -53,8 +53,6 @@ public class ProfController {
 	@Autowired
 	private EnrollService enrollService;
 	
-	@Autowired
-	private PreportService preportService;
 	
 	@RequestMapping("/home")
 	public String testMain() {
@@ -71,8 +69,10 @@ public class ProfController {
 	public String syllForm(Model model, HttpSession session){
 		Professor prof = (Professor) session.getAttribute("LOGIN_USER");
 		model.addAttribute("prof", prof);
-		List<Preport> pList = preportService.getProfEnroll(prof.getId());
+		List<Enroll> pList = enrollService.getProfEnroll(prof.getId());
+		
 		model.addAttribute("pList",pList);
+		System.out.println(pList);
 		model.addAttribute("syllabusform", new Syllabusform());
 		
 		return "/prof/syllabusform";
@@ -119,6 +119,7 @@ public class ProfController {
 			System.out.println(errors.getAllErrors());
 			return "/prof/syllabusform";
 		}
+		List<Syllabus> syll = syllabusService.getAllList();
 		Syllabus syllabus = new Syllabus();
 		Subject subject = new Subject();
 		subject.setNo(syllform.getSubno());
@@ -126,6 +127,12 @@ public class ProfController {
 		Professor prof = new Professor();
 		prof.setId(syllform.getId());
 		syllabus.setProfessor(prof);
+		for(Syllabus sy : syll){
+			if(sy.getSubname().equals(syllform.getSubname())){
+				System.out.println("중복값 발생");
+				return "redirect:/prof/syllform";
+			}
+		}
 		BeanUtils.copyProperties(syllform, syllabus);
 		syllabusService.addNewSyll(syllabus);
 		return "redirect:/prof/syllinfo";
@@ -200,7 +207,14 @@ public class ProfController {
 		Subject subject = new Subject();
 		subject.setNo(enrollform.getSubjectNo());
 		enroll.setSubject(subject);
-		
+		List<Enroll> en = enrollService.enrollAllList();
+		for(Enroll e : en){
+			System.out.println(e.getSubject().getNo());
+			if(e.getSubject().getNo()==enrollform.getSubjectNo()){
+				System.out.println("중복값 발생");
+				return "redirect:/prof/addenrollform";
+			}	
+		}
 		BeanUtils.copyProperties(enrollform, enroll);
 		enrollService.addEnroll(enroll);
 		

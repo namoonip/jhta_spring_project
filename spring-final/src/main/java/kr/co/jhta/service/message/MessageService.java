@@ -17,9 +17,11 @@ public interface MessageService {
 	List<Message> getReceiveMessageAdmin(String id);
 	List<Message> getSendMessageAdmin(String id);
 	void deleteSendMessage(int dno);
+	void deleteReceiveMessage(int dno);
 	List<SiteMap> getDivisionByName(String searchWord);
 	List<Student> getStudentByCode(String code);
 	List<Subject> getSubjectByName(String searchWord);
 	List<Map<String, Object>> getStudentByNo(String subjectNo);
 	String getFilenameByNo(int messageNo);
+	void addMessageCheck(int messageNo);
 }

@@ -55,7 +55,7 @@ public class StuReportFileController {
 	@RequestMapping(value="/editReport", method=RequestMethod.GET)
 	public String editReport(@RequestParam(value="cno") int cno, Model model, Student student) {	
 		PreportContent stuReport = stuRepService.getStuReportByCnoService(cno);
-				
+		
 		PreportContentForm preportContentForm = new PreportContentForm();
 		preportContentForm.setStudent(student);
 		
@@ -65,7 +65,6 @@ public class StuReportFileController {
 		
 		return "student/report/editStuReport";
 	}
-	
 	
 	@RequestMapping(value="/editReport", method=RequestMethod.POST)
 	public String editReportPost(@Valid @ModelAttribute("preportContentForm") PreportContentForm preportContentForm,
@@ -80,37 +79,20 @@ public class StuReportFileController {
 		
 		PreportContent preportContent = new PreportContent();
 		
-		MultipartFile upfile = preportContentForm.getFile();
-		if(!upfile.isEmpty()) {
-			String filename = upfile.getOriginalFilename();
-			preportContentForm.setFilename(filename);
-			IOUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(directory, filename)));
+		System.out.println(preportContentForm.getFile());
+		if(preportContentForm.getFile() == null) {
+			
+			BeanUtils.copyProperties(preportContent, preportContentForm);
+			preportContent.setStudent(student);
+			model.addAttribute("preportContent", stuReport);
+			model.addAttribute("student", student);	
+			
+			stuRepService.updateStuReportNotFileService(preportContent);			
+			return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;			
 		}
-		MultipartFile upfile2 = preportContentForm.getFile2();
-		if(!upfile2.isEmpty()) {
-			String filename2 = upfile2.getOriginalFilename();
-			preportContentForm.setFilename2(filename2);
-			IOUtils.copy(upfile2.getInputStream(), new FileOutputStream(new File(directory, filename2)));
-		}
-		MultipartFile upfile3 = preportContentForm.getFile3();
-		if(!upfile3.isEmpty()) {
-			String filename3 = upfile3.getOriginalFilename();
-			preportContentForm.setFilename3(filename3);
-			IOUtils.copy(upfile3.getInputStream(), new FileOutputStream(new File(directory, filename3)));
-		}
-		MultipartFile upfile4 = preportContentForm.getFile4();
-		if(!upfile4.isEmpty()) {
-			String filename4 = upfile4.getOriginalFilename();
-			preportContentForm.setFilename4(filename4);
-			IOUtils.copy(upfile4.getInputStream(), new FileOutputStream(new File(directory, filename4)));
-		}
-		MultipartFile upfile5 = preportContentForm.getFile5();
-		if(!upfile5.isEmpty()) {
-			String filename5 = upfile5.getOriginalFilename();
-			preportContentForm.setFilename5(filename5);
-			IOUtils.copy(upfile5.getInputStream(), new FileOutputStream(new File(directory, filename5)));
-		}
-				
+		
+		parseFileToDb(preportContentForm.getFile(), preportContentForm);
+		
 		BeanUtils.copyProperties(preportContent, preportContentForm);
 		preportContent.setStudent(student);
 		model.addAttribute("preportContent", stuReport);
@@ -119,6 +101,87 @@ public class StuReportFileController {
 		stuRepService.updateStuReportService(preportContent);				
 		
 		return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;
+	}
+	
+	@RequestMapping(value="/editReportFile", method=RequestMethod.GET)
+	public String editReportFile(@RequestParam(value="cno") int cno, Model model, Student student) {	
+		PreportContent stuReport = stuRepService.getStuReportByCnoService(cno);
+				
+		PreportContentForm preportContentForm = new PreportContentForm();
+		preportContentForm.setStudent(student);
+		
+		model.addAttribute("preportContentForm", preportContentForm);
+		model.addAttribute("preportContent", stuReport);
+		model.addAttribute("student", student);
+		
+		return "student/report/editStuReportFile";
+	}
+	
+	
+	@RequestMapping(value="/editReportFile", method=RequestMethod.POST)
+	public String editReportFilePost(@Valid @ModelAttribute("preportContentForm") PreportContentForm preportContentForm,
+									Errors errors, Model model, Student student) throws Exception{
+		
+		
+		int eno = preportContentForm.getEno();
+		int cno = preportContentForm.getNo();
+		PreportContent stuReport = stuRepService.getStuReportByCnoService(cno);
+		System.out.println(stuReport.getFilename());
+		PreportContent preportContent = new PreportContent();	
+		if(stuReport.getFilename() == null) {
+			
+			if(preportContentForm.getFile() != null) {
+				parseFileToDb(preportContentForm.getFile(), preportContentForm);
+				
+				BeanUtils.copyProperties(preportContent, preportContentForm);
+				preportContent.setStudent(student);
+				model.addAttribute("preportContent", stuReport);
+				model.addAttribute("student", student);	
+				
+				stuRepService.updateStuReportService(preportContent);
+				
+				System.out.println("1111");
+				
+				return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;
+			} else {
+						
+				BeanUtils.copyProperties(preportContent, preportContentForm);
+				preportContent.setStudent(student);
+				model.addAttribute("preportContent", stuReport);
+				model.addAttribute("student", student);	
+				
+				stuRepService.updateStuReportNotFileService(preportContent);
+				
+				System.out.println("2222");
+				
+				return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;
+			}
+			
+		} else {
+			
+			if(preportContentForm.getFile() == null) {
+				BeanUtils.copyProperties(preportContent, preportContentForm);
+				preportContent.setStudent(student);
+				model.addAttribute("preportContent", stuReport);
+				model.addAttribute("student", student);	
+				
+				stuRepService.updateStuReportNotFileService(preportContent);
+				return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;
+				
+			} else {
+				parseFileToDb(preportContentForm.getFile(), preportContentForm);
+				
+				BeanUtils.copyProperties(preportContent, preportContentForm);
+				preportContent.setStudent(student);
+				model.addAttribute("preportContent", stuReport);
+				model.addAttribute("student", student);	
+				
+				stuRepService.updateStuReportService(preportContent);	
+				
+				return "redirect:/stud/showStuReport?cno="+cno+"&eno="+eno;
+			}
+
+		}
 	}
 	
 	@RequestMapping(value="/stuReportAfter", method=RequestMethod.POST)
@@ -132,37 +195,7 @@ public class StuReportFileController {
 		}
 		
 		PreportContent preportContent = new PreportContent();
-		
-		MultipartFile upfile = preportContentForm.getFile();
-		if(!upfile.isEmpty()) {
-			String filename = upfile.getOriginalFilename();
-			preportContentForm.setFilename(filename);
-			IOUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(directory, filename)));
-		}
-		MultipartFile upfile2 = preportContentForm.getFile2();
-		if(!upfile2.isEmpty()) {
-			String filename2 = upfile2.getOriginalFilename();
-			preportContentForm.setFilename2(filename2);
-			IOUtils.copy(upfile2.getInputStream(), new FileOutputStream(new File(directory, filename2)));
-		}
-		MultipartFile upfile3 = preportContentForm.getFile3();
-		if(!upfile3.isEmpty()) {
-			String filename3 = upfile3.getOriginalFilename();
-			preportContentForm.setFilename3(filename3);
-			IOUtils.copy(upfile3.getInputStream(), new FileOutputStream(new File(directory, filename3)));
-		}
-		MultipartFile upfile4 = preportContentForm.getFile4();
-		if(!upfile4.isEmpty()) {
-			String filename4 = upfile4.getOriginalFilename();
-			preportContentForm.setFilename4(filename4);
-			IOUtils.copy(upfile4.getInputStream(), new FileOutputStream(new File(directory, filename4)));
-		}
-		MultipartFile upfile5 = preportContentForm.getFile5();
-		if(!upfile5.isEmpty()) {
-			String filename5 = upfile5.getOriginalFilename();
-			preportContentForm.setFilename5(filename5);
-			IOUtils.copy(upfile5.getInputStream(), new FileOutputStream(new File(directory, filename5)));
-		}
+		parseFileToDb(preportContentForm.getFile(), preportContentForm);
 		
 		model.addAttribute("student", student);
 		Preport profReport = stuRepService.getProfReportByPnoService(rno);
@@ -206,5 +239,14 @@ public class StuReportFileController {
 		mav.setView(filedownloadView);		
 		return mav;
 	}
+	
+	public void parseFileToDb(MultipartFile upfile, PreportContentForm preportContentForm) throws Exception {
+		if(!upfile.isEmpty()) {
+			String filename = upfile.getOriginalFilename();
+			preportContentForm.setFilename(filename);
+			IOUtils.copy(upfile.getInputStream(), new FileOutputStream(new File(directory, filename)));
+		}
+	}
+	
 	
 }

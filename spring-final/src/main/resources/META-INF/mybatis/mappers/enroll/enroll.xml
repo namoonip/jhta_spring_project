@@ -168,4 +168,14 @@
   		where
   			 e_no = #{value}
 	</delete>
+	<select id="enrollAllList" resultType="Enroll">
+		select 
+			E_ENROLLDAY as enrollDay,
+			E_ENROLLNUM as enrollNum,
+			E_ENROLLTIME as enrollTime,
+			E_J_SUBJECT_NO as "subject.no",
+			E_NO as no
+		from
+			E_ENROLLMENT;	
+	</select>
 </mapper>

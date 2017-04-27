@@ -12,8 +12,10 @@ public class StudentForm {
 	@NotNull
 	private String addr1;
 	
-	@NotNull
 	private String addr2;
+	@NotNull
+	private String addr3;
+	private int zipcode;
 	
 	@NotNull
 	@Pattern(regexp="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", message="올바른 이메일 형식을 입력하세요")
@@ -45,9 +47,11 @@ public class StudentForm {
 	private String register;
 	private int score;
 	private String professor;
+	private int remainLeave;
 	private int maxOneScore;
 	private int nowScore;
-	
+	private String tName;
+	private String cName;
 	
 	public StudentForm() {
 		super();
@@ -183,6 +187,46 @@ public class StudentForm {
 
 	public void setNowScore(int nowScore) {
 		this.nowScore = nowScore;
+	}
+
+	public String getAddr3() {
+		return addr3;
+	}
+
+	public void setAddr3(String addr3) {
+		this.addr3 = addr3;
+	}
+
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public int getRemainLeave() {
+		return remainLeave;
+	}
+
+	public void setRemainLeave(int remainLeave) {
+		this.remainLeave = remainLeave;
+	}
+
+	public String gettName() {
+		return tName;
+	}
+
+	public void settName(String tName) {
+		this.tName = tName;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 	
 	

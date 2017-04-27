@@ -102,7 +102,7 @@ input:-webkit-autofill {
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarsubject.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<form id="mail-form" method="post" action="adminsendprocess" enctype="multipart/form-data">
 		<div class="row" style="margin-bottom: 15px;">

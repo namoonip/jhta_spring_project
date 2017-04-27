@@ -31,6 +31,14 @@ $(function() {
 			return false;
 		}
 	});
+	
+	$(".check-message").click(function() {
+		var messageNo = $(this).attr("data-target").replace("#modal-", "");
+		
+		$.get("addmessagecheck", {messageNo: messageNo}, function(data) {
+			console.log(data);
+		}, "json")
+	});
 })
 </script>
 </head>
@@ -38,7 +46,7 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
 <%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
-	<form method="post" action="">
+	<form method="get" action="deletereceivemessage">
 		<div class="row" style="margin-bottom: 15px;">
 			<div class="col-sm-12">
 				<div class="btn-group">
@@ -86,19 +94,19 @@ $(function() {
 							</th>
 							<th>보낸사람</th>
 							<th>제목</th>
-							<th>보낸시간</th>
-							<th>상대방 확인시간</th>
+							<th>첨부파일</th>
+							<th>보낸날짜</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${messageList }" var="message">
-						<c:if test="${message.isDeletedBySender ne 'Y'.charAt(0) }">
+						<c:if test="${message.isDeletedByReceiver ne 'Y'.charAt(0) }">
 						<tr>
 							<td>
 								<input type="checkbox" name="dnoList" value="${message.no }">
 							</td>
 							<td>${message.receiver }</td>
-							<td><a style="cursor: pointer;" data-toggle="modal" data-target="#modal-${message.no }">${message.title }</a></td>
+							<td><a style="cursor: pointer;" data-toggle="modal" data-target="#modal-${message.no }" class="check-message">${message.title }</a></td>
 							<td><a href="messagedownload?no=${message.no }">${message.filename }</a></td>
 							<td><fmt:formatDate value="${message.sendTime }" pattern="M/dd"/></td>
 						</tr>

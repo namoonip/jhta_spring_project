@@ -6,6 +6,9 @@ import java.util.Map;
 import kr.co.jhta.vo.stu.Student;
 
 public interface StudentDao {
+	
+	Student getStudentALLById(String id);
+	
 	void addNewStudent(Student stud);
 	List<Student> getAllStudent();
 	Student getStudentById(String id);

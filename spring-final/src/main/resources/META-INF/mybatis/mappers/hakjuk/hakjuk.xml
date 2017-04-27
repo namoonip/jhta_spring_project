@@ -3,6 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.hakjuk.HakjukDAO">
+	<select id="getSiteMapByName" parameterType="string" resultType="kr.co.jhta.vo.SiteMap">
+		SELECT 
+			T_NO as no, 
+			T_NAME as name,
+			T_CODE as code,
+			T_PRECODE as preCode
+		FROM T_SITEMAP
+		where t_name = #{name}
+	</select>
+	<update id="updateStudent" parameterType="kr.co.jhta.vo.stu.AddStudentForm">
+		update
+			u_student
+		set
+			U_STU_NAME = #{name},
+			U_STU_SSN = #{ssn},
+			U_STU_DIVISION = #{division},
+			U_STU_GRADE = #{grade},
+			U_STU_PROFESSOR = #{professor},
+			U_STU_PHONE = #{phone},
+			U_STU_EMAIL = #{email},
+			U_STU_ADDR1= #{addr1},
+			U_STU_ADDR2= #{addr2},
+			U_STU_PARENTNAME = #{parentName},
+			U_STU_PARENTPHONE = #{parentPhone}
+		where
+			u_stu_id = #{id}
+	</update>
+	
+	<update id="updateProfessor" parameterType="kr.co.jhta.vo.hakjuk.AddProfForm">
+		update
+			u_professor
+		set
+			U_PROF_NAME = #{name},
+			U_PROF_SSN = #{ssn},
+			U_PROF_DIVISION = #{division},
+			U_PROF_CODE = #{code},
+			U_PROF_GRADE = #{grade},
+			U_PROF_PHONE = #{phone},
+			U_PROF_EMAIL = #{email},
+			U_PROF_ADDR = #{addr}
+		where
+			U_PROF_ID = #{id}
+	</update>
+
+	<insert id="addAdmissions" parameterType="kr.co.jhta.vo.stu.Student">
+		insert into A_ADMISSIONS(A_NO ,A_REGISTER, A_APPLY_DATE, A_ID)
+		values(a_admission_seq.nextval,#{register},SYSDATE, #{no})
+	</insert>
+
 
 	<select id="getStudentListBySearchStud" parameterType="kr.co.jhta.vo.hakjuk.StudentSearchForm" resultType="Student">
 		select
@@ -34,7 +83,7 @@
 			and C.c_code LIKE '%' || #{register} || '%'
 		</if>
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="grade != 0">
 			and U_STU_GRADE = #{grade}
@@ -101,6 +150,35 @@
 		and u_stu_professor = u_prof_id
 		and u_stu_id = #{id}
 	</select>
+	<select id="getStudentByIdsecond" resultType="Student" parameterType="string">
+		select U_STU_NO as no, 
+				U_STU_ADDR1 as addr1, 
+				U_STU_ADDR2 as addr2,
+				U_STU_DIVISION,
+				t_name as division, 
+				U_STU_EMAIL as email, 
+				U_STU_ENTERDATE as enterDate, 
+				U_STU_GENDER as gender, 
+				U_STU_GRADE as grade,
+				U_STU_ID as id, 
+				U_STU_LEAVEDATE as leaveDate, 
+				U_STU_NAME as name, 
+				U_STU_NO as no, 
+				U_STU_PARENTNAME as parentName, 
+				U_STU_PARENTPHONE as parentPhone, 
+				U_STU_PHONE as phone, 
+				U_prof_id as professor, 
+				U_STU_PWD as pwd, 
+				C_NAME as register, 
+				U_STU_SCORE as score, 
+				U_STU_SSN as ssn,
+				U_STU_REMAINLEAVE as remainLeave
+		from U_STUDENT a, t_sitemap b, C_CODEREGISTER C,u_professor d
+		where a.u_stu_division = b.t_code
+		and a.u_stu_register = c.c_code
+		and u_stu_professor = u_prof_id
+		and u_stu_id = #{id}
+	</select>
 	
 	<select id="getAllAdmissionStud" resultType="Student">
 		select U_STU_NO as no, 
@@ -121,14 +199,15 @@
 				U_STU_PHONE as phone, 
 				U_STU_PROFESSOR as professor, 
 				U_STU_PWD as pwd, 
-				c_name as register, 
+				a_register as register, 
 				U_STU_SCORE as score, 
 				U_STU_SSN as ssn,
 				U_STU_REMAINLEAVE as remainLeave
-		from U_STUDENT a, t_sitemap b, C_CODEREGISTER C
+				
+		from U_STUDENT a, t_sitemap b, C_CODEREGISTER C,A_ADMISSIONS d
 		where a.u_stu_division = b.t_code
 		and a.u_stu_register = c.c_code
-		and u_stu_register in ('AD1000', 'AD2000')
+		and d.a_id = a.U_stu_no
 	</select>
 	
 	<select id="getAllProfessor" resultType="Professor">
@@ -216,7 +295,7 @@
 			and	U_PROF_REGISTER = #{register} 
 		</if>
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="grade != 'all'">
 			and u_prof_grade = #{grade}
@@ -245,21 +324,18 @@
 				U_STU_PHONE as phone, 
 				U_STU_PROFESSOR as professor, 
 				U_STU_PWD as pwd, 
-				c_name as register, 
+				d.a_register as register, 
 				U_STU_SCORE as score, 
 				U_STU_SSN as ssn
-				
-		from U_STUDENT a, t_sitemap b,C_CODEREGISTER C
+		from U_STUDENT a, t_sitemap b,C_CODEREGISTER C,A_ADMISSIONS d
 		where a.u_stu_division = b.t_code
 		and a.u_stu_register = c.c_code
+		and d.a_id = a.U_stu_no
 		<if test="register != 'all'">
-			and u_stu_register = #{register}
-		</if>
-		<if test="register == 'all'">
-			and u_stu_register in ('AD1000', 'AD2000')
+			and a_register = #{register}
 		</if>
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="grade != 00">
 			and SUBSTR(u_stu_id, 1, 2) = #{grade}
@@ -318,7 +394,7 @@
 			and d.c_code = #{register}
 		</if>
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -374,7 +450,7 @@
 			and d.c_code = #{register}
 		</if>
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -565,7 +641,7 @@
 		and 
 			a.r_pass='false'
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -594,7 +670,7 @@
 		and 
 			a.r_pass='true'
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} = '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -610,7 +686,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE
@@ -631,7 +708,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE
@@ -642,7 +720,7 @@
 		and
 			D_PASS = 'false'
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -658,7 +736,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE
@@ -698,7 +777,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE
@@ -720,7 +800,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE
@@ -731,7 +812,7 @@
 		and
 			D_PASS != 'false'
 		<if test="q != '' ">
-			and  ${sort} = #{q}
+			and  ${sort} LIKE '%' || #{q} || '%'
 		</if>
 		<if test="division != '' ">
 			and b.U_STU_DIVISION = #{division}
@@ -747,7 +828,8 @@
 			D_ENROLLDATE as enrollDate,
 			c.T_NAME as "student.division",
 			b.U_STU_ID as "student.id",
-			b.U_STU_name as "student.name"
+			b.U_STU_name as "student.name",
+			d_reason as reason
 		FROM D_DROPOFF a,  U_STUDENT b, T_SITEMAP c,C_CODEREGISTER d
 		WHERE
 			a.D_code = d.C_CODE

@@ -160,6 +160,15 @@
 			p_no = #{dno}
 	</update>
 	
+	<update id="deleteReceiveMessage" parameterType="int">
+		update
+			p_message
+		set
+			p_isdeletedbyreceiver = 'Y'
+		where
+			p_no = #{dno}
+	</update>
+	
 	<select id="getReceiveMessageAdmin" parameterType="string" resultType="kr.co.jhta.vo.Message">
 		select
 			p_no as no,
@@ -214,5 +223,15 @@
 		where
 			p_no = #{no}
 	</select>
+	
+	<update id="addMessageCheck"  parameterType="int">
+		update
+			p_message
+		set
+			p_checktime = sysdate
+		where
+			p_no = #{messageNo}
+			and p_checktime is null
+	</update>
 	
 </mapper>

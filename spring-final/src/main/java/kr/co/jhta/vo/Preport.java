@@ -14,7 +14,14 @@ public class Preport {
 	private Date prost;
 	private Date proend;
 	private String upfile;
+	private Score score;
 	
+	public Score getScore() {
+		return score;
+	}
+	public void setScore(Score score) {
+		this.score = score;
+	}
 	public String getUpfile() {
 		return upfile;
 	}
@@ -72,8 +79,11 @@ public class Preport {
 	@Override
 	public String toString() {
 		return "Preport [no=" + no + ", enroll=" + enroll + ", content=" + content + ", title=" + title + ", professor="
-				+ professor + ", subject=" + subject + ", prost=" + prost + ", proend=" + proend + "]";
+				+ professor + ", subject=" + subject + ", prost=" + prost + ", proend=" + proend + ", upfile=" + upfile
+				+ ", score=" + score + "]";
 	}
+	
+	
 	
 	
 }

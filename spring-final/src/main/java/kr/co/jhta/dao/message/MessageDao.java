@@ -20,9 +20,11 @@ public interface MessageDao {
 	List<Message> getReceiveMessageAdmin(String id);
 	List<Message> getSendMessageAdmin(String id);
 	void deleteSendMessage(int dno);
+	void deleteReceiveMessage(int dno);
 	List<SiteMap> getDivisionByName(String name);
 	List<Student> getStudentByCode(String code);
 	List<Subject> getSubjectByName(String name);
 	List<Map<String, Object>> getStudentByNo(String sno);
 	String getFilenameByNo(int no);
+	void addMessageCheck(int no);
 }

@@ -36,6 +36,7 @@
 		<typeAlias alias="Preport" type="kr.co.jhta.vo.Preport"/>
 		<typeAlias alias="LectureRatingScore" type="kr.co.jhta.vo.LectureRatingScore"/>
 		<typeAlias alias="Disenroll" type="kr.co.jhta.vo.appli.Disenrollment"/>
+		<typeAlias alias="MakeupLessonAll" type="kr.co.jhta.vo.MakeupLessonAll"/>
 	</typeAliases>
 	
 	<mappers>
@@ -69,6 +70,8 @@
 		<mapper resource="META-INF/mybatis/mappers/lecture/SupplementAryLecture.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/report/report.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/application/disenroll.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/application/dropoff.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/lecture/makeuplesson.xml"/>
 		<!-- <mapper resource="META-INF/mybatis/mappers/messege.xml"/> -->
 	</mappers>
 </configuration>

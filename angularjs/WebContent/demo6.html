@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="resources/bootstrap/bootstrap.min.css" />
+<script type="text/javascript" src="resources/angular/angular.min.js"></script>
+<script type="text/javascript" src="directives/my.js"></script><!-- angularJS 아래에 있어야 한다. -->
+<script type="text/javascript">
+	var app = angular.module("myApp", ["otherModule"]);/* 다른 곳에서 정의한 모듈을 사용한다고 선언 */
+	app.controller("memberCtrl", function($scope) {
+		$scope.members = [
+			{username: '홍길동', email:"hong@naver.com"},
+			{username: '김유신', email:"kim@naver.com"},
+			{username: '강감찬', email:"kang@naver.com"}			
+		];		
+	});
+	
+	app.controller("bookCtrl", function($scope) {
+		$scope.books = [
+			{title: '이것이 자바다', price:35000, publisher:"도우출판"},
+			{title: '자바의 정석', price:30000, publisher:"한빛미디어"},
+			{title: '알기쉬운 자료구조', price:25000, publisher:"인사이트 출판사"}			
+		];
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	
+		<div class="col-ms-5" ng-controller="memberCtrl">
+			<h3>멤버 리스트</h3>
+			
+			<div a-b c="members" d="username">
+			</div>
+		</div>
+			
+		<div class="col-ms-5" ng-controller="bookCtrl">
+			<h3>책 리스트</h3>
+			
+			<div a-b c="books" d="title">
+			</div>
+		</div>
+			
+	</div>
+</div>
+</body>
+</html>

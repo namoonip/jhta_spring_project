@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -255,6 +256,13 @@ $(function() {
 							</c:otherwise>
 						</c:choose>
 					</th>	
+				</tr>
+				<% pageContext.setAttribute("newLineChar", "\n"); %>
+				<tr>
+					<th>자퇴 사유</th>
+					<td colspan="9">
+						<p>${fn:replace(drop.reason, newLineChar, "<br/>")}</p>
+					</td>
 				</tr>
 			</tbody>      	
       	</table>

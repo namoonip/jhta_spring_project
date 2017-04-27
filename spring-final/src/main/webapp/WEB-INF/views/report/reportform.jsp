@@ -21,7 +21,7 @@
 		<h1>새 과제등록하기</h1>
 		<hr class="one">
 		<div class="row well">
-			<form:form method="post" action="/jhta/prof/report/reportform" modelAttribute="reportform">
+			<form:form method="post" action="/jhta/prof/report/reportform" modelAttribute="reportform" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>강의 선택</label>
 					<form:select path="enrollno" cssClass="form-control" selected="">
@@ -51,7 +51,7 @@
 				</div>
 				<div class="form-group">
 					<label>과제제출 종료일</label>
-					<form:input type="file" path="upfile" cssClass="form-control" value=""/>
+					<form:input type="file" path="file" cssClass="form-control" value=""/>
 				</div>
 
 				

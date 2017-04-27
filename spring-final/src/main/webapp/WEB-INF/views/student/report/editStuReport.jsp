@@ -55,25 +55,6 @@ $(function() {
 	
 	$("#input-content").text($("#content").text());
 	
-	$(".deleteFile").on("click", function() {
-		
-		var filename = $(this).text();
-		var cno = $("#input-Cno").val();	
-		
-		/* $.ajax({
-			type:"POST",
-			url:"deleteReportFile/"+ cno + "/" + filename,
-			dataType:"json",
-			success:function(data) {
-				if(data == "success") {
-					$(this).parent().css("display","none");						
-				} 
-			}
-		});  */
-
-		console.log($("#file").attr("path"));
-	});
-	
 })
 </script>
 <style type="text/css">
@@ -92,7 +73,6 @@ $(function() {
          <h4><span class="glyphicon glyphicon-th-list"></span>Report</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
-      
       <div class="row">
 	      <form:form action="editReport" method="POST"  modelAttribute="preportContentForm" enctype="multipart/form-data">
 		      <input type="hidden" name="eno" value="${preportContent.enroll.no}" />
@@ -147,22 +127,7 @@ $(function() {
 		      		<tr>
 		      			<th>파일첨부</th>
 		      			<td colspan="3">
-		      				<c:if test="${preportContent.filename ne null}">
-		      					<a class="btn btn-default btn-sm"><span class="deleteFile glyphicon glyphicon-remove" aria-hidden="true"">${preportContent.filename }</span></a>
-		      				</c:if>      				
-		      				<c:if test="${preportContent.filename2 ne null}">
-		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename2 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-		      				</c:if>      				
-		      				<c:if test="${preportContent.filename3 ne null}">
-		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename3 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-		      				</c:if>      				
-		      				<c:if test="${preportContent.filename4 ne null}">
-		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename4 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-		      				</c:if>      				
-		      				<c:if test="${preportContent.filename5 ne null}">
-		      					<a class="btn btn-default btn-sm"><span class="deleteFile">${preportContent.filename5 }</span> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-		      				</c:if>
-	      					<form:input type="file" cssClass="form-control" path="file" id="file"/>
+			      			<form:input type="file" cssClass="form-control" path="file" id="file"/>      					
 		      			</td>
 		      		</tr>
 		      		<tr>

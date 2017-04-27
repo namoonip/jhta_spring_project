@@ -8,8 +8,11 @@
         <link type="text/css" rel="stylesheet" href="resources/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="resources/material/material.min.css">
-        <script src="resources/material/material.min.js"></script>
+        <link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script type="text/javascript" src="resources/jquery/jquery-3.2.0.min.js"></script>
         <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 
@@ -1345,7 +1348,7 @@
 				<hr />
 				<div class="row" style="height: 30px"></div>
 				<div class="row">
-					<h4>&nbsp;&nbsp;&nbsp;휴강 취소</h4>
+					<h4>&nbsp;&nbsp;&nbsp;최근 신청한 강의</h4>
 					<div class="wrap_table">
 						<div align="center">
 							<table>
@@ -1372,7 +1375,7 @@
 					</div>
 				</div>
 				<hr />
-				<h4>휴강 신청 쪽지 보내기</h4>
+				<h4>휴강 신청 메세지 보내기</h4>
 				<div class="row" style="margin-bottom: 15px;">
 					<div class="col-sm-12">
 						<div class="btn-group">

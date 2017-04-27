@@ -24,7 +24,7 @@ $(function() {
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarsubject.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<form method="post" action="adminregstudent" class="form-inline">
 	<div class="row">
