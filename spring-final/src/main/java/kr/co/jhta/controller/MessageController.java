@@ -49,7 +49,7 @@ public class MessageController {
 	
 	@RequestMapping("/admin/adminsendmessagebox")
 	public String adminSendEmailBox(Model model, Professor prof, @RequestParam(name="pno", defaultValue="1") int pno) {
-		List<Message> messageAllList = messageService.getReceiveMessageAdmin(prof.getId());
+		List<Message> messageAllList = messageService.getSendMessageAdmin(prof.getId());
 		
 		int totalRows = messageAllList.size();
 		PageNation pagination = new PageNation(10, pno, totalRows);
@@ -67,7 +67,7 @@ public class MessageController {
 	
 	@RequestMapping("/admin/adminrecmessagebox")
 	public String adminRecieveEmailBox(Model model, Professor prof, @RequestParam(name="pno", defaultValue="1") int pno) {
-		List<Message> messageAllList = messageService.getSendMessageAdmin(prof.getId());
+		List<Message> messageAllList = messageService.getReceiveMessageAdmin(prof.getId());
 		
 		int totalRows = messageAllList.size();
 		PageNation pagination = new PageNation(10, pno, totalRows);

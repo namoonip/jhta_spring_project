@@ -14,7 +14,8 @@ public interface SchduleEventService {
 	ScheduleEvent getSchEventBySchNoService(int schNo);
 	List<ScheduleEvent> getSchEventByDateService(int studNo, Date start, Date end);
 	void updateSchEventService(ScheduleEvent scheduleEvent);
-	void updateIsShowTrueService(ScheduleEvent schedule);
-	void updateIsShowFalseService(ScheduleEvent schedule);
+	void updateCompletedTrueService(ScheduleEvent schedule);
+	void updateCompletedFalseService(ScheduleEvent schedule);
 	void deleteSchEvent(Integer studNo, Integer schNo);
+	List<ScheduleEvent> getTodaySchEventService(int stuNo);
 }

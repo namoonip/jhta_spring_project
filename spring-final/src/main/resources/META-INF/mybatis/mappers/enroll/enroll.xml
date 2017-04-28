@@ -168,14 +168,18 @@
   		where
   			 e_no = #{value}
 	</delete>
-	<select id="enrollAllList" resultType="Enroll">
-		select 
-			E_ENROLLDAY as enrollDay,
-			E_ENROLLNUM as enrollNum,
-			E_ENROLLTIME as enrollTime,
-			E_J_SUBJECT_NO as "subject.no",
-			E_NO as no
-		from
-			E_ENROLLMENT;	
+	<select id="enrollAllList" parameterType="int" resultType="Enroll">
+		SELECT
+			E.E_ENROLLDAY as enrollDay,
+			E.E_ENROLLTIME as enrollTime,
+			J.J_NO as "subject.no"
+		FROM
+			E_ENROLLMENT E, U_PROFESSOR U, J_SUBJECT J
+		where
+			E.E_J_SUBJECT_NO = J.J_NO
+		and
+			U.U_PROF_ID = J.J_SUB_PROF
+		AND
+			U.U_PROF_NO = #{value}
 	</select>
 </mapper>

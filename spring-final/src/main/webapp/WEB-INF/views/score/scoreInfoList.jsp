@@ -28,7 +28,7 @@ th{
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<div class="row text-right">
 			홈 > 성적관리 > 성적조회 > 성적상세정보 >
@@ -37,6 +37,7 @@ th{
 			<h4><span class="glyphicon glyphicon-th-list"></span> 성적 상세정보</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
+		
 		<!-- 모달 출력 영역 -->
 		<div class="panel panel-heading">
 			<!-- Modal -->
@@ -53,32 +54,32 @@ th{
 						<thead>
 							<tr>
 								<th bgcolor="#f0fcff">
-									<label>전체 평점 평균</label>
-								</th>
-								<th bgcolor="#f0fcff">
-									<label>전체 백분율</label>
-								</th>
-								<th bgcolor="#f0fcff">
 									<label>전체 신청학점</label>
 								</th>
 								<th bgcolor="#f0fcff">
-									<label>전체 취득학점</label>
+									<label>전체 이수학점</label>
+								</th>
+								<th bgcolor="#f0fcff">
+									<label>전체 평점</label>
+								</th>
+								<th bgcolor="#f0fcff">
+									<label>전체 백분율</label>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<p><strong>${savgtotal.credit3 }</strong></p>
+									<p><strong id="t1"></strong></p>
 								</td>
 								<td>
-									<p><strong>${savgtotal.credit4 }</strong></p>
+									<p><strong id="t2"></strong></p>
 								</td>
 								<td>
-									<p><strong>${savgtotal.credit1 }</strong></p>
+									<p><strong id="t3"></strong></p>
 								</td>
 								<td>
-									<p><strong>${savgtotal.credit2 }</strong></p>
+									<p><strong id="t4"></strong></p>
 								</td>
 							</tr>
 						</tbody>
@@ -101,7 +102,7 @@ th{
 								<th>기말</th>
 							</tr>
 						</thead>
-						<tbody id="score_td_box">
+						<tbody id="score_td_box-1">
 							<c:forEach var="regilist" items="${regilist }">
 								<tr style="text-align: left;">
 									<td>${regilist.no}</td>
@@ -126,7 +127,7 @@ th{
 							<tr bgcolor="#f0fcff">
 								<th>학기</th>
 								<th>신청학점</th>
-								<th>취득학점</th>
+								<th>이수학점</th>
 								<th>평균점수</th>
 								<th>백분율점수</th>
 								<th>학사경고</th>
@@ -139,7 +140,7 @@ th{
 								<th>학.기</th>
 							</tr>
 						</thead>
-						<tbody id="score_td_box">
+						<tbody id="score_td_box-2">
 							<c:forEach var="savg" items="${savg }">
 								<tr style="text-align: left;">
 									<td>${savg.semename }</td>
@@ -183,32 +184,32 @@ th{
 				<thead>
 					<tr>
 						<th bgcolor="#f0fcff">
-							<label>전체 평점 평균</label>
-						</th>
-						<th bgcolor="#f0fcff">
-							<label>전체 백분율</label>
-						</th>
-						<th bgcolor="#f0fcff">
 							<label>전체 신청학점</label>
 						</th>
 						<th bgcolor="#f0fcff">
-							<label>전체 취득학점</label>
+							<label>전체 이수학점</label>
+						</th>
+						<th bgcolor="#f0fcff">
+							<label>전체 평점</label>
+						</th>
+						<th bgcolor="#f0fcff">
+							<label>전체 백분율</label>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<p><strong>${savgtotal.credit3 }</strong></p>
+							<p><strong id="t11"></strong></p>
 						</td>
 						<td>
-							<p><strong>${savgtotal.credit4 }</strong></p>
+							<p><strong id="t22"></strong></p>
 						</td>
 						<td>
-							<p><strong>${savgtotal.credit1 }</strong></p>
+							<p><strong id="t33"></strong></p>
 						</td>
 						<td>
-							<p><strong>${savgtotal.credit2 }</strong></p>
+							<p><strong id="t44"></strong></p>
 						</td>
 					</tr>
 				</tbody>
@@ -223,7 +224,7 @@ th{
 						<th>학기</th>
 						<th>과목명</th>
 						<th>이수구분</th>
-						<th>학점</th>
+						<th>이수학점</th>
 						<th>등급</th>
 						<th>과제</th>
 						<th>출석</th>
@@ -232,7 +233,7 @@ th{
 						<th>수정</th>
 					</tr>
 				</thead>
-				<tbody id="score_td_box">
+				<tbody id="score_td_box-3">
 					<c:forEach var="regilist" items="${regilist }">
 						<tr style="text-align: left;">
 							<td>${regilist.no}</td>
@@ -247,7 +248,7 @@ th{
 							<td>${regilist.score.attScore}</td>
 							<td>${regilist.score.midtermScore}</td>
 							<td>${regilist.score.endtermScore}</td>
-							<td><a href="scoreform.do?sno=${regilist.score.no }"class="btn btn-primary btn-xs">수정</a></td>
+							<td><a href="scoreform.do?sno=${regilist.score.no }&psco=${regilist.subject.score}" class="btn btn-primary btn-xs">수정</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -258,7 +259,7 @@ th{
 					<tr bgcolor="#f0fcff">
 						<th>학기</th>
 						<th>신청학점</th>
-						<th>취득학점</th>
+						<th>이수학점</th>
 						<th>평균점수</th>
 						<th>백분율점수</th>
 						<th>학사경고</th>
@@ -271,7 +272,7 @@ th{
 						<th>학.기</th>
 					</tr>
 				</thead>
-				<tbody id="score_td_box">
+				<tbody id="score_td_box-4">				
 					<c:forEach var="savg" items="${savg }">
 						<tr style="text-align: left;">
 							<td>${savg.semename }</td>
@@ -296,6 +297,7 @@ th{
 							<td>${savg.pass7 }</td>
 						</tr>
 					</c:forEach>
+					
 				</tbody>
 			</table>
 		</div>
@@ -303,10 +305,46 @@ th{
 			<div class="text-right">
 				<a href="scorelist.do" class="btn btn-info">메인</a>
 				<a href="attinfolist.do?stuno=${stuinfo.no }" class="btn btn-primary">출석</a>
-				<!-- <button class="btn btn-success" type="button" id="scoreprint">엑셀</button> -->
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">엑셀</button>
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+$(function() {
+	var $list_tbody = $("#score_td_box-4");
+	
+	var rowCount = $list_tbody.find("tr").length;
+	
+	var totalCredit1 = 0;
+	$("#score_td_box-4 td:nth-child(13n+2)").each(function(index, item) {
+		totalCredit1 += parseInt($(item).text());
+	});
+	var totalCredit2 = 0;
+	$("#score_td_box-4 td:nth-child(13n+3)").each(function(index, item) {
+		totalCredit2 += parseInt($(item).text());
+	});
+	var totalCredit3 = 0;
+	$("#score_td_box-4 td:nth-child(13n+4)").each(function(index, item) {
+		totalCredit3 += parseInt($(item).text());
+	});
+	var totalCredit4 = 0;
+	$("#score_td_box-4 td:nth-child(13n+5)").each(function(index, item) {
+		totalCredit4 += parseInt($(item).text());
+	});
+	
+	var t1= totalCredit1;
+	var t2= totalCredit2;
+	var t3= (totalCredit3/rowCount).toFixed(2);
+	var t4= (totalCredit4/rowCount).toFixed(2);
+	$("#t1").text(t1);
+	$("#t11").text(t1);
+	$("#t2").text(t2);
+	$("#t22").text(t2);
+	$("#t3").text(t3);
+	$("#t33").text(t3);
+	$("#t4").text(t4);
+	$("#t44").text(t4);
+})
+</script>
 </html>

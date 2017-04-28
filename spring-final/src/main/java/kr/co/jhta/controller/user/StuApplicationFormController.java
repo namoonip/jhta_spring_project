@@ -32,7 +32,9 @@ public class StuApplicationFormController {
 	@RequestMapping(value="/leave", method=RequestMethod.GET)
 	public String stuLeave(Model model, Student student, HttpServletResponse response) throws Exception {
 		// 기본 정보 담기
+		System.out.println(student);
 		Student stud = stuService.getStudentALLByIdService(student.getId());
+		System.out.println(stud);
 		if(!(stud.getRegister().equals("AD3000"))){ // 휴학자가 아니거나 재학생이 아닐경우 휴학신청 란에 들어오지 못한다.
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -77,9 +79,6 @@ public class StuApplicationFormController {
 		
 		return "/student/applications/dropoffForm";
 	}
-	
-	
-	
 	
 	// 학적상태를 학생 번호와 C코드를 받아 반환한다.
 	public String getTnameInController(Student student) {

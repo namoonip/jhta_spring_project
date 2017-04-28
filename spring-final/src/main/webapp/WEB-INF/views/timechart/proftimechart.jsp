@@ -76,10 +76,9 @@
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px;">
 		<div class="row text-right">
-			홈 > 학적관리 > 입학관리 > 신입학 조회 
 		</div>
 		<div class="row">
-			<h4><span class="glyphicon glyphicon-th-list"></span> 시..간표!!</h4>
+			<h4><span class="glyphicon glyphicon-th-list"></span> 시간표!!</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
 		<div style="margin-top: 20px;"></div>

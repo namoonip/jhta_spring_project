@@ -45,13 +45,16 @@
 			console.log($("#prof1").text());
 		})
 		$("#subname1").val($("[name='subno']").find('option:selected').text());
-	
+		if($("#sylPass").val()) {
+			alert("동일한 과목명의 강의계획서가 존재합니다.");
+		}
 	})
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
+<input type="text" value="${param.sylPass }" id="sylPass"/>
 	<div class="container">
 		<h1>새 강의계획서 등록하기</h1>
 		<hr class="one">

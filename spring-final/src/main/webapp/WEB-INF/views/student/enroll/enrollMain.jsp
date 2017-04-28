@@ -7,7 +7,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <style type="text/css">
 	th { text-align: center !important;
-		vertical-align: middle !important;}
+		vertical-align: middle !important;
+		height: 51px !important;}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -62,7 +63,7 @@ $(function() {
 		<input type="hidden" value="${addFalse}" id="add-False">   
    </c:if>
     <div class="row text-right">
-         	홈
+         	홈 > 수강 신청
       </div>
       <div class="row">
          <h4><span class="glyphicon glyphicon-th-list"></span> 수강신청</h4>
@@ -93,12 +94,11 @@ $(function() {
 		</div>
       </div>
       <hr />
-      <div class="row">
+      <div class="row" style="margin: 15px;">
       	신청 목록
-      	<!-- <form action="enrollSend" method="POST"> -->
 	      	<table class="table table-bordered">
 	      		<colgroup>
-	      			<col width="10%" />
+	      			<col width="13%"/>
 	      			<col width="8%" />
 	      			<col width="8%" />
 	      			<col width="*" />
@@ -131,7 +131,6 @@ $(function() {
 	      					<th>${subject.grade }</th>	<!-- 학년 -->
 	      					<th>${subject.subjectName }</th>	<!-- 과목명 -->
 	      					<th>${subject.professor.name }</th>	<!-- 담당교수 -->
-	      					<%-- ${enroll.subject.professor } --%>
 	      					<th>${subject.enroll.enrollDay }</th>	<!-- 강의 요일-->
 	      					<th>${subject.enroll.enrollTime }</th>	<!-- 강의 시간 -->
 	      					<th>${subject.score }</th>	<!-- 학점 -->
@@ -172,16 +171,14 @@ $(function() {
 	      			</c:forEach>
 	      		</tbody>
 	      	</table>
-	     <!-- </form> -->
 	      </div>
 	      <div>
 	      <hr />
-	      <div class="row">
-	      <!-- <form action="enrollCancle" method="POST"> -->
+	      <div class="row" style="margin: 15px;">
 	      	신청 현황
 	      	<table class="table table-bordered">
 	      		<colgroup>
-	      			<col width="10%" />
+	      			<col width="13%" />
 	      			<col width="8%" />
 	      			<col width="8%" />
 	      			<col width="*" />
@@ -189,9 +186,8 @@ $(function() {
 	      			<col width="10%" />
 	      			<col width="10%" />
 	      			<col width="5%" />
-	      			<col width="6%" />
 	      			<col width="10%" />
-	      			<col width="8%" />
+	      			<col width="5%" />
 	      		</colgroup>
 	      		<thead>
 	      			<tr>
@@ -240,8 +236,8 @@ $(function() {
 	      			</c:forEach>
 	      		</tbody>
 	      	</table>
-	    <!-- </form> -->
-      	<div class="row text-center">
+      	<div class="row text-center" style="padding: 20px;">
+	      	<hr />
       		<p><font size="4;">현재 신청 학점 <span id="applyScore">${applyScore}</span> / 최대 신청 학점 <span id="maxOneScore">${student.maxOneScore}</span></font></p>
       	</div>
       </div>

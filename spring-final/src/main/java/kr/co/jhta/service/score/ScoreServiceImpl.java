@@ -137,5 +137,16 @@ public class ScoreServiceImpl implements ScoreService{
 	@Override
 	public List<String> getSemeNameByStuNo(int stno) {
 		return scoreDao.getSemeNameByStuNo(stno);
+	}
+
+	@Override
+	public List<Subject> getsubjectlistByProfId(int pid) {
+		return scoreDao.getsubjectlistByProfId(pid);
+	}
+
+	@Override
+	public List<Regisubject> getSearchScorelistByhash(HashMap<String, Object> searchcode) {
+		return scoreDao.getSearchScorelistByhash(searchcode);
 	}	
+	
 }

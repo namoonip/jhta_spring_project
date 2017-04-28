@@ -1,9 +1,10 @@
 package kr.co.jhta.service.report;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.stereotype.Controller;
 
 import kr.co.jhta.dao.report.PreportDao;
@@ -51,4 +52,12 @@ public class PreportServiceImpl implements PreportService {
 	public List<Preport> reportAllList() {
 		return preportdao.reportAllList();
 	}
+	@Override
+	public Preport getByEnoOne(int eNo, int stuNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("eNo", eNo);
+		map.put("stuNo", stuNo);
+		return preportdao.getByEnoOne(map);
+	}
+	
 }

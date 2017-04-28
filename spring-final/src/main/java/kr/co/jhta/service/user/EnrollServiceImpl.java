@@ -78,7 +78,7 @@ public class EnrollServiceImpl implements EnrollService{
 	}
 	
 	@Override
-	public List<Enroll> enrollAllList() {
-		return enrollDao.getAllEnroll();
+	public List<Enroll> enrollAllList(int no) {
+		return enrollDao.enrollAllList(no);
 	}
 }

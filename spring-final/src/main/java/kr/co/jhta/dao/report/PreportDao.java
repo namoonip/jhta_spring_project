@@ -1,9 +1,9 @@
 package kr.co.jhta.dao.report;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.jhta.vo.Preport;
-import kr.co.jhta.vo.PreportContent;
 
 public interface PreportDao {
 	void addreport(Preport preport);
@@ -15,4 +15,5 @@ public interface PreportDao {
 	void deleteReport(int no);
 	String getAttchFileName(int no);
 	List<Preport> reportAllList();
+	Preport getByEnoOne(Map<String, Object> map);
 }

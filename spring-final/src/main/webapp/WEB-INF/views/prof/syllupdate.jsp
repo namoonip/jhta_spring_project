@@ -80,7 +80,7 @@
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 	<div class="container">
 		<h1>강의계획서 수정</h1>

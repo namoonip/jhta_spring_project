@@ -20,7 +20,7 @@ public class ReportAjaxController {
 	StuReportService stuRepService;
 	
 	@PostMapping(path="/deleteReportFile/{cno}")
-	public @ResponseBody Map deleteFilename(@PathVariable("cno") int cno) {
+	public @ResponseBody Map<String, Object> deleteFilename(@PathVariable("cno") int cno) {
 		stuRepService.deleteFilenameService(cno);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Success", "Success");

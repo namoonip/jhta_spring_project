@@ -11,12 +11,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	$("#profno1").hide();
+	$(function(){
+		$("#profno1").hide();
+		if($("#reportPass").val()) {
+			alert("동일한 과목의 과제가 존재합니다.");
+		}
+	})
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
+<input type="text" value="${param.reportPass }" id="reportPass"/>
 	<div class="container">
 		<h1>새 과제등록하기</h1>
 		<hr class="one">

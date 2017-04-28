@@ -144,4 +144,25 @@
 		FROM P_REPORt
 		WHERE P_NO = #{value}
 	</select>	
+	<select id="getByEnoOne" parameterType="map" resultType="Preport">
+		SELECT
+			DISTINcT S.S_SCORE_NO as "score.no",
+			J.J_SCORE as "subject.score"
+		FROM
+			R_REGISUBJECT R, U_STUDENT U, S_SCORE S, P_REPORT T, P_REPORTCONTENT P, J_SUBJECT J
+		where
+			R.U_STU_NO = U.U_STU_NO
+		and
+			S.REGISTER = R.R_REGI_NO
+		and
+			T.P_NO = P.P_P_NO
+		AND
+			U.U_STU_NO = P.P_S_NO
+		AND
+			J.J_NO = R.J_NO
+		and
+			R.E_NO = #{eNo}
+		and
+			P.P_S_NO = #{stuNo}
+	</select>
 </mapper>

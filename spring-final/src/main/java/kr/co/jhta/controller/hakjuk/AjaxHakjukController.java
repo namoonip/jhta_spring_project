@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.jhta.service.professor.ProfessorService;
 import kr.co.jhta.service.sitemap.SitemapService;
 import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.SiteMap;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AjaxHakjukController {
 	

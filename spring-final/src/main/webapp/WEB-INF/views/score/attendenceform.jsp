@@ -57,7 +57,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 	<div class="container"  style="margin-left: 250px; padding-top: 25px;">
 		<div class="row text-right">
 			홈 > 성적관리 > 성적조회 > 성적상세정보 > 출석정보

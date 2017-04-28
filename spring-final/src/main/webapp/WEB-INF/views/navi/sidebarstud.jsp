@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
-$(function() {
-	$("a.accordion-toggle").click(function() {	
-		$(".panel-collapse").not($(this)).attr("class","panel-collapse panel-switch collapse");
-	});
-})
 </script>
 	<div id="wrapper">
         <div id="sidebar-wrapper">
@@ -48,7 +43,7 @@ $(function() {
                         </a>
                         <ul id="submenu-5" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="stuReport"><i class="fa fa-caret-right"></i>과제 관리</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i>출결 관리</a></li>
+                            <li><a href="stuAttendance"><i class="fa fa-caret-right"></i>출결 관리</a></li>
                             <li><a href="studenttime"><i class="fa fa-caret-right"></i>시간표</a></li>
                         </ul>
                     </li>
@@ -93,6 +88,15 @@ $(function() {
                             <li><a href="#"><i class="fa fa-caret-right"></i>기타2</a></li>
                         </ul>
                     </li>
+                    <li>
+					     <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-9">
+					         <span class="sidebar-icon"></span><span class="sidebar-title">커뮤니티 관리</span>
+					         <b class="caret"></b>
+					     </a>
+					     <ul id="submenu-9" class="panel-collapse collapse panel-switch" role="menu">
+					         <li><a href="sturecmessagebox"><i class="fa fa-caret-right"></i>쪽지 관리</a></li>
+					     </ul>
+					 </li>
                 </ul>
             </aside>            
         </div>

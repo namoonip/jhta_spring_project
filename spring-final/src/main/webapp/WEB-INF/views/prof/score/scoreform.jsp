@@ -17,22 +17,25 @@ $(function() {
 		var rep = $("#reportBox").val() * 0.1;
 		var mid = $("#midBox").val() * 0.3;
 		var end = $("#endBox").val() * 0.3;
+		var pass =$("#pasco").val();
+		
 		var total  = att+rep+mid+end;
+		
 		alert(total);
 		if(total >= 90){
-			$("#creditBox").val(3);
+			$("#creditBox").val(pass);
 			$("#gradeBox").val('A');
 		}
 		if(90>total && total>= 80){
-			$("#creditBox").val(2);
+			$("#creditBox").val(pass);
 			$("#gradeBox").val('B');
 		}
 		if(80>total && total>= 70){
-			$("#creditBox").val(1);
+			$("#creditBox").val(pass);
 			$("#gradeBox").val('C');
 		}
 		if(70>total && total>= 60){
-			$("#creditBox").val(1);
+			$("#creditBox").val(pass);
 			$("#gradeBox").val('D');
 		}
 		if(60 > total){
@@ -50,6 +53,7 @@ $(function() {
 	<h3>성적 수정</h3>
 	<hr style="border:solid 0.5px #2C7BB5;">
 		<div class="row">
+			<input type="hidden" value=${psco } id="pasco">
 			<form:form class="form-group" action="scoreform.do" method="post" modelAttribute="scoreupdate">
 				<form:input path="no" cssClass="form-control" value="${score.no }" type="hidden"/>
 				<div class="form-group">
@@ -87,7 +91,7 @@ $(function() {
 				</div>
 				<div class="text-right">
 					<button type="submit" class="btn btn-primary" id="score_btn">등록</button>
-					<a href="profscorelist.do" class="btn btn-danger">취소</a>
+					<a href="profscorelist" class="btn btn-danger">취소</a>
 				</div>
 			</form:form>
 		</div>

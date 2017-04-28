@@ -47,7 +47,6 @@
 				U_STU_NOWSCORE as nowScore,
 				c_name as cName,
 				t_name as tName
-				
 		from U_STUDENT a, t_sitemap b, c_coderegister c, u_professor d
 		where U_STU_ID = #{id}
 		and

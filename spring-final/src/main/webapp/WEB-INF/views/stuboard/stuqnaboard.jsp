@@ -38,6 +38,12 @@
 			$('#search-form').submit();
 		});
 		
+		var error = $('#err').val();
+		if (error) {
+			alert('수강신청을 먼저 해주세요.');
+			history.back();
+		}
+		
 	});
 </script>
 </head>
@@ -117,6 +123,7 @@
 		<input type="hidden" name="display"  value="10">
 		<input type="hidden" name="subjectNo" value="">
 	</form>
+	<input type="hidden" id="err" value=${err eq 'error' }>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
 </html>

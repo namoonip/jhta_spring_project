@@ -11,10 +11,21 @@ import kr.co.jhta.service.supplementLecture.SupplementLectureService;
 import kr.co.jhta.vo.SupplementLectureTableVo;
 
 @Controller
+@RequestMapping("/admin")
 public class SupplementLectureController {
 
 	@Autowired
 	private SupplementLectureService supplementLectureService;
+	
+	
+	@RequestMapping("/supplementmakeuplesson.do")
+	public String supplementMakeupLessonView(){
+		
+		return "supplementarylecture/supplementmakeuplessonmain";
+	}
+	
+	
+	
 	
 	
 	//휴강 페이지 띄우기

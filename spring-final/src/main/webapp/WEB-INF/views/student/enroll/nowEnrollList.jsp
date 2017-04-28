@@ -5,31 +5,6 @@
 <html lang="ko">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	$("#select-dept").change(function() {
-		var dept = $(this).val();
-		
-		if(dept=="") {
-			$("#select-major").empty();
-			return false;
-		}
-		
-		$.ajax({
-			url: "enrollSubjectSearch?dept=" + dept,
-			dataType: "json",
-			type: "POST",
-			success: function(data) {
-				$("#select-major").empty();
-				
-				for (var i=0; i<data.length; i++) {
-					$("#select-major").append("<option value="+data[i].code+">"+data[i].name+"</option>");
-				}
-			}
-		});
-	});
-})
-</script>
 <style type="text/css">
 	th { text-align: center !important;
 		vertical-align: middle !important;}
@@ -40,38 +15,13 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
     <div class="row text-right">
-         	수강 과목
+         	홈 > 수강 과목
       </div>
       <div class="row">
          <h4><span class="glyphicon glyphicon-th-list"></span> 수강 과목</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
-      <div class="row">
-		<div style="padding-top: 20px;" class="text-center form-group">
-			<form method="post" action="enrollMain" >
-				<select class="w3-select w3-border" name="option1" style="width: 8%; height: 37px;">
-					<option value="gradeAll">전체</option>
-					<option value="grade1">1 학년</option>
-					<option value="grade2">2 학년</option>
-					<option value="grade3">3 학년</option>
-					<option value="grade4">4 학년</option>
-				</select>
-				<select class="w3-select w3-border" name="dept" id="select-dept" style="width: 16%; height: 37px;">
-					<option value="">학부</option>
-					<c:forEach items="${deptList }" var="dept">
-						<option value="${dept.code }">${dept.name }</option>
-					</c:forEach>
-				</select>
-				<select class="w3-select w3-border" name="select-major" id="select-major" style="width: 16%; height: 37px;">
-					<option value="siteAll">전공</option>
-				</select>
-				<input type="text" name="searchInput" style="width: 30%; height: 37px;"/>
-				<button type="submit" class="" style="background-color: gray; height:30px; width:70px;">검색</button>	
-			</form>
-		</div>
-      </div>
-      <hr />
-         <div class="row">
+         <div class="row" style="margin: 10px;">
 	      <!-- <form action="enrollCancle" method="POST"> -->
 	      	<table class="table table-bordered">
 	      		<colgroup>
@@ -113,19 +63,19 @@ $(function() {
 	      					<th>${regisub.subject.passed.passedName }</th>
 	      					<th>${regisub.subject.grade }</th>	<!-- 학년 -->
 	      					<th>${regisub.subject.professor.name }</th>	<!-- 담당교수 -->
-	      					<%-- ${enroll.subject.professor } --%>
 	      					<th>${regisub.enroll.enrollTime }</th>	<!-- 강의 시간 -->
 	      					<th>${regisub.enroll.enrollDay }</th>	<!-- 강의 요일-->
 	      					<th>X</th>	<!-- 재수강 여부 -->
 	      					<th>${regisub.subject.score }</th>	<!-- 학점 -->
-	      					<th><a href="" class="btn btn-default">출 력</a></th>
+	      					<th><a href="/downloadPDF" class="btn btn-default">출 력</a></th>
 	      				</tr>
 	      			</c:forEach>
 	      		</tbody>
 	      	</table>
 	    <!-- </form> -->
-      	<div class="row text-center">
-      		<p><font size="4;"><span id="applyScore">${applyScore}</span> / <span id="maxOneScore">${student.maxOneScore}</span></font></p>
+      	<div class="row text-center" style="padding: 20px;">
+      		<hr />
+      		<p><font size="4;">현재 신청 학점 <span id="applyScore">${applyScore}</span> / 최대 신청 학점 <span id="maxOneScore">${student.maxOneScore}</span></font></p>
       	</div>
       </div>
     </div>

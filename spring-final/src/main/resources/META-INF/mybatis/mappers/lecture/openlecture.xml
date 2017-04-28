@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.jhta.dao.openlecture.OpenLectureDao">
+
 <!-- 강의 평가 등록 테이블 조회 -->
 <select id="getInformationOfProfessorList" resultType="kr.co.jhta.vo.ProfessorOpenLecture">
 	select distinct
@@ -94,6 +95,27 @@ where
 		#{register}
 		)
 </insert>
+
+<!-- 강의 평가 조회 테이블 전체 조회 -->
+<select id="subjectRatingInquiriesAll" resultType="kr.co.jhta.vo.ProfessorSubject">
+select distinct
+		U.U_PROF_ID				    AS subjectProfeesorId,
+		U.U_PROF_NAME		     	AS subjectPorfessor,
+		J.J_IS_PASSED				AS subjectPassd,
+		J.J_SUBJECT_NAME			AS subjectName,
+		J.J_T_CODE					AS subjectCode,
+		J.J_NO						AS subjectNo,
+		E.E_LECTURE_RATING			AS register
+		from
+			J_SUBJECT J,
+			U_PROFESSOR U,
+			E_ENROLLMENT E
+		where
+			U.U_PROF_ID = J.J_SUB_PROF
+		and 
+			J.J_NO = E.E_J_SUBJECT_NO
+</select>
+
 <!-- 테이블 조회 -->
 <select id="subjectInquiries" parameterType="string" resultType="kr.co.jhta.vo.ProfessorSubject">
 		select distinct
@@ -103,15 +125,15 @@ where
 		J.J_SUBJECT_NAME			AS subjectName,
 		J.J_T_CODE					AS subjectCode,
 		J.J_NO						AS subjectNo,
-		L.L_REGISTER				AS register
+		E.E_LECTURE_RATING			AS register
 		from
 			J_SUBJECT J,
 			U_PROFESSOR U,
-			L_OPENLECTUREREGISTER L
+			E_ENROLLMENT E
 		where
 			U.U_PROF_ID = J.J_SUB_PROF
 		and 
-			J.J_NO = L.L_SUBJECTCODE	
+			J.J_NO = E_J_SUBJECT_NO	
 		and
 	   		U.U_PROF_ID = #{subjectProfeesorId}	 	
 </select>

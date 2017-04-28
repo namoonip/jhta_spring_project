@@ -68,10 +68,20 @@
                     </li>
                     <li>
                         <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-9">
-                            <span class="sidebar-icon"></span><span class="sidebar-title">커뮤니티 관리</span>
+                            <span class="sidebar-icon"></span><span class="sidebar-title">게시판 관리</span>
                             <b class="caret"></b>
                         </a>
                         <ul id="submenu-9" class="panel-collapse collapse panel-switch" role="menu">
+                            <li><a href="homeboard"><i class="fa fa-caret-right"></i>홈페이지 게시판 관리</a></li>
+                            <li><a href="board"><i class="fa fa-caret-right"></i>전체 공지관리</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-10">
+                            <span class="sidebar-icon"></span><span class="sidebar-title">커뮤니티 관리</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="submenu-10" class="panel-collapse collapse panel-switch" role="menu">
                             <li><a href="adminrecmessagebox"><i class="fa fa-caret-right"></i>쪽지 관리</a></li>
                             <li><a href="adminsendemail"><i class="fa fa-caret-right"></i>메일 관리</a></li>
                         </ul>

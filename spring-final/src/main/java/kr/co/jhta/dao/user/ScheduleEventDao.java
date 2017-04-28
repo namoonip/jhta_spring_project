@@ -12,7 +12,9 @@ public interface ScheduleEventDao {
 	List<ScheduleEvent> getSchEventByDate(Map<String, Object> map);
 	
 	void updateSchEvent(ScheduleEvent schedule);
-	void updateIsShowTrue(ScheduleEvent schedule);
-	void updateIsShowFalse(ScheduleEvent schedule);
+	void updateCompletedTrue(ScheduleEvent schedule);
+	void updateCompletedFalse(ScheduleEvent schedule);
 	void deleteSchEvent(Map<String, Integer> map);
+	
+	List<ScheduleEvent> getTodaySchEvent(int stuNo);
 }

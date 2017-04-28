@@ -122,7 +122,7 @@ input:-webkit-autofill {
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/adminSidebar.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<div class="row" style="margin-bottom: 15px;">
 		<div class="col-sm-12">

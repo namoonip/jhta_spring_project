@@ -18,7 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 <div class="container">
 	<h1>강의조회</h1>
@@ -41,7 +41,7 @@
 					<tr>
 						<td>${item.student.name }</td>
 						<td>${item.title }</td>
-						<td><a href="/jhta/prof/report/reporttodetail?no=${item.enroll.no }"><button class="btn btn-default">확인</button></a></td>
+						<td><a href="/jhta/prof/report/reporttodetail?no=${item.no }"><button class="btn btn-default">확인</button></a></td>
 					</tr>
 				</c:forEach>					
 			</tbody>

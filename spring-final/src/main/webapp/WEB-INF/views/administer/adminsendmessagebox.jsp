@@ -97,7 +97,7 @@ $(function() {
 							<td>
 								<input type="checkbox" name="dnoList" value="${message.no }">
 							</td>
-							<td>${message.receiver }</td>
+							<td>${message.receiver } &#40;${message.receiverName }&#41;</td>
 							<td><a style="cursor: pointer;" data-toggle="modal" data-target="#modal-${message.no }">${message.title }</a></td>
 							<td><fmt:formatDate value="${message.sendTime }" pattern="HH:mm"/></td>
 							<td><fmt:formatDate value="${message.checkTime }" pattern="HH:mm"/></td>
@@ -127,14 +127,16 @@ $(function() {
 		<div class="row text-center">
 			<div class="col-sm-12">
 				<ul class="pagination">
-				<c:if test="${pagination.beginPage ne pagination.currentBlock }">
-					<li><a href="adminsendmessagebox?pno=${pagination.beginPage-1 }"><span aria-hidden="true">&laquo;</span></a></li>
-				</c:if>
-				<c:forEach begin="${pagination.beginPage }" end="${pagination.endPage }" var="pageNo">
-					<li><a href="adminsendmessagebox?pno=${pageNo }">${pageNo }</a></li>
-				</c:forEach>
-				<c:if test="${pagination.totalBlocks ne pagination.currentBlock }">
-					<li><a href="adminsendmessagebox?pno=${pagination.endPage+1 }"><span aria-hidden="true">&raquo;</span></a></li>
+				<c:if test="${pagination.totalRows ne 0 }">
+					<c:if test="${pagination.beginPage ne pagination.currentBlock }">
+						<li><a href="adminsendmessagebox?pno=${pagination.beginPage-1 }"><span aria-hidden="true">&laquo;</span></a></li>
+					</c:if>
+					<c:forEach begin="${pagination.beginPage }" end="${pagination.endPage }" var="pageNo">
+						<li><a href="adminsendmessagebox?pno=${pageNo }">${pageNo }</a></li>
+					</c:forEach>
+					<c:if test="${pagination.totalBlocks ne pagination.currentBlock }">
+						<li><a href="adminsendmessagebox?pno=${pagination.endPage+1 }"><span aria-hidden="true">&raquo;</span></a></li>
+					</c:if>
 				</c:if>
 				</ul>
 			</div>

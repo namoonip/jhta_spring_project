@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 <div class="container" style="margin-left: 250px; padding-top:25px; ">
 <div class="row text-right">
@@ -81,7 +81,7 @@
 			</table>
 		</form>
 			<div class="form-group text-center">      
-	      		<a href="/jhta/prof/scoreform.do?sno="><button class="btn btn-default">성적 입력</button></a>
+	      		<a href="/jhta/prof/scoreform.do?sno=${port.score.no }&psco=${port.subject.score}"><button class="btn btn-default">성적 입력</button></a>
 	      		<a href="/jhta/prof/report/reportinfo" class="btn btn-default">뒤로</a>
 	      	</div>
 	</div>

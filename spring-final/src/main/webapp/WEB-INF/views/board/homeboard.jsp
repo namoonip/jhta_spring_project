@@ -114,7 +114,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/adminSidebar.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px;">
 		<div class="row text-right">
 			홈 > 학적관리 > 입학관리 > 신입학 조회 

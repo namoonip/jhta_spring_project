@@ -86,7 +86,7 @@ public class PreportController {
 		return "/report/reportform";
 	}
 	@RequestMapping(value="/reportform", method=RequestMethod.POST)
-	public String reportadd(@Valid @ModelAttribute("reportform")PreportForm reportform,Errors errors){
+	public String reportadd(@Valid @ModelAttribute("reportform")PreportForm reportform,Errors errors,Model model){
 		if(errors.hasErrors()){
 			System.out.println(errors.getAllErrors());
 			return "/prof/report/reportform";
@@ -100,9 +100,11 @@ public class PreportController {
 		prof1.setNo(reportform.getProfno());
 		preport.setProfessor(prof1);
 		System.out.println(reportform);
+		boolean reportPass = false;
 		for(Preport pre : report){
 			if(pre.getEnroll().getNo() == reportform.getEnrollno()){
-				System.out.println(errors.getAllErrors());
+				reportPass = true;
+				model.addAttribute("reportPass",reportPass);
 				System.out.println("중복값 발생");
 				return "redirect:/prof/report/reportform";
 			}
@@ -143,9 +145,10 @@ public class PreportController {
 			PreportContent profReport = stureportService.getStuAllReportByEno1(no);
 			System.out.println(profReport);
 			model.addAttribute("profReport", profReport);
-			int noo = profReport.getReport().getProfessor().getNo();
-			System.out.println(noo);
-			
+			Preport port = preportService.getByEnoOne(profReport.getEnroll().getNo(), profReport.getStudent().getNo());
+			System.out.println(profReport.getEnroll().getNo()+"."+profReport.getStudent().getNo());
+			System.out.println(port);
+			model.addAttribute("port", port);
 	
 		return "/report/reporttodetail";
 	}

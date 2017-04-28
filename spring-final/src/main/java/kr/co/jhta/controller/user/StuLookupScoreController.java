@@ -37,10 +37,12 @@ public class StuLookupScoreController {
 	public String lookupScorePost(HttpSession session, Model model) {
 		Student stu = (Student) session.getAttribute("LOGIN_USER");
 		List<SemesterAvg> savg = scoreService.getSemesterAvgBySno(stu.getNo());
+		List<Regisubject> regilist = scoreService.getSearchInfoBySno(stu.getNo());
 		SemesterAvg savgtotal = scoreService.getSemesterAvgTotalBySno(stu.getNo());
 		
 		model.addAttribute("savg", savg);
 		model.addAttribute("savgtotal", savgtotal);
+		model.addAttribute("regilist", regilist);
 		
 		return "/student/lookupScore/lookupAllScore";
 	}

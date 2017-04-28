@@ -17,4 +17,5 @@ public interface PreportService {
 	void deleteReport(int no);
 	String getAttchFileName(int no);
 	List<Preport> reportAllList();
+	Preport getByEnoOne(int eNo, int stuNo);
 }

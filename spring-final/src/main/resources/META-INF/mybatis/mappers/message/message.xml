@@ -171,48 +171,52 @@
 	
 	<select id="getReceiveMessageAdmin" parameterType="string" resultType="kr.co.jhta.vo.Message">
 		select
-			p_no as no,
-			p_title as title,
-			p_writer as writer,
-			p_writername as writerName,
-			p_receiver as receiver,
-			p_contents as contents,
-			p_ischeck as isCheck,
-			p_filename as filename,
-			p_sendtime as sendTime,
-			p_checktime as checkTime,
-			p_isdeletedbysender as isDeletedBySender,
-			p_isdeletedbyreceiver as isDeleteByReceiver
+			m.p_no as no,
+			m.p_title as title,
+			m.p_writer as writer,
+			m.p_writername as writerName,
+			m.p_receiver as receiver,
+			m.p_contents as contents,
+			m.p_ischeck as isCheck,
+			m.p_filename as filename,
+			m.p_sendtime as sendTime,
+			m.p_checktime as checkTime,
+			m.p_isdeletedbysender as isDeletedBySender,
+			m.p_isdeletedbyreceiver as isDeleteByReceiver,
+			p.u_prof_name as receiverName
 		from
-			p_message
+			p_message m, u_professor p
 		where
-			p_writer = #{writer}
+			p_receiver = #{writer}
 			and p_isdeletedbysender != 'Y'
+			and m.p_receiver = p.u_prof_id
 		order by
 			p_sendtime desc
 	</select>
 	
 	<select id="getSendMessageAdmin" parameterType="string" resultType="kr.co.jhta.vo.Message">
 		select
-			p_no as no,
-			p_title as title,
-			p_writer as writer,
-			p_writername as writerName,
-			p_receiver as receiver,
-			p_contents as contents,
-			p_ischeck as isCheck,
-			p_filename as filename,
-			p_sendtime as sendTime,
-			p_checktime as checkTime,
-			p_isdeletedbysender as isDeletedBySender,
-			p_isdeletedbyreceiver as isDeleteByReceiver
+			m.p_no as no,
+			m.p_title as title,
+			m.p_writer as writer,
+			m.p_writername as writerName,
+			m.p_receiver as receiver,
+			m.p_contents as contents,
+			m.p_ischeck as isCheck,
+			m.p_filename as filename,
+			m.p_sendtime as sendTime,
+			m.p_checktime as checkTime,
+			m.p_isdeletedbysender as isDeletedBySender,
+			m.p_isdeletedbyreceiver as isDeleteByReceiver,
+			p.u_prof_name as receiverName
 		from
-			p_message
+			p_message m, u_professor p
 		where
-			p_receiver = #{writer}
-			and p_isdeletedbyreceiver != 'Y'
+			m.p_writer = #{writer}
+			and m.p_isdeletedbyreceiver != 'Y'
+			and m.p_receiver = p.u_prof_id
 		order by
-			p_sendtime desc
+			m.p_sendtime desc
 	</select>
 	
 	<select id="getFilenameByNo" parameterType="int" resultType="string">

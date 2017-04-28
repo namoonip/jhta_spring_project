@@ -40,4 +40,7 @@ public interface OpenLectureDao {
 	
 	//enroll테이블 업데이트 (강의평가)
 	void updateLectureRatingRegisterEnrollTable(int subjectNo);
+	
+	//openinquiries.do 테이블 전체 조회
+	List<ProfessorSubject> subjectRatingInquiriesAll();
 }

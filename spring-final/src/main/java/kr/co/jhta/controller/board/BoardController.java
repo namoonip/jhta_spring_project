@@ -325,14 +325,24 @@ public class BoardController {
 		
 		List<BoardView> viewUser = boardService.getBoardViewUser(bno);
 		List<Review> reviewList = reviewService.getAllReviewByNo(bno);
+		
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
+				
 				if (!professor.getName().equals(vUser.getUserId())) {
-					BoardView view = new BoardView();
-					view.setBno(bno);
-					view.setUserId(professor.getName());
-					boardService.addBoardView(view);
-					boardService.updateCount(bno);
+					
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(professor.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "profboard/profqnaboarddetail";
+					}
 				}else {
 					Board board = boardService.getBoard(bno);
 					model.addAttribute("reviewList", reviewList);
@@ -357,8 +367,6 @@ public class BoardController {
 	
 	@RequestMapping(value="/prof/profdeptboard", method=RequestMethod.GET)
 	public String profdeptBoard(SearchForm searchForm,Professor prof , Model model){
-		
-		System.out.println(prof);
 		
 		SiteMap sitemap = sitemapSerivce.getSitemapByCodeService(prof.getCode());
 		
@@ -433,6 +441,20 @@ public class BoardController {
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
 				if (!professor.getName().equals(vUser.getUserId())) {
+					
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(professor.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "profboard/profqnaboarddetail";
+					}
+					
 					BoardView view = new BoardView();
 					view.setBno(bno);
 					view.setUserId(professor.getName());
@@ -462,16 +484,15 @@ public class BoardController {
 	// 교수 문의게시판 리뷰 등록
 	@RequestMapping(value="/prof/profqnaaddreview", method=RequestMethod.POST)
 	public String addQnaBoardReview (@RequestParam int bno, String reviewContents ,Professor professor) {
-		
 		Review review = new Review();
-		if (reviewContents == null){
-			return "redirect:/prof/profdetail?bno="+review.getGroupNo()+"&err=deny";
+		if (reviewContents == ""){
+			return "redirect:/prof/profdetail?bno="+bno+"&err=invalid";
 		}
 		review.setContents(reviewContents);
 		review.setGroupNo(bno);
 		review.setWriter(professor.getName());
 		reviewService.addReview(review);
-		return "redirect:/prof/profdetail?bno="+review.getGroupNo();
+		return "redirect:/prof/profdetail?bno="+bno;
 	}
 	
 	@RequestMapping(value="/prof/deleteprofqnaboardreview")
@@ -601,11 +622,19 @@ public class BoardController {
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
 				if (!student.getName().equals(vUser.getUserId())) {
-					BoardView view = new BoardView();
-					view.setBno(bno);
-					view.setUserId(student.getName());
-					boardService.addBoardView(view);
-					boardService.updateCount(bno);
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(student.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "/stuboard/studdeptboarddetail";
+					}
+
 				}else {
 					Board board = boardService.getBoard(bno);
 					model.addAttribute("board", board);
@@ -659,7 +688,7 @@ public class BoardController {
 	public String deptBoardAddReview(@RequestParam int bno,String reviewContents, Student student){
 		Review review = new Review();
 		if (reviewContents.equals("")){
-			return "redirect:/stud/deptboarddetail?bno="+bno+"&err=deny";
+			return "redirect:/stud/deptboarddetail?bno="+bno+"&err=invalid";
 		}
 		
 		review.setContents(reviewContents);
@@ -745,11 +774,18 @@ public class BoardController {
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
 				if (!student.getName().equals(vUser.getUserId())) {
-					BoardView view = new BoardView();
-					view.setBno(bno);
-					view.setUserId(student.getName());
-					boardService.addBoardView(view);
-					boardService.updateCount(bno);
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(student.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "/stuboard/studfreeboarddetail";
+					}
 				}else {
 					Board board = boardService.getBoard(bno);
 					model.addAttribute("board", board);
@@ -775,8 +811,8 @@ public class BoardController {
 	@RequestMapping(value="/stud/freeboardaddreview",method=RequestMethod.POST)
 	public String addFreeBoardReview(@RequestParam int bno, String reviewContents, Student student){
 		Review review = new Review();
-		if (reviewContents == null) {
-			return "redirect:/stud/studboarddetail?bno="+review.getGroupNo()+"err=deny";
+		if (reviewContents == "") {
+			return "redirect:/stud/studboarddetail?bno="+bno+"&err=invalid";
 		}
 		review.setGroupNo(bno);
 		review.setContents(reviewContents);
@@ -808,39 +844,43 @@ public class BoardController {
 	public String stuqnaboard (Student student, Model model, SearchForm searchForm) {
 		
 		List<Regisubject> regiList = regisubjectService.getRegisByUserNoService(student.getNo());
-		List<Subject> subjectCode = new ArrayList<Subject>();
-		
-		searchForm.setSearchBoardType("Q");
-		
-		List<Board> boardList = null;
-		PageNation pageNation = null;
+		if (!regiList.isEmpty()) {
+			List<Subject> subjectCode = new ArrayList<Subject>();
 			
-		for (Regisubject subject : regiList) {
-			Subject subjectL = new Subject();
-			subjectL.setSubjectName(subject.getSubject().getSubjectName());
-			subjectL.setDivision(subject.getSubject().getNo());
-			subjectCode.add(subjectL);
+			searchForm.setSearchBoardType("Q");
+			
+			List<Board> boardList = null;
+			PageNation pageNation = null;
+			
+			for (Regisubject subject : regiList) {
+				Subject subjectL = new Subject();
+				subjectL.setSubjectName(subject.getSubject().getSubjectName());
+				subjectL.setDivision(subject.getSubject().getNo());
+				subjectCode.add(subjectL);
+			}
+			
+			searchForm.setSubjectNo(regiList.get(0).getSubject().getNo());
+			
+			int rows = boardService.searchBoardCount(searchForm);
+			
+			if (searchForm.getDisplay() != 0) {
+				pageNation = new PageNation(searchForm.getDisplay(), searchForm.getPageNo(), rows);
+			}else {
+				pageNation = new PageNation(searchForm.getPageNo(), rows);
+			}
+			searchForm.setBeginIndex(pageNation.getBeginIndex());
+			searchForm.setEndIndex(pageNation.getEndIndex());
+			searchForm.setDisplay(10);
+			boardList = boardService.searchBoard(searchForm);
+			model.addAttribute("subject", subjectCode);
+			model.addAttribute("search", searchForm);
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("pagination", pageNation);
+			return "/stuboard/stuqnaboard";
+		} else {
+			model.addAttribute("err", "error");
+			return "/stuboard/stuqnaboard";
 		}
-		
-		searchForm.setSubjectNo(regiList.get(0).getSubject().getNo());
-		
-		int rows = boardService.searchBoardCount(searchForm);
-		
-		if (searchForm.getDisplay() != 0) {
-			pageNation = new PageNation(searchForm.getDisplay(), searchForm.getPageNo(), rows);
-		}else {
-			pageNation = new PageNation(searchForm.getPageNo(), rows);
-		}
-		searchForm.setBeginIndex(pageNation.getBeginIndex());
-		searchForm.setEndIndex(pageNation.getEndIndex());
-		searchForm.setDisplay(10);
-		boardList = boardService.searchBoard(searchForm);
-		model.addAttribute("subject", subjectCode);
-		model.addAttribute("search", searchForm);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("pagination", pageNation);
-		
-		return "/stuboard/stuqnaboard";
 		
 	}
 	
@@ -933,11 +973,18 @@ public class BoardController {
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
 				if (!student.getName().equals(vUser.getUserId())) {
-					BoardView view = new BoardView();
-					view.setBno(bno);
-					view.setUserId(student.getName());
-					boardService.addBoardView(view);
-					boardService.updateCount(bno);
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(student.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "/stuboard/stuqnadetail";
+					}
 				}else {
 					Board board = boardService.getBoard(bno);
 					model.addAttribute("board", board);
@@ -998,11 +1045,18 @@ public class BoardController {
 		if (!viewUser.isEmpty()) {
 			for (BoardView vUser : viewUser) {
 				if (!student.getName().equals(vUser.getUserId())) {
-					BoardView view = new BoardView();
-					view.setBno(bno);
-					view.setUserId(student.getName());
-					boardService.addBoardView(view);
-					boardService.updateCount(bno);
+					if (vUser.getBno() != bno){
+						BoardView view = new BoardView();
+						view.setBno(bno);
+						view.setUserId(student.getName());
+						boardService.addBoardView(view);
+						boardService.updateCount(bno);
+					}else {
+						Board board = boardService.getBoard(bno);
+						model.addAttribute("reviewList", reviewList);
+						model.addAttribute("board", board);
+						return "/stuboard/studentnoticeboarddetail";
+					}
 				}else {
 					Board board = boardService.getBoard(bno);
 					model.addAttribute("board", board);
@@ -1030,11 +1084,18 @@ public class BoardController {
 			if (!viewUser.isEmpty()) {
 				for (BoardView vUser : viewUser) {
 					if (!student.getName().equals(vUser.getUserId())) {
-						BoardView view = new BoardView();
-						view.setBno(bno);
-						view.setUserId(student.getName());
-						boardService.addBoardView(view);
-						boardService.updateCount(bno);
+						if (vUser.getBno() != bno){
+							BoardView view = new BoardView();
+							view.setBno(bno);
+							view.setUserId(student.getName());
+							boardService.addBoardView(view);
+							boardService.updateCount(bno);
+						}else {
+							Board board = boardService.getBoard(bno);
+							model.addAttribute("reviewList", reviewList);
+							model.addAttribute("board", board);
+							return "/stuboard/studdeptboarddetail";
+						}
 					}else {
 						Board board = boardService.getBoard(bno);
 						model.addAttribute("board", board);

@@ -6,12 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#score_box1").change(function() {
+		var subname = $(this).val();
+		console.log(subname);
+		
+		$.ajax({
+			url: "subSearch.do?sub="+subname,
+			dataType: "json",
+			type: "POST",
+			success: function(data) {
+				$("#score_td_box").empty();
+				for (var i=0; i<data.length; i++) {
+					$("#score_td_box").append('<tr style="text-align: left;" id=tr_'+data[i].no+'></tr>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].no+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].student.name+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].student.id+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].subject.selectNo.semeSelect+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].subject.subjectName+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].subject.passed.passedName+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.credit+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.grade+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.reportScore+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.attScore+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.midtermScore+'</td>');
+					$("#tr_"+data[i].no).append('<td>'+data[i].score.endtermScore+'</td>');			
+					$("#tr_"+data[i].no).append('<td><a href="scoreform.do?sno='+data[i].score.no+'&psco='+data[i].subject.score+'" class="btn btn-primary btn-xs">수정</a></td>');
+				}
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 <body>
@@ -29,6 +59,23 @@
 
 		<div class="row">
 			<div class="panel panel-body" id="score_table">
+				<table class="table table-condensed">
+					<tbody>
+						<tr>
+							<td bgcolor="#dceef3"style="color: #333; width: 10%; vertical-align: middle; height: 30px;">
+								<strong>조회</strong>
+							</td>
+							<td bgcolor="#f0fcff">
+								<select id="score_box1">
+									<option value="all">전체</option>
+									<c:forEach var="sublist" items="${sublist }">
+										<option value="${sublist.subjectName }">${sublist.subjectName }</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 				<table class="table table-condensed">
 					<thead>
 						<tr bgcolor="#f0fcff">
@@ -62,7 +109,7 @@
 								<td>${regilist.score.attScore}</td>
 								<td>${regilist.score.midtermScore}</td>
 								<td>${regilist.score.endtermScore}</td>
-								<td><a href="scoreform.do?sno=${regilist.score.no }" class="btn btn-primary btn-xs">수정</a></td>
+								<td><a href="scoreform.do?sno=${regilist.score.no }&psco=${regilist.subject.score}" class="btn btn-primary btn-xs">수정</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

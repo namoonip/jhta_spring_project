@@ -37,4 +37,6 @@ public interface ScoreDao {
 	List<Regisubject> getAllScorelistByProfID (String pid);
 	int getProfNoByEno(int eno);
 	List<String> getSemeNameByStuNo(int stno);
+	List<Subject> getsubjectlistByProfId(int pid);
+	List<Regisubject> getSearchScorelistByhash(HashMap<String, Object> searchcode);
 }

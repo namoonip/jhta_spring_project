@@ -81,6 +81,7 @@
 	   r.R_REGI_NO as "no",
 		s.J_SUBJECT_NAME as "subject.subjectName",
 			sc.s_score_no as "score.no",
+				sem.S_SEME_SELECT as "subject.selectNo.semeSelect",
 				 att.A_ATT_NO as "score.attendance.attNo",
 				 att.A_ATT_SCORE as "score.attendance.attScore",
 				 att.A_ATT_WEEK1 as "score.attendance.week1",

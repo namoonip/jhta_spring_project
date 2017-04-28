@@ -49,6 +49,12 @@
 					</div>
 				</c:if>
 				<c:if test="${!empty reviewList }">
+					<c:if test="${!empty param.err }">
+						<hr>
+						<div class="text-center">
+							<h3 class="text-danger">본인이 작성한 댓글만 삭제할수 있습니다.</h3>
+						</div>
+					</c:if>
 					<c:forEach var="review" items="${reviewList }">
 						<div class="well">
 							<div class="">
@@ -57,12 +63,6 @@
 							</div>
 							<hr>
 							<p>${review.contentsForBr }</p>
-							<c:if test="${!empty param.err }">
-								<hr>
-								<div class="text-center">
-									<h3 class="text-danger">본인이 작성한 댓글만 삭제할수 있습니다.</h3>
-								</div>
-							</c:if>
 							<div class="text-right">
 								<a href="deleteprofdeptboardreview?rno=${review.no }" class="btn btn-danger btn-xs">삭제</a>
 							</div>
@@ -72,6 +72,11 @@
 				</c:if>
 			</div>
 			<div class="row well">
+				<c:if test="${param.err eq 'invalid' }">
+					<div class="text-center">
+						<h3 class="text-danger">댓글을 작성해 주세요.</h3>
+					</div>
+				</c:if>
 				<form action="profdeptaddreview?bno=${board.no }" method="post">
 					<textarea name="reviewContents" rows="7" class="form-control"></textarea>
 					<div class="text-right" style="margin-top: 20px;">

@@ -94,7 +94,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
+<%@ include file="/WEB-INF/views/collegeregister/sidebar-hakjuk.jsp" %>
 	<!-- 성적/과제/출결 현황 리스트 -->
 	<div class="container" style="margin-left: 250px; padding-top: 25px;">
 		<div class="row text-right">
@@ -187,7 +187,7 @@
 											<td>${regilist.score.attScore}</td>
 											<td>${regilist.score.midtermScore}</td>
 											<td>${regilist.score.endtermScore}</td>
-											<td><a href="scoreform.do?sno=${regilist.score.no }" class="btn btn-primary btn-xs">수정</a></td>
+											<td><a href="scoreform.do?sno=${regilist.score.no }&psco=${regilist.subject.score}" class="btn btn-primary btn-xs">수정</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>

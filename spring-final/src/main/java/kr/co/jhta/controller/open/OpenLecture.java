@@ -22,6 +22,7 @@ import kr.co.jhta.vo.InvestgationItems;
 import kr.co.jhta.vo.LectureEvaluationSheet;
 import kr.co.jhta.vo.LectureRatingSave;
 import kr.co.jhta.vo.ProfessorOpenLecture;
+import kr.co.jhta.vo.ProfessorSubject;
 import kr.co.jhta.vo.stu.Student;
 
 @Controller
@@ -30,6 +31,21 @@ public class OpenLecture {
 	@Autowired
 	private OpenLectureService lectureservice;
 		
+	
+	//openinquiries.do 테이블 전체 조회
+	@RequestMapping("/openLectureTableAll.do")
+	public String openlectureTableAlls(Model model){
+		
+		List<ProfessorSubject> professorListTable = lectureservice.subjectRatingInquiriesAll();
+		model.addAttribute("professorListTable", professorListTable);
+		
+		return "/openlecture/openinquiries";
+	}
+	
+	
+	
+	
+	//성적 전에 보여주는 
 	//강의 평가 화면 보여 주기
 	//URL에 붙인 값 가져오기
 	@RequestMapping(value="/lecturerating.do", method=RequestMethod.GET)
@@ -65,8 +81,7 @@ public class OpenLecture {
 		
 		
 		return "openlecture/openlectureratingregister";
-	}
-	
+	}	
 	
 	//강의 평가 추가하기 등록
 	@RequestMapping("/investigating.do")
@@ -106,7 +121,9 @@ public class OpenLecture {
 	
 	//강의 조회 화면 가는 곳
 	@RequestMapping("/openinquiries.do")
-	public String getOpeninquiries(){
+	public String getOpeninquiries(Model model){
+		
+		
 		
 		
 		return "openlecture/openinquiries";
@@ -127,7 +144,6 @@ public class OpenLecture {
 		Enumeration<String> parameterNames = request.getParameterNames();
 		
 		while (parameterNames.hasMoreElements()) {
-			LectureRatingSave vo = new LectureRatingSave();
 			
 			String ratingName = parameterNames.nextElement();
 			

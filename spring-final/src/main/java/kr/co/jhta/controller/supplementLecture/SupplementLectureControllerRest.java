@@ -17,6 +17,7 @@ import kr.co.jhta.vo.SupplementLectureTableVo;
 import kr.co.jhta.vo.SupplementLectureVo;
 
 @Controller
+@RequestMapping("/admin")
 public class SupplementLectureControllerRest {
 
 	@Autowired

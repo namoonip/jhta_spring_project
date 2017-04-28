@@ -89,4 +89,12 @@ public class OpenLectureServiceImpl implements OpenLectureService {
 		openLecturedao.updateLectureRatingRegisterEnrollTable(subjectNo);
 	}
 	
+	
+	//openinquiries.do 테이블 전체 조회
+	@Override
+	public List<ProfessorSubject> subjectRatingInquiriesAll() {
+		
+		return openLecturedao.subjectRatingInquiriesAll();
+	}
+	
 }

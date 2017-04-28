@@ -20,5 +20,5 @@ public interface EnrollService {
 	List<Enroll> getProfEnroll(String id);
 	void updateEnroll(Enroll enroll);
 	void deleteEnroll(int no);
-	List<Enroll> enrollAllList();
+	List<Enroll> enrollAllList(int no);
 }

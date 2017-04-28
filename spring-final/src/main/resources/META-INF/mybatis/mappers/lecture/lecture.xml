@@ -186,40 +186,38 @@
 			s.u_stu_phone as phone,
 			s.u_stu_professor as professor,
 			r.r_regi_no as no,
-			r.r_maxgrade as maxGrade,
 			r.j_no as "subject.no",
 			r.u_stu_no as "student.no",
 			r.e_no as "enroll.no",
-			r.j_div_no as "division.no",
 			e.e_enrollday as enrollDay,
 			e.e_enrolltime as enrollTime,
 			e.e_enrollnum as emrollNum,
-			u.j_reference as reference,
-			u.j_progress as progress,
 			u.j_subject_name as subjectName,
 			u.j_semester as semester,
 			u.j_grade as subGrade,
-			u.j_is_passed as isPassed,
+			u.j_is_passed as isPassedCode,
 			u.j_score as score,
-			u.j_outline as outline,
 			u.J_t_code as "siteCode.code",
 			u.j_sub_prof as professor,
-			m.s_seme_select as semeSelect
+			u.j_division as subDivision,
+			m.s_seme_select as semeSelect,
+			i.is_passed as isPassed
 		from 
-			u_student s, r_regisubject r, e_enrollment e, j_subject u, s_semester m
+			u_student s, r_regisubject r, e_enrollment e, j_subject u, s_semester m, j_is_passed i
 		where
 			s.u_stu_no = r.u_stu_no
 			and r.j_no = e.e_j_subject_no
 			and r.j_no = u.j_no
 			and u.j_semester = m.s_no
-			and u.J_t_code = #{major}	
+			and i.pass_code = u.j_is_passed
+			and s.u_stu_division = #{major}	
 			<if test="semester != 0">
 				and u.j_semester = #{semester}
 			</if>
-			<if test="student == name">
+			<if test="student == 'name'">
 				and s.u_stu_name like '%' || #{word} || '%'
 			</if>
-			<if test="student == stuNo">
+			<if test="student == 'stuNo'">
 				and s.u_stu_id = #{word}
 			</if>	
 	</select>

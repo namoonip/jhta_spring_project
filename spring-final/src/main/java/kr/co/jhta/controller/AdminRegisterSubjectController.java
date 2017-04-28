@@ -67,7 +67,7 @@ public class AdminRegisterSubjectController {
 		
 		// 검색했을 때 과목 정보를 가져오는 코드
 		List<Map<String, Object>> subTempList = lectureService.getSubjectList(major);
-		
+		System.out.println(subTempList);
 		// 검색했을 때 전공 이름을 가져오는 코드
 		SiteMap searchDept = lectureService.getDetpList(major);
 		
@@ -81,12 +81,12 @@ public class AdminRegisterSubjectController {
 			int no = Integer.parseInt(String.valueOf(selectNoMap.get("no")));
 			
 			if (no != semesterNo) {
-				subTempList.get(i).clear();;
+				subTempList.remove(i);
 			}
 		}
-		
+		System.out.println(subTempList);
 		// 페이지네이션
-		int totalRows = lectureService.getSubjectRowCount(major);
+		int totalRows = subTempList.size();
 		int totalPageNo = (int) Math.ceil((double) totalRows/pagination);
 		int beginPage = (currentPageNo - 1) * pagination + 1;
 		int endPage = currentPageNo * pagination;
@@ -115,9 +115,7 @@ public class AdminRegisterSubjectController {
 		// form 대신에 검색된 페이지네이션 갯수만큼 전체 결과에서 현재 페이지 표현수만큼 다시 복사하는 코드
 		if (subTempList.size() != 0) {
 			for (int i=beginPage-1; i<endPage; i++) {
-				if (!subTempList.get(i).isEmpty()) {
-					subList.add(subTempList.get(i));					
-				}
+				subList.add(subTempList.get(i));					
 			}
 
 			// 과목 정보에 과목 이름을 전부 넣는 코드

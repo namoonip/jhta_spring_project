@@ -26,7 +26,7 @@
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
 		<div style="margin-top: 20px;"></div>
-		<div class="container">
+		<div class="containe	r">
 			<div class="text-center">
 				<div>
 					${board.contentsForHTML }
@@ -44,6 +44,11 @@
 				</div>
 			</c:if>
 			<c:if test="${!empty reviewList }">
+				<c:if test="${param.err eq 'deny' }">
+						<div class="text-center">
+							<h3 class="text-danger">본인이 작성한 댓글만 삭제할수 있습니다.</h3>
+						</div>
+				</c:if>
 				<c:forEach var="review" items="${reviewList }">
 					<div class="well">
 						<div class="">
@@ -61,6 +66,11 @@
 			</c:if>
 		</div>
 		<div class="row well">
+			<c:if test="${param.err eq 'invalid' }">
+				<div class="text-center">
+					<h3 class="text-danger">댓글을 작성해 주세요.</h3>
+				</div>
+			</c:if>
 			<form action="addreview?bno=${board.no }" method="post">
 				<textarea name="reviewContents" rows="7" class="form-control"></textarea>
 				<div class="text-right" style="margin-top: 20px;">

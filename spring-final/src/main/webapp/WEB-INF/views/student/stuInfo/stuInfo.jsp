@@ -75,15 +75,15 @@
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
     <div class="row text-right">
-         홈
+         홈 > 정보 조회
       </div>
       <div class="row">
          <h4><span class="glyphicon glyphicon-th-list"></span> 정보 조회</h4>
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
-      <div class="row">
+      <div class="row">      	
       	<div class="col-xs-2">
-      		<img src="../resources/images/student/PeoPleDefault.png" alt="person" style="width: 100px; height: 100px;"/>
+      		<img src="../resources/images/student/PeoPleDefault.png" alt="person" style="padding-left:10px; padding-right: 10px; padding-top: 30px; width: 150px; height: 200px;"/>
       	</div>
       	<div class="col-xs-10">
       		<p>나의 정보</p>
@@ -126,10 +126,10 @@
 	        		</tr>
 	        		<tr>
 	        			<th>지도교수</th>
-	        			<td><c:out value="${student.professor }"/></td>
+	        			<td><c:out value="${student.professor }"/> 교수</td>
 	        			<th>입학 년도</th>
 	        			<td>
-	        				<fmt:formatDate value="${student.enterDate }" pattern="yyyy-MM-dd"/>
+	        				<fmt:formatDate value="${student.enterDate }" pattern="yyyy년 MM월 dd일"/>
 	        			</td>
 	        		</tr>
 	        		<tr>
@@ -146,6 +146,7 @@
       <div class="row">
       	<p>연락처 정보</p>
      	<form:form action="stuInfo" method="POST" modelAttribute="studentForm">
+     		<form:input type="hidden" path="no" value="${student.no }" />
       		<table class="table table-bordered">
       			<colgroup>
       				<col width="10%" />
@@ -200,7 +201,6 @@
       						<form:errors path="parentPhone" cssClass="text-danger"/>
       					</td>
      				</tr>
-     				<form:input cssClass="hidden" path="pwd" value="${student.pwd}"/>
       			</tbody>
       		</table>
       	</form:form>
