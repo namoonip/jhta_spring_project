@@ -55,8 +55,12 @@ public class OpenLectureRest {
 	//테이블 행 삭제관련 ajax
 	@DeleteMapping(path="/deletesubject/{deleteNo}/{deleteId}")
 	public List<ProfessorSubject> EvaluationSheetDelete(@PathVariable("deleteNo")int subjectNo, @PathVariable("deleteId") String id){
-	
+		
+		//삭제
 		openlectureservice.professorSubjectdelete(subjectNo, id);
+		
+		//업데이트
+		openlectureservice.udateLectureRationgRegisterEnrollTableCancle(subjectNo);
 		
 		return openlectureservice.subjectInquiries(id);
 	}	

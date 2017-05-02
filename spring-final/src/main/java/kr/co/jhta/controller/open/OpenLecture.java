@@ -119,16 +119,6 @@ public class OpenLecture {
 		
 	}
 	
-	//강의 조회 화면 가는 곳
-	@RequestMapping("/openinquiries.do")
-	public String getOpeninquiries(Model model){
-		
-		
-		
-		
-		return "openlecture/openinquiries";
-	}
-	
 	//강의 평가 점수 등록
 	@RequestMapping("/ratingInsert.do")
 	public String ratingInsert(int scoreNo, HttpServletRequest request, HttpSession session) {

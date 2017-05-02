@@ -13,6 +13,10 @@
 <script type="text/javascript">
 $(function() {
 	
+	var isApplicant = false;
+	
+	var webSocket = new WebSocket("ws://127.0.0.1:8081/notice.do");
+	
 	if($("#add-False").val() == "true" ) {
 		alert("최대 학점이상 신청할 수 없습니다.");
 		return;

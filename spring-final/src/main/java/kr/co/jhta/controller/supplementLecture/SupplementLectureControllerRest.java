@@ -40,6 +40,10 @@ public class SupplementLectureControllerRest {
 		
 		List<SupplementLectureTableVo> majorTableList = supplementLectureService.getTableList(majorCode);
 		
+		System.out.println("값값값값값:"+majorTableList);
+		
+		
+		
 		return majorTableList;
 	}
 	

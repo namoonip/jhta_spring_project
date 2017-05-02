@@ -21,12 +21,12 @@
     .wrap_table {
         padding: 30px 0;
         position: relative;
-        width: 1170px%;
+        width: 1170px;
     }
 
     .wrap_table>div {
         overflow: auto;
-        height: 200px;
+        height: 300px;
     }
 
     .wrap_table table {
@@ -106,6 +106,53 @@
         });
 
 
+        //삭제 ajax
+        $("#subjectdelete").on("click", function() {
+		
+        	
+        	var $button = $(this).attr("id").replace("openlecture-","");
+        	console.log($button)
+        	var text = $("#professorlist :checked").val().split("-")
+            var deleteNo = text[0];
+           
+            var deleteId = text[1];
+            
+            $("#subjectdelete").attr("value",deleteNo);
+            
+          
+            var register = text[2];
+            
+            
+		if(register == 'y'){
+			
+            $.ajax({
+                type: "DELETE",
+                url: "deletesubject/" + deleteNo + "/" + deleteId,
+                dataType: "json",
+                success: function(data) {
+				
+                var	subjectNo = data[i].subjectNo;
+                
+                for(i=0; i<data.length; i++){
+                	
+                	if($button == subjectNo){
+                		
+                		$()
+                	}
+                	
+                	
+                }
+                	
+                }
+            });
+            
+		}else{
+			alert("강의평가가 등록되어있는 강의가 아닙니다.")
+		}
+            
+        });
+
+        
 
 
         //모달 강의 평가 
@@ -189,40 +236,11 @@
 
                     }
 
-
+					
 
                 }
             })
         });
-
-        //삭제 ajax
-        $("#subjectdelete").on("click", function() {
-		
-            var text = $(":checked").val().split("-")
-            var deleteNo = text[0];
-            var deleteId = text[1];
-            var register = text[2];
-
-            console.log(deleteNo); //학과번호
-            console.log(deleteId); //교수아이디
-            
-		if(register == 'y'){
-			
-            $.ajax({
-                type: "DELETE",
-                url: "deletesubject/" + deleteNo + "/" + deleteId,
-                dataType: "json",
-                success: function(data) {
-                	window.location.replace("http://localhost/jhta/openLectureTableAll.do");
-  
-                }
-            });
-		}else{
-			alert("강의평가가 등록되어있는 강의가 아닙니다.")
-		}
-            
-        });
-
 
 
     });
@@ -272,7 +290,7 @@
 							<th style="width: 15%">과목 번호</th>
 							<th style="width: 30%">과목 이름</th>
 							<th style="width: 15%">전공 옵션</th>
-							<th style="width: 15%">강의 평가서</th>
+							<th style="width: 15%">미리 보기</th>
 						</tr>
 					</thead>
 					<tbody id="professorlist">
@@ -306,7 +324,7 @@
 		<div class="row">
 			<button id="subjectdelete" type="submit"
 				class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab pull-right'
-				style='color: black'>
+				style='color: black' value="">
 				<i class='material-icons md-48'>delete_forever</i>
 			</button>
 		</div>

@@ -43,7 +43,7 @@ public class SupplementLectureController {
 	@RequestMapping("/pageRedirect.do")
 	public String resetSupplementLecture(){
 		
-		return"redirect:/supplementLecture.do";
+		return"redirect:/admin/supplementLecture.do";
 	}
 	
 	

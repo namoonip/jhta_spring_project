@@ -58,6 +58,8 @@ public class MakeupLessonRestController {
 	
 		makeuplessonservice.insertMakeupLessonRegister(makeuplesson);
 		
+		makeuplessonservice.updateMakeupLessonRegister(makeuplesson);
+		
 		return makeuplessonservice.makeupLessonGetTableModal(makeuplesson.getSubjectNo());
 	}
 	
@@ -69,5 +71,12 @@ public class MakeupLessonRestController {
 		return makeuplessonservice.makeupLessonGetTableModal(subjectNo);
 	}
 	
+	@GetMapping(path="makeupLessonCancle/{subjectNo}")
+	public @ResponseBody MakeupLessonAll makeupLessonTableModalCancle(@PathVariable("subjectNo") int subjectNo){
+		
+		MakeupLessonAll tabledetailCancle = makeuplessonservice.makeupLessonGetTableModalCancle(subjectNo);
+		
+		return tabledetailCancle;
+	}
 	
 }

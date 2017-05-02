@@ -162,8 +162,8 @@
                     html += '</div>';
                     html += '<div class="modal-footer">';
                     html += '<input hidden="hidden" name="supplementLectureCheck" value="' + supplementLectureCheck + '">';
-                    html += '<button id="supplementLectureApplicationAdd-' + subjectNo + '"type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
-                    html += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+                    html += '<button id="supplementLectureApplicationAdd-' + subjectNo + '"type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">등록</button>';
+                    html += '<button type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">취소</button>';
                     html += '</div>';
 
                     $modalApplecation.append(html);
@@ -188,7 +188,7 @@
                         }
 
                         var buttonNo = $(":input[name='subjectNo']").val()
-                        console.log(subjectNo)
+                        console.log(buttonNo)
                         $.ajax({
                             type: "POST",
                             url: "userInformaiton/",
@@ -418,8 +418,8 @@
                     html += '</div>';
                     html += '<div class="modal-footer">';
                     html += '<input hidden="hidden" name="supplementLectureCheck" value="' + supplementLectureCheck + '">';
-                    html += '<button id="supplementLectureApplicationCancle-' + subjectNo + '"type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
-                    html += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+                    html += '<button id="supplementLectureApplicationCancle-' + subjectNo + '"type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">등록</button>';
+                    html += '<button type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">취소</button>';
                     html += '</div>';
 
                     $modalApplecation.append(html);
@@ -432,20 +432,19 @@
 
                         $.ajax({
                             type: "DELETE",
-                            url: "SearchCancle/" + subjectNo,
+                            url: "makeupCancle/" + subjectNo,
                             dataType: 'json',
                             success: function(data) {
 
                                 var dataNo = data.subjectNo;
 
                                 $("td:contains(" + dataNo + ")").parents("tr").hide();
-
+                            
                             }
                         });
                     });
                 }
             });
-
         });
 
 
@@ -497,9 +496,8 @@
                         $.ajax({
                             type: "GET",
                             url: "searchSubjectTable/" + majorCode,
-                            datatype: "json",
+                            dataType: "json",
                             success: function(data) {
-
 
                                 if (!data.length == 0) {
 
@@ -517,6 +515,7 @@
                                         var majorOption = data[i].majorOption;
                                         var majorScore = data[i].majorScore;
                                         var subjectLectureNumber = data[i].subjectLectureNumber;
+                                       
 
                                         var html = '<tr id="supplementLectureTr-' + subjectNo + '">';
                                         html += '<td style="width: 10%" id="id-' + professorId + '"><label>' + professorId + '</label></td>'
@@ -707,8 +706,8 @@
                                             html += '</div>';
                                             html += '<div class="modal-footer">';
                                             html += '<input hidden="hidden" name="supplementLectureCheck" value="' + supplementLectureCheck + '">';
-                                            html += '<button id="supplementLectureApplicationAdd-' + subjectNo + '"type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
-                                            html += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+                                            html += '<button id="supplementLectureApplicationAdd-' + subjectNo + '"type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">등록</button>';
+                                            html += '<button type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">취소</button>';
                                             html += '</div>';
 
                                             $modalApplecation.append(html);
@@ -733,15 +732,16 @@
                                                 }
 
                                                 var buttonNo = $(":input[name='subjectNo']").val()
-                                                console.log(subjectNo)
+                                               
 
                                                 $.ajax({
                                                     type: "POST",
                                                     url: "userInformaiton/",
                                                     contentType: "application/json", //서버로 보내는 컨텐츠 형식 정의
                                                     data: JSON.stringify(userInformaiton),
+                                             		dataType:"json",
                                                     success: function(data) {
-
+                                                    	
                                                         var subjectNo = data.subjectNo;
                                                         console.log(subjectNo);
                                                         //신청 번호 취소로 바꾸는 코딩
@@ -960,8 +960,8 @@
                                             html += '</div>';
                                             html += '<div class="modal-footer">';
                                             html += '<input hidden="hidden" name="supplementLectureCheck" value="' + supplementLectureCheck + '">';
-                                            html += '<button id="supplementLectureApplicationCancle-' + subjectNo + '"type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>';
-                                            html += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+                                            html += '<button id="supplementLectureApplicationCancle-' + subjectNo + '"type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">등록</button>';
+                                            html += '<button type="button" class="mdl-button mdl-js-button mdl-button--raised" data-dismiss="modal">취소</button>';
                                             html += '</div>';
 
                                             $modalApplecation.append(html);
