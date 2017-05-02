@@ -16,6 +16,21 @@ public enum Grade {
 		this.point = point;
 	}
 	
+	/*
+	 * A(4)는
+	 * class A {
+	 * 			int point;
+	 * 			public A(int point) {
+	 * 				this.point = point;
+	 * 			}
+	 * 
+	 * 			public int getPoint() {
+	 * 				return point;
+	 *			} 		
+	 * 		}
+	 * 와 같다. 
+	 */
+	
 	public int getPoint() {
 		return point;
 	}
