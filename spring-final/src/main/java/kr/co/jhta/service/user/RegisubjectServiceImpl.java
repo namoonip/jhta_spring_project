@@ -1,6 +1,6 @@
 package kr.co.jhta.service.user;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.jhta.dao.user.EnrollDao;
 import kr.co.jhta.dao.user.RegisubjectDao;
 import kr.co.jhta.service.score.ScoreService;
+import kr.co.jhta.vo.*;
 import kr.co.jhta.vo.stu.Regisubject;
 
 @Service
@@ -31,10 +32,14 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 
 
 	@Override
-	public void deleteRegisubByENoService(int enrollNo) {
-		Regisubject regilist = scoreService.getRegisInfoByEno(enrollNo);
+	public void deleteRegisubByENoService(int eNo, int stuNo) {
+		HashMap<String, Object> enrolls = new HashMap<String, Object>();
+		enrolls.put("eNo", eNo);
+		enrolls.put("stuNo", stuNo);
+		
+		Regisubject regilist = scoreService.getRegisInfoByEnoAndStuNo(enrolls);
 		scoreService.delScore(regilist.getNo());
-		regiDao.deleteRegisubByENo(enrollNo);
+		regiDao.deleteRegisubByENo(eNo);
 	}
 
 	@Override
@@ -42,5 +47,28 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		List<Regisubject> regisubList = regiDao.getRegisByUserNo(userNo);
 		return regisubList;
 	}
+
+	@Override
+	public Syllabus getSyllabusBySubjectNoService(int subNo) {
+		return regiDao.getSyllabusBySubjectNo(subNo);
+	}
 	
+	@Override
+	public Regisubject getRegisByStuNoENoService(int stuNo, int eNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("stuNo", stuNo);
+		map.put("eNo", eNo);
+		return regiDao.getRegisByStuNoENo(map);
+	}
+
+	@Override
+	public void deleteRegisubByENoAndStuNoService(int eNo, int stuNo) {
+		Regisubject regilist = scoreService.getRegisInfoByEno(eNo);
+		scoreService.delScore(regilist.getNo());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("eNo", eNo);
+		map.put("stuNo", stuNo);
+		regiDao.deleteRegisubByENoAndStuNo(map);
+	}	
+
 }

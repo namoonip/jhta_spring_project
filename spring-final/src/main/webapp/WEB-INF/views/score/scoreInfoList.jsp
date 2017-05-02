@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,6 +15,12 @@ $(function () {
 	$("#scoreprint").click(function (e) {
 		window.open('data:application/vnd.ms-excel, Score_Info' + encodeURIComponent($('#modal_excel').html()), '_blank');
 		e.preventDefault(); 
+	});
+	
+	$("#scoreprintpdf").click(function(e) {
+		var pdf = new jsPDF();
+		pdf.addHTML($('#modal_excel').html());
+		pdf.save('test.pdf');
 	});
 });
 </script>
@@ -278,7 +285,7 @@ th{
 							<td>${savg.semename }</td>
 							<td>${savg.credit1 }</td>
 							<td>${savg.credit2 }</td>
-							<td>${savg.credit3 }</td>
+							<td><fmt:formatNumber value="${savg.credit3 }" pattern="#.##"></fmt:formatNumber></td>
 							<td>${savg.credit4 }</td>
 							<c:choose>
 								<c:when test="${savg.grade gt 2}">

@@ -59,8 +59,8 @@ $(function() {
 <%@ include file="/WEB-INF/views/navi/stunavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
    <div class="container" style="margin-left: 250px; padding-top:25px; ">
-   <c:if test="${addFals != '' }">
-		<input type="hidden" value="${addFalse}" id="add-False">   
+   <c:if test="${param.addFalse != '' }">
+		<input type="hidden" value="${param.addFalse}" id="add-False">   
    </c:if>
     <div class="row text-right">
          	홈 > 수강 신청

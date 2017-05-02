@@ -128,7 +128,8 @@ public class StuEnrollController {
 	@RequestMapping(value="/enrollCancle", method=RequestMethod.GET)
 	public String stuEnrollCancel(@RequestParam("cancleNo") int cancleNo, Student student
 			, @RequestParam(value="minusScore") int minusScore, Model model) {
-		regisubjectService.deleteRegisubByENoService(cancleNo);
+		
+		regisubjectService.deleteRegisubByENoService(cancleNo, student.getNo());
 		enrollService.updateMinusNowNumService(cancleNo);
 		if(minusScore != 0) {			
 			stuService.updateMinusScoreService(minusScore, student.getNo());

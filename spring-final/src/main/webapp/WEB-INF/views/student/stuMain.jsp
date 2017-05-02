@@ -20,6 +20,16 @@
    	  text-align: center !important;
       vertical-align: middle !important;
    }
+   	a{text-decoration:none; color:white}
+	.pull-right{float:right}
+	.main_popup{width:500px; height:500px; border:3px solid #3E4156;background-color: white;}
+	.popup_bottom{
+	    background-color: black;
+	    color: white;
+	    height: 25px;
+	    padding: 2px 5px 3px 5px;
+	    width: 495px;
+	}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -55,12 +65,9 @@ $(function() {
 		eventData["startDate"] = $('#event-start-date').val();
 		eventData["startHour"] = $('#event-start-hour').val();
 		eventData["startMinute"] = $('#event-start-minute').val();
-		if (!$("#event-all-day").prop("checked")) {
-			eventData["endDate"] = $('#event-end-date').val();
-			eventData["endHour"] = $('#event-end-hour').val();
-			eventData["endMinute"] = $('#event-end-minute').val();
-		}
-		eventData["allDay"] = $("#event-all-day").prop("checked");
+		eventData["endDate"] = $('#event-end-date').val();
+		eventData["endHour"] = $('#event-end-hour').val();
+		eventData["endMinute"] = $('#event-end-minute').val();
 		
 		return eventData;
 	}
@@ -124,10 +131,36 @@ $(function() {
 	
 	});
 	
-/* 	$("#edit-event-btn").click(function() {
+ 	$("#edit-event-btn").click(function() {
+ 		var schNo = $("#event-no-detail").val();
+ 		$.ajax({
+ 			url:"updateSch",
+ 			data:getEventData(),
+ 			dataType:"json",
+ 			success:function(data) {
+ 				$("#event-form-modal-detail").modal("hide");
+ 				$("#calendar-box").fullCalendar('refetchEvents');
+ 			}
+ 			
+ 		});
+ 		
+	}); 
+ 	
+	// 수정할 이벤트의 정보를 가져온다.
+	function getEventData() {
+		var eventData = {};
+		eventData["no"] = $("#event-no-detail").val();
+		eventData["title"] = $("#event-title-detail").val();
+		eventData["location"] = $("#event-location-detail").val();
+		eventData["startDate"] = $('#event-start-date-detail').val();
+		eventData["startHour"] = $('#event-start-hour-detail').val();
+		eventData["startMinute"] = $('#event-start-minute-detail').val();
+		eventData["endDate"] = $('#event-end-date-detail').val();
+		eventData["endHour"] = $('#event-end-hour-detail').val();
+		eventData["endMinute"] = $('#event-end-minute-detail').val();
 		
-	}); */
-	
+		return eventData;
+	}
 	
 	// 캘린더를 초기화한다.
 	$("#calendar-box").fullCalendar({
@@ -170,6 +203,7 @@ $(function() {
 				data:'schNo=' + schNo,
 				dataType:"json",
 				success:function(data) {
+					$("#event-no-detail").val(data.no);
 					$("#event-title-detail").val(data.title);
 					$("#event-location-detail").val(data.location);
 					$("#event-no-detail").val(data.no);
@@ -190,23 +224,54 @@ $(function() {
 			initializeForm(date);
 			// 모달창을 표시한다.
 			$("#event-form-modal").modal("show");
-		}
+		}		
+		
 	});
-
-	/* $("#completed-btn").click(function() {
-		
-		$.ajax({
-			url:"",
-			dataType:"json",
-			success:function(data) {
-				console.log(data);
-			}
-			
-		});
-		
-	}); */
+	
+	// PopupScript
+	if(getCookie("notToday")!="Y"){
+		$("#main_popup").show('fade');
+	}
+	
 	
 })
+function closePopupNotToday(){	             
+		setCookie('notToday','Y', 1);
+		$("#main_popup").hide('fade');
+}
+function setCookie(name, value, expiredays) {
+	var today = new Date();
+	    today.setDate(today.getDate() + expiredays);
+
+	    document.cookie = name + '=' + escape(value) + '; path=/; expires=' + today.toGMTString() + ';'
+}
+
+function getCookie(name) 
+{ 
+    var cName = name + "="; 
+    var x = 0; 
+    while ( x <= document.cookie.length ) 
+    { 
+        var y = (x+cName.length); 
+        if ( document.cookie.substring( x, y ) == cName ) 
+        { 
+            if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) 
+                endOfCookie = document.cookie.length;
+            return unescape( document.cookie.substring( y, endOfCookie ) ); 
+        } 
+        x = document.cookie.indexOf( " ", x ) + 1; 
+        if ( x == 0 ) 
+            break; 
+    } 
+    return ""; 
+}
+function closeMainPopup(){
+	$("#main_popup").hide('fade');
+}
+
+function closePopup(){
+	$("#main_popup").hide('fade');
+} 
 </script>
 </head>
 <body>
@@ -231,8 +296,8 @@ $(function() {
 						<colgroup>
 							<col width="13%">
 							<col width="*">
-							<col width="14%">
-							<col width="18%">
+							<col width="16%">
+							<col width="21%">
 							<col width="14%">
 						</colgroup>
 						<thead>
@@ -267,8 +332,8 @@ $(function() {
 						<colgroup>
 							<col width="13%">
 							<col width="*">
-							<col width="14%">
-							<col width="18%">
+							<col width="16%">
+							<col width="21%">
 							<col width="14%">
 						</colgroup>
 						<thead>
@@ -431,6 +496,7 @@ $(function() {
     						<label for="location" class="col-sm-2 control-label">장소</label>
     						<div class="col-sm-10">
       							<input type="text" class="form-control" id="event-location-detail" name="location" placeholder="장소를 입력하세요">
+      							<input type="hidden" id="hidden-location" />
     						</div>
   						</div>
   						<div class="form-group">
@@ -461,12 +527,6 @@ $(function() {
     						</div>
     						<label for="end-minute" class="col-sm-1 control-label">분</label>
   						</div>
-  						<div class="form-group">
-    						<label for="title" class="col-sm-2 control-label">하루 종일</label>
-    						<div class="col-sm-1">
-    							<input type="checkbox" class="form-control" id="event-all-day-detail" name="allDay">
-    						</div>
-  						</div>
 					</form>
       			</div>
       			<div class="modal-footer">
@@ -476,6 +536,15 @@ $(function() {
       			</div>
     		</div>
   		</div>
+	</div>
+	
+	<!-- Popup -->
+	<div id="main_popup" class="main_popup" style="position: absolute; z-index:10000; top:0px; left:50%; display: none;">
+		<a href="stuNoticeBoarddetail?bno=458" ><img src="../resources/images/student/popup/PopupNoticeImg.png" style="width:100%;height:100%;"/></a>
+		<div class="popup_bottom">
+			<a href="javascript:closePopupNotToday()" class="white">오늘하루 그만보기</a>
+			<a class="pull-right white" href="javascript:closePopup();">닫기</a>
+		</div>
 	</div>
 </body>
 </html>

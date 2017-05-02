@@ -1,4 +1,4 @@
-package kr.co.jhta.view;
+package kr.co.jhta.controller.view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -14,7 +14,6 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
  
-
 public abstract class AbstractITextPdfView extends AbstractView {
  
     public AbstractITextPdfView() {
@@ -29,17 +28,21 @@ public abstract class AbstractITextPdfView extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // IE workaround: write into byte array first.
         ByteArrayOutputStream baos = createTemporaryOutputStream();
  
+        // Apply preferences and build metadata.
         Document document = newDocument();
         PdfWriter writer = newWriter(document, baos);
         prepareWriter(model, writer, request);
         buildPdfMetadata(model, document, request);
  
+        // Build PDF document.
         document.open();
         buildPdfDocument(model, document, writer, request, response);
         document.close();
  
+        // Flush to HTTP response.
         writeToResponse(response, baos);
     }
  
