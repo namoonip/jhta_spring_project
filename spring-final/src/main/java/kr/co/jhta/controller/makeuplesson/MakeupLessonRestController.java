@@ -68,9 +68,12 @@ public class MakeupLessonRestController {
 		
 		makeuplessonservice.deleteMakeupLessonCancle(subjectNo);
 		
+		makeuplessonservice.updateMakeupLesson(subjectNo);
+		
 		return makeuplessonservice.makeupLessonGetTableModal(subjectNo);
 	}
 	
+	//보강 취소
 	@GetMapping(path="makeupLessonCancle/{subjectNo}")
 	public @ResponseBody MakeupLessonAll makeupLessonTableModalCancle(@PathVariable("subjectNo") int subjectNo){
 		

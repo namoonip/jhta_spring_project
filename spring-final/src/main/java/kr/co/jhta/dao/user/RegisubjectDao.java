@@ -13,6 +13,6 @@ public interface RegisubjectDao {
 	void deleteRegisubByENoAndStuNo(Map<String, Object> map);
 	Syllabus getSyllabusBySubjectNo(int subNo);
 	Regisubject getRegisByStuNoENo(Map<String, Object> map);
-	
+	Regisubject getRegisByRegiNo(Map<String, Object> map);
 	
 }

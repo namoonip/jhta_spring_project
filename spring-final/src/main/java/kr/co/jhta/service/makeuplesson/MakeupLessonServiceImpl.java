@@ -73,4 +73,10 @@ public class MakeupLessonServiceImpl implements MakeupLessonService {
 		
 		return makeuplessondao.makeupLessonGetTableModalCancle(sujectNo);
 	}
+	
+	@Override
+	public void updateMakeupLesson(int subjectNo) {
+		
+		makeuplessondao.updateMakeupLesson(subjectNo);
+	}
 }

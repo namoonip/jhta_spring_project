@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import kr.co.jhta.vo.LectureEvaluationSheet;
 import kr.co.jhta.vo.ProfessorOpenLecture;
 import kr.co.jhta.vo.ProfessorSubject;
 
+@RequestMapping("/prof")
 @RestController
 public class OpenLectureRest {	
 

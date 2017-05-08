@@ -39,4 +39,6 @@ List<Subject> getAllList();
 	List<Subject> getallenroll();
 	
 	Subject getByENoList(int no);
+	
+	Subject getsubByEnrollNo(int eno);
 }

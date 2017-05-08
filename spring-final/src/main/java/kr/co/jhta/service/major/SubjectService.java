@@ -2,7 +2,6 @@ package kr.co.jhta.service.major;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.jhta.vo.Subject;
@@ -28,4 +27,5 @@ public interface SubjectService {
 	void editSubjectByNo (SubjectEditForm editform);
 	List<Subject> getallenroll();
 	Subject getByENoList(int no);
+	Subject getsubByEnrollNoService(int eno);
 }

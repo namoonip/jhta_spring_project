@@ -32,4 +32,7 @@ public interface MakeupLessonService {
 	
 	//모달 상세 조회 cancle
 	MakeupLessonAll makeupLessonGetTableModalCancle(int sujectNo);
+	
+	//취소 업데이트
+	void updateMakeupLesson(int subjectNo);
 }

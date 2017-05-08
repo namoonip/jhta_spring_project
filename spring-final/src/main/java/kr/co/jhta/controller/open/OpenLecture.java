@@ -25,12 +25,20 @@ import kr.co.jhta.vo.ProfessorOpenLecture;
 import kr.co.jhta.vo.ProfessorSubject;
 import kr.co.jhta.vo.stu.Student;
 
+@RequestMapping("/prof")
 @Controller
 public class OpenLecture {
 
 	@Autowired
 	private OpenLectureService lectureservice;
 		
+	@RequestMapping("/openLectureMain.do")
+	public String openLectureMain(){
+		
+		return "/openlecture/openlectureratingmain";
+	}
+	
+	
 	
 	//openinquiries.do 테이블 전체 조회
 	@RequestMapping("/openLectureTableAll.do")

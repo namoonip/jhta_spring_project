@@ -129,4 +129,12 @@
  where 		
  		M_MAKEUPLESSON_SUBJECTNO = #{subjectNo}
  </delete>
+ <update id="updateMakeupLesson" parameterType="int">
+ update 
+ 	S_SUPPLEMENTLECTURE
+ set
+ 	S_MAKEUPLESSONREGISTER = 'n'
+ where
+ 	S_SUPPLEMENTLECTURE_SUBJECT = #{subjectNo}
+ </update>
  </mapper>

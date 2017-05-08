@@ -7,12 +7,14 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="viewport" content="width=device-width, initial-scale=1">
-<link type="text/css" rel="stylesheet" href="/jhta/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+<meta http-equiv="viewport"
+	content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script type="text/javascript" src="/jhta/resources/jquery/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="/jhta/resources/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
    $(function() {
 
@@ -432,7 +434,7 @@
 
                        $.ajax({
                            type: "DELETE",
-                           url: "SearchCancle/" + subjectNo,
+                           url: "makeupCancle/" + subjectNo,
                            dataType: 'json',
                            success: function(data) {
 
@@ -1047,17 +1049,20 @@
 	<%@ include file="/WEB-INF/views/navi/adminnavi.jsp"%>
 	<%@ include file="/WEB-INF/views/navi/sidebarsupplementmakeuplesson.jsp"%>
 	<!-- 보강신청, 취소 모달 -->
-	<div class="container">
+	<div class="container" style="margin-left: 250px; padding-top: 25px;">
+	<div class="row text-right">
+			홈 > 보강 관리  > 보강 등록
+		</div>
 		<div class="modal fade bs-example-modal-lg" tabindex="-1"
 			role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content" id="modalApplecation"></div>
 			</div>
 		</div>
-		<h3>보강 관리</h3>
-		<hr />
+		<h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;보강 관리</h4>
+		<hr style="border: solid 0.5px #2C7BB5;">
 		<div class="row">
-			<h4>&nbsp;&nbsp;&nbsp;보강 신청</h4>
+			<h5>&nbsp;&nbsp;&nbsp;보강 신청</h5>
 			<div class="col-sm-1">
 				<a href="makeuplecturereset.do"><i class="material-icons" style="color: black">restore_page</i></a>
 			</div>
@@ -1181,7 +1186,7 @@
 		<hr />
 		<div class="row" style="height: 30px"></div>
 		<div class="row">
-			<h4>&nbsp;&nbsp;&nbsp;최근 신청한 강의</h4>
+			<h5>&nbsp;&nbsp;&nbsp;최근 신청한 강의</h5>
 			<div class="wrap_table">
 				<div align="center">
 					<table>
@@ -1208,7 +1213,7 @@
 			</div>
 		</div>
 		<hr />
-		<h4>보강 신청 메세지 보내기</h4>
+		<h5>보강 신청 메세지 보내기</h5>
 		<div class="row" style="margin-bottom: 15px;">
 			<div class="col-sm-12">
 				<div class="btn-group">

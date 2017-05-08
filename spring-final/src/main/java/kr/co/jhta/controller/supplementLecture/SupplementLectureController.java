@@ -34,6 +34,7 @@ public class SupplementLectureController {
 		
 		List<SupplementLectureTableVo> totalData = supplementLectureService.TotalTableList();
 		
+		
 		model.addAttribute("totalDataList",totalData);
 		
 		return"supplementarylecture/supplementLecture";

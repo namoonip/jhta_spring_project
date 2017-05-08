@@ -84,4 +84,9 @@ public class SubjectServiceImpl implements SubjectService{
 	public Subject getByENoList(int no) {
 		return subjectDao.getByENoList(no);
 	}
+
+	@Override
+	public Subject getsubByEnrollNoService(int eno) {
+		return subjectDao.getsubByEnrollNo(eno);
+	}
 }

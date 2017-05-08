@@ -29,19 +29,6 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		return regisubList;
 	}
 
-
-
-	@Override
-	public void deleteRegisubByENoService(int eNo, int stuNo) {
-		HashMap<String, Object> enrolls = new HashMap<String, Object>();
-		enrolls.put("eNo", eNo);
-		enrolls.put("stuNo", stuNo);
-		
-		Regisubject regilist = scoreService.getRegisInfoByEnoAndStuNo(enrolls);
-		scoreService.delScore(regilist.getNo());
-		regiDao.deleteRegisubByENo(eNo);
-	}
-
 	@Override
 	public List<Regisubject> getRegisByUserNoService(int userNo) {
 		List<Regisubject> regisubList = regiDao.getRegisByUserNo(userNo);
@@ -63,12 +50,24 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 
 	@Override
 	public void deleteRegisubByENoAndStuNoService(int eNo, int stuNo) {
-		Regisubject regilist = scoreService.getRegisInfoByEno(eNo);
+		HashMap<String, Object> enrolls = new HashMap<String, Object>();
+		enrolls.put("eNo", eNo);
+		enrolls.put("stuNo", stuNo);
+		System.out.println("Eno: "+eNo);
+		System.out.println("stuNo: "+stuNo);
+		Regisubject regilist = scoreService.getRegisInfoByEnoAndStuNo(enrolls);
 		scoreService.delScore(regilist.getNo());
+		regiDao.deleteRegisubByENoAndStuNo(enrolls);
+	}
+
+
+
+	@Override
+	public Regisubject getRegisByRegiNoService(int stuNo, int regiNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("eNo", eNo);
 		map.put("stuNo", stuNo);
-		regiDao.deleteRegisubByENoAndStuNo(map);
+		map.put("regiNo", regiNo);
+		return regiDao.getRegisByRegiNo(map);
 	}	
 
 }
