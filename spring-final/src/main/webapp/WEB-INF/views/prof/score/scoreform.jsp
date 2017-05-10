@@ -21,7 +21,6 @@ $(function() {
 		
 		var total  = att+rep+mid+end;
 		
-		alert(total);
 		if(total >= 90){
 			$("#creditBox").val(pass);
 			$("#gradeBox").val('A');

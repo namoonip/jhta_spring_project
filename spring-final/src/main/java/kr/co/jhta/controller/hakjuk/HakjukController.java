@@ -1,6 +1,9 @@
 package kr.co.jhta.controller.hakjuk;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -240,7 +243,7 @@ public class HakjukController {
 	 * @return
 	 */
 	@RequestMapping(value="/addstud", method=RequestMethod.POST)
-	public String addstudent(String studemail,String studemailaddr,AddStudentForm addstud){
+	public String addstudent(String studemail,String studemailaddr,AddStudentForm addstud,HttpServletResponse response,Model model) throws Exception{
 		String email = studemail+"@"+studemailaddr;
 		Student stud = new Student();
 		BeanUtils.copyProperties(addstud, stud);
@@ -248,7 +251,14 @@ public class HakjukController {
 		stud.setPwd(addstud.getSsn().split("-")[0]);
 		stud.setProfessor(addstud.getProfessor());
 		hakjukService.admissionsStud(stud,stud.getRegister());
-		return "redirect:/admin/admissionstud";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('학생이 등록되었습니다.'); </script>");
+        out.flush();
+		model.addAttribute("studList",hakjukService.getAllStudentService());
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService());
+		model.addAttribute("rows",hakjukService.getAllStudentService().size());
+		return "collegeregister/searchstud";
 	}
 	
 	/**
@@ -275,7 +285,7 @@ public class HakjukController {
 	 */
 	
 	@RequestMapping(value="/addprof", method=RequestMethod.POST)
-	public String addprofessor(String studemail,String studemailaddr,AddProfForm addprof){
+	public String addprofessor(String studemail,String studemailaddr,AddProfForm addprof,HttpServletResponse response,Model model) throws Exception{
 		
 		String email = studemail+"@"+studemailaddr;
 		addprof.setAddr(addprof.getAddr1()+addprof.getAddr2());
@@ -283,7 +293,14 @@ public class HakjukController {
 		addprof.setCode(addprof.getDivision());
 		addprof.setPwd(addprof.getSsn().split("-")[0]);
 		hakjukService.addProfessorService(addprof);
-		return "redirect:/admin/searchprof";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('교수가 등록되었습니다.'); </script>");
+        out.flush();
+        model.addAttribute("profList",hakjukService.getAllProfessorService()); // 모든 교수를 조회하여 jsp에 전달
+		model.addAttribute("rows",hakjukService.getAllProfessorService().size());
+		model.addAttribute("sitemapList",sitemapService.getAllSitemapPreService()); // 대학 정보 전달
+		return "collegeregister/searchprof";
 	}
 	
 	

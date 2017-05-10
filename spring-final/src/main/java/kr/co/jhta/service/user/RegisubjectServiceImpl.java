@@ -25,14 +25,12 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 
 	@Override
 	public List<Regisubject> getAllRegisInfoService() {
-		List<Regisubject> regisubList = regiDao.getAllRegisInfo();
-		return regisubList;
+		return regiDao.getAllRegisInfo();
 	}
 
 	@Override
 	public List<Regisubject> getRegisByUserNoService(int userNo) {
-		List<Regisubject> regisubList = regiDao.getRegisByUserNo(userNo);
-		return regisubList;
+		return regiDao.getRegisByUserNo(userNo);
 	}
 
 	@Override
@@ -53,8 +51,6 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		HashMap<String, Object> enrolls = new HashMap<String, Object>();
 		enrolls.put("eNo", eNo);
 		enrolls.put("stuNo", stuNo);
-		System.out.println("Eno: "+eNo);
-		System.out.println("stuNo: "+stuNo);
 		Regisubject regilist = scoreService.getRegisInfoByEnoAndStuNo(enrolls);
 		scoreService.delScore(regilist.getNo());
 		regiDao.deleteRegisubByENoAndStuNo(enrolls);
@@ -68,6 +64,7 @@ public class RegisubjectServiceImpl implements RegisubjectService{
 		map.put("stuNo", stuNo);
 		map.put("regiNo", regiNo);
 		return regiDao.getRegisByRegiNo(map);
-	}	
+	}
+
 
 }

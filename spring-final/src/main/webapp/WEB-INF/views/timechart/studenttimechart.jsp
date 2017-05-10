@@ -52,19 +52,19 @@
 		text-align: center !important;
 	}
 	
-	.day1 {
+	.day0 {
 		background-color:#FFCA6C !important;
 	}
-	.day2 {
+	.day1 {
 		background-color:#FF6C6C !important; 
 	}
-	.day3 {
+	.day2 {
 		background-color:#FFF136 !important; 
 	}
-	.day4 {
+	.day3 {
 		background-color:#CFFF24 !important; 
 	}
-	.day5 {
+	.day4 {
 		background-color:#368AFF !important; 
 	}
 </style>
@@ -73,11 +73,9 @@
 <%@ include file="/WEB-INF/views/navi/stunavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarstud.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px;">
-		<div class="row text-right">
-			홈 > 학적관리 > 입학관리 > 신입학 조회 
-		</div>
+	
 		<div class="row">
-			<h4><span class="glyphicon glyphicon-th-list"></span> 시..간표!!</h4>
+			<h4><span class="glyphicon glyphicon-th-list"></span> 시간표</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
 		</div>
 		<div style="margin-top: 20px;"></div>
@@ -93,9 +91,8 @@
 						<th>금</th>
 					</tr>				
 				</thead>
-				<tbody>
 					<tr>
-						<th>1</th>
+						<th>1교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -103,7 +100,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>2</th>
+						<th>2교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -111,7 +108,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>3</th>
+						<th>3교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -119,7 +116,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>4</th>
+						<th>4교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -127,7 +124,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>5</th>
+						<th>5교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -135,7 +132,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>6</th>
+						<th>6교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -143,7 +140,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>7</th>
+						<th>7교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -151,7 +148,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>8</th>
+						<th>8교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -159,7 +156,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>9</th>
+						<th>9교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -167,7 +164,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>10</th>
+						<th>10교시</th>
 						<td></td>
 						<td></td>
 						<td></td>

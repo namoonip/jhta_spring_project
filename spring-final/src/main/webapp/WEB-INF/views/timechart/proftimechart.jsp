@@ -54,19 +54,19 @@
 		text-align: center !important;
 	}
 	
-	.day1 {
+	.day0 {
 		background-color:#FFCA6C !important;
 	}
-	.day2 {
+	.day1 {
 		background-color:#FF6C6C !important; 
 	}
-	.day3 {
+	.day2 {
 		background-color:#FFF136 !important; 
 	}
-	.day4 {
+	.day3 {
 		background-color:#CFFF24 !important; 
 	}
-	.day5 {
+	.day4 {
 		background-color:#368AFF !important; 
 	}
 </style>
@@ -96,7 +96,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th>1</th>
+						<th>1교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -104,7 +104,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>2</th>
+						<th>2교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -112,7 +112,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>3</th>
+						<th>3교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -120,7 +120,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>4</th>
+						<th>4교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -128,7 +128,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>5</th>
+						<th>5교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -136,7 +136,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>6</th>
+						<th>6교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -144,7 +144,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>7</th>
+						<th>7교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -152,7 +152,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>8</th>
+						<th>8교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -160,7 +160,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>9</th>
+						<th>9교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -168,7 +168,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>10</th>
+						<th>10교시</th>
 						<td></td>
 						<td></td>
 						<td></td>

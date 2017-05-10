@@ -8,6 +8,7 @@ import kr.co.jhta.vo.Subject;
 import kr.co.jhta.vo.SubjectEditForm;
 import kr.co.jhta.vo.SubjectIsPassed;
 import kr.co.jhta.vo.SubjectSearchForm;
+import kr.co.jhta.vo.stu.EnrollSearchForm;
 
 @Transactional
 public interface SubjectService {
@@ -28,4 +29,6 @@ public interface SubjectService {
 	List<Subject> getallenroll();
 	Subject getByENoList(int no);
 	Subject getsubByEnrollNoService(int eno);
+	List<Subject> searchEnrollByOptionService(EnrollSearchForm enrollSerachForm);
+	List<Subject> getEnrollListByTcodeService(int stuGrade, String stuTcode);
 }

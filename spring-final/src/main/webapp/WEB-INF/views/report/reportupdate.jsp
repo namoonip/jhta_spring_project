@@ -26,7 +26,7 @@
 <body>
 <%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
-	<div class="container">
+	<div class="container" style="margin-left:250px; padding-top:25px;">
 		<h1>과제수정하기</h1>
 		<hr class="one">
 		<div class="row well">
@@ -60,7 +60,7 @@
 				</div>
 				<div class="form-group text-right">
 					<button type="submit" class="btn btn-primary">등록</button>
-					<a href="/jhta/prof/main" class="btn btn-warning">취소</a>
+					<a href="/jhta/prof/report/reportinfo" class="btn btn-warning">취소</a>
 				</div>
 			</form:form>
 		</div>

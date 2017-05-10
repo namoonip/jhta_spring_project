@@ -14,12 +14,9 @@
 <title></title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
 <%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top:25px;">
-		<div class="row text-right">
-			홈 > 학적관리 > 입학관리 > 신입학 조회 
-		</div>
 		<div class="row">
 			<h4><span class="glyphicon glyphicon-th-list"></span> 학과 게시판 등록</h4>
 			<hr style="border:solid 0.5px #2C7BB5;">
