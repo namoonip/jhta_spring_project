@@ -155,12 +155,10 @@
                             <ul class="nav navbar-nav">
 						      <li><a href="searchstud" style="color: white;">학적 관리</a></li>
 						      <li><a href="semester" style="color: white;">교과 관리</a></li>
-						      <li><a href="adminregstudent" style="color: white;">수업 관리</a></li>
-						      <li><a href="adminregsubject" style="color: white;">수강 관리</a></li>
 						      <li><a href="scorelist.do" style="color: white;">성적 관리</a></li>
 						      <li><a href="supplementLecture.do" style="color: white;">휴강 관리</a></li>
 						      <li><a href="makeuplesson.do" style="color: white;">보강 관리</a></li>
-						      <li><a href="openLectureTableAll.do" style="color: white;">평가 관리</a></li>
+						      <li><a href="openratingregister.do" style="color: white;">평가 관리</a></li>
     						</ul>
                     </div>
                     

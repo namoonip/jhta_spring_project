@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.jhta.service.makeuplesson.MakeupLessonService;
 import kr.co.jhta.vo.MakeupLessonAll;
-import kr.co.jhta.vo.SupplementLectureTableVo;
 import kr.co.jhta.vo.SupplementLectureVo;
 
 @Controller

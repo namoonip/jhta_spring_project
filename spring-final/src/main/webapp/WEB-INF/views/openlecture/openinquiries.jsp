@@ -80,7 +80,7 @@
         $('button[id^=openlecture]').each(function(index, item) {
             var register = $(item).attr('value');
             if (register == 'n') {
-                $(this).addClass('disabled', 'disabled');
+                $(this).addClass('hide', 'hide');
                 
             }
         });
@@ -350,7 +350,7 @@
 	<%@ include file="/WEB-INF/views/navi/openlecture.jsp"%>
 	<div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<div class="row text-right">
-			홈 > 강의 평가 관리 > 강의평가 조회/삭제
+			홈 > 평가 관리 > 강의평가 조회/삭제
 		</div>
 		<div class="modal fade bs-example-modal-lg" tabindex="-1"
 			role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal">
@@ -358,14 +358,15 @@
 				<div class="modal-content" id="modaldata"></div>
 			</div>
 		</div>
-		<h5><span class="glyphicon glyphicon-th-list"></span>강의 평가 조회 /삭제</h5>
+		<h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;강의 평가 조회 /삭제</h4>
 		<hr style="border:solid 0.5px #2C7BB5;">
 		<div class="row">
 			<h5>&nbsp;&nbsp;과목 조회</h5>
 			<div class="row">
 				<form action="">
 					<div class="mdl-layout__header-row">
-						<div id="search-option" class="mdl-layout-spacer"></div>
+						<div id="search-option" class="mdl-layout-spacer">
+						</div>
 						<div
 							class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
 							<label class="mdl-button mdl-js-button mdl-button--icon"
@@ -424,9 +425,10 @@
 			</div>
 		</div>
 		</div>
-		<div class="row">
+		<div class="row pull-right">
+			<a class="mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab" href="openratingregister.do"><i class='material-icons md-48 ' style="color: black">note_add</i></a>
 			<button id="subjectdelete" type="submit"
-				class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab pull-right'
+				class='mdl-button mdj-js-button mdl-button-fab mdl-button-mini-fab'
 				style='color: black' value="">
 				<i class='material-icons md-48'>delete_forever</i>
 			</button>

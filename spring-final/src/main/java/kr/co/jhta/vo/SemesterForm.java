@@ -2,10 +2,8 @@ package kr.co.jhta.vo;
 
 import java.util.Date;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 public class SemesterForm {
 	

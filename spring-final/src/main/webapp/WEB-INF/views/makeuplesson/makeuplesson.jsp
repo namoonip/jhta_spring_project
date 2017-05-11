@@ -132,7 +132,7 @@
 
                    html += '<div class="form-group">';
                    html += '<div class="col-sm-3">';
-                   html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                   html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                    html += '</div>';
                    html += '<div class="col-sm-6">';
                    html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="majorOption" value="' + majorOption + '" disabled="disabled" />';
@@ -408,7 +408,7 @@
 
                    html += '<div class="form-group">';
                    html += '<div class="col-sm-3">';
-                   html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                   html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                    html += '</div>';
                    html += '<div class="col-sm-6">';
                    html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="information" value="' + majorOption + '" disabled="disabled" />';
@@ -678,7 +678,7 @@
 
                                            html += '<div class="form-group">';
                                            html += '<div class="col-sm-3">';
-                                           html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                                           html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                                            html += '</div>';
                                            html += '<div class="col-sm-6">';
                                            html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="majorOption" value="' + majorOption + '" disabled="disabled" />';
@@ -1222,7 +1222,7 @@
 						<thead class="mdl-shadow--2dp">
 							<tr>
 								<th style="width: 10%">과목 코드</th>
-								<th style="width: 15%">전공 옵션</th>
+								<th style="width: 15%">전공 코드</th>
 								<th style="width: 15%">담당 교수</th>
 								<th style="width: 25%">과목 이름</th>
 								<th style="width: 25%">보강 신청일</th>
@@ -1289,7 +1289,7 @@
 																class="glyphicon glyphicon-search"></i></span> <input
 																type="text" class="form-control" id="search-word">
 															<div class="input-group-btn">
-																<button type="button" class="btn btn-success"
+																<button type="button" class="btn btn-default"
 																	id="search-list">검색</button>
 															</div>
 														</div>
@@ -1313,8 +1313,8 @@
 														</div>
 													</div>
 													<div class="modal-footer text-right">
-														<button class="btn btn-info" id="add-list">추가</button>
-														<button type="button" class="btn btn-default"
+														<button class="mdl-button mdl-js-button mdl-button--raised" id="add-list">추가</button>
+														<button type="button" class="mdl-button mdl-js-button mdl-button--raised"
 															data-dismiss="modal" id="close-modal">닫기</button>
 													</div>
 												</div>

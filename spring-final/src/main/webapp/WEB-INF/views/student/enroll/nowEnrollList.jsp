@@ -36,7 +36,7 @@
 	      			<col width="6%" />
 	      			<col width="10%" />
 	      		</colgroup>
-	      		<thead>
+	      		<thead style="background-color: #D3D3D3;">
 	      			<tr>
 	      				<th>과목 코드</th>
 	      				<th>과목명</th>

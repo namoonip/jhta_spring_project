@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.hakjuk.JejukService;
 import kr.co.jhta.vo.JejukStuSearchForm;
-import kr.co.jhta.vo.SubjectSearchForm;
 import kr.co.jhta.vo.hakjuk.JejukList;
 import kr.co.jhta.vo.hakjuk.StudentJejuk;
 import kr.co.jhta.vo.stu.Student;

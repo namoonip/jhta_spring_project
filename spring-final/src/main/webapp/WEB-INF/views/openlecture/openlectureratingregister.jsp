@@ -186,7 +186,7 @@ select.menu {
 	<div class="row text-right">
 			홈 > 강의 평가 관리 > 강의평가 등록
 		</div>
-		<h5><span class="glyphicon glyphicon-th-list"></span>강의 평가 등록</h5>
+		<h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;강의 평가 등록</h4>
 		<hr style="border:solid 0.5px #2C7BB5;"/>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="row">

@@ -133,7 +133,7 @@
 
                     html += '<div class="form-group">';
                     html += '<div class="col-sm-3">';
-                    html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                    html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                     html += '</div>';
                     html += '<div class="col-sm-6">';
                     html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="majorOption" value="' + majorOption + '" disabled="disabled" />';
@@ -391,7 +391,7 @@
 
                     html += '<div class="form-group">';
                     html += '<div class="col-sm-3">';
-                    html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                    html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                     html += '</div>';
                     html += '<div class="col-sm-6">';
                     html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="information" value="' + majorOption + '" disabled="disabled" />';
@@ -684,7 +684,7 @@
 
                                             html += '<div class="form-group">';
                                             html += '<div class="col-sm-3">';
-                                            html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                                            html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                                             html += '</div>';
                                             html += '<div class="col-sm-6">';
                                             html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="majorOption" value="' + majorOption + '" disabled="disabled" />';
@@ -938,34 +938,13 @@
 
                                             html += '<div class="form-group">';
                                             html += '<div class="col-sm-3">';
-                                            html += '<label class="pull-right" style="color: black">전공 옵션:</label>';
+                                            html += '<label class="pull-right" style="color: black">전공 코드:</label>';
                                             html += '</div>';
                                             html += '<div class="col-sm-6">';
                                             html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="information" value="' + majorOption + '" disabled="disabled" />';
                                             html += '</div>';
                                             html += '<div class="col-sm-3"></div>';
                                             html += '</div>';
-
-                                            html += '<div class="form-group">';
-                                            html += '<div class="col-sm-3">';
-                                            html += '<label class="pull-right" style="color: black">휴강 신청일:</label>';
-                                            html += '</div>';
-                                            html += '<div class="col-sm-6">';
-                                            html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="information" value="' + applicationStartDate + '" disabled="disabled" />';
-                                            html += '</div>';
-                                            html += '<div class="col-sm-3"></div>';
-                                            html += '</div>';
-
-                                            html += '<div class="form-group">';
-                                            html += '<div class="col-sm-3">';
-                                            html += '<label class="pull-right" style="color: black">휴강 종료일:</label>';
-                                            html += '</div>';
-                                            html += '<div class="col-sm-6">';
-                                            html += '<input id="code" class="mdl-textfield__input" type="text"style="width: 200px" name="information" value="' + applicationEndDate + '" disabled="disabled" />';
-                                            html += '</div>';
-                                            html += '<div class="col-sm-3"></div>';
-                                            html += '</div>';
-
 
                                             html += '</div>';
                                             html += '</div>';
@@ -1228,8 +1207,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/navi/adminnavi.jsp"%>
-	<%@ include
-		file="/WEB-INF/views/navi/sidebarsupplementmakeuplesson.jsp"%>
+	<%@ include	file="/WEB-INF/views/navi/sidebarsupplementmakeuplesson.jsp"%>
 	<!-- 휴강신청, 취소 모달 -->
 	<div class="container" style="margin-left: 250px; padding-top: 25px;">
 		<div class="row text-right">홈 > 휴강 보강 > 휴강관리</div>
@@ -1281,7 +1259,7 @@
 								<th style="width: 10%">교수 ID</th>
 								<th style="width: 10%">학과 번호</th>
 								<th style="width: 15%">과목 코드</th>
-								<th style="width: 15%">전공 옵션</th>
+								<th style="width: 15%">전공 코드</th>
 								<th style="width: 15%">담당 교수</th>
 								<th style="width: 25%">과목 이름</th>
 								<th style="width: 20%">신청</th>

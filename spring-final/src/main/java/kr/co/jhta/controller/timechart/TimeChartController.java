@@ -2,11 +2,9 @@ package kr.co.jhta.controller.timechart;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.co.jhta.vo.stu.Student;
 
 @Controller
 public class TimeChartController {

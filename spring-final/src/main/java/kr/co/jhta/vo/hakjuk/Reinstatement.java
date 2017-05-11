@@ -2,7 +2,6 @@ package kr.co.jhta.vo.hakjuk;
 
 import java.util.Date;
 
-import kr.co.jhta.vo.SiteMap;
 import kr.co.jhta.vo.stu.Student;
 
 public class Reinstatement {

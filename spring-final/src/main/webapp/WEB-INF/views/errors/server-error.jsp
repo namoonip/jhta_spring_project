@@ -26,7 +26,6 @@
 			<%
 			}
 			%>
-			</p>
 		</div>
 		<p class="text-right">
 			<a href="testmain" class="btn btn-default btn-lg">HOME</a>

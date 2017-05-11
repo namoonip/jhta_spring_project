@@ -208,7 +208,7 @@ $(function() {
       <div class="row" style="padding: 20px;">
       	<h4>휴학 신청 내역</h4>
       	<table class="table table-bordered">
-			<thead>
+			<thead style="background-color: #F0FFFF;">
 				<tr>
 					<th>학년도</th>
 					<th>학기</th>

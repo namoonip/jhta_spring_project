@@ -286,7 +286,7 @@ function closePopup(){
          <hr style="border:solid 0.5px #2C7BB5;">
       </div>
       <div class="row">
-	      <div class="col-xs-5">
+	      <div class="col-xs-6">
 	      	<div class="panel panel-default">
 		      	<div class="panel-heading">
 					<strong>최근 공지사항</strong>
@@ -294,11 +294,11 @@ function closePopup(){
 		       	<div class="panel-body">
 					<table class="table table-default">
 						<colgroup>
-							<col width="13%">
+							<col width="11%">
 							<col width="*">
-							<col width="16%">
-							<col width="21%">
 							<col width="14%">
+							<col width="21%">
+							<col width="13%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -330,11 +330,11 @@ function closePopup(){
 		       	<div class="panel-body">
 					<table class="table table-default">
 						<colgroup>
-							<col width="13%">
+							<col width="11%">
 							<col width="*">
-							<col width="16%">
-							<col width="21%">
 							<col width="14%">
+							<col width="21%">
+							<col width="13%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -361,7 +361,7 @@ function closePopup(){
 	      	</div>
 	      </div>
 	      
-	      <div class="col-xs-7">
+	      <div class="col-xs-6">
 	      	<div class="panel panel-default">
 		      	<div class="panel-heading">
 					<strong>일정</strong>
@@ -385,7 +385,7 @@ function closePopup(){
 		      			<col width="15%" />
 		      			<col width="10%" />
 		      		</colgroup>
-		      		<thead>
+		      		<thead style="background-color: #D3D3D3;">
 		      			<tr>
 		      				<th>학과</th>
 		      				<th>이수구분</th>
@@ -412,6 +412,7 @@ function closePopup(){
 		      	</table>
 	      	</div>
 	      </div>
+      	<hr />
       </div>
    </div>
    

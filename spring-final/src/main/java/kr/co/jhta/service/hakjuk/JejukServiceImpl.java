@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.jhta.dao.hakjuk.JejukDAO;
 import kr.co.jhta.vo.JejukStuSearchForm;
-import kr.co.jhta.vo.SubjectSearchForm;
 import kr.co.jhta.vo.hakjuk.JejukList;
 import kr.co.jhta.vo.hakjuk.StudentJejuk;
 import kr.co.jhta.vo.stu.Student;

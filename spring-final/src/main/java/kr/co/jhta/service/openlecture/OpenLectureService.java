@@ -6,7 +6,6 @@ import java.util.List;
 import kr.co.jhta.vo.InvestGationAttribute;
 import kr.co.jhta.vo.LectureEvaluationSheet;
 import kr.co.jhta.vo.LectureRatingSave;
-import kr.co.jhta.vo.Professor;
 import kr.co.jhta.vo.ProfessorOpenLecture;
 import kr.co.jhta.vo.ProfessorSubject;
 

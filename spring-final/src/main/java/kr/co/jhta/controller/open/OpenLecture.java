@@ -1,29 +1,19 @@
 package kr.co.jhta.controller.open;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.jhta.service.openlecture.OpenLectureService;
 import kr.co.jhta.vo.InvestGationAttribute;
 import kr.co.jhta.vo.InvestgationItems;
-import kr.co.jhta.vo.LectureEvaluationSheet;
-import kr.co.jhta.vo.LectureRatingSave;
 import kr.co.jhta.vo.ProfessorOpenLecture;
 import kr.co.jhta.vo.ProfessorSubject;
-import kr.co.jhta.vo.stu.Student;
 
 @RequestMapping("/admin")
 @Controller

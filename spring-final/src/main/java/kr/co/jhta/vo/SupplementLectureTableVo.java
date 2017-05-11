@@ -1,6 +1,5 @@
 package kr.co.jhta.vo;
 
-import java.util.Date;
 
 public class SupplementLectureTableVo {
 

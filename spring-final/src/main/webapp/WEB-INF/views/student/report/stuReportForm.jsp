@@ -66,7 +66,7 @@ $(function() {
 	      			<col width="10%" />
 	      			<col width="10%" />
 	      		</colgroup>
-	      		<thead>
+	      		<thead style="background-color:	#F0FFFF;">
 	      			<tr>
 	      				<th>과목 코드</th>
 	      				<th>과목명</th>

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.co.jhta.vo.Sessioncheck;
-import kr.co.jhta.vo.stu.Student;
 public class RoleCheckInterceptor extends HandlerInterceptorAdapter{
 		
 	@Override

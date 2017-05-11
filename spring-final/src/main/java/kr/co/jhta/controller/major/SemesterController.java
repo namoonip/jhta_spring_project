@@ -1,7 +1,5 @@
 package kr.co.jhta.controller.major;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtilsBean;

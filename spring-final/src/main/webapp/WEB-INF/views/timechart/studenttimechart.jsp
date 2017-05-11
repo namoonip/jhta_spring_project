@@ -81,7 +81,7 @@
 		<div style="margin-top: 20px;"></div>
 		<div class="row">
 			<table class="table" id="chart-table">
-				<thead>
+				<thead style="background-color: #DCDCDC;">
 					<tr>
 						<th></th>
 						<th>월</th>
@@ -92,7 +92,7 @@
 					</tr>				
 				</thead>
 					<tr>
-						<th>1교시</th>
+						<th style="background-color: #FFFACD;">1교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -100,7 +100,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>2교시</th>
+						<th style="background-color: #FFFACD;">2교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -108,7 +108,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>3교시</th>
+						<th style="background-color: #FFFACD;">3교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -116,7 +116,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>4교시</th>
+						<th style="background-color: #FFFACD;">4교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -124,7 +124,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>5교시</th>
+						<th style="background-color: #FFFACD;">5교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -132,7 +132,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>6교시</th>
+						<th style="background-color: #FFFACD;">6교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -140,7 +140,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>7교시</th>
+						<th style="background-color: #FFFACD;">7교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -148,7 +148,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>8교시</th>
+						<th style="background-color: #FFFACD;">8교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -156,7 +156,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>9교시</th>
+						<th style="background-color: #FFFACD;">9교시</th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -164,7 +164,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>10교시</th>
+						<th style="background-color: #FFFACD;">10교시</th>
 						<td></td>
 						<td></td>
 						<td></td>

@@ -156,7 +156,7 @@
                     
                     <div id="navbar-collapse" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                        	<li><a id="user-profile" href="#"style="color: white;"><img src="resources/images/3.jpg" class="img-responsive img-thumbnail img-circle"> ${LOGIN_USER.name }님 환영합니다.</a></li>
+                        	<li><a id="user-profile" href="#"style="color: white;"><img src="/jhta/resources/images/student/PeoPleDefault.png" class="img-responsive img-thumbnail img-circle"> ${LOGIN_USER.name }님 환영합니다.</a></li>
                             <li><a href="/jhta/prof/profinfo" style="color: white;">내 정보 수정</a></li>
                             <li><a href="/jhta/logout" style="color: white;">로그아웃</a></li>
                         </ul>

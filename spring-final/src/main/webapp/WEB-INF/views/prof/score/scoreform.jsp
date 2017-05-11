@@ -46,8 +46,8 @@ $(function() {
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navi/adminnavi.jsp" %>
-<%@ include file="/WEB-INF/views/navi/sidebarscore.jsp" %>
+<%@ include file="/WEB-INF/views/navi/profnavi.jsp" %>
+<%@ include file="/WEB-INF/views/navi/sidebarprof.jsp" %>
 	<div class="container" style="margin-left: 250px; padding-top: 25px;">
 	<h3>성적 수정</h3>
 	<hr style="border:solid 0.5px #2C7BB5;">

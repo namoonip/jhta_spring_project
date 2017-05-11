@@ -174,7 +174,6 @@
       					<th rowspan="6">자택</th>
       					<th rowspan="3">*도로명 주소</th>
       					<td>
-      						<%-- <form:input type="text" path="zipCode" placeholder="도로명 주소" /> --%>
 			      			<form:input style="width: 80px;" type="text" path="zipcode" id="postcode" placeholder="우편번호" value="${student.zipcode }" />
 							<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 						</td>
