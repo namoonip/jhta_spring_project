@@ -25,7 +25,7 @@
 				<col width="10%">
 				<col width="10%">				
 			</colgroup>
-			<thead>
+			<thead style="background-color: #E0FFFF">
 				<tr>
 					<th>번호</th>
 					<th>과목명</th>
@@ -42,14 +42,14 @@
 						<td><a href="/jhta/prof/subdetail?no=${item.no }">${item.subject.subjectName }</a></td>
 						<td>${item.enrollDay }</td>
 						<td>${item.enrollTime }</td>
-						<td><a href="/jhta/prof/subupdate?no=${item.no }" class="btn btn-primary btn-xs">수정</a></td>
-						<td><a href="/jhta/prof/subdel?no=${item.no }" class="btn btn-danger btn-xs">삭제</a></td>
+						<td><a href="/jhta/prof/subupdate?no=${item.no }" class="btn btn-primary btn-sm">수정</a></td>
+						<td><a href="/jhta/prof/subdel?no=${item.no }" class="btn btn-danger btn-sm">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		<div class="add text-right">
-			<a href="/jhta/prof/addenrollform"><button class="btn btn-primary btn-xs">등록</button></a>
+			<a href="/jhta/prof/addenrollform"><button class="btn btn-default">등록</button></a>
 		</div>
 	</div>
 </body>

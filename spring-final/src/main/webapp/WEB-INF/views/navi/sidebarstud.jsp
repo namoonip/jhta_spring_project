@@ -27,17 +27,6 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-4">
-                            <span class="sidebar-icon"></span><span class="sidebar-title">학적 관리</span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
-                            <li><a href="leave"><i class="fa fa-caret-right"></i>휴학 신청</a></li>
-                            <li><a href="reinstate"><i class="fa fa-caret-right"></i>복학 신청</a></li>
-                            <li><a href="dropoff"><i class="fa fa-caret-right"></i>자퇴 신청</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-6">
                             <span class="sidebar-icon"></span><span class="sidebar-title">수강 신청</span>
                             <b class="caret"></b>
@@ -55,6 +44,17 @@
                             <li><a href="stuReport"><i class="fa fa-caret-right"></i>과제 관리</a></li>
                             <li><a href="stuAttendance"><i class="fa fa-caret-right"></i>출결 관리</a></li>
                             <li><a href="studenttime"><i class="fa fa-caret-right"></i>시간표</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-4">
+                            <span class="sidebar-icon"></span><span class="sidebar-title">학적 관리</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="submenu-4" class="panel-collapse collapse panel-switch" role="menu">
+                            <li><a href="leave"><i class="fa fa-caret-right"></i>휴학 신청</a></li>
+                            <li><a href="reinstate"><i class="fa fa-caret-right"></i>복학 신청</a></li>
+                            <li><a href="dropoff"><i class="fa fa-caret-right"></i>자퇴 신청</a></li>
                         </ul>
                     </li>
                     <li>

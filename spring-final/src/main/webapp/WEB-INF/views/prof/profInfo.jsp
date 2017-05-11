@@ -96,7 +96,7 @@
       				</tr>
       				<tr>
       					<th>이메일</th>
-      					<td><form:input type="text" path="email" value="${prof.email }" />
+      					<td><form:input type="text" path="email" value="${prof.email }" style="width: 200px;"/>
       						<button type="submit" class="btn btn-default">수정</button>
       						<form:errors path="email" cssClass="text-danger"/>
       					</td>
@@ -106,7 +106,7 @@
       					<th rowspan="3">주소</th>
       				</tr>
       				<tr>
-      					<td><form:input type="text" path="addr" value="${prof.addr }"/>
+      					<td><form:input type="text" path="addr" value="${prof.addr }" style="width: 400px;"/>
       						<button class="btn btn-default">수정</button>
       					</td>
       				</tr>

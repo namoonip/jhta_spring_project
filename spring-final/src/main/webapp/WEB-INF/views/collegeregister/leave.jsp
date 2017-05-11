@@ -128,7 +128,7 @@ $(function () {
 					</div>
 					<div class="row">
 						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-							<thead>
+							<thead style="background-color: #F0FFFF;">
 								<tr>
 									<th>번호</th>
 									<th>구분</th>

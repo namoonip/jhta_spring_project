@@ -84,14 +84,14 @@
 		<div style="margin-top: 20px;"></div>
 		<div class="row">
 			<table class="table" id="chart-table">
-				<thead style="background-color: #DCDCDC;">
+				<thead>
 					<tr>
-						<th></th>
-						<th>월</th>
-						<th>화</th>
-						<th>수</th>
-						<th>목</th>
-						<th>금</th>
+						<th style="background-color: #B0E0E6;"></th>
+						<th style="background-color: #DCDCDC;">월</th>
+						<th style="background-color: #DCDCDC;">화</th>
+						<th style="background-color: #DCDCDC;">수</th>
+						<th style="background-color: #DCDCDC;">목</th>
+						<th style="background-color: #DCDCDC;">금</th>
 					</tr>				
 				</thead>
 				<tbody>

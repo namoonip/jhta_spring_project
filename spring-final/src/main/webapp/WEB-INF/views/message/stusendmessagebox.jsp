@@ -86,7 +86,7 @@ $(function() {
 						<col width="15%">
 						<col width="15%">
 					</colgroup>
-					<thead>
+					<thead style="background-color: #FFDAB9;">
 						<tr>
 							<th>
 								<input type="checkbox" name="all" id="all-check">
